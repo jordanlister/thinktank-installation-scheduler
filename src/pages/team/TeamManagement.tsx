@@ -23,6 +23,7 @@ import {
   Plus
 } from 'lucide-react';
 import { useTeamStore } from '../../stores/useTeamStore';
+import { useTeamMembers, useExpiringCertifications, useTeamAnalytics } from '../../hooks/useTeamData';
 import TeamMemberDirectory from '../../components/team/TeamMemberDirectory';
 import TeamMemberModal from '../../components/team/TeamMemberModal';
 import AvailabilityCalendar from '../../components/team/AvailabilityCalendar';
@@ -30,33 +31,32 @@ import { TeamPairingEngine, WorkloadBalancer, SkillsManager, PerformanceAnalytic
 import type { TeamMember, TeamAnalytics } from '../../types';
 
 const TeamManagement: React.FC = () => {
+  // Use real data from Supabase
+  const { teamMembers, isLoading: teamLoading, error: teamError } = useTeamMembers();
+  const { expiringCertifications, isLoading: certsLoading } = useExpiringCertifications();
+  
+  // Get analytics for the last 30 days
+  const analyticsStart = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  const analyticsEnd = new Date().toISOString().split('T')[0];
+  const { analytics: teamAnalytics } = useTeamAnalytics({ start: analyticsStart, end: analyticsEnd });
+  
+  // Use store for UI state management
   const {
-    teamMembers,
     selectedTeamMember,
-    teamAnalytics,
-    expiringCertifications,
     pendingTimeOffRequests,
-    isLoading,
-    error,
     setSelectedTeamMember,
-    generateTeamAnalytics,
-    checkExpiringCertifications,
     findOptimalPairings
   } = useTeamStore();
+
+  const isLoading = teamLoading || certsLoading;
+  const error = teamError;
 
   const [activeTab, setActiveTab] = useState<'directory' | 'availability' | 'analytics' | 'pairings'>('directory');
   const [showMemberModal, setShowMemberModal] = useState(false);
   const [modalMode, setModalMode] = useState<'view' | 'edit' | 'create'>('view');
   const [selectedRegion, setSelectedRegion] = useState<string>('');
 
-  // Load initial data
-  useEffect(() => {
-    checkExpiringCertifications();
-    generateTeamAnalytics({
-      start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-      end: new Date().toISOString().split('T')[0]
-    });
-  }, []);
+  // Data is loaded automatically by the hooks
 
   // Calculate key metrics
   const keyMetrics = React.useMemo(() => {
@@ -115,6 +115,28 @@ const TeamManagement: React.FC = () => {
       <div className="flex items-center justify-center h-64">
         <RefreshCw className="h-6 w-6 animate-spin text-blue-600" />
         <span className="ml-2 text-gray-600">Loading team data...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="space-y-6">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="flex items-start space-x-3">
+            <AlertTriangle className="h-5 w-5 text-red-600 mt-0.5" />
+            <div>
+              <h3 className="text-sm font-medium text-red-800">Error Loading Team Data</h3>
+              <p className="mt-1 text-sm text-red-700">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-2 text-sm text-red-800 underline hover:text-red-900"
+              >
+                Try again
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -277,7 +299,11 @@ const TeamManagement: React.FC = () => {
       {/* Tab Content */}
       <div className="min-h-[600px]">
         {activeTab === 'directory' && (
-          <TeamMemberDirectory />
+          <TeamMemberDirectory 
+            teamMembers={teamMembers}
+            isLoading={isLoading}
+            error={error}
+          />
         )}
         
         {activeTab === 'availability' && (

@@ -2,10 +2,13 @@
 
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { MapPin, Users, Settings } from 'lucide-react';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
 import DataProcessing from './pages/data-processing/DataProcessing';
 import SchedulingDashboard from './pages/schedules/SchedulingDashboard';
+import TeamManagement from './pages/team/TeamManagement';
+import ReportsPage from './pages/reports/ReportsPage';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import { PageLoading } from './components/common/Loading';
 import AuthForm from './components/forms/AuthForm';
@@ -15,44 +18,75 @@ import { auth } from './services/supabase';
 // Placeholder components for other pages
 
 const InstallationsPage = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-3xl font-semibold text-primary-900 mb-6">Installations</h1>
+  <div className="space-y-8">
+    <div>
+      <h1 className="text-3xl font-bold text-primary-900">Installations</h1>
+      <p className="mt-2 text-lg text-primary-600">
+        Manage and track all installation requests
+      </p>
+    </div>
     <div className="card">
-      <div className="card-body text-center py-12">
-        <p className="text-primary-600">Installations page coming soon...</p>
+      <div className="card-body text-center py-16">
+        <MapPin className="h-16 w-16 text-primary-300 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-primary-900 mb-2">
+          Installations Management
+        </h3>
+        <p className="text-primary-600 mb-4">
+          This page will allow you to view, create, and manage installation requests.
+        </p>
+        <p className="text-sm text-primary-500">
+          Feature coming soon - comprehensive installation tracking and management
+        </p>
       </div>
     </div>
   </div>
 );
 
 const AssignmentsPage = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-3xl font-semibold text-primary-900 mb-6">Assignments</h1>
-    <div className="card">
-      <div className="card-body text-center py-12">
-        <p className="text-primary-600">Assignments page coming soon...</p>
-      </div>
+  <div className="space-y-8">
+    <div>
+      <h1 className="text-3xl font-bold text-primary-900">Assignments</h1>
+      <p className="mt-2 text-lg text-primary-600">
+        Assign leads and assistants to installation teams
+      </p>
     </div>
-  </div>
-);
-
-const ReportsPage = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-3xl font-semibold text-primary-900 mb-6">Reports</h1>
     <div className="card">
-      <div className="card-body text-center py-12">
-        <p className="text-primary-600">Reports page coming soon...</p>
+      <div className="card-body text-center py-16">
+        <Users className="h-16 w-16 text-primary-300 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-primary-900 mb-2">
+          Team Assignments
+        </h3>
+        <p className="text-primary-600 mb-4">
+          This page will allow you to assign team members to installations and manage workload distribution.
+        </p>
+        <p className="text-sm text-primary-500">
+          Feature coming soon - intelligent team assignment and workload balancing
+        </p>
       </div>
     </div>
   </div>
 );
 
 const SettingsPage = () => (
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h1 className="text-3xl font-semibold text-primary-900 mb-6">Settings</h1>
+  <div className="space-y-8">
+    <div>
+      <h1 className="text-3xl font-bold text-primary-900">Settings</h1>
+      <p className="mt-2 text-lg text-primary-600">
+        Configure system preferences and user settings
+      </p>
+    </div>
     <div className="card">
-      <div className="card-body text-center py-12">
-        <p className="text-primary-600">Settings page coming soon...</p>
+      <div className="card-body text-center py-16">
+        <Settings className="h-16 w-16 text-primary-300 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-primary-900 mb-2">
+          System Configuration
+        </h3>
+        <p className="text-primary-600 mb-4">
+          This page will provide access to system-wide settings, user preferences, and configuration options.
+        </p>
+        <p className="text-sm text-primary-500">
+          Feature coming soon - comprehensive settings management
+        </p>
       </div>
     </div>
   </div>
@@ -123,6 +157,7 @@ function App() {
             <Route path="schedules" element={<SchedulingDashboard />} />
             <Route path="installations" element={<InstallationsPage />} />
             <Route path="assignments" element={<AssignmentsPage />} />
+            <Route path="team" element={<TeamManagement />} />
             <Route path="data-processing" element={<DataProcessing />} />
             <Route path="reports" element={<ReportsPage />} />
             <Route path="settings" element={<SettingsPage />} />

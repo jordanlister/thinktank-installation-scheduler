@@ -39,12 +39,12 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
           
           <div className="flex items-center ml-4 lg:ml-0">
             <div className="flex-shrink-0">
-              <div className="h-8 w-8 bg-accent-600 rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-accent-600 rounded-lg flex items-center justify-center shadow-sm">
                 <span className="text-white font-bold text-sm">TT</span>
               </div>
             </div>
             <div className="ml-3">
-              <h1 className="text-lg font-semibold text-primary-900 hidden sm:block">
+              <h1 className="text-lg font-bold text-primary-900 hidden sm:block">
                 Think Tank Technologies
               </h1>
               <p className="text-sm text-primary-600 hidden sm:block">

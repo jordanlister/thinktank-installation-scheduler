@@ -66,9 +66,9 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
         }`}
       >
         {/* Sidebar header */}
-        <div className="flex items-center justify-between h-16 px-6 border-b border-primary-200">
+        <div className="flex items-center justify-between h-16 px-6 border-b border-primary-200 bg-white">
           <div className="flex items-center">
-            <div className="h-8 w-8 bg-accent-600 rounded-lg flex items-center justify-center">
+            <div className="h-8 w-8 bg-accent-600 rounded-lg flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-sm">TT</span>
             </div>
             <div className="ml-3">

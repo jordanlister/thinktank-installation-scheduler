@@ -5,13 +5,12 @@ import {
   X, 
   Edit, 
   Save, 
-  Cancel,
   User, 
   MapPin, 
   Phone, 
   Mail, 
   Award, 
-  Tool, 
+  Wrench, 
   Calendar,
   Clock,
   AlertTriangle,
@@ -212,7 +211,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({ member, isOpen, onClo
                     onClick={() => mode === 'create' ? onClose() : setMode('view')}
                     className="flex items-center space-x-1 px-3 py-1 border border-gray-300 rounded hover:bg-gray-50"
                   >
-                    <Cancel className="h-4 w-4" />
+                    <X className="h-4 w-4" />
                     <span>Cancel</span>
                   </button>
                 </>
@@ -264,7 +263,7 @@ const TeamMemberModal: React.FC<TeamMemberModalProps> = ({ member, isOpen, onClo
               { id: 'overview', label: 'Overview', icon: User },
               { id: 'skills', label: 'Skills', icon: Award },
               { id: 'certifications', label: 'Certifications', icon: Shield },
-              { id: 'equipment', label: 'Equipment', icon: Tool },
+              { id: 'equipment', label: 'Equipment', icon: Wrench },
               { id: 'availability', label: 'Availability', icon: Calendar },
               { id: 'performance', label: 'Performance', icon: Target }
             ].map(tab => (
@@ -626,7 +625,7 @@ const CertificationsTab: React.FC<any> = () => (
 
 const EquipmentTab: React.FC<any> = () => (
   <div className="text-center py-8 text-gray-500">
-    <Tool className="h-8 w-8 mx-auto mb-2 text-gray-400" />
+    <Wrench className="h-8 w-8 mx-auto mb-2 text-gray-400" />
     <p>Equipment management interface would be here</p>
   </div>
 );

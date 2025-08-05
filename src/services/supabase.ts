@@ -70,6 +70,35 @@ export const auth = {
         }
       }
     });
+    
+    // If auth signup succeeded and we have a user, create the public user record
+    if (data.user && !error) {
+      try {
+        const { error: dbError } = await supabase
+          .from('users')
+          .insert([
+            {
+              id: data.user.id,
+              email: data.user.email,
+              first_name: userData.firstName,
+              last_name: userData.lastName,
+              role: userData.role || 'scheduler',
+              is_active: true,
+              created_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            }
+          ]);
+        
+        if (dbError) {
+          console.warn('Failed to create user profile:', dbError.message);
+          // Don't fail the auth signup for this - user can still login
+        }
+      } catch (dbErr) {
+        console.warn('Error creating user profile:', dbErr);
+        // Don't fail the auth signup for this - user can still login
+      }
+    }
+    
     return { data, error };
   },
 

@@ -19,15 +19,16 @@ export const Layout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-primary-50">
       {/* Global error notification */}
       {error && (
-        <div className="bg-error-600 text-white px-4 py-3 relative">
+        <div className="bg-error-600 text-white px-4 py-3 relative z-50">
           <div className="flex items-center justify-between max-w-7xl mx-auto">
             <p className="text-sm font-medium">{error}</p>
             <button
               onClick={clearError}
-              className="text-white hover:text-error-100 ml-4"
+              className="text-white hover:text-error-100 ml-4 transition-colors"
+              aria-label="Close error notification"
             >
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -45,7 +46,7 @@ export const Layout: React.FC = () => {
         />
 
         {/* Main content area */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden bg-primary-50">
           {/* Header */}
           <Header 
             onMenuToggle={handleMenuToggle} 
@@ -53,8 +54,8 @@ export const Layout: React.FC = () => {
           />
 
           {/* Main content */}
-          <main className="flex-1 overflow-auto">
-            <div className="py-6">
+          <main className="flex-1 overflow-auto bg-primary-50">
+            <div className="py-6 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
               <ErrorBoundary>
                 <Outlet />
               </ErrorBoundary>

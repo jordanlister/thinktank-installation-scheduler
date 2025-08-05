@@ -22,18 +22,25 @@ import {
   Tool,
   Calendar
 } from 'lucide-react';
-import { useTeamStore, useTeamMembers, useTeamSearchQuery, useTeamFilterCriteria, useTeamViewMode } from '../../stores/useTeamStore';
+import { useTeamStore } from '../../stores/useTeamStore';
 import type { TeamMember, UserRole, CertificationStatus } from '../../types';
 import { TeamDataManager } from '../../utils/teamManagement';
 
-const TeamMemberDirectory: React.FC = () => {
+interface TeamMemberDirectoryProps {
+  teamMembers: TeamMember[];
+  isLoading?: boolean;
+  error?: string | null;
+}
+
+const TeamMemberDirectory: React.FC<TeamMemberDirectoryProps> = ({ 
+  teamMembers, 
+  isLoading = false, 
+  error = null 
+}) => {
   const {
-    teamMembers,
     searchQuery,
     filterCriteria,
     viewMode,
-    isLoading,
-    error,
     setSearchQuery,
     setFilterCriteria,
     setViewMode,
