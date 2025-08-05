@@ -1,0 +1,111 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+.vercel/
+coverage/
+
+# Environment files (will be handled separately)
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test files
+__tests__/
+*.test.js
+*.test.ts
+*.test.tsx
+*.spec.js
+*.spec.ts
+*.spec.tsx
+test/
+tests/
+coverage/
+.nyc_output/
+
+# Documentation
+README.md
+*.md
+docs/
+documentation/
+
+# Development tools
+.eslintrc*
+.prettierrc*
+.editorconfig
+babel.config.*
+jest.config.*
+cypress.json
+.storybook/
+
+# Docker files (to avoid nested Docker builds)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Log files
+logs/
+*.log
+
+# Package manager files (keep only package.json and package-lock.json)
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store/
+
+# Development data
+test-data/
+mock-data/
+samples/
+fixtures/
+
+# Configuration files that shouldn't be in production
+tsconfig.json
+tsconfig.*.json
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+eslint.config.js
+
+# Cache directories
+.cache/
+.parcel-cache/
+.eslintcache

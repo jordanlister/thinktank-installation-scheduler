@@ -1,0 +1,16 @@
+Store #,Customer,Contact Phone,Email Address,Address,Town,Province,Postal Code,Scheduled Date,Time,Type,Urgency,Territory,Special Instructions
+2001,Starbucks Corp,555-123-4567,valid@email.com,123 Test St,Seattle,WA,98101,2024-02-15,9:00 AM,Installation,High,NW,Valid record
+2002,,555-234-5678,manager@store.com,456 Oak Ave,Portland,OR,97201,2024-02-16,25:00,Renovation,Medium,NW,Missing customer name
+2003,Target Store,invalid-phone,bad-email,789 Pine St,Vancouver,WA,98660,invalid-date,14:00,Installation,,NW,Invalid phone and email and date
+2004,Home Depot,(555) 456-7890,good@email.com,,Spokane,WA,99201,2024-02-18,8:30 AM,Setup,Urgent,Northwest,Missing street address
+2005,Best Buy,555.567.8901,store@bestbuy.com,654 Elm Dr,,WA,83701,2024-02-19,11:00,Installation,Medium,NW,Missing city
+2006,Walmart,5556789012,walmart@store.com,987 Maple Ct,San Francisco,,94102,2024-02-20,1:30 PM,Renovation,High,CA,Missing state
+2007,Costco,(555) 789-0123,contact@costco.com,147 Birch Rd,Los Angeles,CA,,2024-02-21,3:45 PM,Installation,Medium,CA,Missing ZIP
+2008,Apple Store,(555) 890-1234,apple@store.com,258 Spruce Way,San Diego,CA,92101,,15:45,Setup,Low,California,Missing date
+2009,Microsoft Store,(555) 901-2345,ms@store.com,369 Willow St,Sacramento,CA,95814,2024-02-23,,Installation,High,CA,Missing time
+2010,Amazon Go,555-012-3456,amazon@go.com,741 Aspen Pl,Fresno,CA,93701,2024-02-24,4:30 PM,,Medium,CA,Missing installation type
+2011,GameStop,(555) 111-2222,gamestop@store.com,852 Oak St,Phoenix,AZ,85001,2024-12-31,23:59,Installation,Critical,SW,Future date and invalid priority
+,,,,,,,,,,,,,Empty row should be skipped
+2012,T-Mobile,555 222 3333,tmobile@store.com,963 Main Ave,Denver,CO,80201,2024-02-26,10:00,Mobile Setup,high,West,Different format phone
+2013,Verizon Store,(555) 333-4444,verizon@wireless.com,159 Broadway,Salt Lake City,UT,84101,02/27/2024,10:30 AM,Network Install,URGENT,West,Different date format
+2014,AT&T Store,+1-555-444-5555,att@store.com,753 1st Street,Las Vegas,NV,89101,2024/02/28,22:30,Telecom,low,Southwest,International format phone

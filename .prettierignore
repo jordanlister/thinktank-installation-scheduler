@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+coverage/
+.nyc_output/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.vercel/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.d.ts
+*.min.js
+*.min.css
+
+# Test data
+test-data/
+mock-data/
+samples/
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Config files that shouldn't be formatted
+.eslintcache
+tsconfig.json
+tsconfig.*.json
+
+# Documentation that has specific formatting
+CHANGELOG.md
+LICENSE

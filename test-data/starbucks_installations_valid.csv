@@ -1,0 +1,11 @@
+Store Number,Customer Name,Phone,Email,Street Address,City,State,ZIP Code,Install Date,Install Time,Installation Type,Priority,Region,Notes
+1001,Starbucks Coffee Company,(555) 123-4567,manager@starbucks.com,123 Main Street,Seattle,WA,98101,2024-02-15,09:00,Equipment Installation,High,Northwest,Install new espresso machine
+1002,Starbucks Coffee Company,(555) 234-5678,regional@starbucks.com,456 Oak Avenue,Portland,OR,97201,2024-02-16,10:30,Renovation,Medium,Northwest,Complete store renovation
+1003,Starbucks Coffee Company,(555) 345-6789,district@starbucks.com,789 Pine Street,Vancouver,WA,98660,2024-02-17,14:00,Equipment Installation,Low,Northwest,Replace coffee grinders
+1004,Starbucks Coffee Company,(555) 456-7890,store1004@starbucks.com,321 Cedar Lane,Spokane,WA,99201,2024-02-18,08:30,New Store Setup,Urgent,Northwest,Grand opening preparation
+1005,Starbucks Coffee Company,(555) 567-8901,ops@starbucks.com,654 Elm Drive,Boise,ID,83701,2024-02-19,11:00,Equipment Installation,Medium,Northwest,Upgrade POS system
+1006,Starbucks Coffee Company,(555) 678-9012,manager1006@starbucks.com,987 Maple Court,San Francisco,CA,94102,2024-02-20,13:30,Renovation,High,California,Kitchen remodel
+1007,Starbucks Coffee Company,(555) 789-0123,facility@starbucks.com,147 Birch Road,Los Angeles,CA,90210,2024-02-21,15:45,Equipment Installation,Medium,California,Install new refrigeration
+1008,Starbucks Coffee Company,(555) 890-1234,regional2@starbucks.com,258 Spruce Way,San Diego,CA,92101,2024-02-22,09:15,New Store Setup,Low,California,Setup new location
+1009,Starbucks Coffee Company,(555) 901-2345,store1009@starbucks.com,369 Willow Street,Sacramento,CA,95814,2024-02-23,12:00,Equipment Installation,High,California,Replace entire coffee system
+1010,Starbucks Coffee Company,(555) 012-3456,maintenance@starbucks.com,741 Aspen Place,Fresno,CA,93701,2024-02-24,16:30,Renovation,Medium,California,Seating area expansion

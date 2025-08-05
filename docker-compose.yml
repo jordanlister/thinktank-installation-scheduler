@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # Development service
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: ttt-scheduler-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/dist
+    environment:
+      - NODE_ENV=development
+      - VITE_APP_ENVIRONMENT=development
+      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - .env.development
+    networks:
+      - ttt-network
+    profiles:
+      - development
+
+  # Production service (for testing production builds locally)
+  app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+      args:
+        - NODE_ENV=production
+        - VITE_APP_ENVIRONMENT=production
+    container_name: ttt-scheduler-prod
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_APP_ENVIRONMENT=production
+    networks:
+      - ttt-network
+    profiles:
+      - production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL database (for local development if not using Supabase)
+  postgres:
+    image: postgres:15-alpine
+    container_name: ttt-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=installation_scheduler
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ttt-network
+    profiles:
+      - database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: ttt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ttt-network
+    profiles:
+      - cache
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Nginx reverse proxy (for multi-service setup)
+  nginx:
+    image: nginx:alpine
+    container_name: ttt-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./docker/nginx-proxy.conf:/etc/nginx/nginx.conf
+      - ./docker/ssl:/etc/nginx/ssl
+    depends_on:
+      - app-dev
+    networks:
+      - ttt-network
+    profiles:
+      - proxy
+
+networks:
+  ttt-network:
+    driver: bridge
+    name: ttt-network
+
+volumes:
+  postgres_data:
+    name: ttt-postgres-data
+  redis_data:
+    name: ttt-redis-data

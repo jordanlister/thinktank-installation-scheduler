@@ -1,0 +1,6 @@
+Location ID,Client Name,Contact Phone,Client Email,Street,Town,State,Zip,Appointment Date,Appointment Time,Work Type,Importance,Area,Comments
+3001,McDonald's Restaurant,(555) 111-1111,mcdonalds@corp.com,100 Burger Lane,Chicago,IL,60601,2024-03-01,08:00,Kitchen Equipment,High,Midwest,New fryer installation
+3002,Subway Sandwiches,(555) 222-2222,subway@franchise.com,200 Sub Street,Milwaukee,WI,53201,2024-03-02,09:30,Renovation,Medium,Midwest,Complete remodel
+3003,Pizza Hut,(555) 333-3333,pizzahut@store.com,300 Pizza Plaza,Indianapolis,IN,46201,2024-03-03,11:00,Equipment,Low,Midwest,Oven replacement
+3004,KFC Restaurant,(555) 444-4444,kfc@chicken.com,400 Fried Avenue,Detroit,MI,48201,2024-03-04,13:30,New Location,Urgent,Midwest,Grand opening setup
+3005,Taco Bell,(555) 555-5555,tacobell@yum.com,500 Taco Street,Columbus,OH,43201,2024-03-05,15:00,Equipment,Medium,Midwest,Grill maintenance

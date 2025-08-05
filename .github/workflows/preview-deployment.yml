@@ -1,0 +1,144 @@
+name: Preview Deployment
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # Build and Deploy Preview
+  preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event.action != 'closed'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+          VITE_APP_ENVIRONMENT: preview
+          VITE_APP_VERSION: pr-${{ github.event.pull_request.number }}
+
+      - name: Deploy to Vercel Preview
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+          vercel-args: '--env VITE_APP_ENVIRONMENT=preview'
+          github-comment: true
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          urls: |
+            ${{ steps.vercel-deploy.outputs.preview-url }}
+          configPath: './lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Comment PR with preview link
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const previewUrl = '${{ steps.vercel-deploy.outputs.preview-url }}';
+            const prNumber = ${{ github.event.pull_request.number }};
+            
+            const comment = `## 🚀 Preview Deployment
+            
+            Your preview deployment is ready!
+            
+            **🔗 Preview URL:** ${previewUrl}
+            
+            **📊 Lighthouse Report:** [View Report](${previewUrl}/_lighthouse/)
+            
+            **🔍 What's included:**
+            - ✅ Latest changes from this PR
+            - ✅ Production build optimizations
+            - ✅ Performance monitoring enabled
+            
+            **⚠️ Note:** This is a preview environment with limited functionality.
+            
+            ---
+            
+            *Preview updated on every commit to this PR*`;
+            
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Run accessibility tests
+        run: npm run test:a11y
+        env:
+          PREVIEW_URL: ${{ steps.vercel-deploy.outputs.preview-url }}
+        continue-on-error: true
+
+      - name: Upload accessibility report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: accessibility-report-pr-${{ github.event.pull_request.number }}
+          path: accessibility-report.html
+          retention-days: 7
+
+  # Cleanup when PR is closed
+  cleanup-preview:
+    name: Cleanup Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event.action == 'closed'
+    
+    steps:
+      - name: Delete Vercel Preview
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--delete'
+
+      - name: Comment PR with cleanup notice
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = ${{ github.event.pull_request.number }};
+            
+            const comment = `## 🧹 Preview Cleanup
+            
+            Preview deployment has been cleaned up as this PR was closed.
+            
+            Thank you for your contribution! 🎉`;
+            
+            github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

@@ -1,0 +1,501 @@
+Job ID,Store Number,Customer Name,Phone,Email,Street Address,City,State,ZIP Code,Install Date,Install Time,Duration,Installation Type,Priority,Region,Notes
+JOB001,5001,Starbucks Coffee,(555) 452-3941,store5001@starbuckscoffee.com,"4108 Maple Lane",Atlanta,GA,63956,2024-06-10,08:00,300,Renovation,Medium,Central,Automated test data record 1
+JOB002,5002,Home Depot,(555) 609-4216,store5002@homedepot.com,"2967 Maple Avenue",Springfield,IL,68897,2024-06-29,13:00,120,New Store Setup,Low,Central,Automated test data record 2
+JOB003,5003,Target Store,(555) 968-5535,store5003@targetstore.com,"4181 Elm Way",Syracuse,NY,89028,2024-03-30,09:00,300,New Store Setup,High,Northeast,Automated test data record 3
+JOB004,5004,Walmart,(555) 860-6456,store5004@walmart.com,"3151 Maple Avenue",Rochester,NY,24559,2024-05-01,10:00,120,Equipment Installation,High,Northeast,Automated test data record 4
+JOB005,5005,McDonald's,(555) 799-6752,store5005@mcdonalds.com,"6039 Elm Lane",Erie,PA,90887,2024-05-02,11:30,180,Equipment Upgrade,High,Central,Automated test data record 5
+JOB006,5006,Subway,(555) 777-7108,store5006@subway.com,"2560 Pine Avenue",Columbus,GA,51028,2024-04-30,08:30,240,System Integration,Urgent,Central,Automated test data record 6
+JOB007,5007,Walgreens,(555) 991-8515,store5007@walgreens.com,"1636 Main Way",San Diego,CA,82291,2024-04-25,08:30,120,Equipment Upgrade,Medium,West,Automated test data record 7
+JOB008,5008,Target Store,(555) 425-8421,store5008@targetstore.com,"3115 Maple Way",Orlando,FL,64449,2024-06-01,09:30,90,Renovation,High,Southeast,Automated test data record 8
+JOB009,5009,Starbucks Coffee,(555) 867-5672,store5009@starbuckscoffee.com,"9511 Pine Drive",Grand Rapids,MI,96787,2024-04-09,17:00,300,Equipment Installation,High,Central,Automated test data record 9
+JOB010,5010,McDonald's,(555) 519-3141,store5010@mcdonalds.com,"1831 Elm Drive",Grand Rapids,MI,62901,2024-03-10,14:00,180,Renovation,Urgent,Central,Automated test data record 10
+JOB011,5011,Starbucks Coffee,(555) 669-7681,store5011@starbuckscoffee.com,"2689 Cedar Way",Detroit,MI,25831,2024-04-05,17:30,300,New Store Setup,Medium,Central,Automated test data record 11
+JOB012,5012,Subway,(555) 101-7908,store5012@subway.com,"3210 Pine Street",Sterling Heights,MI,99430,2024-06-15,14:30,300,Equipment Installation,Urgent,Central,Automated test data record 12
+JOB013,5013,CVS Pharmacy,(555) 533-6552,store5013@cvspharmacy.com,"3125 Oak Avenue",Grand Rapids,MI,89356,2024-04-21,12:30,60,Renovation,High,Central,Automated test data record 13
+JOB014,5014,Subway,(555) 693-7724,store5014@subway.com,"6315 Cedar Street",New York,NY,13914,2024-06-15,08:30,180,Renovation,High,Northeast,Automated test data record 14
+JOB015,5015,Home Depot,(555) 147-2560,store5015@homedepot.com,"6759 Cedar Avenue",Philadelphia,PA,70949,2024-05-26,12:00,180,System Integration,High,Central,Automated test data record 15
+JOB016,5016,CVS Pharmacy,(555) 440-3775,store5016@cvspharmacy.com,"1109 Pine Way",Dallas,TX,87377,2024-05-02,12:00,90,New Store Setup,Urgent,South,Automated test data record 16
+JOB017,5017,Target Store,(555) 461-6972,store5017@targetstore.com,"5431 Main Avenue",Grand Rapids,MI,46268,2024-03-05,08:00,120,New Store Setup,High,Central,Automated test data record 17
+JOB018,5018,Home Depot,(555) 404-1404,store5018@homedepot.com,"3231 Cedar Avenue",Grand Rapids,MI,63823,2024-05-07,08:30,300,New Store Setup,Medium,Central,Automated test data record 18
+JOB019,5019,CVS Pharmacy,(555) 193-9147,store5019@cvspharmacy.com,"6849 Pine Lane",Los Angeles,CA,89017,2024-04-02,09:30,180,Equipment Installation,High,West,Automated test data record 19
+JOB020,5020,Best Buy,(555) 388-2397,store5020@bestbuy.com,"6667 Oak Drive",Augusta,GA,64792,2024-06-14,14:00,180,System Integration,Urgent,Central,Automated test data record 20
+JOB021,5021,McDonald's,(555) 731-2242,store5021@mcdonalds.com,"889 Main Way",Cincinnati,OH,74674,2024-03-31,13:30,120,Equipment Upgrade,Medium,Central,Automated test data record 21
+JOB022,5022,Target Store,(555) 108-9852,store5022@targetstore.com,"1793 Main Drive",Rochester,NY,51101,2024-05-17,11:30,180,Equipment Upgrade,Low,Northeast,Automated test data record 22
+JOB023,5023,Walmart,(555) 182-1087,store5023@walmart.com,"2959 Maple Lane",Syracuse,NY,28216,2024-03-19,11:00,300,Equipment Installation,High,Northeast,Automated test data record 23
+JOB024,5024,Pizza Hut,(555) 137-8654,store5024@pizzahut.com,"673 Elm Street",Austin,TX,16611,2024-04-25,15:00,240,New Store Setup,Low,South,Automated test data record 24
+JOB025,5025,Home Depot,(555) 299-1890,store5025@homedepot.com,"8244 Oak Way",San Antonio,TX,22046,2024-05-25,13:00,60,System Integration,High,South,Automated test data record 25
+JOB026,5026,Target Store,(555) 145-7672,store5026@targetstore.com,"9016 Elm Street",Jacksonville,FL,25246,2024-03-24,08:30,300,Renovation,Low,Southeast,Automated test data record 26
+JOB027,5027,Home Depot,(555) 797-3979,store5027@homedepot.com,"5773 Maple Avenue",Buffalo,NY,30096,2024-04-22,10:30,180,New Store Setup,Low,Northeast,Automated test data record 27
+JOB028,5028,McDonald's,(555) 150-2760,store5028@mcdonalds.com,"6654 Oak Avenue",New York,NY,85158,2024-06-16,13:00,240,Equipment Upgrade,High,Northeast,Automated test data record 28
+JOB029,5029,Pizza Hut,(555) 142-2414,store5029@pizzahut.com,"8050 Cedar Way",Tampa,FL,82002,2024-03-25,14:30,240,New Store Setup,Medium,Southeast,Automated test data record 29
+JOB030,5030,Subway,(555) 528-6649,store5030@subway.com,"584 Oak Street",Rochester,NY,95365,2024-03-21,15:00,60,Equipment Installation,Low,Northeast,Automated test data record 30
+JOB031,5031,Home Depot,(555) 230-6450,store5031@homedepot.com,"5293 Cedar Street",Erie,PA,52797,2024-06-03,10:00,300,Equipment Installation,Medium,Central,Automated test data record 31
+JOB032,5032,Home Depot,(555) 337-2432,store5032@homedepot.com,"8880 Oak Avenue",Columbus,GA,28570,2024-03-27,14:30,90,Equipment Installation,Low,Central,Automated test data record 32
+JOB033,5033,Pizza Hut,(555) 977-4901,store5033@pizzahut.com,"1408 Main Avenue",Erie,PA,86618,2024-05-18,16:30,120,Equipment Upgrade,Low,Central,Automated test data record 33
+JOB034,5034,McDonald's,(555) 608-1465,store5034@mcdonalds.com,"1876 Oak Way",Warren,MI,72556,2024-06-22,13:00,120,Equipment Upgrade,High,Central,Automated test data record 34
+JOB035,5035,Home Depot,(555) 156-4146,store5035@homedepot.com,"5525 Oak Drive",Warren,MI,90152,2024-03-23,12:30,120,New Store Setup,High,Central,Automated test data record 35
+JOB036,5036,McDonald's,(555) 203-5473,store5036@mcdonalds.com,"8797 Maple Street",San Antonio,TX,15479,2024-03-03,09:30,240,Equipment Installation,Low,South,Automated test data record 36
+JOB037,5037,Walmart,(555) 296-5707,store5037@walmart.com,"5831 Maple Avenue",Sacramento,CA,28683,2024-04-30,17:30,120,New Store Setup,High,West,Automated test data record 37
+JOB038,5038,Walmart,(555) 110-5582,store5038@walmart.com,"1243 Main Lane",Dallas,TX,97793,2024-05-01,08:00,300,Equipment Installation,High,South,Automated test data record 38
+JOB039,5039,Walmart,(555) 439-2736,store5039@walmart.com,"2914 Main Street",Cleveland,OH,44368,2024-06-29,10:00,60,Equipment Installation,Urgent,Central,Automated test data record 39
+JOB040,5040,McDonald's,(555) 883-3101,store5040@mcdonalds.com,"4105 Cedar Lane",Rochester,NY,50250,2024-04-09,16:00,300,Renovation,Urgent,Northeast,Automated test data record 40
+JOB041,5041,Best Buy,(555) 623-7081,store5041@bestbuy.com,"9228 Main Way",Detroit,MI,30715,2024-04-29,16:30,90,Renovation,Medium,Central,Automated test data record 41
+JOB042,5042,Target Store,(555) 820-2366,store5042@targetstore.com,"2250 Pine Street",Durham,NC,96111,2024-04-02,15:00,120,Renovation,High,Central,Automated test data record 42
+JOB043,5043,Target Store,(555) 282-5540,store5043@targetstore.com,"1697 Pine Way",Orlando,FL,80736,2024-05-03,13:00,120,New Store Setup,High,Southeast,Automated test data record 43
+JOB044,5044,McDonald's,(555) 874-4069,store5044@mcdonalds.com,"177 Elm Drive",Durham,NC,75458,2024-03-13,13:30,120,New Store Setup,Medium,Central,Automated test data record 44
+JOB045,5045,Starbucks Coffee,(555) 829-7502,store5045@starbuckscoffee.com,"8520 Cedar Lane",Columbus,OH,97069,2024-04-02,16:00,300,Renovation,High,Central,Automated test data record 45
+JOB046,5046,CVS Pharmacy,(555) 344-4010,store5046@cvspharmacy.com,"6647 Maple Lane",Jacksonville,FL,11752,2024-04-11,12:00,60,System Integration,Low,Southeast,Automated test data record 46
+JOB047,5047,Target Store,(555) 256-1262,store5047@targetstore.com,"6200 Oak Avenue",Warren,MI,53805,2024-03-27,14:30,240,Equipment Upgrade,Medium,Central,Automated test data record 47
+JOB048,5048,CVS Pharmacy,(555) 719-3016,store5048@cvspharmacy.com,"7522 Elm Lane",Toledo,OH,79874,2024-06-23,11:30,60,Renovation,High,Central,Automated test data record 48
+JOB049,5049,Pizza Hut,(555) 127-8186,store5049@pizzahut.com,"1363 Elm Way",Toledo,OH,82992,2024-04-05,09:00,90,Equipment Upgrade,High,Central,Automated test data record 49
+JOB050,5050,Home Depot,(555) 118-5402,store5050@homedepot.com,"4434 Oak Street",Houston,TX,71576,2024-03-19,08:00,60,Renovation,Low,South,Automated test data record 50
+JOB051,5051,CVS Pharmacy,(555) 334-8853,store5051@cvspharmacy.com,"175 Oak Drive",Charlotte,NC,68290,2024-04-10,13:00,240,New Store Setup,Low,Central,Automated test data record 51
+JOB052,5052,Home Depot,(555) 552-5146,store5052@homedepot.com,"6968 Cedar Drive",Warren,MI,86182,2024-04-13,13:30,300,Renovation,High,Central,Automated test data record 52
+JOB053,5053,Walmart,(555) 939-9779,store5053@walmart.com,"9753 Oak Street",Houston,TX,53966,2024-03-04,08:30,300,System Integration,Medium,South,Automated test data record 53
+JOB054,5054,Target Store,(555) 312-3649,store5054@targetstore.com,"8481 Oak Drive",Tampa,FL,36867,2024-05-09,14:00,180,Equipment Upgrade,Medium,Southeast,Automated test data record 54
+JOB055,5055,Subway,(555) 462-5868,store5055@subway.com,"3087 Oak Lane",Tampa,FL,29442,2024-04-10,15:30,240,Renovation,Low,Southeast,Automated test data record 55
+JOB056,5056,Best Buy,(555) 552-3370,store5056@bestbuy.com,"889 Maple Avenue",New York,NY,56019,2024-03-16,11:30,240,Equipment Upgrade,High,Northeast,Automated test data record 56
+JOB057,5057,Home Depot,(555) 421-8715,store5057@homedepot.com,"9497 Maple Avenue",Grand Rapids,MI,65407,2024-04-23,15:30,180,Equipment Installation,High,Central,Automated test data record 57
+JOB058,5058,McDonald's,(555) 445-8772,store5058@mcdonalds.com,"1414 Main Drive",Pittsburgh,PA,95527,2024-04-09,12:00,240,System Integration,Medium,Central,Automated test data record 58
+JOB059,5059,McDonald's,(555) 695-3487,store5059@mcdonalds.com,"5119 Oak Street",Jacksonville,FL,94321,2024-06-20,08:00,90,Equipment Upgrade,High,Southeast,Automated test data record 59
+JOB060,5060,McDonald's,(555) 218-4028,store5060@mcdonalds.com,"7560 Oak Street",Warren,MI,91376,2024-05-31,11:30,300,Renovation,Low,Central,Automated test data record 60
+JOB061,5061,McDonald's,(555) 948-3524,store5061@mcdonalds.com,"1587 Maple Avenue",Allentown,PA,46370,2024-04-07,12:00,120,Renovation,High,Central,Automated test data record 61
+JOB062,5062,Walmart,(555) 365-5827,store5062@walmart.com,"1284 Elm Street",Houston,TX,21713,2024-03-13,09:30,120,New Store Setup,Low,South,Automated test data record 62
+JOB063,5063,Target Store,(555) 652-3237,store5063@targetstore.com,"2342 Maple Lane",Springfield,IL,52947,2024-03-24,16:30,60,System Integration,High,Central,Automated test data record 63
+JOB064,5064,Walgreens,(555) 688-8563,store5064@walgreens.com,"679 Pine Drive",Orlando,FL,62849,2024-04-19,12:30,120,New Store Setup,High,Southeast,Automated test data record 64
+JOB065,5065,Pizza Hut,(555) 803-6753,store5065@pizzahut.com,"7804 Cedar Street",Philadelphia,PA,77298,2024-06-02,14:00,180,System Integration,Urgent,Central,Automated test data record 65
+JOB066,5066,McDonald's,(555) 337-4027,store5066@mcdonalds.com,"7458 Pine Lane",Philadelphia,PA,27770,2024-03-08,09:00,180,Equipment Upgrade,Medium,Central,Automated test data record 66
+JOB067,5067,Starbucks Coffee,(555) 985-6376,store5067@starbuckscoffee.com,"8275 Elm Lane",New York,NY,66728,2024-05-12,15:00,300,New Store Setup,High,Northeast,Automated test data record 67
+JOB068,5068,Pizza Hut,(555) 949-5496,store5068@pizzahut.com,"9027 Maple Avenue",Austin,TX,97867,2024-03-04,16:00,60,Equipment Upgrade,Medium,South,Automated test data record 68
+JOB069,5069,Pizza Hut,(555) 122-6224,store5069@pizzahut.com,"9676 Cedar Lane",Philadelphia,PA,66792,2024-03-05,13:30,120,Equipment Upgrade,High,Central,Automated test data record 69
+JOB070,5070,Starbucks Coffee,(555) 315-5884,store5070@starbuckscoffee.com,"6657 Elm Street",Rochester,NY,63965,2024-05-19,16:30,60,Equipment Upgrade,High,Northeast,Automated test data record 70
+JOB071,5071,Best Buy,(555) 358-1380,store5071@bestbuy.com,"834 Elm Lane",Durham,NC,63118,2024-05-10,08:00,60,Renovation,High,Central,Automated test data record 71
+JOB072,5072,Starbucks Coffee,(555) 427-3526,store5072@starbuckscoffee.com,"5967 Cedar Avenue",Jacksonville,FL,50825,2024-03-17,16:00,240,New Store Setup,Low,Southeast,Automated test data record 72
+JOB073,5073,Target Store,(555) 746-7715,store5073@targetstore.com,"9109 Elm Avenue",Charlotte,NC,31162,2024-03-09,08:30,90,New Store Setup,Low,Central,Automated test data record 73
+JOB074,5074,Target Store,(555) 820-3663,store5074@targetstore.com,"6440 Maple Avenue",Houston,TX,99170,2024-06-02,15:30,180,Equipment Upgrade,Medium,South,Automated test data record 74
+JOB075,5075,McDonald's,(555) 909-3307,store5075@mcdonalds.com,"6818 Oak Street",Chicago,IL,24210,2024-03-02,17:00,60,Renovation,Low,Central,Automated test data record 75
+JOB076,5076,Starbucks Coffee,(555) 287-5386,store5076@starbuckscoffee.com,"143 Cedar Avenue",Allentown,PA,62941,2024-05-13,09:30,240,New Store Setup,High,Central,Automated test data record 76
+JOB077,5077,Subway,(555) 165-3348,store5077@subway.com,"6088 Cedar Avenue",Cincinnati,OH,24859,2024-04-21,10:30,60,Equipment Installation,Low,Central,Automated test data record 77
+JOB078,5078,Home Depot,(555) 862-3851,store5078@homedepot.com,"7340 Oak Way",Atlanta,GA,85055,2024-03-11,13:30,90,New Store Setup,Urgent,Central,Automated test data record 78
+JOB079,5079,Pizza Hut,(555) 987-2843,store5079@pizzahut.com,"5694 Elm Avenue",Toledo,OH,24809,2024-04-19,14:00,180,System Integration,High,Central,Automated test data record 79
+JOB080,5080,Walgreens,(555) 298-4785,store5080@walgreens.com,"4009 Oak Lane",Peoria,IL,98577,2024-03-17,17:00,60,Equipment Upgrade,Low,Central,Automated test data record 80
+JOB081,5081,McDonald's,(555) 502-7687,store5081@mcdonalds.com,"6686 Main Lane",San Francisco,CA,48600,2024-05-23,16:00,240,Equipment Upgrade,Medium,West,Automated test data record 81
+JOB082,5082,Subway,(555) 284-1101,store5082@subway.com,"510 Maple Way",San Francisco,CA,80973,2024-06-04,14:00,60,New Store Setup,Urgent,West,Automated test data record 82
+JOB083,5083,Starbucks Coffee,(555) 977-9470,store5083@starbuckscoffee.com,"2010 Cedar Way",Grand Rapids,MI,88109,2024-04-10,15:00,60,System Integration,High,Central,Automated test data record 83
+JOB084,5084,Home Depot,(555) 413-2235,store5084@homedepot.com,"1474 Main Drive",Cleveland,OH,89365,2024-05-30,09:30,300,Equipment Upgrade,High,Central,Automated test data record 84
+JOB085,5085,Best Buy,(555) 910-3054,store5085@bestbuy.com,"4385 Maple Street",San Diego,CA,90312,2024-03-22,16:30,240,Equipment Installation,Low,West,Automated test data record 85
+JOB086,5086,McDonald's,(555) 711-4894,store5086@mcdonalds.com,"6252 Elm Street",Erie,PA,57578,2024-04-14,17:00,90,Equipment Upgrade,Urgent,Central,Automated test data record 86
+JOB087,5087,CVS Pharmacy,(555) 245-1133,store5087@cvspharmacy.com,"1382 Oak Lane",San Antonio,TX,44690,2024-03-23,17:30,240,System Integration,Low,South,Automated test data record 87
+JOB088,5088,Best Buy,(555) 511-3494,store5088@bestbuy.com,"3552 Main Street",Warren,MI,96054,2024-05-08,17:00,60,System Integration,Low,Central,Automated test data record 88
+JOB089,5089,McDonald's,(555) 573-4471,store5089@mcdonalds.com,"2565 Pine Lane",Toledo,OH,42735,2024-05-09,14:00,90,System Integration,Medium,Central,Automated test data record 89
+JOB090,5090,Walgreens,(555) 388-2776,store5090@walgreens.com,"3294 Maple Way",Sacramento,CA,65065,2024-06-03,15:30,300,Renovation,Low,West,Automated test data record 90
+JOB091,5091,Target Store,(555) 264-1186,store5091@targetstore.com,"2487 Maple Lane",Philadelphia,PA,52776,2024-05-28,08:00,120,System Integration,Medium,Central,Automated test data record 91
+JOB092,5092,Best Buy,(555) 235-9725,store5092@bestbuy.com,"9257 Cedar Way",Jacksonville,FL,83705,2024-04-15,11:00,60,New Store Setup,Low,Southeast,Automated test data record 92
+JOB093,5093,Subway,(555) 547-1775,store5093@subway.com,"9490 Maple Way",Sterling Heights,MI,85019,2024-03-29,15:30,300,Equipment Installation,Urgent,Central,Automated test data record 93
+JOB094,5094,Target Store,(555) 805-7553,store5094@targetstore.com,"8872 Elm Drive",Tampa,FL,94193,2024-06-23,14:30,300,Equipment Installation,Medium,Southeast,Automated test data record 94
+JOB095,5095,Walgreens,(555) 652-2975,store5095@walgreens.com,"6305 Elm Drive",Cleveland,OH,57629,2024-03-31,13:00,120,Equipment Installation,Urgent,Central,Automated test data record 95
+JOB096,5096,McDonald's,(555) 782-8175,store5096@mcdonalds.com,"3770 Pine Drive",Durham,NC,46927,2024-05-24,12:00,120,Equipment Upgrade,Urgent,Central,Automated test data record 96
+JOB097,5097,Subway,(555) 717-2123,store5097@subway.com,"2937 Elm Drive",Greensboro,NC,10570,2024-06-03,16:30,240,System Integration,Medium,Central,Automated test data record 97
+JOB098,5098,Pizza Hut,(555) 638-1605,store5098@pizzahut.com,"181 Oak Lane",Grand Rapids,MI,26124,2024-05-27,16:30,120,Renovation,High,Central,Automated test data record 98
+JOB099,5099,Walmart,(555) 321-3143,store5099@walmart.com,"3662 Cedar Avenue",Austin,TX,34653,2024-05-27,09:00,180,Equipment Installation,Urgent,South,Automated test data record 99
+JOB100,5100,Subway,(555) 198-8897,store5100@subway.com,"3933 Pine Way",Raleigh,NC,24208,2024-03-30,17:00,120,System Integration,Low,Central,Automated test data record 100
+JOB101,5101,Target Store,(555) 661-1735,store5101@targetstore.com,"7129 Oak Way",Greensboro,NC,93012,2024-06-19,12:00,60,Equipment Upgrade,Low,Central,Automated test data record 101
+JOB102,5102,Target Store,(555) 677-6696,store5102@targetstore.com,"9243 Oak Lane",Cleveland,OH,98428,2024-04-14,09:00,90,Equipment Installation,Medium,Central,Automated test data record 102
+JOB103,5103,Best Buy,(555) 129-5699,store5103@bestbuy.com,"1822 Pine Drive",San Diego,CA,63303,2024-05-24,09:30,90,Equipment Installation,High,West,Automated test data record 103
+JOB104,5104,Pizza Hut,(555) 775-2809,store5104@pizzahut.com,"2313 Cedar Lane",Austin,TX,94725,2024-03-24,17:00,60,Equipment Upgrade,High,South,Automated test data record 104
+JOB105,5105,Walgreens,(555) 292-6236,store5105@walgreens.com,"4251 Pine Avenue",Columbus,GA,14301,2024-04-28,14:00,60,Equipment Installation,High,Central,Automated test data record 105
+JOB106,5106,Home Depot,(555) 493-7034,store5106@homedepot.com,"5087 Elm Drive",Dallas,TX,86469,2024-05-15,10:30,90,System Integration,Low,South,Automated test data record 106
+JOB107,5107,Target Store,(555) 581-3162,store5107@targetstore.com,"1743 Pine Avenue",Orlando,FL,20884,2024-06-09,09:30,180,New Store Setup,Low,Southeast,Automated test data record 107
+JOB108,5108,Walmart,(555) 749-9707,store5108@walmart.com,"9221 Maple Avenue",Buffalo,NY,87728,2024-04-15,08:00,60,System Integration,High,Northeast,Automated test data record 108
+JOB109,5109,Target Store,(555) 908-1431,store5109@targetstore.com,"6451 Main Drive",Durham,NC,83117,2024-03-14,08:00,300,Renovation,High,Central,Automated test data record 109
+JOB110,5110,CVS Pharmacy,(555) 303-6363,store5110@cvspharmacy.com,"3125 Oak Avenue",Augusta,GA,98627,2024-05-13,14:00,60,Renovation,High,Central,Automated test data record 110
+JOB111,5111,Best Buy,(555) 387-8195,store5111@bestbuy.com,"5788 Elm Lane",Sterling Heights,MI,44926,2024-03-15,09:30,90,System Integration,Medium,Central,Automated test data record 111
+JOB112,5112,McDonald's,(555) 422-6618,store5112@mcdonalds.com,"3658 Oak Way",Warren,MI,92953,2024-06-03,10:00,240,New Store Setup,Low,Central,Automated test data record 112
+JOB113,5113,Target Store,(555) 734-5075,store5113@targetstore.com,"7965 Pine Drive",San Francisco,CA,15968,2024-04-22,15:30,120,System Integration,Urgent,West,Automated test data record 113
+JOB114,5114,Subway,(555) 419-6308,store5114@subway.com,"7619 Cedar Avenue",Sterling Heights,MI,90787,2024-06-11,12:00,120,System Integration,Low,Central,Automated test data record 114
+JOB115,5115,Starbucks Coffee,(555) 543-1758,store5115@starbuckscoffee.com,"4334 Cedar Lane",Detroit,MI,55963,2024-04-22,17:30,240,Renovation,High,Central,Automated test data record 115
+JOB116,5116,Starbucks Coffee,(555) 907-5307,store5116@starbuckscoffee.com,"4784 Oak Street",Charlotte,NC,85739,2024-04-04,16:30,60,New Store Setup,High,Central,Automated test data record 116
+JOB117,5117,Best Buy,(555) 697-6763,store5117@bestbuy.com,"530 Maple Lane",Dallas,TX,83056,2024-05-21,09:00,240,New Store Setup,Urgent,South,Automated test data record 117
+JOB118,5118,CVS Pharmacy,(555) 671-6462,store5118@cvspharmacy.com,"4966 Oak Lane",Charlotte,NC,66466,2024-06-17,08:30,240,System Integration,Low,Central,Automated test data record 118
+JOB119,5119,Walgreens,(555) 720-6844,store5119@walgreens.com,"2658 Cedar Lane",Detroit,MI,21274,2024-03-06,08:00,240,Renovation,High,Central,Automated test data record 119
+JOB120,5120,Home Depot,(555) 868-6674,store5120@homedepot.com,"8193 Cedar Avenue",Jacksonville,FL,30227,2024-04-15,10:30,240,Equipment Upgrade,Medium,Southeast,Automated test data record 120
+JOB121,5121,CVS Pharmacy,(555) 140-8428,store5121@cvspharmacy.com,"6235 Main Lane",Philadelphia,PA,54913,2024-06-16,11:00,90,Renovation,Low,Central,Automated test data record 121
+JOB122,5122,Best Buy,(555) 313-8777,store5122@bestbuy.com,"5605 Elm Way",Columbus,OH,82647,2024-05-04,08:30,300,Equipment Upgrade,Urgent,Central,Automated test data record 122
+JOB123,5123,McDonald's,(555) 527-2615,store5123@mcdonalds.com,"6286 Oak Avenue",Los Angeles,CA,10243,2024-04-30,10:00,180,Renovation,Low,West,Automated test data record 123
+JOB124,5124,Target Store,(555) 221-7232,store5124@targetstore.com,"167 Cedar Street",Syracuse,NY,61621,2024-06-20,09:00,180,Equipment Installation,Low,Northeast,Automated test data record 124
+JOB125,5125,Walgreens,(555) 696-3132,store5125@walgreens.com,"594 Main Lane",Houston,TX,55974,2024-06-12,08:00,240,Renovation,Medium,South,Automated test data record 125
+JOB126,5126,Home Depot,(555) 245-6637,store5126@homedepot.com,"9040 Oak Drive",Austin,TX,16596,2024-06-21,08:30,240,New Store Setup,Low,South,Automated test data record 126
+JOB127,5127,Home Depot,(555) 545-8393,store5127@homedepot.com,"7921 Oak Lane",Savannah,GA,79104,2024-06-01,14:00,90,System Integration,Urgent,Central,Automated test data record 127
+JOB128,5128,McDonald's,(555) 508-5913,store5128@mcdonalds.com,"6221 Main Drive",Miami,FL,40693,2024-06-15,16:30,120,Renovation,Low,Southeast,Automated test data record 128
+JOB129,5129,Walgreens,(555) 422-1932,store5129@walgreens.com,"1099 Pine Lane",Orlando,FL,41582,2024-05-25,12:00,90,Equipment Upgrade,Low,Southeast,Automated test data record 129
+JOB130,5130,CVS Pharmacy,(555) 752-6844,store5130@cvspharmacy.com,"6962 Elm Street",Dallas,TX,52266,2024-03-10,10:30,180,Equipment Upgrade,Urgent,South,Automated test data record 130
+JOB131,5131,Walgreens,(555) 686-1285,store5131@walgreens.com,"8279 Maple Avenue",Syracuse,NY,70402,2024-06-28,08:30,180,Equipment Upgrade,Medium,Northeast,Automated test data record 131
+JOB132,5132,Target Store,(555) 642-6815,store5132@targetstore.com,"4894 Elm Way",Orlando,FL,92666,2024-04-20,11:00,180,System Integration,Medium,Southeast,Automated test data record 132
+JOB133,5133,Best Buy,(555) 406-6089,store5133@bestbuy.com,"8958 Maple Way",Raleigh,NC,95108,2024-05-16,14:30,90,Equipment Installation,Medium,Central,Automated test data record 133
+JOB134,5134,Subway,(555) 376-2066,store5134@subway.com,"8188 Oak Street",Pittsburgh,PA,23882,2024-03-02,08:30,300,Equipment Upgrade,Low,Central,Automated test data record 134
+JOB135,5135,Walgreens,(555) 352-3758,store5135@walgreens.com,"6744 Maple Drive",Dallas,TX,71591,2024-04-25,16:30,240,Equipment Installation,Medium,South,Automated test data record 135
+JOB136,5136,Best Buy,(555) 938-8629,store5136@bestbuy.com,"4881 Elm Avenue",Philadelphia,PA,14395,2024-04-23,16:30,90,Equipment Installation,Urgent,Central,Automated test data record 136
+JOB137,5137,Target Store,(555) 395-2731,store5137@targetstore.com,"631 Cedar Lane",Atlanta,GA,95119,2024-03-27,17:30,300,System Integration,High,Central,Automated test data record 137
+JOB138,5138,Best Buy,(555) 222-7650,store5138@bestbuy.com,"3794 Elm Lane",Allentown,PA,33750,2024-04-14,11:30,180,Renovation,High,Central,Automated test data record 138
+JOB139,5139,CVS Pharmacy,(555) 505-1906,store5139@cvspharmacy.com,"621 Elm Way",Buffalo,NY,51376,2024-03-23,13:30,180,System Integration,High,Northeast,Automated test data record 139
+JOB140,5140,CVS Pharmacy,(555) 755-5780,store5140@cvspharmacy.com,"5630 Cedar Street",Peoria,IL,85484,2024-04-04,17:30,90,Equipment Installation,Low,Central,Automated test data record 140
+JOB141,5141,CVS Pharmacy,(555) 677-5762,store5141@cvspharmacy.com,"3759 Elm Avenue",Miami,FL,93553,2024-06-02,08:00,180,Equipment Upgrade,Low,Southeast,Automated test data record 141
+JOB142,5142,Best Buy,(555) 127-6148,store5142@bestbuy.com,"2136 Oak Street",Jacksonville,FL,46591,2024-04-17,08:00,300,Equipment Upgrade,Medium,Southeast,Automated test data record 142
+JOB143,5143,Home Depot,(555) 205-9103,store5143@homedepot.com,"533 Maple Lane",Rochester,NY,31669,2024-06-25,09:30,90,Equipment Installation,Low,Northeast,Automated test data record 143
+JOB144,5144,CVS Pharmacy,(555) 776-1206,store5144@cvspharmacy.com,"4749 Elm Street",Savannah,GA,92348,2024-05-01,10:00,120,Equipment Installation,Medium,Central,Automated test data record 144
+JOB145,5145,Pizza Hut,(555) 501-8826,store5145@pizzahut.com,"7762 Cedar Avenue",Columbus,GA,89507,2024-03-15,08:30,300,Equipment Installation,Urgent,Central,Automated test data record 145
+JOB146,5146,Subway,(555) 149-6452,store5146@subway.com,"1688 Oak Way",Rockford,IL,21126,2024-05-01,09:30,180,Equipment Upgrade,Medium,Central,Automated test data record 146
+JOB147,5147,CVS Pharmacy,(555) 396-5350,store5147@cvspharmacy.com,"2271 Cedar Lane",Cleveland,OH,32176,2024-06-09,09:30,240,Equipment Upgrade,Low,Central,Automated test data record 147
+JOB148,5148,Walgreens,(555) 276-8837,store5148@walgreens.com,"2416 Pine Way",San Francisco,CA,70988,2024-03-23,10:30,60,Equipment Installation,Low,West,Automated test data record 148
+JOB149,5149,Home Depot,(555) 587-2964,store5149@homedepot.com,"5460 Pine Drive",San Antonio,TX,52000,2024-05-20,16:30,90,System Integration,Medium,South,Automated test data record 149
+JOB150,5150,Subway,(555) 971-1711,store5150@subway.com,"628 Cedar Lane",Austin,TX,27440,2024-04-24,12:00,240,Equipment Upgrade,Medium,South,Automated test data record 150
+JOB151,5151,Walmart,(555) 787-6940,store5151@walmart.com,"7325 Cedar Street",Philadelphia,PA,34848,2024-03-07,11:30,60,System Integration,Medium,Central,Automated test data record 151
+JOB152,5152,Home Depot,(555) 358-5772,store5152@homedepot.com,"8053 Cedar Avenue",Houston,TX,31103,2024-04-19,14:00,60,System Integration,Low,South,Automated test data record 152
+JOB153,5153,CVS Pharmacy,(555) 544-3391,store5153@cvspharmacy.com,"23 Pine Street",Atlanta,GA,87602,2024-03-27,12:00,90,Renovation,High,Central,Automated test data record 153
+JOB154,5154,Walgreens,(555) 303-5832,store5154@walgreens.com,"8578 Cedar Avenue",Allentown,PA,56890,2024-03-29,11:30,300,New Store Setup,Medium,Central,Automated test data record 154
+JOB155,5155,Subway,(555) 437-9158,store5155@subway.com,"4284 Cedar Lane",Los Angeles,CA,86156,2024-03-02,12:00,90,New Store Setup,Medium,West,Automated test data record 155
+JOB156,5156,McDonald's,(555) 849-2374,store5156@mcdonalds.com,"5398 Elm Avenue",Durham,NC,17328,2024-03-20,15:30,240,New Store Setup,Urgent,Central,Automated test data record 156
+JOB157,5157,Walgreens,(555) 554-9457,store5157@walgreens.com,"9902 Cedar Way",San Francisco,CA,48565,2024-03-08,16:30,90,System Integration,Medium,West,Automated test data record 157
+JOB158,5158,McDonald's,(555) 752-1090,store5158@mcdonalds.com,"8876 Cedar Avenue",Detroit,MI,23036,2024-03-12,15:00,60,Equipment Installation,Urgent,Central,Automated test data record 158
+JOB159,5159,Walgreens,(555) 183-8857,store5159@walgreens.com,"2860 Cedar Lane",San Diego,CA,72575,2024-06-24,12:30,240,System Integration,Low,West,Automated test data record 159
+JOB160,5160,CVS Pharmacy,(555) 705-9314,store5160@cvspharmacy.com,"9439 Elm Lane",Sterling Heights,MI,10847,2024-06-15,09:30,120,New Store Setup,High,Central,Automated test data record 160
+JOB161,5161,Walmart,(555) 231-3013,store5161@walmart.com,"8531 Pine Lane",Erie,PA,41092,2024-03-02,11:30,240,Equipment Upgrade,Low,Central,Automated test data record 161
+JOB162,5162,McDonald's,(555) 955-3622,store5162@mcdonalds.com,"2744 Oak Avenue",Rockford,IL,79821,2024-06-03,11:00,90,New Store Setup,Low,Central,Automated test data record 162
+JOB163,5163,Target Store,(555) 839-6626,store5163@targetstore.com,"2376 Elm Way",Tampa,FL,19797,2024-03-13,09:30,180,Equipment Upgrade,Medium,Southeast,Automated test data record 163
+JOB164,5164,Walgreens,(555) 781-3530,store5164@walgreens.com,"8941 Maple Avenue",Jacksonville,FL,44254,2024-03-10,16:30,300,System Integration,Low,Southeast,Automated test data record 164
+JOB165,5165,Subway,(555) 405-1696,store5165@subway.com,"9683 Oak Street",Pittsburgh,PA,64632,2024-06-26,09:30,180,System Integration,Urgent,Central,Automated test data record 165
+JOB166,5166,CVS Pharmacy,(555) 921-7690,store5166@cvspharmacy.com,"3516 Main Avenue",Springfield,IL,97501,2024-05-24,09:30,60,New Store Setup,Low,Central,Automated test data record 166
+JOB167,5167,Subway,(555) 880-4917,store5167@subway.com,"7061 Oak Street",San Diego,CA,99231,2024-04-20,17:00,120,System Integration,Low,West,Automated test data record 167
+JOB168,5168,Subway,(555) 120-9198,store5168@subway.com,"1846 Maple Avenue",Jacksonville,FL,32068,2024-04-08,14:00,60,New Store Setup,Medium,Southeast,Automated test data record 168
+JOB169,5169,Starbucks Coffee,(555) 381-1754,store5169@starbuckscoffee.com,"6775 Main Street",Greensboro,NC,93677,2024-05-26,17:00,300,System Integration,Urgent,Central,Automated test data record 169
+JOB170,5170,Walmart,(555) 858-4900,store5170@walmart.com,"1671 Elm Drive",Dallas,TX,27037,2024-04-09,10:00,60,New Store Setup,Urgent,South,Automated test data record 170
+JOB171,5171,Subway,(555) 295-9962,store5171@subway.com,"1491 Main Street",San Antonio,TX,34753,2024-06-06,08:30,240,Equipment Upgrade,High,South,Automated test data record 171
+JOB172,5172,Home Depot,(555) 261-9775,store5172@homedepot.com,"8468 Maple Avenue",Savannah,GA,54993,2024-03-27,11:00,180,System Integration,Urgent,Central,Automated test data record 172
+JOB173,5173,Home Depot,(555) 887-4452,store5173@homedepot.com,"7096 Maple Avenue",San Diego,CA,23612,2024-04-23,08:30,90,Equipment Upgrade,Low,West,Automated test data record 173
+JOB174,5174,CVS Pharmacy,(555) 994-4169,store5174@cvspharmacy.com,"7899 Main Street",San Francisco,CA,18410,2024-05-28,10:30,300,Renovation,Medium,West,Automated test data record 174
+JOB175,5175,Subway,(555) 858-3566,store5175@subway.com,"953 Main Drive",Atlanta,GA,87642,2024-06-28,17:00,180,New Store Setup,Medium,Central,Automated test data record 175
+JOB176,5176,CVS Pharmacy,(555) 572-8258,store5176@cvspharmacy.com,"2155 Cedar Avenue",Orlando,FL,59528,2024-04-11,11:30,180,Equipment Upgrade,High,Southeast,Automated test data record 176
+JOB177,5177,Subway,(555) 525-6689,store5177@subway.com,"492 Oak Way",Orlando,FL,89422,2024-04-10,09:00,60,Renovation,Medium,Southeast,Automated test data record 177
+JOB178,5178,Pizza Hut,(555) 977-4775,store5178@pizzahut.com,"2304 Elm Way",Buffalo,NY,41574,2024-03-29,17:30,240,Equipment Installation,Low,Northeast,Automated test data record 178
+JOB179,5179,Walmart,(555) 168-3891,store5179@walmart.com,"6656 Pine Lane",Springfield,IL,43759,2024-03-05,13:00,60,New Store Setup,Urgent,Central,Automated test data record 179
+JOB180,5180,Walmart,(555) 392-2474,store5180@walmart.com,"9532 Maple Street",Pittsburgh,PA,92505,2024-06-13,17:30,60,Renovation,Medium,Central,Automated test data record 180
+JOB181,5181,Home Depot,(555) 148-5741,store5181@homedepot.com,"2994 Maple Way",Raleigh,NC,38293,2024-03-11,10:30,60,New Store Setup,High,Central,Automated test data record 181
+JOB182,5182,Subway,(555) 658-6525,store5182@subway.com,"1294 Main Way",Columbus,GA,66495,2024-05-11,09:00,300,Equipment Upgrade,Low,Central,Automated test data record 182
+JOB183,5183,Walgreens,(555) 449-2159,store5183@walgreens.com,"3389 Maple Street",Erie,PA,55339,2024-06-14,16:00,240,Equipment Installation,Urgent,Central,Automated test data record 183
+JOB184,5184,CVS Pharmacy,(555) 860-3413,store5184@cvspharmacy.com,"3733 Cedar Drive",Buffalo,NY,21441,2024-03-09,08:00,240,System Integration,Urgent,Northeast,Automated test data record 184
+JOB185,5185,Walgreens,(555) 449-5616,store5185@walgreens.com,"5871 Maple Street",Philadelphia,PA,68286,2024-05-08,11:30,300,System Integration,Medium,Central,Automated test data record 185
+JOB186,5186,McDonald's,(555) 698-5536,store5186@mcdonalds.com,"9696 Pine Drive",Syracuse,NY,63141,2024-05-14,10:30,120,Equipment Upgrade,Urgent,Northeast,Automated test data record 186
+JOB187,5187,Subway,(555) 413-6979,store5187@subway.com,"7117 Pine Avenue",Chicago,IL,37235,2024-06-08,10:00,240,Equipment Installation,Low,Central,Automated test data record 187
+JOB188,5188,Best Buy,(555) 220-6694,store5188@bestbuy.com,"1953 Pine Drive",Philadelphia,PA,93353,2024-05-18,10:00,180,Renovation,Low,Central,Automated test data record 188
+JOB189,5189,CVS Pharmacy,(555) 519-1612,store5189@cvspharmacy.com,"7955 Pine Drive",Grand Rapids,MI,50459,2024-05-09,10:30,180,Renovation,Low,Central,Automated test data record 189
+JOB190,5190,Walgreens,(555) 318-6977,store5190@walgreens.com,"9825 Main Avenue",Toledo,OH,88039,2024-04-28,15:30,300,Equipment Installation,Medium,Central,Automated test data record 190
+JOB191,5191,Target Store,(555) 300-4467,store5191@targetstore.com,"6357 Pine Way",San Antonio,TX,95973,2024-06-06,16:30,90,Renovation,High,South,Automated test data record 191
+JOB192,5192,Subway,(555) 870-3140,store5192@subway.com,"7629 Oak Street",San Diego,CA,88711,2024-06-21,11:00,180,New Store Setup,Low,West,Automated test data record 192
+JOB193,5193,Walgreens,(555) 729-7813,store5193@walgreens.com,"8738 Pine Drive",New York,NY,27750,2024-04-09,17:30,60,Equipment Upgrade,Medium,Northeast,Automated test data record 193
+JOB194,5194,Subway,(555) 738-9199,store5194@subway.com,"6665 Oak Street",Savannah,GA,41832,2024-06-08,09:30,240,Equipment Upgrade,Low,Central,Automated test data record 194
+JOB195,5195,Best Buy,(555) 809-5898,store5195@bestbuy.com,"3571 Elm Way",San Diego,CA,48947,2024-03-29,17:30,240,Equipment Upgrade,Medium,West,Automated test data record 195
+JOB196,5196,Walmart,(555) 839-2545,store5196@walmart.com,"3537 Main Street",Orlando,FL,32656,2024-03-21,15:30,300,Renovation,High,Southeast,Automated test data record 196
+JOB197,5197,Walmart,(555) 482-3465,store5197@walmart.com,"6464 Oak Avenue",Miami,FL,63067,2024-05-21,16:00,300,Renovation,Low,Southeast,Automated test data record 197
+JOB198,5198,CVS Pharmacy,(555) 190-2311,store5198@cvspharmacy.com,"8148 Elm Way",Pittsburgh,PA,42977,2024-06-02,08:00,90,Equipment Installation,Medium,Central,Automated test data record 198
+JOB199,5199,Target Store,(555) 864-3736,store5199@targetstore.com,"5543 Maple Avenue",Syracuse,NY,52010,2024-03-09,10:00,60,New Store Setup,Low,Northeast,Automated test data record 199
+JOB200,5200,Pizza Hut,(555) 316-3696,store5200@pizzahut.com,"2564 Pine Avenue",San Francisco,CA,14949,2024-06-26,13:30,240,Equipment Installation,Urgent,West,Automated test data record 200
+JOB201,5201,Subway,(555) 180-6504,store5201@subway.com,"3230 Pine Street",Peoria,IL,23676,2024-06-25,14:30,120,Equipment Installation,Medium,Central,Automated test data record 201
+JOB202,5202,Subway,(555) 729-6014,store5202@subway.com,"9312 Maple Avenue",Orlando,FL,30212,2024-03-12,11:30,90,Equipment Upgrade,Medium,Southeast,Automated test data record 202
+JOB203,5203,Best Buy,(555) 737-3416,store5203@bestbuy.com,"4772 Main Avenue",Miami,FL,20449,2024-06-05,14:30,180,New Store Setup,High,Southeast,Automated test data record 203
+JOB204,5204,Starbucks Coffee,(555) 976-1233,store5204@starbuckscoffee.com,"4102 Main Way",Durham,NC,90144,2024-04-02,10:00,90,New Store Setup,Low,Central,Automated test data record 204
+JOB205,5205,Pizza Hut,(555) 747-3308,store5205@pizzahut.com,"6256 Main Street",Erie,PA,95223,2024-03-31,08:00,300,Renovation,Urgent,Central,Automated test data record 205
+JOB206,5206,Subway,(555) 694-7802,store5206@subway.com,"4641 Cedar Avenue",Houston,TX,30621,2024-03-03,16:30,60,System Integration,High,South,Automated test data record 206
+JOB207,5207,Walgreens,(555) 332-9394,store5207@walgreens.com,"833 Maple Drive",Grand Rapids,MI,95538,2024-03-14,15:30,120,System Integration,Low,Central,Automated test data record 207
+JOB208,5208,Best Buy,(555) 853-4397,store5208@bestbuy.com,"2790 Pine Way",Pittsburgh,PA,22448,2024-06-10,09:30,240,System Integration,Low,Central,Automated test data record 208
+JOB209,5209,CVS Pharmacy,(555) 961-2237,store5209@cvspharmacy.com,"7115 Maple Avenue",Warren,MI,21888,2024-04-01,12:30,300,New Store Setup,High,Central,Automated test data record 209
+JOB210,5210,McDonald's,(555) 305-3552,store5210@mcdonalds.com,"235 Maple Lane",Greensboro,NC,19235,2024-05-25,08:30,90,New Store Setup,High,Central,Automated test data record 210
+JOB211,5211,CVS Pharmacy,(555) 639-8346,store5211@cvspharmacy.com,"8948 Main Street",Sterling Heights,MI,78304,2024-03-10,12:30,240,System Integration,High,Central,Automated test data record 211
+JOB212,5212,Home Depot,(555) 951-8019,store5212@homedepot.com,"1888 Elm Drive",Toledo,OH,51998,2024-04-01,13:30,120,System Integration,High,Central,Automated test data record 212
+JOB213,5213,Subway,(555) 855-3357,store5213@subway.com,"6082 Oak Drive",Philadelphia,PA,93600,2024-04-28,16:30,60,New Store Setup,Medium,Central,Automated test data record 213
+JOB214,5214,Best Buy,(555) 237-4440,store5214@bestbuy.com,"2919 Cedar Avenue",Augusta,GA,86205,2024-04-18,17:30,90,Equipment Installation,Low,Central,Automated test data record 214
+JOB215,5215,Subway,(555) 445-6206,store5215@subway.com,"7224 Pine Avenue",San Antonio,TX,11195,2024-03-05,10:00,300,Renovation,Low,South,Automated test data record 215
+JOB216,5216,Pizza Hut,(555) 670-6674,store5216@pizzahut.com,"8261 Main Drive",Pittsburgh,PA,10350,2024-05-02,16:00,300,Equipment Upgrade,Low,Central,Automated test data record 216
+JOB217,5217,Home Depot,(555) 105-9110,store5217@homedepot.com,"7181 Cedar Street",Savannah,GA,46176,2024-03-06,10:00,120,Equipment Installation,Low,Central,Automated test data record 217
+JOB218,5218,CVS Pharmacy,(555) 296-3335,store5218@cvspharmacy.com,"3850 Oak Way",San Antonio,TX,84616,2024-06-23,13:00,240,Equipment Upgrade,High,South,Automated test data record 218
+JOB219,5219,Starbucks Coffee,(555) 872-4679,store5219@starbuckscoffee.com,"5906 Main Drive",Raleigh,NC,18877,2024-04-27,09:30,240,Equipment Installation,Low,Central,Automated test data record 219
+JOB220,5220,Target Store,(555) 697-2255,store5220@targetstore.com,"4316 Elm Avenue",Buffalo,NY,29146,2024-05-28,14:30,60,Renovation,Low,Northeast,Automated test data record 220
+JOB221,5221,Home Depot,(555) 955-8125,store5221@homedepot.com,"8063 Elm Lane",Orlando,FL,11397,2024-06-08,10:00,240,Equipment Installation,Low,Southeast,Automated test data record 221
+JOB222,5222,Walgreens,(555) 276-2533,store5222@walgreens.com,"2977 Cedar Street",New York,NY,31753,2024-05-11,15:00,120,Equipment Upgrade,Medium,Northeast,Automated test data record 222
+JOB223,5223,CVS Pharmacy,(555) 236-6961,store5223@cvspharmacy.com,"2685 Main Street",Greensboro,NC,88919,2024-03-31,09:30,60,Equipment Installation,High,Central,Automated test data record 223
+JOB224,5224,Pizza Hut,(555) 609-9774,store5224@pizzahut.com,"4739 Cedar Drive",Greensboro,NC,22388,2024-03-13,15:30,300,System Integration,High,Central,Automated test data record 224
+JOB225,5225,Target Store,(555) 723-3023,store5225@targetstore.com,"1535 Cedar Avenue",Jacksonville,FL,19862,2024-03-08,08:30,300,Renovation,Urgent,Southeast,Automated test data record 225
+JOB226,5226,Walmart,(555) 216-8903,store5226@walmart.com,"7285 Elm Drive",Chicago,IL,36603,2024-05-10,15:30,300,Renovation,Urgent,Central,Automated test data record 226
+JOB227,5227,Best Buy,(555) 221-8351,store5227@bestbuy.com,"4687 Oak Avenue",Los Angeles,CA,56401,2024-03-01,10:30,120,Equipment Upgrade,Medium,West,Automated test data record 227
+JOB228,5228,CVS Pharmacy,(555) 758-2345,store5228@cvspharmacy.com,"8957 Main Lane",Peoria,IL,43663,2024-05-13,09:00,300,Equipment Upgrade,Urgent,Central,Automated test data record 228
+JOB229,5229,Subway,(555) 813-3843,store5229@subway.com,"9027 Maple Lane",Greensboro,NC,43646,2024-06-04,12:30,90,Equipment Upgrade,Medium,Central,Automated test data record 229
+JOB230,5230,McDonald's,(555) 431-2997,store5230@mcdonalds.com,"7234 Maple Avenue",Warren,MI,32922,2024-05-24,11:30,180,System Integration,Medium,Central,Automated test data record 230
+JOB231,5231,Home Depot,(555) 949-8644,store5231@homedepot.com,"8142 Main Way",Columbus,OH,80334,2024-06-03,10:00,60,Renovation,High,Central,Automated test data record 231
+JOB232,5232,Home Depot,(555) 150-5588,store5232@homedepot.com,"5542 Pine Street",Dallas,TX,66634,2024-04-29,13:00,90,Equipment Installation,Low,South,Automated test data record 232
+JOB233,5233,Target Store,(555) 641-6021,store5233@targetstore.com,"6577 Main Drive",San Francisco,CA,65611,2024-06-16,08:30,60,System Integration,Medium,West,Automated test data record 233
+JOB234,5234,Walmart,(555) 652-8947,store5234@walmart.com,"3768 Cedar Avenue",Jacksonville,FL,57897,2024-04-22,09:30,120,Equipment Installation,Low,Southeast,Automated test data record 234
+JOB235,5235,Best Buy,(555) 524-5714,store5235@bestbuy.com,"9429 Elm Street",Atlanta,GA,85402,2024-06-08,17:30,300,Renovation,High,Central,Automated test data record 235
+JOB236,5236,Walgreens,(555) 967-3643,store5236@walgreens.com,"3780 Elm Street",Syracuse,NY,41072,2024-03-07,17:30,240,Renovation,High,Northeast,Automated test data record 236
+JOB237,5237,Subway,(555) 872-8051,store5237@subway.com,"5531 Maple Drive",Cincinnati,OH,75929,2024-05-23,15:30,240,Equipment Installation,Low,Central,Automated test data record 237
+JOB238,5238,Walgreens,(555) 616-8852,store5238@walgreens.com,"4485 Pine Avenue",Detroit,MI,46865,2024-03-18,08:00,90,New Store Setup,Low,Central,Automated test data record 238
+JOB239,5239,CVS Pharmacy,(555) 214-6115,store5239@cvspharmacy.com,"1595 Oak Drive",Allentown,PA,88083,2024-04-06,11:30,90,Equipment Installation,Low,Central,Automated test data record 239
+JOB240,5240,Starbucks Coffee,(555) 109-7926,store5240@starbuckscoffee.com,"761 Oak Way",Cincinnati,OH,28371,2024-06-08,15:00,60,Equipment Installation,High,Central,Automated test data record 240
+JOB241,5241,Subway,(555) 633-6764,store5241@subway.com,"8710 Main Avenue",Detroit,MI,78989,2024-03-25,17:30,240,Equipment Upgrade,Urgent,Central,Automated test data record 241
+JOB242,5242,Subway,(555) 131-8565,store5242@subway.com,"1082 Oak Street",Columbus,GA,90064,2024-06-24,14:30,240,Renovation,Medium,Central,Automated test data record 242
+JOB243,5243,Target Store,(555) 969-9199,store5243@targetstore.com,"2607 Oak Street",Durham,NC,76529,2024-03-17,12:30,90,New Store Setup,Urgent,Central,Automated test data record 243
+JOB244,5244,CVS Pharmacy,(555) 837-2060,store5244@cvspharmacy.com,"2216 Pine Avenue",Springfield,IL,42043,2024-05-08,10:30,300,Equipment Installation,Medium,Central,Automated test data record 244
+JOB245,5245,Best Buy,(555) 654-1324,store5245@bestbuy.com,"4346 Cedar Lane",Pittsburgh,PA,23176,2024-06-03,15:00,300,Equipment Upgrade,Medium,Central,Automated test data record 245
+JOB246,5246,Target Store,(555) 508-7262,store5246@targetstore.com,"4108 Pine Drive",Peoria,IL,56085,2024-06-20,12:00,240,Equipment Installation,Medium,Central,Automated test data record 246
+JOB247,5247,McDonald's,(555) 717-3611,store5247@mcdonalds.com,"8653 Elm Street",San Antonio,TX,31481,2024-05-07,11:00,240,Equipment Upgrade,Medium,South,Automated test data record 247
+JOB248,5248,Home Depot,(555) 120-8133,store5248@homedepot.com,"2312 Cedar Lane",Rochester,NY,72091,2024-04-03,10:00,180,System Integration,Low,Northeast,Automated test data record 248
+JOB249,5249,Pizza Hut,(555) 263-2781,store5249@pizzahut.com,"5702 Pine Lane",Jacksonville,FL,85397,2024-06-09,11:30,240,New Store Setup,Medium,Southeast,Automated test data record 249
+JOB250,5250,Home Depot,(555) 747-1151,store5250@homedepot.com,"8391 Main Avenue",Buffalo,NY,97762,2024-05-26,11:30,180,Equipment Upgrade,Urgent,Northeast,Automated test data record 250
+JOB251,5251,CVS Pharmacy,(555) 112-3668,store5251@cvspharmacy.com,"188 Elm Lane",Allentown,PA,94537,2024-04-30,08:00,120,System Integration,Low,Central,Automated test data record 251
+JOB252,5252,CVS Pharmacy,(555) 495-8674,store5252@cvspharmacy.com,"686 Maple Drive",Jacksonville,FL,32899,2024-06-22,08:30,120,Equipment Installation,Urgent,Southeast,Automated test data record 252
+JOB253,5253,CVS Pharmacy,(555) 837-8438,store5253@cvspharmacy.com,"4759 Oak Street",Charlotte,NC,76216,2024-03-30,14:30,180,New Store Setup,Medium,Central,Automated test data record 253
+JOB254,5254,Walmart,(555) 558-1488,store5254@walmart.com,"379 Elm Avenue",San Antonio,TX,86967,2024-03-28,08:00,300,Renovation,Low,South,Automated test data record 254
+JOB255,5255,Home Depot,(555) 476-7288,store5255@homedepot.com,"6964 Main Lane",San Antonio,TX,15845,2024-05-08,13:30,240,System Integration,Low,South,Automated test data record 255
+JOB256,5256,Home Depot,(555) 379-8611,store5256@homedepot.com,"6628 Elm Drive",Chicago,IL,55635,2024-03-29,09:00,180,System Integration,Medium,Central,Automated test data record 256
+JOB257,5257,Home Depot,(555) 892-2222,store5257@homedepot.com,"544 Main Lane",Syracuse,NY,51345,2024-03-02,16:30,120,Renovation,High,Northeast,Automated test data record 257
+JOB258,5258,Target Store,(555) 515-9481,store5258@targetstore.com,"9663 Elm Drive",Orlando,FL,91680,2024-04-22,17:00,240,New Store Setup,Urgent,Southeast,Automated test data record 258
+JOB259,5259,Target Store,(555) 586-7480,store5259@targetstore.com,"8844 Elm Way",Savannah,GA,84856,2024-06-28,12:00,120,System Integration,Medium,Central,Automated test data record 259
+JOB260,5260,McDonald's,(555) 903-7258,store5260@mcdonalds.com,"1624 Maple Street",Chicago,IL,58615,2024-04-19,12:30,90,New Store Setup,Medium,Central,Automated test data record 260
+JOB261,5261,McDonald's,(555) 835-6088,store5261@mcdonalds.com,"4368 Main Way",Austin,TX,24407,2024-04-16,16:30,90,New Store Setup,High,South,Automated test data record 261
+JOB262,5262,Pizza Hut,(555) 972-4037,store5262@pizzahut.com,"196 Oak Drive",San Francisco,CA,22840,2024-05-09,16:30,120,System Integration,Urgent,West,Automated test data record 262
+JOB263,5263,CVS Pharmacy,(555) 890-1372,store5263@cvspharmacy.com,"2279 Oak Street",Warren,MI,40941,2024-04-10,14:30,90,Equipment Upgrade,Low,Central,Automated test data record 263
+JOB264,5264,CVS Pharmacy,(555) 615-3504,store5264@cvspharmacy.com,"5473 Main Lane",Austin,TX,90706,2024-04-06,16:30,180,New Store Setup,Low,South,Automated test data record 264
+JOB265,5265,Target Store,(555) 604-2695,store5265@targetstore.com,"4656 Oak Drive",Rochester,NY,25327,2024-05-19,10:00,300,New Store Setup,Low,Northeast,Automated test data record 265
+JOB266,5266,Subway,(555) 371-7796,store5266@subway.com,"5940 Pine Avenue",Erie,PA,61952,2024-06-20,08:30,60,Equipment Installation,Low,Central,Automated test data record 266
+JOB267,5267,McDonald's,(555) 851-2953,store5267@mcdonalds.com,"3932 Pine Lane",Columbus,OH,73916,2024-06-25,12:00,60,System Integration,Medium,Central,Automated test data record 267
+JOB268,5268,McDonald's,(555) 780-1953,store5268@mcdonalds.com,"733 Cedar Lane",Philadelphia,PA,29670,2024-03-11,11:00,300,New Store Setup,Low,Central,Automated test data record 268
+JOB269,5269,Target Store,(555) 385-5131,store5269@targetstore.com,"9716 Maple Drive",Detroit,MI,50250,2024-04-03,12:30,60,Equipment Installation,High,Central,Automated test data record 269
+JOB270,5270,Home Depot,(555) 381-4058,store5270@homedepot.com,"3256 Main Way",Columbus,OH,50189,2024-04-30,12:00,90,System Integration,Urgent,Central,Automated test data record 270
+JOB271,5271,McDonald's,(555) 541-4787,store5271@mcdonalds.com,"7039 Elm Drive",Cincinnati,OH,85908,2024-04-27,09:30,120,System Integration,Medium,Central,Automated test data record 271
+JOB272,5272,Starbucks Coffee,(555) 689-6085,store5272@starbuckscoffee.com,"4871 Cedar Avenue",Buffalo,NY,27720,2024-06-05,17:30,240,Equipment Installation,Urgent,Northeast,Automated test data record 272
+JOB273,5273,Best Buy,(555) 137-3697,store5273@bestbuy.com,"4384 Elm Street",Buffalo,NY,66713,2024-06-22,11:30,60,Equipment Upgrade,High,Northeast,Automated test data record 273
+JOB274,5274,Subway,(555) 717-4100,store5274@subway.com,"8259 Oak Lane",Cleveland,OH,98967,2024-05-22,10:30,180,System Integration,Medium,Central,Automated test data record 274
+JOB275,5275,Target Store,(555) 346-9353,store5275@targetstore.com,"9539 Cedar Way",Detroit,MI,13460,2024-03-28,16:00,120,Renovation,Medium,Central,Automated test data record 275
+JOB276,5276,Target Store,(555) 475-4260,store5276@targetstore.com,"5000 Oak Lane",Sacramento,CA,73518,2024-04-23,09:00,60,New Store Setup,Medium,West,Automated test data record 276
+JOB277,5277,McDonald's,(555) 682-2814,store5277@mcdonalds.com,"8302 Oak Street",San Diego,CA,53043,2024-03-22,12:00,120,Equipment Upgrade,Urgent,West,Automated test data record 277
+JOB278,5278,Home Depot,(555) 941-6599,store5278@homedepot.com,"4295 Maple Drive",Detroit,MI,93118,2024-05-05,14:30,120,System Integration,Medium,Central,Automated test data record 278
+JOB279,5279,Walgreens,(555) 190-7973,store5279@walgreens.com,"1221 Cedar Drive",Allentown,PA,35396,2024-05-06,15:30,180,Equipment Upgrade,High,Central,Automated test data record 279
+JOB280,5280,McDonald's,(555) 841-6201,store5280@mcdonalds.com,"1044 Pine Avenue",Cincinnati,OH,44870,2024-06-23,12:00,180,Equipment Installation,Medium,Central,Automated test data record 280
+JOB281,5281,Pizza Hut,(555) 537-9405,store5281@pizzahut.com,"7464 Pine Lane",Pittsburgh,PA,23275,2024-05-18,15:00,180,System Integration,Low,Central,Automated test data record 281
+JOB282,5282,Target Store,(555) 881-9465,store5282@targetstore.com,"3604 Pine Way",San Francisco,CA,24120,2024-06-29,13:00,60,Equipment Upgrade,Urgent,West,Automated test data record 282
+JOB283,5283,Home Depot,(555) 889-4569,store5283@homedepot.com,"9029 Pine Way",Rockford,IL,66395,2024-03-17,09:30,120,Equipment Upgrade,Medium,Central,Automated test data record 283
+JOB284,5284,Pizza Hut,(555) 335-9500,store5284@pizzahut.com,"6468 Oak Lane",Sterling Heights,MI,26073,2024-06-22,12:00,180,Equipment Installation,High,Central,Automated test data record 284
+JOB285,5285,Subway,(555) 822-2580,store5285@subway.com,"7702 Oak Avenue",Raleigh,NC,40035,2024-04-15,09:30,60,Equipment Upgrade,Low,Central,Automated test data record 285
+JOB286,5286,Pizza Hut,(555) 495-6823,store5286@pizzahut.com,"9399 Oak Drive",Syracuse,NY,59904,2024-06-12,16:30,60,Renovation,High,Northeast,Automated test data record 286
+JOB287,5287,Subway,(555) 751-7907,store5287@subway.com,"6072 Oak Drive",Toledo,OH,98347,2024-04-01,11:30,180,Renovation,Medium,Central,Automated test data record 287
+JOB288,5288,Home Depot,(555) 707-6487,store5288@homedepot.com,"7814 Maple Lane",Sterling Heights,MI,97518,2024-04-28,08:30,300,System Integration,Urgent,Central,Automated test data record 288
+JOB289,5289,Starbucks Coffee,(555) 824-7959,store5289@starbuckscoffee.com,"612 Main Street",Toledo,OH,75870,2024-04-01,13:30,90,Equipment Upgrade,Medium,Central,Automated test data record 289
+JOB290,5290,Target Store,(555) 753-8412,store5290@targetstore.com,"6668 Oak Street",Syracuse,NY,45149,2024-03-28,11:00,180,Equipment Installation,Medium,Northeast,Automated test data record 290
+JOB291,5291,Subway,(555) 696-8317,store5291@subway.com,"4651 Pine Drive",Sacramento,CA,89896,2024-06-13,15:30,180,New Store Setup,Urgent,West,Automated test data record 291
+JOB292,5292,Starbucks Coffee,(555) 640-7873,store5292@starbuckscoffee.com,"755 Cedar Lane",Augusta,GA,13876,2024-03-27,16:30,60,System Integration,High,Central,Automated test data record 292
+JOB293,5293,McDonald's,(555) 524-4968,store5293@mcdonalds.com,"2142 Maple Lane",Houston,TX,71903,2024-03-05,12:30,90,System Integration,Urgent,South,Automated test data record 293
+JOB294,5294,Best Buy,(555) 195-7311,store5294@bestbuy.com,"9477 Elm Avenue",Rockford,IL,88151,2024-06-21,14:30,120,System Integration,Medium,Central,Automated test data record 294
+JOB295,5295,CVS Pharmacy,(555) 671-9094,store5295@cvspharmacy.com,"9362 Oak Lane",Buffalo,NY,94333,2024-03-15,17:30,90,Equipment Installation,Urgent,Northeast,Automated test data record 295
+JOB296,5296,McDonald's,(555) 125-9382,store5296@mcdonalds.com,"6289 Elm Avenue",Cincinnati,OH,62704,2024-06-17,15:00,120,Renovation,Low,Central,Automated test data record 296
+JOB297,5297,Walgreens,(555) 783-3867,store5297@walgreens.com,"2559 Main Drive",Columbus,GA,68449,2024-04-15,09:30,240,New Store Setup,Low,Central,Automated test data record 297
+JOB298,5298,Walmart,(555) 699-6187,store5298@walmart.com,"6833 Cedar Way",San Francisco,CA,17238,2024-03-10,08:00,240,New Store Setup,Low,West,Automated test data record 298
+JOB299,5299,Walmart,(555) 476-7525,store5299@walmart.com,"8118 Oak Way",Erie,PA,83092,2024-03-27,12:30,60,System Integration,Urgent,Central,Automated test data record 299
+JOB300,5300,CVS Pharmacy,(555) 536-2744,store5300@cvspharmacy.com,"1173 Cedar Street",Houston,TX,48908,2024-03-14,12:00,60,Equipment Installation,High,South,Automated test data record 300
+JOB301,5301,Home Depot,(555) 493-4828,store5301@homedepot.com,"6427 Maple Way",Syracuse,NY,71252,2024-03-20,17:00,180,Equipment Upgrade,Medium,Northeast,Automated test data record 301
+JOB302,5302,Walgreens,(555) 514-8457,store5302@walgreens.com,"5347 Maple Avenue",Pittsburgh,PA,59163,2024-04-16,16:30,90,Renovation,Low,Central,Automated test data record 302
+JOB303,5303,Subway,(555) 564-3084,store5303@subway.com,"5244 Elm Avenue",Detroit,MI,45500,2024-05-12,11:00,120,Renovation,Urgent,Central,Automated test data record 303
+JOB304,5304,Target Store,(555) 933-2411,store5304@targetstore.com,"7217 Maple Avenue",Peoria,IL,42225,2024-06-04,10:30,300,New Store Setup,Medium,Central,Automated test data record 304
+JOB305,5305,Best Buy,(555) 543-3498,store5305@bestbuy.com,"8919 Oak Lane",Los Angeles,CA,23481,2024-03-29,13:30,60,System Integration,Low,West,Automated test data record 305
+JOB306,5306,McDonald's,(555) 912-8223,store5306@mcdonalds.com,"9321 Elm Avenue",Cleveland,OH,18510,2024-04-28,10:30,300,New Store Setup,Medium,Central,Automated test data record 306
+JOB307,5307,Best Buy,(555) 109-5727,store5307@bestbuy.com,"7941 Cedar Drive",San Diego,CA,53451,2024-03-02,15:30,180,New Store Setup,Medium,West,Automated test data record 307
+JOB308,5308,Subway,(555) 461-2256,store5308@subway.com,"9844 Pine Way",New York,NY,89089,2024-04-17,16:00,180,Equipment Installation,Urgent,Northeast,Automated test data record 308
+JOB309,5309,Best Buy,(555) 387-9901,store5309@bestbuy.com,"2079 Oak Drive",Philadelphia,PA,11973,2024-05-17,13:00,60,Equipment Installation,Urgent,Central,Automated test data record 309
+JOB310,5310,Home Depot,(555) 703-3064,store5310@homedepot.com,"6509 Pine Lane",Pittsburgh,PA,61857,2024-06-29,10:30,60,System Integration,Low,Central,Automated test data record 310
+JOB311,5311,Home Depot,(555) 778-3896,store5311@homedepot.com,"3450 Pine Way",Miami,FL,71320,2024-05-03,09:00,120,New Store Setup,Urgent,Southeast,Automated test data record 311
+JOB312,5312,McDonald's,(555) 989-4384,store5312@mcdonalds.com,"7455 Cedar Street",San Francisco,CA,84882,2024-06-26,11:00,120,Equipment Upgrade,High,West,Automated test data record 312
+JOB313,5313,Home Depot,(555) 609-5719,store5313@homedepot.com,"3894 Oak Street",Warren,MI,29677,2024-06-26,15:00,60,Equipment Installation,Medium,Central,Automated test data record 313
+JOB314,5314,Pizza Hut,(555) 102-3044,store5314@pizzahut.com,"7581 Maple Drive",Atlanta,GA,58664,2024-06-11,09:30,90,System Integration,Medium,Central,Automated test data record 314
+JOB315,5315,CVS Pharmacy,(555) 440-6048,store5315@cvspharmacy.com,"2843 Cedar Drive",Durham,NC,51727,2024-03-15,15:30,300,System Integration,Urgent,Central,Automated test data record 315
+JOB316,5316,Subway,(555) 211-7946,store5316@subway.com,"6026 Main Drive",Allentown,PA,26097,2024-03-23,09:30,60,Equipment Installation,Urgent,Central,Automated test data record 316
+JOB317,5317,Pizza Hut,(555) 441-4921,store5317@pizzahut.com,"3488 Oak Way",Syracuse,NY,14010,2024-03-30,11:00,300,Equipment Installation,Low,Northeast,Automated test data record 317
+JOB318,5318,McDonald's,(555) 525-9503,store5318@mcdonalds.com,"804 Cedar Drive",Orlando,FL,22088,2024-04-08,08:00,120,Equipment Upgrade,Low,Southeast,Automated test data record 318
+JOB319,5319,Subway,(555) 932-9986,store5319@subway.com,"64 Pine Way",Rockford,IL,97966,2024-06-20,16:30,120,Equipment Installation,Low,Central,Automated test data record 319
+JOB320,5320,Target Store,(555) 714-8836,store5320@targetstore.com,"5609 Oak Street",San Antonio,TX,71123,2024-04-08,09:30,300,New Store Setup,Low,South,Automated test data record 320
+JOB321,5321,Home Depot,(555) 132-3640,store5321@homedepot.com,"1191 Oak Street",San Antonio,TX,73669,2024-04-16,10:00,300,Renovation,Medium,South,Automated test data record 321
+JOB322,5322,McDonald's,(555) 870-2836,store5322@mcdonalds.com,"152 Elm Way",Sacramento,CA,75632,2024-03-09,17:30,90,Equipment Upgrade,Medium,West,Automated test data record 322
+JOB323,5323,Target Store,(555) 446-1345,store5323@targetstore.com,"4595 Elm Street",Durham,NC,39505,2024-04-20,10:30,90,Equipment Installation,High,Central,Automated test data record 323
+JOB324,5324,Walmart,(555) 703-7437,store5324@walmart.com,"2507 Elm Drive",New York,NY,25210,2024-03-19,14:30,240,New Store Setup,Low,Northeast,Automated test data record 324
+JOB325,5325,Starbucks Coffee,(555) 978-2363,store5325@starbuckscoffee.com,"4486 Elm Lane",Erie,PA,17985,2024-05-31,17:30,180,Equipment Installation,Urgent,Central,Automated test data record 325
+JOB326,5326,CVS Pharmacy,(555) 443-7231,store5326@cvspharmacy.com,"2963 Oak Street",San Diego,CA,50134,2024-04-02,09:30,240,Equipment Upgrade,High,West,Automated test data record 326
+JOB327,5327,Best Buy,(555) 600-9300,store5327@bestbuy.com,"925 Elm Street",Jacksonville,FL,28485,2024-03-07,08:00,90,System Integration,High,Southeast,Automated test data record 327
+JOB328,5328,Starbucks Coffee,(555) 904-4516,store5328@starbuckscoffee.com,"9916 Pine Street",Erie,PA,10963,2024-06-04,17:30,120,New Store Setup,Urgent,Central,Automated test data record 328
+JOB329,5329,CVS Pharmacy,(555) 745-7625,store5329@cvspharmacy.com,"6735 Cedar Drive",Cincinnati,OH,60182,2024-06-09,12:30,180,Equipment Installation,Low,Central,Automated test data record 329
+JOB330,5330,Walmart,(555) 698-4050,store5330@walmart.com,"7619 Pine Street",Chicago,IL,86160,2024-04-22,10:00,180,Equipment Upgrade,Urgent,Central,Automated test data record 330
+JOB331,5331,Best Buy,(555) 631-2561,store5331@bestbuy.com,"4986 Cedar Drive",Columbus,OH,65264,2024-03-18,13:30,120,Equipment Upgrade,Urgent,Central,Automated test data record 331
+JOB332,5332,Starbucks Coffee,(555) 485-9337,store5332@starbuckscoffee.com,"3225 Oak Drive",Grand Rapids,MI,13782,2024-05-29,09:00,90,Equipment Upgrade,Low,Central,Automated test data record 332
+JOB333,5333,CVS Pharmacy,(555) 123-4208,store5333@cvspharmacy.com,"1797 Cedar Lane",Grand Rapids,MI,80445,2024-05-26,13:00,300,Equipment Installation,Low,Central,Automated test data record 333
+JOB334,5334,Best Buy,(555) 266-2577,store5334@bestbuy.com,"6820 Main Way",Los Angeles,CA,20421,2024-05-18,15:00,120,New Store Setup,Medium,West,Automated test data record 334
+JOB335,5335,Target Store,(555) 341-3168,store5335@targetstore.com,"7691 Oak Lane",Jacksonville,FL,65416,2024-04-03,13:00,120,System Integration,Urgent,Southeast,Automated test data record 335
+JOB336,5336,Starbucks Coffee,(555) 412-2686,store5336@starbuckscoffee.com,"8876 Pine Drive",Sacramento,CA,65729,2024-04-04,12:30,120,System Integration,Urgent,West,Automated test data record 336
+JOB337,5337,CVS Pharmacy,(555) 936-6190,store5337@cvspharmacy.com,"9753 Cedar Drive",Los Angeles,CA,96956,2024-05-27,09:00,60,Renovation,High,West,Automated test data record 337
+JOB338,5338,CVS Pharmacy,(555) 361-5078,store5338@cvspharmacy.com,"7402 Main Drive",Orlando,FL,39041,2024-04-10,12:00,180,System Integration,Urgent,Southeast,Automated test data record 338
+JOB339,5339,McDonald's,(555) 864-9730,store5339@mcdonalds.com,"7259 Cedar Street",New York,NY,74448,2024-04-24,12:00,90,Equipment Installation,Urgent,Northeast,Automated test data record 339
+JOB340,5340,Walgreens,(555) 830-2308,store5340@walgreens.com,"3345 Pine Lane",Springfield,IL,23309,2024-04-23,08:00,60,Equipment Installation,Low,Central,Automated test data record 340
+JOB341,5341,Subway,(555) 284-9928,store5341@subway.com,"1085 Maple Street",Columbus,OH,43449,2024-06-11,13:30,240,Equipment Upgrade,Medium,Central,Automated test data record 341
+JOB342,5342,Subway,(555) 959-1004,store5342@subway.com,"3599 Main Street",Jacksonville,FL,18965,2024-04-26,10:00,60,New Store Setup,Medium,Southeast,Automated test data record 342
+JOB343,5343,McDonald's,(555) 820-5252,store5343@mcdonalds.com,"473 Maple Way",Sterling Heights,MI,25852,2024-06-18,11:30,300,Equipment Upgrade,Urgent,Central,Automated test data record 343
+JOB344,5344,Walmart,(555) 306-7257,store5344@walmart.com,"6319 Maple Lane",Syracuse,NY,90193,2024-03-03,14:30,60,System Integration,High,Northeast,Automated test data record 344
+JOB345,5345,Home Depot,(555) 204-8263,store5345@homedepot.com,"4752 Maple Way",Allentown,PA,15289,2024-06-10,14:30,90,Equipment Installation,High,Central,Automated test data record 345
+JOB346,5346,Subway,(555) 269-3037,store5346@subway.com,"7669 Pine Avenue",Austin,TX,90777,2024-04-27,11:00,180,System Integration,Medium,South,Automated test data record 346
+JOB347,5347,Target Store,(555) 712-5332,store5347@targetstore.com,"1612 Maple Avenue",Syracuse,NY,79087,2024-03-09,11:00,120,System Integration,Low,Northeast,Automated test data record 347
+JOB348,5348,Walmart,(555) 684-5512,store5348@walmart.com,"8455 Cedar Drive",Sacramento,CA,27688,2024-06-23,17:30,300,New Store Setup,Medium,West,Automated test data record 348
+JOB349,5349,Walgreens,(555) 712-2403,store5349@walgreens.com,"3458 Cedar Street",Cleveland,OH,21868,2024-05-02,13:00,180,New Store Setup,High,Central,Automated test data record 349
+JOB350,5350,Pizza Hut,(555) 178-1128,store5350@pizzahut.com,"2997 Oak Drive",Peoria,IL,31069,2024-05-04,14:00,180,Equipment Installation,Urgent,Central,Automated test data record 350
+JOB351,5351,Subway,(555) 988-1785,store5351@subway.com,"630 Elm Avenue",Sterling Heights,MI,51975,2024-03-28,14:30,180,Renovation,Urgent,Central,Automated test data record 351
+JOB352,5352,Starbucks Coffee,(555) 702-5140,store5352@starbuckscoffee.com,"5301 Cedar Way",Erie,PA,41962,2024-04-06,13:00,300,Equipment Installation,Low,Central,Automated test data record 352
+JOB353,5353,Pizza Hut,(555) 586-6637,store5353@pizzahut.com,"4992 Main Drive",Pittsburgh,PA,75126,2024-03-05,15:30,180,System Integration,Medium,Central,Automated test data record 353
+JOB354,5354,Starbucks Coffee,(555) 592-9257,store5354@starbuckscoffee.com,"4777 Cedar Lane",Atlanta,GA,70675,2024-05-13,17:00,300,Equipment Upgrade,Low,Central,Automated test data record 354
+JOB355,5355,Best Buy,(555) 558-8438,store5355@bestbuy.com,"783 Pine Lane",Columbus,OH,89518,2024-05-09,14:00,300,System Integration,Urgent,Central,Automated test data record 355
+JOB356,5356,McDonald's,(555) 434-2332,store5356@mcdonalds.com,"9101 Main Way",Los Angeles,CA,61747,2024-05-20,16:00,240,New Store Setup,Urgent,West,Automated test data record 356
+JOB357,5357,Walmart,(555) 552-8766,store5357@walmart.com,"2514 Cedar Street",Durham,NC,41064,2024-03-02,11:00,240,Equipment Upgrade,Urgent,Central,Automated test data record 357
+JOB358,5358,Starbucks Coffee,(555) 502-7467,store5358@starbuckscoffee.com,"601 Main Avenue",Grand Rapids,MI,53001,2024-05-23,08:00,90,Equipment Upgrade,Medium,Central,Automated test data record 358
+JOB359,5359,Starbucks Coffee,(555) 651-7367,store5359@starbuckscoffee.com,"3103 Oak Drive",Durham,NC,11334,2024-06-03,17:00,60,Renovation,Medium,Central,Automated test data record 359
+JOB360,5360,Starbucks Coffee,(555) 652-1751,store5360@starbuckscoffee.com,"7246 Pine Way",Austin,TX,76900,2024-06-11,15:30,120,Equipment Upgrade,Low,South,Automated test data record 360
+JOB361,5361,Walmart,(555) 722-5674,store5361@walmart.com,"4465 Oak Avenue",Charlotte,NC,52516,2024-03-16,11:30,180,New Store Setup,High,Central,Automated test data record 361
+JOB362,5362,Pizza Hut,(555) 299-1617,store5362@pizzahut.com,"6098 Pine Avenue",Columbus,OH,97846,2024-05-11,08:00,60,Renovation,Urgent,Central,Automated test data record 362
+JOB363,5363,Walgreens,(555) 112-9242,store5363@walgreens.com,"3735 Pine Way",Sacramento,CA,30105,2024-05-27,15:30,240,Equipment Installation,Low,West,Automated test data record 363
+JOB364,5364,Best Buy,(555) 627-6628,store5364@bestbuy.com,"3089 Main Avenue",Rochester,NY,30189,2024-04-17,13:30,240,Renovation,Medium,Northeast,Automated test data record 364
+JOB365,5365,Walgreens,(555) 704-3122,store5365@walgreens.com,"5549 Cedar Drive",Sterling Heights,MI,64147,2024-03-06,16:00,60,Equipment Installation,Urgent,Central,Automated test data record 365
+JOB366,5366,Target Store,(555) 487-1315,store5366@targetstore.com,"1854 Oak Way",Houston,TX,29633,2024-04-10,15:00,120,Equipment Upgrade,Medium,South,Automated test data record 366
+JOB367,5367,Home Depot,(555) 511-2632,store5367@homedepot.com,"5468 Elm Way",Sacramento,CA,91975,2024-05-14,12:30,300,Renovation,Urgent,West,Automated test data record 367
+JOB368,5368,Target Store,(555) 768-1094,store5368@targetstore.com,"3656 Pine Lane",Los Angeles,CA,91145,2024-05-03,11:00,180,Equipment Installation,Low,West,Automated test data record 368
+JOB369,5369,Best Buy,(555) 821-6753,store5369@bestbuy.com,"8037 Pine Lane",Savannah,GA,22951,2024-06-26,12:30,180,Equipment Upgrade,Low,Central,Automated test data record 369
+JOB370,5370,Starbucks Coffee,(555) 960-7523,store5370@starbuckscoffee.com,"3184 Oak Lane",Cleveland,OH,94401,2024-03-20,08:30,60,Equipment Installation,Low,Central,Automated test data record 370
+JOB371,5371,Starbucks Coffee,(555) 310-3805,store5371@starbuckscoffee.com,"8487 Main Way",Cleveland,OH,72125,2024-04-04,10:30,60,Equipment Installation,High,Central,Automated test data record 371
+JOB372,5372,CVS Pharmacy,(555) 736-4501,store5372@cvspharmacy.com,"6509 Cedar Street",Augusta,GA,73205,2024-06-13,15:30,120,Renovation,Medium,Central,Automated test data record 372
+JOB373,5373,CVS Pharmacy,(555) 242-2041,store5373@cvspharmacy.com,"2719 Main Lane",Philadelphia,PA,56660,2024-04-03,16:00,300,Renovation,High,Central,Automated test data record 373
+JOB374,5374,Subway,(555) 738-3093,store5374@subway.com,"6865 Maple Lane",Jacksonville,FL,11665,2024-04-18,10:00,300,Renovation,Urgent,Southeast,Automated test data record 374
+JOB375,5375,Subway,(555) 570-2418,store5375@subway.com,"757 Elm Avenue",Jacksonville,FL,93464,2024-06-07,13:00,300,New Store Setup,Urgent,Southeast,Automated test data record 375
+JOB376,5376,McDonald's,(555) 116-4859,store5376@mcdonalds.com,"7790 Maple Way",Sacramento,CA,11240,2024-03-28,15:30,60,System Integration,Medium,West,Automated test data record 376
+JOB377,5377,Home Depot,(555) 434-6652,store5377@homedepot.com,"6996 Cedar Avenue",Savannah,GA,94371,2024-06-08,10:00,120,Renovation,Low,Central,Automated test data record 377
+JOB378,5378,Target Store,(555) 260-4898,store5378@targetstore.com,"5049 Elm Street",New York,NY,77878,2024-04-10,16:00,60,New Store Setup,Medium,Northeast,Automated test data record 378
+JOB379,5379,Best Buy,(555) 586-8522,store5379@bestbuy.com,"9662 Maple Street",San Francisco,CA,78576,2024-06-07,16:30,240,Renovation,Urgent,West,Automated test data record 379
+JOB380,5380,Starbucks Coffee,(555) 216-9711,store5380@starbuckscoffee.com,"7015 Cedar Drive",San Francisco,CA,96318,2024-03-10,08:30,90,Equipment Installation,Low,West,Automated test data record 380
+JOB381,5381,McDonald's,(555) 777-7853,store5381@mcdonalds.com,"3598 Pine Drive",Sacramento,CA,16819,2024-06-24,10:30,90,System Integration,Medium,West,Automated test data record 381
+JOB382,5382,Walgreens,(555) 276-7151,store5382@walgreens.com,"7508 Maple Drive",Pittsburgh,PA,78334,2024-05-18,14:30,240,Equipment Upgrade,Medium,Central,Automated test data record 382
+JOB383,5383,Pizza Hut,(555) 438-6826,store5383@pizzahut.com,"6070 Maple Avenue",Philadelphia,PA,79015,2024-04-02,08:00,240,System Integration,Urgent,Central,Automated test data record 383
+JOB384,5384,CVS Pharmacy,(555) 869-2515,store5384@cvspharmacy.com,"1734 Pine Way",Durham,NC,40224,2024-05-10,11:30,90,Equipment Upgrade,Urgent,Central,Automated test data record 384
+JOB385,5385,McDonald's,(555) 158-2219,store5385@mcdonalds.com,"8961 Main Lane",Toledo,OH,66937,2024-03-31,17:30,120,Equipment Upgrade,Medium,Central,Automated test data record 385
+JOB386,5386,Walgreens,(555) 563-7317,store5386@walgreens.com,"7174 Main Drive",Durham,NC,33113,2024-06-25,09:00,300,New Store Setup,High,Central,Automated test data record 386
+JOB387,5387,Walgreens,(555) 327-6510,store5387@walgreens.com,"9794 Cedar Drive",Orlando,FL,93672,2024-05-21,16:00,90,Equipment Upgrade,High,Southeast,Automated test data record 387
+JOB388,5388,Home Depot,(555) 431-1359,store5388@homedepot.com,"4552 Pine Way",Columbus,OH,73883,2024-04-30,11:30,120,System Integration,High,Central,Automated test data record 388
+JOB389,5389,Subway,(555) 653-6547,store5389@subway.com,"3806 Oak Drive",San Antonio,TX,96270,2024-05-02,13:00,180,Equipment Installation,High,South,Automated test data record 389
+JOB390,5390,Pizza Hut,(555) 573-8458,store5390@pizzahut.com,"4894 Oak Lane",Grand Rapids,MI,14873,2024-03-09,10:00,120,System Integration,Low,Central,Automated test data record 390
+JOB391,5391,Pizza Hut,(555) 442-5786,store5391@pizzahut.com,"7113 Cedar Drive",New York,NY,85366,2024-06-16,13:00,300,Equipment Upgrade,Medium,Northeast,Automated test data record 391
+JOB392,5392,McDonald's,(555) 425-6242,store5392@mcdonalds.com,"1469 Cedar Lane",Erie,PA,25100,2024-05-23,13:00,90,Equipment Installation,Medium,Central,Automated test data record 392
+JOB393,5393,Walmart,(555) 982-4466,store5393@walmart.com,"9463 Elm Drive",Warren,MI,83987,2024-03-15,15:30,240,Equipment Installation,Low,Central,Automated test data record 393
+JOB394,5394,Target Store,(555) 972-1300,store5394@targetstore.com,"7953 Elm Avenue",Toledo,OH,38780,2024-03-30,17:00,90,New Store Setup,Urgent,Central,Automated test data record 394
+JOB395,5395,Walgreens,(555) 694-5068,store5395@walgreens.com,"8314 Pine Street",Augusta,GA,86683,2024-05-06,13:00,120,New Store Setup,Medium,Central,Automated test data record 395
+JOB396,5396,CVS Pharmacy,(555) 519-6489,store5396@cvspharmacy.com,"8590 Elm Way",Rochester,NY,29281,2024-05-30,12:30,60,Renovation,Medium,Northeast,Automated test data record 396
+JOB397,5397,Target Store,(555) 696-6551,store5397@targetstore.com,"3670 Elm Drive",Toledo,OH,57124,2024-03-27,09:30,90,New Store Setup,Medium,Central,Automated test data record 397
+JOB398,5398,Pizza Hut,(555) 587-1934,store5398@pizzahut.com,"2487 Cedar Way",Allentown,PA,60734,2024-05-02,13:00,300,Equipment Upgrade,Low,Central,Automated test data record 398
+JOB399,5399,Target Store,(555) 913-3311,store5399@targetstore.com,"5498 Maple Drive",Grand Rapids,MI,35805,2024-04-14,14:30,300,New Store Setup,High,Central,Automated test data record 399
+JOB400,5400,Subway,(555) 166-7263,store5400@subway.com,"6850 Cedar Drive",Savannah,GA,42636,2024-05-29,15:00,60,System Integration,High,Central,Automated test data record 400
+JOB401,5401,CVS Pharmacy,(555) 291-2647,store5401@cvspharmacy.com,"9511 Main Lane",Warren,MI,28644,2024-04-15,10:30,120,Equipment Upgrade,Low,Central,Automated test data record 401
+JOB402,5402,Best Buy,(555) 408-5581,store5402@bestbuy.com,"3326 Oak Lane",Springfield,IL,50462,2024-05-01,15:30,180,New Store Setup,High,Central,Automated test data record 402
+JOB403,5403,Walmart,(555) 188-6030,store5403@walmart.com,"6068 Main Way",Pittsburgh,PA,34497,2024-04-20,10:00,240,Equipment Upgrade,High,Central,Automated test data record 403
+JOB404,5404,Best Buy,(555) 417-4046,store5404@bestbuy.com,"4548 Cedar Drive",Cleveland,OH,80003,2024-03-15,14:00,240,Equipment Upgrade,Low,Central,Automated test data record 404
+JOB405,5405,CVS Pharmacy,(555) 454-7604,store5405@cvspharmacy.com,"1829 Pine Avenue",Rockford,IL,57219,2024-04-14,12:30,300,Renovation,Low,Central,Automated test data record 405
+JOB406,5406,CVS Pharmacy,(555) 462-9670,store5406@cvspharmacy.com,"1004 Elm Way",Dallas,TX,19133,2024-05-09,08:00,180,System Integration,High,South,Automated test data record 406
+JOB407,5407,McDonald's,(555) 343-7258,store5407@mcdonalds.com,"4912 Maple Street",Orlando,FL,71910,2024-03-29,08:00,240,Renovation,Low,Southeast,Automated test data record 407
+JOB408,5408,Home Depot,(555) 333-1975,store5408@homedepot.com,"1729 Pine Way",Sacramento,CA,65215,2024-04-02,15:00,240,System Integration,Low,West,Automated test data record 408
+JOB409,5409,Best Buy,(555) 729-6452,store5409@bestbuy.com,"6487 Pine Street",Jacksonville,FL,45148,2024-06-03,16:00,240,New Store Setup,Medium,Southeast,Automated test data record 409
+JOB410,5410,Pizza Hut,(555) 226-1140,store5410@pizzahut.com,"7457 Cedar Street",Orlando,FL,96022,2024-04-12,08:00,120,Equipment Installation,Low,Southeast,Automated test data record 410
+JOB411,5411,Pizza Hut,(555) 853-1278,store5411@pizzahut.com,"7241 Cedar Avenue",Syracuse,NY,72315,2024-06-03,10:30,60,Equipment Upgrade,Low,Northeast,Automated test data record 411
+JOB412,5412,Subway,(555) 340-7279,store5412@subway.com,"437 Maple Way",Cincinnati,OH,25316,2024-03-10,14:00,60,Equipment Installation,Low,Central,Automated test data record 412
+JOB413,5413,Starbucks Coffee,(555) 337-6514,store5413@starbuckscoffee.com,"1947 Main Way",Miami,FL,66352,2024-06-26,15:00,90,Equipment Installation,High,Southeast,Automated test data record 413
+JOB414,5414,Starbucks Coffee,(555) 292-2363,store5414@starbuckscoffee.com,"844 Oak Street",Greensboro,NC,54711,2024-05-21,17:00,180,Equipment Installation,Urgent,Central,Automated test data record 414
+JOB415,5415,Walgreens,(555) 906-3820,store5415@walgreens.com,"1242 Main Avenue",Tampa,FL,65849,2024-05-03,10:30,300,System Integration,Urgent,Southeast,Automated test data record 415
+JOB416,5416,Starbucks Coffee,(555) 302-3233,store5416@starbuckscoffee.com,"7732 Pine Drive",Sterling Heights,MI,70060,2024-04-28,11:30,300,New Store Setup,High,Central,Automated test data record 416
+JOB417,5417,McDonald's,(555) 366-1615,store5417@mcdonalds.com,"4022 Oak Lane",Warren,MI,33858,2024-04-15,14:00,90,New Store Setup,Medium,Central,Automated test data record 417
+JOB418,5418,Walgreens,(555) 432-3706,store5418@walgreens.com,"1946 Main Drive",San Francisco,CA,42000,2024-05-28,15:00,90,System Integration,Urgent,West,Automated test data record 418
+JOB419,5419,Walmart,(555) 914-9605,store5419@walmart.com,"9169 Oak Drive",Dallas,TX,50538,2024-05-20,09:00,120,System Integration,Low,South,Automated test data record 419
+JOB420,5420,McDonald's,(555) 719-1624,store5420@mcdonalds.com,"4179 Cedar Street",Los Angeles,CA,50392,2024-04-06,11:30,300,Equipment Installation,High,West,Automated test data record 420
+JOB421,5421,Pizza Hut,(555) 321-4145,store5421@pizzahut.com,"1780 Maple Lane",Cleveland,OH,92941,2024-03-09,17:30,90,Equipment Installation,Low,Central,Automated test data record 421
+JOB422,5422,McDonald's,(555) 677-9480,store5422@mcdonalds.com,"6345 Maple Lane",Savannah,GA,54650,2024-03-24,09:00,90,Renovation,High,Central,Automated test data record 422
+JOB423,5423,Starbucks Coffee,(555) 520-5113,store5423@starbuckscoffee.com,"6706 Cedar Drive",Sterling Heights,MI,48775,2024-04-30,10:00,180,System Integration,Low,Central,Automated test data record 423
+JOB424,5424,McDonald's,(555) 965-4498,store5424@mcdonalds.com,"1662 Pine Way",Tampa,FL,82504,2024-03-05,14:30,300,New Store Setup,Urgent,Southeast,Automated test data record 424
+JOB425,5425,Pizza Hut,(555) 820-6118,store5425@pizzahut.com,"8250 Pine Way",Philadelphia,PA,32939,2024-03-31,08:00,120,System Integration,High,Central,Automated test data record 425
+JOB426,5426,Home Depot,(555) 388-1379,store5426@homedepot.com,"645 Main Drive",Sterling Heights,MI,99564,2024-03-15,16:00,90,Equipment Upgrade,Medium,Central,Automated test data record 426
+JOB427,5427,Home Depot,(555) 824-8731,store5427@homedepot.com,"8265 Cedar Lane",Philadelphia,PA,84802,2024-04-03,13:30,300,Equipment Upgrade,Urgent,Central,Automated test data record 427
+JOB428,5428,Walmart,(555) 744-2945,store5428@walmart.com,"4837 Main Avenue",Philadelphia,PA,42842,2024-06-10,15:00,120,Equipment Installation,Low,Central,Automated test data record 428
+JOB429,5429,Pizza Hut,(555) 890-3139,store5429@pizzahut.com,"8107 Cedar Street",Sterling Heights,MI,64377,2024-05-04,17:30,120,Renovation,Low,Central,Automated test data record 429
+JOB430,5430,Home Depot,(555) 116-9019,store5430@homedepot.com,"5385 Main Street",Grand Rapids,MI,10000,2024-06-07,09:00,120,New Store Setup,High,Central,Automated test data record 430
+JOB431,5431,Starbucks Coffee,(555) 612-3611,store5431@starbuckscoffee.com,"200 Main Way",Raleigh,NC,93265,2024-05-26,13:30,180,Equipment Upgrade,Urgent,Central,Automated test data record 431
+JOB432,5432,Best Buy,(555) 354-2582,store5432@bestbuy.com,"7453 Oak Street",San Francisco,CA,96981,2024-05-09,12:00,120,System Integration,Medium,West,Automated test data record 432
+JOB433,5433,Subway,(555) 813-5953,store5433@subway.com,"8690 Elm Lane",Columbus,OH,44865,2024-06-02,09:30,90,New Store Setup,High,Central,Automated test data record 433
+JOB434,5434,CVS Pharmacy,(555) 662-5774,store5434@cvspharmacy.com,"4348 Cedar Lane",Dallas,TX,18106,2024-04-17,11:30,240,Renovation,Urgent,South,Automated test data record 434
+JOB435,5435,CVS Pharmacy,(555) 549-8971,store5435@cvspharmacy.com,"8010 Pine Way",Jacksonville,FL,67503,2024-03-29,10:30,90,Equipment Installation,Medium,Southeast,Automated test data record 435
+JOB436,5436,Starbucks Coffee,(555) 543-5380,store5436@starbuckscoffee.com,"671 Main Lane",Columbus,OH,61078,2024-03-28,12:30,90,New Store Setup,High,Central,Automated test data record 436
+JOB437,5437,Walmart,(555) 269-4479,store5437@walmart.com,"6391 Oak Lane",Houston,TX,37706,2024-06-12,11:00,90,Renovation,High,South,Automated test data record 437
+JOB438,5438,Starbucks Coffee,(555) 616-1166,store5438@starbuckscoffee.com,"534 Main Way",Charlotte,NC,19918,2024-06-20,11:00,300,Renovation,Urgent,Central,Automated test data record 438
+JOB439,5439,McDonald's,(555) 522-9617,store5439@mcdonalds.com,"209 Main Way",Peoria,IL,91421,2024-04-10,12:00,60,System Integration,Low,Central,Automated test data record 439
+JOB440,5440,Pizza Hut,(555) 782-1436,store5440@pizzahut.com,"6917 Elm Drive",Atlanta,GA,77769,2024-04-26,10:00,240,Equipment Installation,Medium,Central,Automated test data record 440
+JOB441,5441,Best Buy,(555) 194-1198,store5441@bestbuy.com,"5663 Maple Way",Detroit,MI,76483,2024-04-17,15:30,90,System Integration,Low,Central,Automated test data record 441
+JOB442,5442,CVS Pharmacy,(555) 218-9684,store5442@cvspharmacy.com,"2181 Elm Way",Atlanta,GA,83551,2024-03-20,13:00,90,New Store Setup,Urgent,Central,Automated test data record 442
+JOB443,5443,Walmart,(555) 796-7867,store5443@walmart.com,"6475 Main Drive",San Francisco,CA,60495,2024-04-06,14:30,60,New Store Setup,Low,West,Automated test data record 443
+JOB444,5444,Starbucks Coffee,(555) 290-7268,store5444@starbuckscoffee.com,"2233 Elm Avenue",Detroit,MI,14100,2024-05-31,17:00,240,Equipment Installation,Medium,Central,Automated test data record 444
+JOB445,5445,Walmart,(555) 954-7260,store5445@walmart.com,"9736 Elm Avenue",Greensboro,NC,39974,2024-03-23,09:00,300,New Store Setup,Low,Central,Automated test data record 445
+JOB446,5446,Target Store,(555) 359-9783,store5446@targetstore.com,"5985 Oak Way",Tampa,FL,90955,2024-04-11,15:30,60,Equipment Installation,Urgent,Southeast,Automated test data record 446
+JOB447,5447,Home Depot,(555) 469-9092,store5447@homedepot.com,"2463 Elm Street",Springfield,IL,44333,2024-05-07,11:00,60,New Store Setup,Low,Central,Automated test data record 447
+JOB448,5448,Pizza Hut,(555) 117-1520,store5448@pizzahut.com,"9009 Cedar Street",Sterling Heights,MI,22629,2024-04-23,14:30,120,Equipment Installation,Urgent,Central,Automated test data record 448
+JOB449,5449,Target Store,(555) 794-8808,store5449@targetstore.com,"465 Cedar Drive",Pittsburgh,PA,26456,2024-05-04,14:00,90,System Integration,High,Central,Automated test data record 449
+JOB450,5450,Target Store,(555) 281-1378,store5450@targetstore.com,"6877 Pine Way",Atlanta,GA,37626,2024-04-25,17:00,240,Equipment Installation,Urgent,Central,Automated test data record 450
+JOB451,5451,Home Depot,(555) 814-6785,store5451@homedepot.com,"8329 Maple Street",Charlotte,NC,50689,2024-04-28,15:30,240,System Integration,Urgent,Central,Automated test data record 451
+JOB452,5452,CVS Pharmacy,(555) 879-3230,store5452@cvspharmacy.com,"9004 Oak Lane",Erie,PA,50204,2024-03-16,16:00,90,System Integration,High,Central,Automated test data record 452
+JOB453,5453,Target Store,(555) 424-6741,store5453@targetstore.com,"2887 Elm Way",Miami,FL,28788,2024-06-22,11:30,240,System Integration,Low,Southeast,Automated test data record 453
+JOB454,5454,Walgreens,(555) 560-7316,store5454@walgreens.com,"5579 Cedar Lane",Columbus,OH,44176,2024-06-21,08:00,90,Equipment Installation,High,Central,Automated test data record 454
+JOB455,5455,Home Depot,(555) 804-3312,store5455@homedepot.com,"7133 Elm Way",Columbus,GA,73960,2024-05-17,14:00,90,Equipment Installation,High,Central,Automated test data record 455
+JOB456,5456,Best Buy,(555) 522-1735,store5456@bestbuy.com,"7112 Maple Way",Columbus,GA,20235,2024-04-10,14:00,120,System Integration,Medium,Central,Automated test data record 456
+JOB457,5457,Walmart,(555) 749-5403,store5457@walmart.com,"8172 Pine Drive",Warren,MI,19877,2024-03-12,10:00,300,Equipment Installation,High,Central,Automated test data record 457
+JOB458,5458,Best Buy,(555) 644-9137,store5458@bestbuy.com,"9446 Cedar Avenue",Durham,NC,55073,2024-03-28,10:00,300,Equipment Upgrade,Medium,Central,Automated test data record 458
+JOB459,5459,CVS Pharmacy,(555) 135-9132,store5459@cvspharmacy.com,"6300 Cedar Drive",San Antonio,TX,53963,2024-03-24,14:00,300,Equipment Installation,High,South,Automated test data record 459
+JOB460,5460,Walmart,(555) 137-6907,store5460@walmart.com,"6048 Oak Street",Orlando,FL,58650,2024-05-04,14:30,60,Equipment Upgrade,High,Southeast,Automated test data record 460
+JOB461,5461,Home Depot,(555) 273-8340,store5461@homedepot.com,"1634 Cedar Street",Sterling Heights,MI,79252,2024-04-02,11:00,120,Equipment Installation,Low,Central,Automated test data record 461
+JOB462,5462,Walmart,(555) 532-2271,store5462@walmart.com,"7892 Main Lane",Jacksonville,FL,52630,2024-04-06,17:30,60,Renovation,Low,Southeast,Automated test data record 462
+JOB463,5463,Starbucks Coffee,(555) 419-9964,store5463@starbuckscoffee.com,"302 Maple Avenue",Rochester,NY,69024,2024-05-31,12:30,300,Renovation,Medium,Northeast,Automated test data record 463
+JOB464,5464,Home Depot,(555) 495-5321,store5464@homedepot.com,"2824 Cedar Way",Atlanta,GA,60267,2024-03-07,14:00,180,System Integration,Medium,Central,Automated test data record 464
+JOB465,5465,Pizza Hut,(555) 824-9272,store5465@pizzahut.com,"5040 Pine Drive",Warren,MI,66450,2024-03-24,11:00,60,Renovation,Urgent,Central,Automated test data record 465
+JOB466,5466,Walmart,(555) 807-6853,store5466@walmart.com,"5021 Pine Lane",Austin,TX,76440,2024-04-25,15:30,240,Equipment Upgrade,Low,South,Automated test data record 466
+JOB467,5467,Walgreens,(555) 964-1106,store5467@walgreens.com,"35 Oak Street",Detroit,MI,88029,2024-05-01,10:00,60,Equipment Upgrade,High,Central,Automated test data record 467
+JOB468,5468,Best Buy,(555) 130-5164,store5468@bestbuy.com,"8144 Maple Drive",Pittsburgh,PA,51614,2024-06-22,13:00,60,Equipment Installation,Urgent,Central,Automated test data record 468
+JOB469,5469,Walmart,(555) 407-1420,store5469@walmart.com,"5156 Cedar Avenue",Tampa,FL,82007,2024-04-05,12:00,120,System Integration,Low,Southeast,Automated test data record 469
+JOB470,5470,Target Store,(555) 654-3049,store5470@targetstore.com,"9996 Cedar Drive",Jacksonville,FL,87364,2024-06-24,09:30,120,Renovation,Low,Southeast,Automated test data record 470
+JOB471,5471,Pizza Hut,(555) 525-9287,store5471@pizzahut.com,"9394 Oak Street",Savannah,GA,74522,2024-06-29,09:30,60,System Integration,Medium,Central,Automated test data record 471
+JOB472,5472,Walmart,(555) 855-9657,store5472@walmart.com,"9989 Oak Avenue",Miami,FL,88882,2024-03-06,11:30,300,New Store Setup,High,Southeast,Automated test data record 472
+JOB473,5473,Pizza Hut,(555) 943-1621,store5473@pizzahut.com,"6296 Cedar Avenue",Columbus,GA,73535,2024-04-01,15:30,300,New Store Setup,Medium,Central,Automated test data record 473
+JOB474,5474,Subway,(555) 269-7488,store5474@subway.com,"2728 Oak Avenue",Tampa,FL,49773,2024-05-18,15:30,240,Renovation,Urgent,Southeast,Automated test data record 474
+JOB475,5475,Walgreens,(555) 201-1979,store5475@walgreens.com,"2211 Maple Way",Rochester,NY,92367,2024-06-22,10:00,300,System Integration,High,Northeast,Automated test data record 475
+JOB476,5476,Subway,(555) 406-2316,store5476@subway.com,"2630 Elm Avenue",San Antonio,TX,26738,2024-03-07,15:00,90,System Integration,Medium,South,Automated test data record 476
+JOB477,5477,Best Buy,(555) 897-3241,store5477@bestbuy.com,"4242 Oak Way",Chicago,IL,29346,2024-04-20,16:30,180,Equipment Installation,High,Central,Automated test data record 477
+JOB478,5478,Home Depot,(555) 870-2552,store5478@homedepot.com,"9306 Elm Lane",Durham,NC,18478,2024-06-02,13:00,180,Equipment Upgrade,Medium,Central,Automated test data record 478
+JOB479,5479,Best Buy,(555) 398-5597,store5479@bestbuy.com,"7638 Elm Avenue",Philadelphia,PA,95721,2024-04-26,09:30,240,Equipment Installation,Medium,Central,Automated test data record 479
+JOB480,5480,Best Buy,(555) 422-3877,store5480@bestbuy.com,"2979 Cedar Avenue",Pittsburgh,PA,98157,2024-06-18,11:30,120,System Integration,Medium,Central,Automated test data record 480
+JOB481,5481,Best Buy,(555) 300-5692,store5481@bestbuy.com,"2315 Cedar Drive",Warren,MI,63978,2024-03-05,15:30,120,Equipment Upgrade,Urgent,Central,Automated test data record 481
+JOB482,5482,Starbucks Coffee,(555) 575-9943,store5482@starbuckscoffee.com,"9392 Elm Lane",Toledo,OH,62171,2024-06-12,09:00,180,Renovation,Urgent,Central,Automated test data record 482
+JOB483,5483,CVS Pharmacy,(555) 406-3528,store5483@cvspharmacy.com,"7824 Oak Lane",Miami,FL,35817,2024-03-21,12:00,120,New Store Setup,Low,Southeast,Automated test data record 483
+JOB484,5484,CVS Pharmacy,(555) 359-9728,store5484@cvspharmacy.com,"6935 Pine Street",Columbus,OH,14722,2024-06-29,12:30,240,Renovation,Urgent,Central,Automated test data record 484
+JOB485,5485,Pizza Hut,(555) 199-2824,store5485@pizzahut.com,"3242 Oak Street",Sterling Heights,MI,35177,2024-03-08,11:30,300,Equipment Installation,High,Central,Automated test data record 485
+JOB486,5486,Home Depot,(555) 306-5849,store5486@homedepot.com,"4646 Pine Street",Savannah,GA,40261,2024-05-13,09:00,60,Equipment Upgrade,High,Central,Automated test data record 486
+JOB487,5487,Subway,(555) 767-5252,store5487@subway.com,"68 Cedar Street",Grand Rapids,MI,71447,2024-03-10,14:30,90,Renovation,Medium,Central,Automated test data record 487
+JOB488,5488,Home Depot,(555) 546-9597,store5488@homedepot.com,"1166 Elm Avenue",Dallas,TX,17002,2024-04-06,14:30,180,System Integration,Medium,South,Automated test data record 488
+JOB489,5489,Walmart,(555) 614-2402,store5489@walmart.com,"7892 Pine Drive",Houston,TX,39373,2024-04-03,12:00,180,Renovation,Low,South,Automated test data record 489
+JOB490,5490,McDonald's,(555) 656-9423,store5490@mcdonalds.com,"9057 Cedar Street",Rockford,IL,73664,2024-03-28,15:30,180,Renovation,High,Central,Automated test data record 490
+JOB491,5491,Home Depot,(555) 693-9944,store5491@homedepot.com,"5191 Main Avenue",Dallas,TX,46115,2024-06-26,17:00,300,Equipment Installation,Low,South,Automated test data record 491
+JOB492,5492,Best Buy,(555) 175-3527,store5492@bestbuy.com,"5282 Cedar Lane",Dallas,TX,68669,2024-03-17,08:00,240,System Integration,High,South,Automated test data record 492
+JOB493,5493,Target Store,(555) 451-1121,store5493@targetstore.com,"6497 Pine Way",Chicago,IL,39196,2024-03-14,15:30,120,Equipment Upgrade,Urgent,Central,Automated test data record 493
+JOB494,5494,Best Buy,(555) 548-7296,store5494@bestbuy.com,"3499 Elm Lane",Raleigh,NC,83542,2024-06-02,17:00,60,Renovation,Low,Central,Automated test data record 494
+JOB495,5495,Pizza Hut,(555) 376-1657,store5495@pizzahut.com,"7622 Cedar Street",Peoria,IL,25485,2024-03-28,17:30,90,New Store Setup,Urgent,Central,Automated test data record 495
+JOB496,5496,Target Store,(555) 774-6860,store5496@targetstore.com,"1403 Elm Drive",Sacramento,CA,51564,2024-03-31,16:30,60,Renovation,Urgent,West,Automated test data record 496
+JOB497,5497,CVS Pharmacy,(555) 416-1227,store5497@cvspharmacy.com,"9258 Maple Drive",Houston,TX,63079,2024-05-20,11:30,300,Equipment Installation,Low,South,Automated test data record 497
+JOB498,5498,Subway,(555) 427-4799,store5498@subway.com,"7144 Maple Drive",Grand Rapids,MI,39372,2024-06-05,16:30,60,Equipment Installation,High,Central,Automated test data record 498
+JOB499,5499,CVS Pharmacy,(555) 225-3435,store5499@cvspharmacy.com,"7643 Oak Avenue",Los Angeles,CA,13954,2024-03-10,09:30,300,Renovation,Medium,West,Automated test data record 499
+JOB500,5500,Starbucks Coffee,(555) 614-6280,store5500@starbuckscoffee.com,"363 Oak Way",Erie,PA,10200,2024-04-26,15:30,120,Renovation,High,Central,Automated test data record 500
