@@ -499,7 +499,7 @@ export const useTeamStore = create<TeamManagementState>()(
           const pairings: TeamPairing[] = [];
           
           leads.forEach(lead => {
-            let bestAssistant = null;
+            let bestAssistant: TeamMember | null = null;
             let bestScore = 0;
             
             assistants.forEach(assistant => {

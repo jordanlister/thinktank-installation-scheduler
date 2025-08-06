@@ -1,7 +1,7 @@
 // Think Tank Technologies Installation Scheduler - Interactive Mapping Component
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import { Icon, LatLng, LatLngBounds } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { 
@@ -9,10 +9,6 @@ import {
   Navigation, 
   Route, 
   Users, 
-  Clock, 
-  Settings, 
-  Eye, 
-  EyeOff,
   Layers,
   Download
 } from 'lucide-react';
@@ -24,7 +20,6 @@ import type {
   GeographicCluster 
 } from '../../types';
 import { 
-  calculateDistance, 
   createGeographicClusters,
   optimizeMultiStopRoute 
 } from '../../utils/geographicUtils';
@@ -68,7 +63,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
   jobs,
   teams,
   assignments = [],
-  selectedTeam,
+  selectedTeam: _,
   onJobSelect,
   onTeamSelect,
   onRouteOptimize,
@@ -83,7 +78,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({
     selectedLayers: ['jobs', 'routes', 'teams']
   });
 
-  const [clusters, setClusters] = useState<GeographicCluster[]>([]);
+  const [_clusters, setClusters] = useState<GeographicCluster[]>([]);
   const [optimizedRoutes, setOptimizedRoutes] = useState<{ [teamId: string]: RoutePoint[] }>({});
   const [mapStats, setMapStats] = useState({
     totalJobs: 0,

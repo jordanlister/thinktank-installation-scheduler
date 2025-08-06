@@ -9,7 +9,6 @@ import {
   Edit3, 
   Save, 
   Plus, 
-  Settings,
   Calendar,
   Users,
   BarChart3,
@@ -20,12 +19,9 @@ import {
 import { 
   EmailTemplate, 
   PDFTemplate, 
-  EmailTemplateType, 
-  PDFTemplateType,
   ReportSchedule,
   TemplateEditor,
-  User,
-  UserRole
+  User
 } from '../../types';
 
 interface ReportManagementProps {
@@ -152,8 +148,9 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
   };
 
   const filteredTemplates = getCurrentTemplates().filter(template => {
+    const description = 'description' in template ? template.description : template.metadata?.description;
     const matchesSearch = template.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         template.description?.toLowerCase().includes(searchTerm.toLowerCase());
+                         description?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterActive === null || template.isActive === filterActive;
     return matchesSearch && matchesFilter;
   });
@@ -303,7 +300,7 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
     };
   };
 
-  const loadSampleData = (template: EmailTemplate | PDFTemplate) => {
+  const loadSampleData = (_template: EmailTemplate | PDFTemplate) => {
     // Load sample data based on template type
     const sampleData = {
       teamMemberName: 'John Smith',
@@ -461,7 +458,7 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
       <ReportScheduler
         template={selectedTemplate}
         templateType={templateType}
-        onSave={(schedule) => {
+        onSave={(schedule: ReportSchedule) => {
           onScheduleCreate?.(schedule);
           setViewMode('list');
         }}
@@ -573,7 +570,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
       </div>
 
       <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-        {template.description || 'No description available'}
+        {('description' in template ? template.description : template.metadata?.description) || 'No description available'}
       </p>
 
       <div className="flex items-center justify-between text-xs text-gray-500 mb-4">

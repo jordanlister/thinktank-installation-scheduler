@@ -16,7 +16,6 @@ import {
   TrendingDown,
   Award,
   Shield,
-  Tool,
   MapPin,
   Filter,
   Search,

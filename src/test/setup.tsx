@@ -1,6 +1,7 @@
 import { afterEach, beforeAll, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import React from 'react'
 
 // Global test setup for Think Tank Technologies Installation Scheduler
 

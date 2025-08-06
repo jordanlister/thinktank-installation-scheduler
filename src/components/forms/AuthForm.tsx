@@ -158,7 +158,7 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
           onSuccess?.(user);
         }
       } else if (mode === 'register') {
-        const { data, error } = await auth.signUp(formData.email, formData.password, {
+        const { data: _, error } = await auth.signUp(formData.email, formData.password, {
           firstName: formData.firstName,
           lastName: formData.lastName,
           role: formData.role,

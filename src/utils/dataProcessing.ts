@@ -113,7 +113,7 @@ export function detectSchema(rawData: RawJobData[]): ColumnMapping {
   const availableColumns = Object.keys(rawData[0]).filter(key => key !== '_rowNumber');
 
   // For each standard field, find the best matching column
-  Object.entries(COLUMN_ALIASES).forEach(([standardField, aliases]) => {
+  Object.entries(COLUMN_ALIASES).forEach(([standardField, aliases]: [string, readonly string[]]) => {
     let bestMatch = '';
     let bestConfidence = 0;
 

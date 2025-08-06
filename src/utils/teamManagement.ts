@@ -548,7 +548,7 @@ export class PerformanceAnalytics {
       .filter(member => this.calculateIndividualScore(member) < threshold);
   }
 
-  private static calculateIndividualScore(member: TeamMember): number {
+  static calculateIndividualScore(member: TeamMember): number {
     if (!member.performanceMetrics) return 0;
     
     const metrics = member.performanceMetrics;

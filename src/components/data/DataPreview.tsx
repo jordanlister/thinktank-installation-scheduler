@@ -17,7 +17,7 @@ import {
   Mail,
   Building
 } from 'lucide-react';
-import { ProcessedJobData, ProcessingResult, ValidationError } from '../../types';
+import { ProcessedJobData, ProcessingResult } from '../../types';
 
 interface DataPreviewProps {
   result: ProcessingResult;
@@ -315,7 +315,7 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
               </tr>
             </thead>
             <tbody className="divide-y divide-primary-200">
-              {paginatedData.map((row, index) => (
+              {paginatedData.map((row, _) => (
                 <tr key={row.id} className={`${getRowStatusColor(row)} hover:bg-primary-50`}>
                   <td className="px-4 py-3 whitespace-nowrap">
                     {getStatusIcon(row)}

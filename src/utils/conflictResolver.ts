@@ -169,6 +169,7 @@ function detectTravelDistanceConflicts(
   
   assignments.forEach(assignment => {
     const teamId = assignment.leadId || assignment.assistantId;
+    if (!teamId) return;
     const team = teamLookup.get(teamId);
     if (!team || !team.coordinates) return;
     
@@ -203,6 +204,7 @@ function detectAvailabilityConflicts(
   
   assignments.forEach(assignment => {
     const teamId = assignment.leadId || assignment.assistantId;
+    if (!teamId) return;
     const team = teamLookup.get(teamId);
     if (!team) return;
     
@@ -246,6 +248,7 @@ function detectSpecializationConflicts(
   
   assignments.forEach(assignment => {
     const teamId = assignment.leadId || assignment.assistantId;
+    if (!teamId) return;
     const team = teamLookup.get(teamId);
     if (!team) return;
     

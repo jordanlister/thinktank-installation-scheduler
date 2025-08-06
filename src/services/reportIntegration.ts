@@ -305,7 +305,7 @@ export class ReportIntegrationService {
   private async sendSingleAssignmentNotification(assignment: Assignment): Promise<void> {
     const installation = await this.getInstallationById(assignment.installationId);
     const teamMember = await this.getTeamMemberById(assignment.leadId);
-    const assistant = assignment.assistantId ? await this.getTeamMemberById(assignment.assistantId) : undefined;
+    const assistant = assignment.assistantId ? (await this.getTeamMemberById(assignment.assistantId)) || undefined : undefined;
 
     if (!installation || !teamMember) return;
 
@@ -337,7 +337,7 @@ export class ReportIntegrationService {
     for (const assignment of assignments) {
       const installation = await this.getInstallationById(assignment.installationId);
       const lead = await this.getTeamMemberById(assignment.leadId);
-      const assistant = assignment.assistantId ? await this.getTeamMemberById(assignment.assistantId) : undefined;
+      const assistant = assignment.assistantId ? (await this.getTeamMemberById(assignment.assistantId)) || undefined : undefined;
 
       if (!installation || !lead) continue;
 

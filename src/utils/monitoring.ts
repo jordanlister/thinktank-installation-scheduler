@@ -235,13 +235,14 @@ class MonitoringService {
       try {
         const navigationObserver = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
+            const navEntry = entry as PerformanceNavigationTiming;
             this.trackPerformance({
               name: 'navigation',
-              value: entry.loadEventEnd - entry.fetchStart,
+              value: navEntry.loadEventEnd - navEntry.fetchStart,
               unit: 'ms',
               context: {
-                type: entry.type,
-                redirectCount: entry.redirectCount,
+                type: navEntry.type,
+                redirectCount: navEntry.redirectCount,
               },
             })
           }
@@ -291,7 +292,7 @@ class MonitoringService {
           severity: 'low',
           context: {
             type: 'resource_error',
-            element: event.target?.tagName,
+            element: (event.target as Element)?.tagName,
             source: (event.target as any)?.src || (event.target as any)?.href,
           },
         })

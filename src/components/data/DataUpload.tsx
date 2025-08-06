@@ -22,7 +22,6 @@ export const DataUpload: React.FC<DataUploadProps> = ({
   const {
     uploadState,
     isDragActive,
-    uploadFile,
     resetUpload,
     getRootProps,
     getInputProps

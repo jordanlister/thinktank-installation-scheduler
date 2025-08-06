@@ -1,6 +1,6 @@
 // Think Tank Technologies - Team Member Directory Component
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Search, 
   Filter, 
@@ -16,14 +16,10 @@ import {
   Clock,
   User,
   MapPin,
-  Phone,
-  Mail,
-  Award,
-  Tool,
-  Calendar
+  Mail
 } from 'lucide-react';
 import { useTeamStore } from '../../stores/useTeamStore';
-import type { TeamMember, UserRole, CertificationStatus } from '../../types';
+import type { TeamMember, UserRole } from '../../types';
 import { TeamDataManager } from '../../utils/teamManagement';
 
 interface TeamMemberDirectoryProps {
@@ -45,7 +41,6 @@ const TeamMemberDirectory: React.FC<TeamMemberDirectoryProps> = ({
     setFilterCriteria,
     setViewMode,
     setSelectedTeamMember,
-    addTeamMember,
     removeTeamMember,
     clearFilters
   } = useTeamStore();

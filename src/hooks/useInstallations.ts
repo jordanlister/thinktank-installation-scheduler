@@ -1,7 +1,7 @@
 // Think Tank Technologies - Installation Data Hook
 
 import { useState, useEffect } from 'react';
-import { db } from '../services/supabase';
+import { supabase } from '../services/supabase';
 import type { Installation, DashboardStats } from '../types';
 
 interface InstallationWithAddress extends Omit<Installation, 'address'> {
@@ -27,47 +27,53 @@ export const useInstallations = () => {
       setIsLoading(true);
       setError(null);
 
-      const data = await db.from('installations').select(`
-        id,
-        job_id,
-        store_number,
-        customer_name,
-        customer_phone,
-        customer_email,
-        scheduled_date,
-        scheduled_time,
-        duration,
-        status,
-        priority,
-        installation_type,
-        specifications,
-        requirements,
-        region,
-        notes,
-        lead_id,
-        assistant_id,
-        estimated_revenue,
-        actual_revenue,
-        customer_satisfaction_score,
-        created_at,
-        updated_at,
-        addresses!inner (
+      const { data, error: installationsError } = await supabase
+        .from('installations')
+        .select(`
           id,
-          street,
-          city,
-          state,
-          zip_code,
-          coordinates
-        ),
-        lead:users!lead_id (
-          first_name,
-          last_name
-        ),
-        assistant:users!assistant_id (
-          first_name,
-          last_name
-        )
-      `);
+          job_id,
+          store_number,
+          customer_name,
+          customer_phone,
+          customer_email,
+          scheduled_date,
+          scheduled_time,
+          duration,
+          status,
+          priority,
+          installation_type,
+          specifications,
+          requirements,
+          region,
+          notes,
+          lead_id,
+          assistant_id,
+          estimated_revenue,
+          actual_revenue,
+          customer_satisfaction_score,
+          created_at,
+          updated_at,
+          addresses!inner (
+            id,
+            street,
+            city,
+            state,
+            zip_code,
+            coordinates
+          ),
+          lead:users!lead_id (
+            first_name,
+            last_name
+          ),
+          assistant:users!assistant_id (
+            first_name,
+            last_name
+          )
+        `);
+      
+      if (installationsError) {
+        throw installationsError;
+      }
 
       const transformedData: Installation[] = data.map((item: any) => ({
         id: item.id,
@@ -128,7 +134,13 @@ export const useDashboardStats = () => {
       setError(null);
 
       // Fetch all installations
-      const installations = await db.from('installations').select('*');
+      const { data: installations, error: installationsError } = await supabase
+        .from('installations')
+        .select('*');
+      
+      if (installationsError) {
+        throw installationsError;
+      }
       
       const today = new Date().toISOString().split('T')[0];
       const weekStart = new Date();
@@ -198,37 +210,44 @@ export const useInstallationsForDate = (date: string) => {
       setIsLoading(true);
       setError(null);
 
-      const data = await db.from('installations').select(`
-        id,
-        job_id,
-        customer_name,
-        customer_phone,
-        customer_email,
-        scheduled_date,
-        scheduled_time,
-        duration,
-        status,
-        priority,
-        installation_type,
-        region,
-        notes,
-        lead_id,
-        assistant_id,
-        addresses!inner (
-          street,
-          city,
-          state,
-          zip_code
-        ),
-        lead:users!lead_id (
-          first_name,
-          last_name
-        ),
-        assistant:users!assistant_id (
-          first_name,
-          last_name
-        )
-      `).eq('scheduled_date', date);
+      const { data, error: installationsError } = await supabase
+        .from('installations')
+        .select(`
+          id,
+          job_id,
+          customer_name,
+          customer_phone,
+          customer_email,
+          scheduled_date,
+          scheduled_time,
+          duration,
+          status,
+          priority,
+          installation_type,
+          region,
+          notes,
+          lead_id,
+          assistant_id,
+          addresses!inner (
+            street,
+            city,
+            state,
+            zip_code
+          ),
+          lead:users!lead_id (
+            first_name,
+            last_name
+          ),
+          assistant:users!assistant_id (
+            first_name,
+            last_name
+          )
+        `)
+        .eq('scheduled_date', date);
+      
+      if (installationsError) {
+        throw installationsError;
+      }
 
       const transformedData: Installation[] = data.map((item: any) => ({
         id: item.id,

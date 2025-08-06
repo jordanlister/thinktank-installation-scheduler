@@ -1,18 +1,14 @@
 // Think Tank Technologies Installation Scheduler - Route Optimization Panel
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { 
   Route, 
-  Navigation, 
-  Clock, 
   MapPin, 
   TrendingUp, 
-  Users, 
   AlertTriangle,
   CheckCircle,
   Play,
   Pause,
-  RotateCcw,
   Download,
   Settings
 } from 'lucide-react';
@@ -25,8 +21,7 @@ import type {
 } from '../../types';
 import { 
   optimizeMultiStopRoute,
-  calculateWorkloadDistribution,
-  findOptimalTeamAssignments 
+  calculateWorkloadDistribution 
 } from '../../utils/geographicUtils';
 
 interface RouteOptimizationPanelProps {
@@ -74,7 +69,7 @@ const RouteOptimizationPanel: React.FC<RouteOptimizationPanelProps> = ({
   jobs,
   teams,
   assignments,
-  selectedTeam,
+  selectedTeam: _,
   onOptimizationComplete,
   onRouteSelect,
   className = ''

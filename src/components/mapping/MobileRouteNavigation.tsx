@@ -3,16 +3,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
   Navigation,
-  MapPin,
   Clock,
   Phone,
-  MessageSquare,
-  ExternalLink,
-  Download,
   Share2,
   CheckCircle,
   AlertCircle,
-  ArrowRight,
   MoreVertical,
   Settings
 } from 'lucide-react';
@@ -108,7 +103,6 @@ const MobileRouteNavigation: React.FC<MobileRouteNavigationProps> = ({
     if (!job.address.coordinates) return;
 
     const { lat, lng } = job.address.coordinates;
-    const address = `${job.address.street}, ${job.address.city}, ${job.address.state}`;
     
     let url = '';
     switch (navigationApp) {

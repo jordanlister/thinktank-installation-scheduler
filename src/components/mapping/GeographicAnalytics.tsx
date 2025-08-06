@@ -1,6 +1,6 @@
 // Think Tank Technologies Installation Scheduler - Geographic Analytics Component
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   BarChart, 
   Bar, 
@@ -29,20 +29,17 @@ import {
   Route,
   DollarSign,
   Activity,
-  Filter,
   Download
 } from 'lucide-react';
 import type { 
   Installation, 
   TeamMember, 
-  OptimizedAssignment,
-  RegionAnalysisReport
+  OptimizedAssignment
 } from '../../types';
 import { 
   calculateTerritoryCoverage,
   calculateWorkloadDistribution,
-  groupJobsByState,
-  calculateGeographicSpread
+  groupJobsByState
 } from '../../utils/geographicUtils';
 
 interface GeographicAnalyticsProps {
@@ -423,7 +420,7 @@ const GeographicAnalytics: React.FC<GeographicAnalyticsProps> = ({
                     dataKey={selectedMetric === 'coverage' ? 'coverage' : 'jobs'}
                     nameKey="name"
                   >
-                    {chartData.regionComparison.slice(0, 6).map((entry, index) => (
+                    {chartData.regionComparison.slice(0, 6).map((_, index) => (
                       <Cell key={`cell-${index}`} fill={colors.regions[index % colors.regions.length]} />
                     ))}
                   </Pie>

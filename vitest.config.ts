@@ -29,7 +29,7 @@ export default defineConfig({
     globals: true,
     
     // Setup files
-    setupFiles: ['./src/test/setup.ts'],
+    setupFiles: ['./src/test/setup.tsx'],
     
     // Include and exclude patterns
     include: [

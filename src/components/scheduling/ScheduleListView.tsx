@@ -57,7 +57,7 @@ const ScheduleListView: React.FC<ScheduleListViewProps> = ({
     if (searchTerm) {
       filtered = filtered.filter(assignment => {
         const teamId = assignment.leadId || assignment.assistantId;
-        const team = getTeamMember(teamId);
+        const team = teamId ? getTeamMember(teamId) : undefined;
         const teamName = team ? `${team.firstName} ${team.lastName}` : '';
         
         return (
@@ -89,8 +89,8 @@ const ScheduleListView: React.FC<ScheduleListViewProps> = ({
         case 'team':
           const aTeamId = a.leadId || a.assistantId;
           const bTeamId = b.leadId || b.assistantId;
-          const aTeam = getTeamMember(aTeamId);
-          const bTeam = getTeamMember(bTeamId);
+          const aTeam = aTeamId ? getTeamMember(aTeamId) : undefined;
+          const bTeam = bTeamId ? getTeamMember(bTeamId) : undefined;
           aValue = aTeam ? `${aTeam.firstName} ${aTeam.lastName}` : '';
           bValue = bTeam ? `${bTeam.firstName} ${bTeam.lastName}` : '';
           break;
@@ -263,7 +263,7 @@ const ScheduleListView: React.FC<ScheduleListViewProps> = ({
         {filteredAndSortedAssignments.length > 0 ? (
           filteredAndSortedAssignments.map((assignment) => {
             const teamId = assignment.leadId || assignment.assistantId;
-            const team = getTeamMember(teamId);
+            const team = teamId ? getTeamMember(teamId) : undefined;
             const conflicts = getAssignmentConflicts(assignment.id);
             const statusColor = getPriorityColor(conflicts);
 

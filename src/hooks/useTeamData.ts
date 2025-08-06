@@ -1,7 +1,7 @@
 // Think Tank Technologies - Team Data Hook
 
 import { useState, useEffect } from 'react';
-import { db } from '../services/supabase';
+import { supabase } from '../services/supabase';
 import type { 
   TeamMember, 
   Skill, 
@@ -23,43 +23,86 @@ export const useTeamMembers = () => {
       setError(null);
 
       // Fetch team members with related data
-      const data = await db.from('team_member_details').select('*');
+      const { data, error: teamMemberError } = await supabase
+        .from('team_member_details')
+        .select('*');
+      
+      if (teamMemberError) {
+        throw teamMemberError;
+      }
 
       // Fetch additional data for each team member
       const teamMemberIds = data.map(tm => tm.id);
 
       // Fetch skills for all team members
-      const skillsData = await db.from('team_member_skills').select(`
-        team_member_id,
-        level,
-        acquired_date,
-        last_assessed,
-        skills!inner (
-          id,
-          name,
-          category
-        )
-      `).in('team_member_id', teamMemberIds);
+      const { data: skillsData, error: skillsError } = await supabase
+        .from('team_member_skills')
+        .select(`
+          team_member_id,
+          level,
+          acquired_date,
+          last_assessed,
+          skills!inner (
+            id,
+            name,
+            category
+          )
+        `)
+        .in('team_member_id', teamMemberIds);
+      
+      if (skillsError) {
+        throw skillsError;
+      }
 
       // Fetch certifications
-      const certificationsData = await db.from('certifications').select('*')
+      const { data: certificationsData, error: certificationsError } = await supabase
+        .from('certifications')
+        .select('*')
         .in('team_member_id', teamMemberIds);
+      
+      if (certificationsError) {
+        throw certificationsError;
+      }
 
       // Fetch equipment
-      const equipmentData = await db.from('equipment').select('*')
+      const { data: equipmentData, error: equipmentError } = await supabase
+        .from('equipment')
+        .select('*')
         .in('assigned_to', teamMemberIds);
+      
+      if (equipmentError) {
+        throw equipmentError;
+      }
 
       // Fetch availability
-      const availabilityData = await db.from('availability').select('*')
+      const { data: availabilityData, error: availabilityError } = await supabase
+        .from('availability')
+        .select('*')
         .in('team_member_id', teamMemberIds);
+      
+      if (availabilityError) {
+        throw availabilityError;
+      }
 
       // Fetch work preferences
-      const workPreferencesData = await db.from('work_preferences').select('*')
+      const { data: workPreferencesData, error: workPreferencesError } = await supabase
+        .from('work_preferences')
+        .select('*')
         .in('team_member_id', teamMemberIds);
+      
+      if (workPreferencesError) {
+        throw workPreferencesError;
+      }
 
       // Fetch performance metrics
-      const performanceData = await db.from('performance_metrics').select('*')
+      const { data: performanceData, error: performanceError } = await supabase
+        .from('performance_metrics')
+        .select('*')
         .in('team_member_id', teamMemberIds);
+      
+      if (performanceError) {
+        throw performanceError;
+      }
 
       // Transform and combine the data
       const transformedTeamMembers: TeamMember[] = data.map((tm: any) => {
@@ -248,16 +291,23 @@ export const useExpiringCertifications = () => {
       const thirtyDaysFromNow = new Date();
       thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
 
-      const data = await db.from('certifications').select(`
-        *,
-        team_members!inner (
-          users!inner (
-            first_name,
-            last_name
+      const { data, error: certError } = await supabase
+        .from('certifications')
+        .select(`
+          *,
+          team_members!inner (
+            users!inner (
+              first_name,
+              last_name
+            )
           )
-        )
-      `).lte('expiration_date', thirtyDaysFromNow.toISOString().split('T')[0])
+        `)
+        .lte('expiration_date', thirtyDaysFromNow.toISOString().split('T')[0])
         .eq('status', 'active');
+      
+      if (certError) {
+        throw certError;
+      }
 
       const transformedData = data.map((cert: any) => ({
         id: cert.id,
@@ -305,15 +355,35 @@ export const useTeamAnalytics = (period: { start: string; end: string }) => {
       setError(null);
 
       // Fetch team members count
-      const teamMembersData = await db.from('team_members').select('id, region').eq('employment_status', 'active');
+      const { data: teamMembersData, error: teamMembersError } = await supabase
+        .from('team_members')
+        .select('id, region')
+        .eq('employment_status', 'active');
+      
+      if (teamMembersError) {
+        throw teamMembersError;
+      }
       
       // Fetch performance metrics for the period
-      const performanceData = await db.from('performance_metrics').select('*')
+      const { data: performanceData, error: performanceError } = await supabase
+        .from('performance_metrics')
+        .select('*')
         .gte('period_start', period.start)
         .lte('period_end', period.end);
+      
+      if (performanceError) {
+        throw performanceError;
+      }
 
       // Fetch certifications
-      const certificationsData = await db.from('certifications').select('*').eq('status', 'active');
+      const { data: certificationsData, error: certificationsError } = await supabase
+        .from('certifications')
+        .select('*')
+        .eq('status', 'active');
+      
+      if (certificationsError) {
+        throw certificationsError;
+      }
 
       // Calculate analytics
       const totalTeamMembers = teamMembersData.length;

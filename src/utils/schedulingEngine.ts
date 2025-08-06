@@ -148,8 +148,8 @@ export class SchedulingEngine {
           job,
           optimalTeam,
           routePoint,
-          i > 0 ? optimizedRoute.route[i - 1] : null,
-          i < optimizedRoute.route.length - 1 ? optimizedRoute.route[i + 1] : null
+          i > 0 ? optimizedRoute.route[i - 1] : undefined,
+          i < optimizedRoute.route.length - 1 ? optimizedRoute.route[i + 1] : undefined
         );
 
         assignments.push(assignment);

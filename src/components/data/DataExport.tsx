@@ -8,12 +8,11 @@ import {
   Calendar,
   CheckCircle2,
   AlertTriangle,
-  Settings,
-  Filter
+  Settings
 } from 'lucide-react';
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
-import { ProcessingResult, ProcessedJobData, ValidationError } from '../../types';
+import { ProcessingResult } from '../../types';
 
 interface DataExportProps {
   result: ProcessingResult;
