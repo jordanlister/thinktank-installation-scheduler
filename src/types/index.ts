@@ -235,7 +235,7 @@ export interface DataProcessingConfig {
 
 // Supported column aliases for intelligent mapping
 export const COLUMN_ALIASES = {
-  jobId: ['job_id', 'job id', 'id', 'job number', 'job_number', 'work order', 'wo', 'order id', 'order_id', 'ticket', 'ticket id', 'reference', 'ref'],
+  jobId: ['job_id', 'job id', 'id', 'job number', 'job_number', 'work order', 'wo', 'order id', 'order_id', 'ticket', 'ticket id', 'reference', 'ref', 'tech', '1 tech', '2 tech', 'technician', 'installer'],
   storeNumber: ['store_number', 'store number', 'store_id', 'store id', 'location id', 'location_id', 'store #', 'store#', 'location', 'loc', 'site', 'site id', 'site_id', 'branch', 'branch id', 'outlet'],
   customerName: ['customer_name', 'customer name', 'client name', 'client_name', 'name', 'customer', 'store name', 'location name', 'business name', 'company', 'company name', 'site name', 'facility', 'facility name'],
   customerPhone: ['customer_phone', 'customer phone', 'phone', 'phone number', 'phone_number', 'contact phone', 'mobile', 'tel', 'telephone', 'contact', 'contact number', 'manager phone'],

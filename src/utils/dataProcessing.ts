@@ -21,7 +21,7 @@ export const DEFAULT_CONFIG: DataProcessingConfig = {
   skipEmptyRows: true,
   dateFormat: 'YYYY-MM-DD',
   timeFormat: 'HH:mm',
-  requiredFields: ['customerName', 'installDate'],
+  requiredFields: [],
   allowedFileTypes: ['xlsx', 'xls', 'csv'],
   maxFileSize: 10 * 1024 * 1024, // 10MB
 };
@@ -621,29 +621,64 @@ export async function processJobDataFile(
     const schemaMap = detectSchema(rawData);
     
     if (Object.keys(schemaMap).length === 0) {
-      // Provide helpful debugging information
+      // Create a fallback mapping using available columns
       const availableColumns = Object.keys(rawData[0]).filter(key => key !== '_rowNumber');
-      const requiredFields = config.requiredFields || DEFAULT_CONFIG.requiredFields;
       
-      const errorMsg = [
-        'Could not detect any recognizable columns in the file.',
-        '',
-        'Available columns in your file:',
-        availableColumns.map((col, i) => `  ${i + 1}. "${col}"`).join('\n'),
-        '',
-        'Required fields we\'re looking for:',
-        requiredFields.map(field => {
-          const aliases = COLUMN_ALIASES[field as keyof typeof COLUMN_ALIASES];
-          return `  • ${field}: ${aliases.slice(0, 5).join(', ')}${aliases.length > 5 ? ', ...' : ''}`;
-        }).join('\n'),
-        '',
-        'Tips:',
-        '• Make sure your first row contains column headers',
-        '• Column names should match or be similar to the expected fields',
-        '• Try renaming columns to match expected names (e.g., "Customer Name", "Install Date", "Address")'
-      ].join('\n');
-      
-      throw new Error(errorMsg);
+      // If we have any columns, create a basic mapping
+      if (availableColumns.length > 0) {
+        // Use first column as customerName if no better match
+        if (availableColumns.length >= 1) {
+          schemaMap.customerName = {
+            detectedColumn: availableColumns[0],
+            confidence: 0.3,
+            aliases: COLUMN_ALIASES.customerName as string[]
+          };
+        }
+        
+        // Use second column as installDate if no better match  
+        if (availableColumns.length >= 2) {
+          schemaMap.installDate = {
+            detectedColumn: availableColumns[1],
+            confidence: 0.3,
+            aliases: COLUMN_ALIASES.installDate as string[]
+          };
+        }
+        
+        // Map remaining columns as notes/specifications
+        availableColumns.slice(2).forEach((col, index) => {
+          const fieldName = index === 0 ? 'specifications' : 'notes';
+          if (!schemaMap[fieldName]) {
+            schemaMap[fieldName] = {
+              detectedColumn: col,
+              confidence: 0.2,
+              aliases: COLUMN_ALIASES[fieldName as keyof typeof COLUMN_ALIASES] as string[]
+            };
+          }
+        });
+      } else {
+        // If still no columns, provide helpful debugging information
+        const requiredFields = ['customerName', 'installDate']; // Core fields for display
+        
+        const errorMsg = [
+          'Could not detect any recognizable columns in the file.',
+          '',
+          'Available columns in your file:',
+          availableColumns.map((col, i) => `  ${i + 1}. "${col}"`).join('\n'),
+          '',
+          'Expected fields we can work with:',
+          requiredFields.map(field => {
+            const aliases = COLUMN_ALIASES[field as keyof typeof COLUMN_ALIASES];
+            return `  • ${field}: ${aliases.slice(0, 5).join(', ')}${aliases.length > 5 ? ', ...' : ''}`;
+          }).join('\n'),
+          '',
+          'Tips:',
+          '• Make sure your first row contains column headers',
+          '• Column names should match or be similar to the expected fields',
+          '• Try renaming columns to match expected names (e.g., "Customer Name", "Install Date", "Address")'
+        ].join('\n');
+        
+        throw new Error(errorMsg);
+      }
     }
 
     // Process the data
