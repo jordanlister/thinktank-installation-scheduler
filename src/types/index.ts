@@ -235,23 +235,23 @@ export interface DataProcessingConfig {
 
 // Supported column aliases for intelligent mapping
 export const COLUMN_ALIASES = {
-  jobId: ['job_id', 'job id', 'id', 'job number', 'job_number', 'work order', 'wo'],
-  storeNumber: ['store_number', 'store number', 'store_id', 'store id', 'location id', 'location_id', 'store #', 'store#'],
-  customerName: ['customer_name', 'customer name', 'client name', 'client_name', 'name', 'customer'],
-  customerPhone: ['customer_phone', 'customer phone', 'phone', 'phone number', 'phone_number', 'contact phone', 'mobile'],
-  customerEmail: ['customer_email', 'customer email', 'email', 'email address', 'contact email'],
-  street: ['street', 'address', 'street address', 'address line 1', 'address_line_1'],
-  city: ['city', 'town'],
-  state: ['state', 'province', 'region'],
-  zipCode: ['zip_code', 'zip code', 'zip', 'postal code', 'postal_code'],
-  installDate: ['install_date', 'install date', 'date', 'scheduled date', 'scheduled_date', 'appointment date'],
-  installTime: ['install_time', 'install time', 'time', 'scheduled time', 'scheduled_time', 'appointment time'],
-  duration: ['duration', 'estimated duration', 'time required', 'hours'],
-  installationType: ['installation_type', 'installation type', 'type', 'service type', 'work type'],
-  specifications: ['specifications', 'specs', 'requirements', 'special requirements'],
-  priority: ['priority', 'urgency', 'importance'],
-  region: ['region', 'territory', 'area', 'district', 'zone'],
-  notes: ['notes', 'comments', 'remarks', 'special notes', 'instructions']
+  jobId: ['job_id', 'job id', 'id', 'job number', 'job_number', 'work order', 'wo', 'order id', 'order_id', 'ticket', 'ticket id', 'reference', 'ref'],
+  storeNumber: ['store_number', 'store number', 'store_id', 'store id', 'location id', 'location_id', 'store #', 'store#', 'location', 'loc', 'site', 'site id', 'site_id', 'branch', 'branch id', 'outlet'],
+  customerName: ['customer_name', 'customer name', 'client name', 'client_name', 'name', 'customer', 'store name', 'location name', 'business name', 'company', 'company name', 'site name', 'facility', 'facility name'],
+  customerPhone: ['customer_phone', 'customer phone', 'phone', 'phone number', 'phone_number', 'contact phone', 'mobile', 'tel', 'telephone', 'contact', 'contact number', 'manager phone'],
+  customerEmail: ['customer_email', 'customer email', 'email', 'email address', 'contact email', 'manager email', 'contact_email'],
+  street: ['street', 'address', 'street address', 'address line 1', 'address_line_1', 'addr', 'location address', 'site address', 'full address', 'street_address'],
+  city: ['city', 'town', 'municipality', 'locality'],
+  state: ['state', 'province', 'region', 'st', 'prov'],
+  zipCode: ['zip_code', 'zip code', 'zip', 'postal code', 'postal_code', 'postcode', 'postal'],
+  installDate: ['install_date', 'install date', 'date', 'scheduled date', 'scheduled_date', 'appointment date', 'service date', 'work date', 'completion date', 'target date', 'due date', 'installation date'],
+  installTime: ['install_time', 'install time', 'time', 'scheduled time', 'scheduled_time', 'appointment time', 'service time', 'start time', 'time slot'],
+  duration: ['duration', 'estimated duration', 'time required', 'hours', 'est duration', 'time estimate', 'work hours', 'service hours'],
+  installationType: ['installation_type', 'installation type', 'type', 'service type', 'work type', 'job type', 'service', 'category', 'work category', 'equipment type', 'product type'],
+  specifications: ['specifications', 'specs', 'requirements', 'special requirements', 'details', 'description', 'work description', 'scope', 'equipment', 'products'],
+  priority: ['priority', 'urgency', 'importance', 'rush', 'urgent', 'level', 'priority level'],
+  region: ['region', 'territory', 'area', 'district', 'zone', 'market', 'division', 'sector'],
+  notes: ['notes', 'comments', 'remarks', 'special notes', 'instructions', 'special instructions', 'additional info', 'info', 'memo', 'description']
 } as const;
 
 export type ColumnAlias = keyof typeof COLUMN_ALIASES;

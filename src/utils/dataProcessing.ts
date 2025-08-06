@@ -21,7 +21,7 @@ export const DEFAULT_CONFIG: DataProcessingConfig = {
   skipEmptyRows: true,
   dateFormat: 'YYYY-MM-DD',
   timeFormat: 'HH:mm',
-  requiredFields: ['customerName', 'installDate', 'street', 'city', 'state', 'zipCode'],
+  requiredFields: ['customerName', 'installDate'],
   allowedFileTypes: ['xlsx', 'xls', 'csv'],
   maxFileSize: 10 * 1024 * 1024, // 10MB
 };
@@ -127,16 +127,25 @@ export function detectSchema(rawData: RawJobData[]): ColumnMapping {
           bestConfidence = 1.0;
         }
       } else {
-        // Check for partial matches
+        // Check for partial matches and substring matches
         const confidence = calculateStringSimilarity(columnLower, aliases);
-        if (confidence > bestConfidence && confidence > 0.6) {
+        
+        // Also check if any alias is a substring or vice versa
+        let substringMatch = false;
+        aliases.forEach(alias => {
+          if (columnLower.includes(alias) || alias.includes(columnLower)) {
+            substringMatch = true;
+          }
+        });
+        
+        if (confidence > bestConfidence && (confidence > 0.4 || substringMatch)) {
           bestMatch = column;
-          bestConfidence = confidence;
+          bestConfidence = Math.max(confidence, substringMatch ? 0.7 : confidence);
         }
       }
     });
 
-    if (bestMatch && bestConfidence > 0.6) {
+    if (bestMatch && bestConfidence > 0.4) {
       columnMapping[standardField] = {
         detectedColumn: bestMatch,
         confidence: Math.round(bestConfidence * 100) / 100,
@@ -612,7 +621,29 @@ export async function processJobDataFile(
     const schemaMap = detectSchema(rawData);
     
     if (Object.keys(schemaMap).length === 0) {
-      throw new Error('Could not detect any recognizable columns in the file');
+      // Provide helpful debugging information
+      const availableColumns = Object.keys(rawData[0]).filter(key => key !== '_rowNumber');
+      const requiredFields = config.requiredFields || DEFAULT_CONFIG.requiredFields;
+      
+      const errorMsg = [
+        'Could not detect any recognizable columns in the file.',
+        '',
+        'Available columns in your file:',
+        availableColumns.map((col, i) => `  ${i + 1}. "${col}"`).join('\n'),
+        '',
+        'Required fields we\'re looking for:',
+        requiredFields.map(field => {
+          const aliases = COLUMN_ALIASES[field as keyof typeof COLUMN_ALIASES];
+          return `  • ${field}: ${aliases.slice(0, 5).join(', ')}${aliases.length > 5 ? ', ...' : ''}`;
+        }).join('\n'),
+        '',
+        'Tips:',
+        '• Make sure your first row contains column headers',
+        '• Column names should match or be similar to the expected fields',
+        '• Try renaming columns to match expected names (e.g., "Customer Name", "Install Date", "Address")'
+      ].join('\n');
+      
+      throw new Error(errorMsg);
     }
 
     // Process the data
