@@ -42,7 +42,9 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
     'installDate',
     'address',
     'customerPhone',
-    'installationType'
+    'installationType',
+    'specifications',
+    'notes'
   ]));
 
   // Get rows with error/warning information
@@ -91,6 +93,7 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
     { key: 'installTime', label: 'Install Time', icon: Calendar },
     { key: 'address', label: 'Address', icon: MapPin },
     { key: 'installationType', label: 'Installation Type', icon: Building },
+    { key: 'specifications', label: 'Specifications', icon: Eye },
     { key: 'priority', label: 'Priority', icon: AlertTriangle },
     { key: 'region', label: 'Region', icon: MapPin },
     { key: 'notes', label: 'Notes', icon: Eye }
@@ -113,17 +116,24 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
   };
 
   const formatCellValue = (key: string, value: any): string => {
-    if (!value) return '';
+    if (value === null || value === undefined) return '';
+    if (value === '') return '(empty)';
     
     switch (key) {
       case 'address':
         return formatAddress(value);
       case 'installDate':
-        return new Date(value).toLocaleDateString();
+        try {
+          return new Date(value).toLocaleDateString();
+        } catch {
+          return String(value);
+        }
       case 'priority':
         return value.charAt(0).toUpperCase() + value.slice(1);
       case 'specifications':
-        return Array.isArray(value) ? value.join(', ') : value;
+        return Array.isArray(value) ? value.join(', ') : String(value);
+      case 'notes':
+        return String(value);
       default:
         return String(value);
     }
