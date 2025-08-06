@@ -347,6 +347,22 @@ export function processData(
       hasWarnings = true;
     }
 
+    // Ensure we have at least some basic data for display
+    if (!processedRow.customerName && !processedRow.installDate && !processedRow.specifications && !processedRow.notes) {
+      // If completely empty, try to use raw data directly
+      const availableColumns = Object.keys(row).filter(key => key !== '_rowNumber');
+      if (availableColumns.length >= 1) {
+        processedRow.customerName = String(row[availableColumns[0]] || '').trim() || `Row ${rowNumber}`;
+      }
+      if (availableColumns.length >= 2) {
+        processedRow.specifications = String(row[availableColumns[1]] || '').trim() || 'No data';
+      }
+      // Add today's date as fallback
+      if (!processedRow.installDate) {
+        processedRow.installDate = new Date().toISOString().split('T')[0];
+      }
+    }
+
     // Skip empty rows if configured
     if (config.skipEmptyRows && isEmptyRow(processedRow)) {
       return;
@@ -709,6 +725,14 @@ export async function processJobDataFile(
 
     // Process the data
     const result = processData(rawData, schemaMap, config);
+    
+    // Debug logging to see what data structure we're creating
+    console.log('Processing result:', {
+      totalRows: result.validData.length,
+      sampleData: result.validData.slice(0, 2),
+      schemaMap,
+      rawDataSample: rawData.slice(0, 2)
+    });
     
     // Update metadata with file information
     result.metadata.fileName = file.name;
