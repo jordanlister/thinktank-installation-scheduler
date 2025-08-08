@@ -38,20 +38,22 @@ export const Layout: React.FC = () => {
         </div>
       )}
 
-      <div className="flex h-screen">
-        {/* Navigation Sidebar */}
+      <div className="relative h-screen bg-primary-50">
+        {/* Navigation Sidebar - Fixed overlay */}
         <Navigation 
           sidebarOpen={sidebarOpen} 
           onClose={handleSidebarClose} 
         />
 
-        {/* Main content area */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-primary-50">
-          {/* Header */}
-          <Header 
-            onMenuToggle={handleMenuToggle} 
-            sidebarOpen={sidebarOpen} 
-          />
+        {/* Header - Full width across entire screen */}
+        <Header 
+          onMenuToggle={handleMenuToggle} 
+          sidebarOpen={sidebarOpen} 
+        />
+        
+        {/* Main content area - Full width with left margin for collapsed sidebar */}
+        <div className="flex flex-col h-full overflow-hidden bg-primary-50 ml-16 transition-none"
+             style={{ height: 'calc(100vh - 4rem)' }}>
 
           {/* Main content */}
           <main className="flex-1 overflow-auto bg-primary-50">

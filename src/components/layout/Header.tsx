@@ -4,6 +4,7 @@ import React from 'react';
 import { Menu, X, Bell, User, LogOut } from 'lucide-react';
 import { useAppStore, useUser } from '../../stores/useAppStore';
 import { formatName } from '../../utils';
+import { ConnectionStatus } from '../common/ConnectionStatus';
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -22,24 +23,12 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
 
   return (
     <header className="bg-white shadow-sm border-b border-primary-200">
-      <div className="flex justify-between items-center px-4 sm:px-6 lg:px-8 h-16">
+      <div className="flex justify-between items-center pr-4 sm:pr-6 lg:pr-8 h-16">
         {/* Left section - Logo and menu toggle */}
         <div className="flex items-center">
-          <button
-            onClick={onMenuToggle}
-            className="p-2 rounded-md text-primary-600 hover:text-primary-900 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-accent-500 lg:hidden"
-            aria-label="Toggle sidebar"
-          >
-            {sidebarOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-          
-          <div className="flex items-center ml-4 lg:ml-0">
+          <div className="flex items-center pl-2">
             <div className="flex-shrink-0">
-              <div className="h-8 w-8 bg-accent-600 rounded-lg flex items-center justify-center shadow-sm">
+              <div className="h-8 w-8 bg-accent-600 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">TT</span>
               </div>
             </div>
@@ -52,10 +41,25 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
               </p>
             </div>
           </div>
+          
+          <button
+            onClick={onMenuToggle}
+            className="ml-4 p-2 rounded-md text-primary-600 hover:text-primary-900 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-accent-500 lg:hidden"
+            aria-label="Toggle sidebar"
+          >
+            {sidebarOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
         </div>
 
         {/* Right section - Notifications and user menu */}
         <div className="flex items-center space-x-4">
+          {/* Connection Status */}
+          <ConnectionStatus className="hidden sm:flex" />
+          
           {/* Notifications */}
           <button
             className="p-2 rounded-md text-primary-600 hover:text-primary-900 hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-accent-500 relative"
