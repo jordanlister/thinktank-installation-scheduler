@@ -97,46 +97,25 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
             orientation: 'portrait',
             margins: { top: 72, right: 72, bottom: 72, left: 72 }
           },
-          components: [],
-          variables: [
-            { name: 'region', type: 'string', description: 'Region name', required: true },
-            { name: 'dateRange', type: 'string', description: 'Date range', required: true }
-          ],
-          styling: {
+          variables: template.variables || [],
+          styling: template.styling || {
             fontFamily: 'Helvetica',
             fontSize: 12,
             primaryColor: '#1a365d',
             secondaryColor: '#2d3748',
             accentColor: '#3182ce',
             backgroundColor: '#ffffff',
-            textColor: '#2d3748',
-            brandColors: {
-              primary: '#1a365d',
-              secondary: '#2d3748',
-              accent: '#3182ce',
-              neutral: '#718096',
-              success: '#38a169',
-              warning: '#d69e2e',
-              error: '#e53e3e',
-              background: '#ffffff',
-              surface: '#f7fafc',
-              text: '#2d3748'
-            }
+            textColor: '#2d3748'
           },
-          isActive: true,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          createdBy: 'system',
-          version: 1,
-          metadata: {
-            tags: ['schedule'],
-            category: 'Operations',
-            description: 'Installation schedule report',
-            generationCount: 0
-          }
-        }
-      ];
-      setPdfTemplates(mockPdfTemplates);
+          isActive: template.is_active,
+          createdAt: template.created_at,
+          updatedAt: template.updated_at,
+          createdBy: template.created_by,
+          version: template.version || 1,
+          metadata: template.metadata || {}
+        }));
+        setPdfTemplates(pdfTemplates);
+      }
     } catch (err) {
       setError('Failed to load templates');
       console.error(err);
@@ -300,22 +279,62 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
     };
   };
 
-  const loadSampleData = (_template: EmailTemplate | PDFTemplate) => {
-    // Load sample data based on template type
-    const sampleData = {
-      teamMemberName: 'John Smith',
-      customerName: 'ABC Corporation',
-      installDate: '2024-01-15',
-      installTime: '9:00 AM',
-      address: '123 Main St, City, ST 12345',
-      customerPhone: '(555) 123-4567',
-      region: 'Northwest',
-      completedJobs: 42,
-      utilizationRate: 87,
-      weekOf: '2024-01-15'
-    };
-    
-    setPreviewData(sampleData);
+  const loadSampleData = async (template: EmailTemplate | PDFTemplate) => {
+    try {
+      // Load real sample data from the database for preview
+      const { default: supabase } = await import('../../services/supabase');
+      
+      // Get recent installation data for realistic preview
+      const { data: installations } = await supabase
+        .from('installations')
+        .select('*')
+        .limit(1)
+        .order('created_at', { ascending: false });
+        
+      // Get a team member for realistic data
+      const { data: teamMembers } = await supabase
+        .from('team_members')
+        .select('*, users!inner(*)')
+        .limit(1)
+        .eq('employment_status', 'active');
+      
+      const sampleInstallation = installations?.[0];
+      const sampleTeamMember = teamMembers?.[0];
+      
+      const sampleData = {
+        teamMemberName: sampleTeamMember ? `${sampleTeamMember.users.first_name} ${sampleTeamMember.users.last_name}` : 'Team Member',
+        customerName: sampleInstallation?.customer_name || 'Customer Name',
+        installDate: sampleInstallation?.scheduled_date || new Date().toISOString().split('T')[0],
+        installTime: sampleInstallation?.scheduled_time || '9:00 AM',
+        address: sampleInstallation?.address || '123 Main St, City, ST 12345',
+        customerPhone: sampleInstallation?.customer_phone || '(555) 123-4567',
+        region: sampleTeamMember?.region || 'Region',
+        completedJobs: 0,
+        utilizationRate: 0,
+        weekOf: new Date().toISOString().split('T')[0],
+        companyName: 'Think Tank Technologies',
+        currentDate: new Date().toLocaleDateString()
+      };
+      
+      setPreviewData(sampleData);
+    } catch (error) {
+      console.error('Error loading sample data:', error);
+      // Fallback to minimal sample data
+      setPreviewData({
+        teamMemberName: 'Team Member',
+        customerName: 'Customer Name',
+        installDate: new Date().toISOString().split('T')[0],
+        installTime: '9:00 AM',
+        address: '123 Main St, City, ST 12345',
+        customerPhone: '(555) 123-4567',
+        region: 'Region',
+        completedJobs: 0,
+        utilizationRate: 0,
+        weekOf: new Date().toISOString().split('T')[0],
+        companyName: 'Think Tank Technologies',
+        currentDate: new Date().toLocaleDateString()
+      });
+    }
   };
 
   const renderTemplateList = () => (
@@ -354,7 +373,7 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
 
         <button
           onClick={handleCreateTemplate}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="btn-primary flex items-center gap-2"
         >
           <Plus size={16} />
           New Template
@@ -413,7 +432,7 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
           {!searchTerm && (
             <button
               onClick={handleCreateTemplate}
-              className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              className="btn-primary inline-flex items-center gap-2"
             >
               <Plus size={16} />
               Create Template
@@ -549,7 +568,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-md transition-shadow">
+    <div className="card hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg ${getTypeColor()}`}>
@@ -607,80 +626,86 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
 
 // Placeholder components (would be implemented separately)
 const TemplateEditorComponent: React.FC<any> = ({ template, onSave, onCancel, isSaving }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-6">
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-xl font-bold">Edit Template: {template.name}</h2>
+  <div className="card">
+    <div className="card-body">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold text-white">Edit Template: {template.name}</h2>
       <div className="flex items-center gap-2">
         <button
           onClick={onCancel}
-          className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+          className="btn-ghost"
         >
           Cancel
         </button>
         <button
           onClick={onSave}
           disabled={isSaving}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="btn-primary flex items-center gap-2"
         >
           {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />}
           {isSaving ? 'Saving...' : 'Save'}
         </button>
+        </div>
       </div>
-    </div>
-    <div className="text-gray-600">
-      Template editor would be implemented here with rich text editing, variable insertion, and live preview.
+      <div className="text-white/70">
+        Template editor would be implemented here with rich text editing, variable insertion, and live preview.
+      </div>
     </div>
   </div>
 );
 
 const TemplatePreview: React.FC<any> = ({ template, onBack, onEdit }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-6">
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-xl font-bold">Preview: {template.name}</h2>
+  <div className="card">
+    <div className="card-body">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold text-white">Preview: {template.name}</h2>
       <div className="flex items-center gap-2">
         <button
           onClick={onBack}
-          className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+          className="btn-ghost"
         >
           Back
         </button>
         <button
           onClick={onEdit}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          className="btn-primary flex items-center gap-2"
         >
           <Edit3 size={16} />
           Edit
         </button>
+        </div>
       </div>
-    </div>
-    <div className="text-gray-600">
-      Template preview would be rendered here with sample data.
+      <div className="text-white/70">
+        Template preview would be rendered here with sample data.
+      </div>
     </div>
   </div>
 );
 
 const ReportScheduler: React.FC<any> = ({ template, onSave, onCancel }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-6">
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-xl font-bold">Schedule: {template.name}</h2>
+  <div className="card">
+    <div className="card-body">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-bold text-white">Schedule: {template.name}</h2>
       <div className="flex items-center gap-2">
         <button
           onClick={onCancel}
-          className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+          className="btn-ghost"
         >
           Cancel
         </button>
         <button
           onClick={() => onSave({})}
-          className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+          className="btn-success flex items-center gap-2"
         >
           <Calendar size={16} />
           Schedule
         </button>
+        </div>
       </div>
-    </div>
-    <div className="text-gray-600">
-      Report scheduling interface would be implemented here with cron scheduling, recipient management, and automation settings.
+      <div className="text-white/70">
+        Report scheduling interface would be implemented here with cron scheduling, recipient management, and automation settings.
+      </div>
     </div>
   </div>
 );

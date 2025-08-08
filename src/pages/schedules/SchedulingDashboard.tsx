@@ -1,8 +1,9 @@
-// Think Tank Technologies Installation Scheduler - Scheduling Dashboard
+// Lead Route - Scheduling Dashboard
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Calendar, Clock, MapPin, Users, AlertTriangle, Settings, PlayCircle, Download } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, AlertTriangle, Settings, PlayCircle, Download, RefreshCw } from 'lucide-react';
 import { useAppStore } from '../../stores/useAppStore';
+import { useTeamMembers } from '../../hooks/useTeamData';
 import { schedulingEngine } from '../../utils/schedulingEngine';
 import { enhanceJobsWithCoordinates } from '../../utils/geographicUtils';
 import ScheduleOptimizationPanel from '../../components/scheduling/ScheduleOptimizationPanel';
@@ -41,6 +42,14 @@ const SchedulingDashboard: React.FC = () => {
     isLoading 
   } = useAppStore();
 
+  // Get real team data from Supabase
+  const { 
+    teamMembers: teams, 
+    isLoading: teamsLoading, 
+    error: teamsError, 
+    refetch: refetchTeams 
+  } = useTeamMembers();
+
   // Scheduling state
   const [schedulingResult, setSchedulingResult] = useState<SchedulingResult | null>(null);
   const [optimizationInProgress, setOptimizationInProgress] = useState(false);
@@ -54,96 +63,6 @@ const SchedulingDashboard: React.FC = () => {
     groupBy: 'team'
   });
 
-  // Mock team data - in production this would come from team management system
-  const [teams] = useState<TeamMember[]>([
-    {
-      id: 'team_1',
-      email: 'john.lead@thinktank.com',
-      firstName: 'John',
-      lastName: 'Smith',
-      role: 'lead',
-      isActive: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      region: 'Northeast',
-      specializations: ['commercial', 'restaurant', 'retail'],
-      capacity: 6,
-      travelRadius: 100,
-      coordinates: { lat: 40.7505, lng: -73.9971 },
-      homeBase: {
-        street: '123 Main St',
-        city: 'New York',
-        state: 'NY',
-        zipCode: '10001',
-        coordinates: { lat: 40.7505, lng: -73.9971 }
-      },
-      availability: [
-        {
-          id: 'avail_1',
-          teamMemberId: 'team_1',
-          startDate: '2025-01-01',
-          endDate: '2025-12-31',
-          startTime: '08:00',
-          endTime: '18:00',
-          isRecurring: true,
-          recurringDays: [1, 2, 3, 4, 5],
-          isAvailable: true
-        }
-      ],
-      performanceMetrics: {
-        completionRate: 0.95,
-        averageTime: 110,
-        customerSatisfaction: 4.8,
-        travelEfficiency: 0.87,
-        totalJobs: 245,
-        totalDistance: 12400
-      }
-    },
-    {
-      id: 'team_2',
-      email: 'sarah.lead@thinktank.com',
-      firstName: 'Sarah',
-      lastName: 'Johnson',
-      role: 'lead',
-      isActive: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      region: 'Southeast',
-      specializations: ['commercial', 'healthcare', 'office'],
-      capacity: 5,
-      travelRadius: 80,
-      coordinates: { lat: 33.7537, lng: -84.3863 },
-      homeBase: {
-        street: '456 Peachtree St',
-        city: 'Atlanta',
-        state: 'GA',
-        zipCode: '30301',
-        coordinates: { lat: 33.7537, lng: -84.3863 }
-      },
-      availability: [
-        {
-          id: 'avail_2',
-          teamMemberId: 'team_2',
-          startDate: '2025-01-01',
-          endDate: '2025-12-31',
-          startTime: '07:00',
-          endTime: '17:00',
-          isRecurring: true,
-          recurringDays: [1, 2, 3, 4, 5],
-          isAvailable: true
-        }
-      ],
-      performanceMetrics: {
-        completionRate: 0.92,
-        averageTime: 125,
-        customerSatisfaction: 4.6,
-        travelEfficiency: 0.84,
-        totalJobs: 198,
-        totalDistance: 9800
-      }
-    }
-  ]);
-
   // UI state
   const [showOptimizationPanel, setShowOptimizationPanel] = useState(false);
   const [showConflictPanel, setShowConflictPanel] = useState(false);
@@ -155,6 +74,11 @@ const SchedulingDashboard: React.FC = () => {
   const runOptimization = useCallback(async () => {
     if (installations.length === 0) {
       setError('No installations available for scheduling');
+      return;
+    }
+
+    if (teams.length === 0) {
+      setError('No team members available for assignment');
       return;
     }
 
@@ -254,52 +178,72 @@ const SchedulingDashboard: React.FC = () => {
 
   // Auto-run optimization when installations change
   useEffect(() => {
-    if (installations.length > 0 && !schedulingResult) {
+    if (installations.length > 0 && teams.length > 0 && !schedulingResult) {
       runOptimization();
     }
-  }, [installations.length, runOptimization, schedulingResult]);
+  }, [installations.length, teams.length, runOptimization, schedulingResult]);
+
+  // Handle team loading and error states
+  if (teamsLoading || isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="glass rounded-xl p-8 flex items-center space-x-4">
+          <RefreshCw className="h-8 w-8 animate-spin text-accent-400" />
+          <span className="text-lg text-white/80">Loading scheduling data...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (teamsError) {
+    return (
+      <div className="space-y-8">
+        <div className="glass-strong border border-error-500/30 rounded-xl p-6">
+          <div className="flex items-start space-x-4">
+            <div className="h-10 w-10 bg-error-500/20 rounded-full flex items-center justify-center">
+              <AlertTriangle className="h-6 w-6 text-error-400" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-lg font-medium text-white">Error Loading Team Data</h3>
+              <p className="mt-2 text-white/70">{teamsError}</p>
+              <button
+                onClick={refetchTeams}
+                className="mt-4 btn-primary"
+              >
+                Try again
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Header */}
       <div className="mb-8">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-semibold text-primary-900">Installation Scheduling</h1>
-            <p className="mt-2 text-primary-600">
-              Optimize and manage installation schedules with intelligent assignment algorithms
-            </p>
-          </div>
-          
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={() => setShowOptimizationPanel(true)}
-              className="btn-secondary"
-              disabled={isLoading}
-            >
-              <Settings className="w-4 h-4" />
-              Optimization Settings
-            </button>
-            
-            <button
-              onClick={runOptimization}
-              disabled={optimizationInProgress || installations.length === 0}
-              className="btn-primary"
-            >
-              {optimizationInProgress ? (
-                <>
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  Optimizing...
-                </>
-              ) : (
-                <>
-                  <PlayCircle className="w-4 h-4" />
-                  Run Optimization
-                </>
-              )}
-            </button>
-          </div>
-        </div>
+        <h1 className="text-4xl font-bold text-white mb-2">Route Management</h1>
+        <p className="text-xl text-white/80">Optimize and manage routes with intelligent assignment algorithms</p>
+      </div>
+
+      {/* Controls */}
+      <div className="flex justify-end items-center space-x-3 mb-8">
+        <button
+          onClick={() => setShowOptimizationPanel(true)}
+          className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md"
+          disabled={isLoading}
+        >
+          Optimization Settings
+        </button>
+        
+        <button
+          onClick={runOptimization}
+          disabled={optimizationInProgress || installations.length === 0 || teams.length === 0}
+          className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md disabled:opacity-50"
+        >
+          {optimizationInProgress ? 'Optimizing...' : 'Run Optimization'}
+        </button>
       </div>
 
       {/* Metrics Overview */}
@@ -341,17 +285,17 @@ const SchedulingDashboard: React.FC = () => {
 
       {/* Conflicts Alert */}
       {schedulingResult && schedulingResult.conflicts.length > 0 && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div className="mb-6 alert-glass alert-error">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <AlertTriangle className="w-5 h-5 text-red-600 mr-2" />
-              <span className="text-red-800 font-medium">
+              <AlertTriangle className="w-5 h-5 text-red-400 mr-2" />
+              <span className="text-glass-primary font-medium">
                 {schedulingResult.conflicts.length} scheduling conflicts detected
               </span>
             </div>
             <button
               onClick={() => setShowConflictPanel(true)}
-              className="text-red-600 hover:text-red-800 font-medium"
+              className="text-red-300 hover:text-red-200 font-medium transition-colors"
             >
               Review Conflicts
             </button>
@@ -363,15 +307,15 @@ const SchedulingDashboard: React.FC = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="flex bg-white border border-primary-200 rounded-lg p-1">
+            <div className="flex glass rounded-lg p-1">
               {(['calendar', 'list', 'timeline', 'map'] as const).map((view) => (
                 <button
                   key={view}
                   onClick={() => handleViewChange(view)}
                   className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                     viewConfig.viewType === view
-                      ? 'bg-primary-600 text-white'
-                      : 'text-primary-600 hover:text-primary-800'
+                      ? 'btn-primary text-white'
+                      : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10'
                   }`}
                 >
                   {view.charAt(0).toUpperCase() + view.slice(1)}
@@ -380,7 +324,7 @@ const SchedulingDashboard: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-2">
-              <Clock className="w-4 h-4 text-primary-400" />
+              <Clock className="w-4 h-4 text-glass-muted" />
               <input
                 type="date"
                 value={viewConfig.dateRange.start}
@@ -390,7 +334,7 @@ const SchedulingDashboard: React.FC = () => {
                 }))}
                 className="form-input text-sm"
               />
-              <span className="text-primary-400">to</span>
+              <span className="text-glass-muted">to</span>
               <input
                 type="date"
                 value={viewConfig.dateRange.end}
@@ -406,7 +350,7 @@ const SchedulingDashboard: React.FC = () => {
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setShowBulkAssignmentModal(true)}
-              className="btn-secondary text-sm"
+              className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md text-sm disabled:opacity-50"
               disabled={!schedulingResult}
             >
               Bulk Actions
@@ -414,10 +358,9 @@ const SchedulingDashboard: React.FC = () => {
             
             <button
               onClick={handleExportSchedule}
-              className="btn-secondary text-sm"
+              className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md text-sm disabled:opacity-50"
               disabled={!schedulingResult}
             >
-              <Download className="w-4 h-4" />
               Export Schedule
             </button>
           </div>
@@ -465,24 +408,30 @@ const SchedulingDashboard: React.FC = () => {
           </>
         ) : (
           <div className="text-center py-12">
-            <div className="text-primary-400 mb-4">
+            <div className="text-glass-muted mb-4">
               {installations.length === 0 ? (
                 <>
-                  <Calendar className="w-12 h-12 mx-auto mb-4" />
-                  <p className="text-lg">No installations available for scheduling</p>
-                  <p className="text-sm">Import installation data to get started</p>
+                  <Calendar className="w-12 h-12 mx-auto mb-4 text-glass-muted" />
+                  <p className="text-lg text-glass-secondary">No installations available for scheduling</p>
+                  <p className="text-sm text-glass-muted">Import installation data to get started</p>
+                </>
+              ) : teams.length === 0 ? (
+                <>
+                  <Users className="w-12 h-12 mx-auto mb-4 text-glass-muted" />
+                  <p className="text-lg text-glass-secondary">No team members available for assignment</p>
+                  <p className="text-sm text-glass-muted">Add team members to get started with scheduling</p>
                 </>
               ) : optimizationInProgress ? (
                 <>
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-400 mx-auto mb-4"></div>
-                  <p className="text-lg">Running schedule optimization...</p>
-                  <p className="text-sm">This may take a few moments</p>
+                  <div className="loading-spinner mx-auto mb-4" style={{width: '3rem', height: '3rem'}}></div>
+                  <p className="text-lg text-glass-secondary">Running schedule optimization...</p>
+                  <p className="text-sm text-glass-muted">This may take a few moments</p>
                 </>
               ) : (
                 <>
-                  <PlayCircle className="w-12 h-12 mx-auto mb-4" />
-                  <p className="text-lg">Ready to optimize schedule</p>
-                  <p className="text-sm">Click "Run Optimization" to generate assignments</p>
+                  <PlayCircle className="w-12 h-12 mx-auto mb-4 text-glass-muted" />
+                  <p className="text-lg text-glass-secondary">Ready to optimize schedule</p>
+                  <p className="text-sm text-glass-muted">Click "Run Optimization" to generate assignments</p>
                 </>
               )}
             </div>

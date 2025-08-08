@@ -114,7 +114,7 @@ export const NAVIGATION_ITEMS: NavItem[] = [
     label: 'Settings',
     path: '/settings',
     icon: 'Settings',
-    roles: [UserRole.ADMIN],
+    roles: [UserRole.ADMIN, UserRole.SCHEDULER, UserRole.LEAD],
   },
 ];
 

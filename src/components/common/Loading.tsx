@@ -23,21 +23,27 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   if (message) {
     return (
-      <div className={`flex flex-col items-center space-y-2 ${className}`} role="status" aria-live="polite">
-        <Loader2 
-          className={`animate-spin text-accent-600 ${sizeClasses[size]}`}
-        />
-        <span className="text-primary-600 text-sm">{message}</span>
+      <div className={`flex flex-col items-center space-y-3 ${className}`} role="status" aria-live="polite">
+        <div className="relative">
+          <Loader2 
+            className={`animate-spin text-accent-400 ${sizeClasses[size]} drop-shadow-lg`}
+          />
+          <div className={`absolute inset-0 animate-spin ${sizeClasses[size]} rounded-full blur-sm bg-accent-400/30`}></div>
+        </div>
+        <span className="text-white/80 text-sm font-medium">{message}</span>
       </div>
     );
   }
 
   return (
-    <Loader2 
-      className={`animate-spin text-accent-600 ${sizeClasses[size]} ${className}`}
-      role="status" 
-      aria-live="polite"
-    />
+    <div className="relative inline-block">
+      <Loader2 
+        className={`animate-spin text-accent-400 ${sizeClasses[size]} ${className} drop-shadow-lg`}
+        role="status" 
+        aria-live="polite"
+      />
+      <div className={`absolute inset-0 animate-spin ${sizeClasses[size]} rounded-full blur-sm bg-accent-400/30`}></div>
+    </div>
   );
 };
 
@@ -51,10 +57,10 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   className = '' 
 }) => {
   return (
-    <div className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ${className}`}>
-      <div className="bg-white rounded-lg p-6 flex flex-col items-center space-y-4 shadow-lg">
-        <LoadingSpinner size="lg" />
-        <p className="text-primary-700 font-medium">{message}</p>
+    <div className={`fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 ${className}`}>
+      <div className="modal-glass p-8 flex flex-col items-center space-y-6 animate-scale-in">
+        <LoadingSpinner size="xl" />
+        <p className="text-white font-medium text-lg">{message}</p>
       </div>
     </div>
   );
@@ -71,9 +77,8 @@ export const LoadingCard: React.FC<LoadingCardProps> = ({
 }) => {
   return (
     <div className={`card ${className}`}>
-      <div className="card-body flex flex-col items-center justify-center py-12">
-        <LoadingSpinner size="lg" />
-        <p className="text-primary-600 mt-4">{message}</p>
+      <div className="card-body flex flex-col items-center justify-center py-16">
+        <LoadingSpinner size="xl" message={message} />
       </div>
     </div>
   );
@@ -127,9 +132,10 @@ export const Skeleton: React.FC<SkeletonProps> = ({
       {Array.from({ length: rows }).map((_, index) => (
         <div
           key={index}
-          className={`bg-primary-200 rounded-md h-4 ${
-            index < rows - 1 ? 'mb-2' : ''
-          }`}
+          className={`bg-white/10 rounded-lg h-4 ${
+            index < rows - 1 ? 'mb-3' : ''
+          } shimmer`}
+          style={{ animationDelay: `${index * 0.1}s` }}
         />
       ))}
     </div>
@@ -178,13 +184,18 @@ export const PageLoading: React.FC<PageLoadingProps> = ({
   className = '' 
 }) => {
   return (
-    <div className={`min-h-screen bg-gray-50 flex items-center justify-center ${className}`}>
-      <div className="text-center">
-        <LoadingSpinner size="xl" />
-        <h2 className="mt-4 text-lg font-medium text-primary-900">
+    <div className={`min-h-screen bg-dark-gradient flex items-center justify-center ${className}`}>
+      <div className="text-center glass rounded-2xl p-12 animate-glass-float">
+        <div className="mb-8">
+          <div className="h-16 w-16 mx-auto bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center shadow-glow-accent mb-6">
+            <span className="text-white font-bold text-xl drop-shadow-sm">TT</span>
+          </div>
+          <LoadingSpinner size="xl" />
+        </div>
+        <h2 className="text-2xl font-bold text-white mb-2">
           Think Tank Technologies
         </h2>
-        <p className="mt-2 text-primary-600">{message}</p>
+        <p className="text-white/70 text-lg">{message}</p>
       </div>
     </div>
   );
@@ -215,10 +226,10 @@ export const withLoading = <P extends object>(
       
       return (
         <div className="card">
-          <div className="card-body text-center py-12">
-            <div className="text-error-500 mb-2">
+          <div className="card-body text-center py-16">
+            <div className="h-16 w-16 bg-error-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
-                className="mx-auto h-12 w-12"
+                className="h-8 w-8 text-error-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -231,10 +242,10 @@ export const withLoading = <P extends object>(
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-primary-900 mb-1">
+            <h3 className="text-xl font-semibold text-white mb-3">
               Error Loading Data
             </h3>
-            <p className="text-primary-600">{error}</p>
+            <p className="text-white/70">{error}</p>
           </div>
         </div>
       );

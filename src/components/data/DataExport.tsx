@@ -377,12 +377,9 @@ export const DataExport: React.FC<DataExportProps> = ({
                     : 'border-primary-300 hover:border-accent-400 hover:bg-accent-50'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <CheckCircle2 className="h-5 w-5 text-success-500" />
-                  <div>
-                    <div className="font-medium text-primary-900">Valid Data Only</div>
-                    <div className="text-sm text-primary-600">{result.validData.length} records</div>
-                  </div>
+                <div>
+                  <div className="font-medium text-primary-900">Valid Data Only</div>
+                  <div className="text-sm text-primary-600">{result.validData.length} records</div>
                 </div>
               </button>
 
@@ -394,13 +391,10 @@ export const DataExport: React.FC<DataExportProps> = ({
                     : 'border-primary-300 hover:border-accent-400 hover:bg-accent-50'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <AlertTriangle className="h-5 w-5 text-error-500" />
-                  <div>
-                    <div className="font-medium text-primary-900">Issues Report</div>
-                    <div className="text-sm text-primary-600">
-                      {result.errors.length + result.warnings.length} issues
-                    </div>
+                <div>
+                  <div className="font-medium text-primary-900">Issues Report</div>
+                  <div className="text-sm text-primary-600">
+                    {result.errors.length + result.warnings.length} issues
                   </div>
                 </div>
               </button>
@@ -413,12 +407,9 @@ export const DataExport: React.FC<DataExportProps> = ({
                     : 'border-primary-300 hover:border-accent-400 hover:bg-accent-50'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <FileText className="h-5 w-5 text-primary-500" />
-                  <div>
-                    <div className="font-medium text-primary-900">Processing Report</div>
-                    <div className="text-sm text-primary-600">Metadata & statistics</div>
-                  </div>
+                <div>
+                  <div className="font-medium text-primary-900">Processing Report</div>
+                  <div className="text-sm text-primary-600">Metadata & statistics</div>
                 </div>
               </button>
 
@@ -430,12 +421,9 @@ export const DataExport: React.FC<DataExportProps> = ({
                     : 'border-primary-300 hover:border-accent-400 hover:bg-accent-50'
                 }`}
               >
-                <div className="flex items-center space-x-3">
-                  <Calendar className="h-5 w-5 text-accent-500" />
-                  <div>
-                    <div className="font-medium text-primary-900">Complete Dataset</div>
-                    <div className="text-sm text-primary-600">All processed data</div>
-                  </div>
+                <div>
+                  <div className="font-medium text-primary-900">Complete Dataset</div>
+                  <div className="text-sm text-primary-600">All processed data</div>
                 </div>
               </button>
             </div>
@@ -477,9 +465,8 @@ export const DataExport: React.FC<DataExportProps> = ({
 
         {/* Additional Options */}
         <div className="space-y-3 mb-6 p-4 bg-primary-50 rounded-lg border border-primary-200">
-          <h4 className="font-medium text-primary-900 flex items-center space-x-2">
-            <Settings className="h-4 w-4" />
-            <span>Export Options</span>
+          <h4 className="font-medium text-primary-900">
+            Export Options
           </h4>
           
           <div className="space-y-2">
@@ -530,19 +517,9 @@ export const DataExport: React.FC<DataExportProps> = ({
         <button
           onClick={handleExport}
           disabled={isExporting}
-          className="btn-primary w-full inline-flex items-center justify-center space-x-2"
+          className="btn-primary w-full"
         >
-          {isExporting ? (
-            <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              <span>Exporting...</span>
-            </>
-          ) : (
-            <>
-              <ExportIcon className="h-4 w-4" />
-              <span>Export Data</span>
-            </>
-          )}
+          {isExporting ? 'Exporting...' : 'Export Data'}
         </button>
       </div>
     </div>

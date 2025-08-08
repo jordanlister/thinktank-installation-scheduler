@@ -1,469 +1,561 @@
-// Think Tank Technologies Reports Page
-// Main page for accessing email and PDF report generation features
+// Think Tank Technologies - Reports & Analytics Page
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   FileText, 
-  Mail, 
-  BarChart3, 
-  Calendar, 
-  Users, 
-  Settings,
-  Download,
-  Send,
-  Eye,
+  Download, 
+  AlertCircle, 
+  Calendar,
   TrendingUp,
+  BarChart3,
+  Mail,
   Clock,
-  AlertCircle
+  RefreshCw,
+  Plus,
+  Eye,
+  X
 } from 'lucide-react';
-import ReportManagement from '../../components/reports/ReportManagement';
-import { useAppStore } from '../../stores/useAppStore';
 import { 
-  EmailTemplate, 
-  PDFTemplate, 
-  ReportAnalytics,
-  EmailAnalyticsMetrics,
-  PDFAnalyticsMetrics,
-  User
-} from '../../types';
-import { emailGenerator } from '../../services/emailGenerator';
-import { pdfGenerator } from '../../services/pdfGenerator';
-import { reportAnalytics } from '../../services/reportAnalytics';
-
-type TabType = 'overview' | 'templates' | 'analytics' | 'scheduled';
+  useRecentReports,
+  useScheduledReports,
+  useReportGeneration
+} from '../../hooks/useReports';
 
 const ReportsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('overview');
-  const [analytics, setAnalytics] = useState<ReportAnalytics | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const { user } = useAppStore();
+  const [selectedDateRange, setSelectedDateRange] = useState({
+    start: new Date().toISOString().split('T')[0],
+    end: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+  });
+  const [showReportGenerator, setShowReportGenerator] = useState(false);
+  const [showScheduleReportModal, setShowScheduleReportModal] = useState(false);
 
-  useEffect(() => {
-    if (activeTab === 'analytics') {
-      loadAnalytics();
-    }
-  }, [activeTab]);
+  const { reports: recentReports, isLoading: reportsLoading, refetch: refetchReports } = useRecentReports();
+  const { scheduledReports, isLoading: scheduledLoading } = useScheduledReports();
+  const {
+    generatingReports,
+    reportStatuses,
+    generateScheduleReport,
+    generatePerformanceReport,
+    generateAnalyticsReport
+  } = useReportGeneration();
 
-  const loadAnalytics = async () => {
-    setIsLoading(true);
+  const handleGenerateScheduleReport = async () => {
     try {
-      const period = {
-        start: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(), // Last 30 days
-        end: new Date().toISOString()
-      };
-      const analyticsData = await reportAnalytics.generateAnalytics(period);
-      setAnalytics(analyticsData);
+      const reportId = await generateScheduleReport(selectedDateRange);
+      console.log('Schedule report generation started:', reportId);
+      refetchReports(); // Refresh the reports list
     } catch (error) {
-      console.error('Failed to load analytics:', error);
-    } finally {
-      setIsLoading(false);
+      console.error('Error generating schedule report:', error);
     }
   };
 
-  const renderOverview = () => (
+  const handleGeneratePerformanceReport = async (period: 'week' | 'month' | 'quarter') => {
+    try {
+      const reportId = await generatePerformanceReport(period);
+      console.log('Performance report generation started:', reportId);
+      refetchReports(); // Refresh the reports list
+    } catch (error) {
+      console.error('Error generating performance report:', error);
+    }
+  };
+
+  const handleGenerateAnalyticsReport = async () => {
+    try {
+      const reportId = await generateAnalyticsReport();
+      console.log('Analytics report generation started:', reportId);
+      refetchReports(); // Refresh the reports list
+    } catch (error) {
+      console.error('Error generating analytics report:', error);
+    }
+  };
+
+  const handleViewScheduledReport = (scheduleId: string) => {
+    // Find the scheduled report
+    const report = scheduledReports.find(sr => sr.id === scheduleId);
+    if (report) {
+      console.log('Viewing scheduled report:', report);
+      // Here you would typically open a detailed modal or navigate to a detail page
+    }
+  };
+
+  const handleAddScheduledReport = () => {
+    setShowScheduleReportModal(true);
+  };
+
+  return (
     <div className="space-y-6">
-      {/* Quick Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Email Templates"
-          value="12"
-          change="+2 this month"
-          icon={<Mail className="text-blue-600" size={24} />}
-          trend="up"
-        />
-        <StatCard
-          title="PDF Templates"
-          value="8"
-          change="+1 this month"
-          icon={<FileText className="text-green-600" size={24} />}
-          trend="up"
-        />
-        <StatCard
-          title="Reports Generated"
-          value="156"
-          change="+23% this week"
-          icon={<BarChart3 className="text-purple-600" size={24} />}
-          trend="up"
-        />
-        <StatCard
-          title="Emails Sent"
-          value="1,247"
-          change="89.5% delivered"
-          icon={<Send className="text-orange-600" size={24} />}
-          trend="stable"
-        />
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-white mb-2">Reports & Analytics</h1>
+        <p className="text-xl text-white/80">Generate reports and view performance analytics</p>
+      </div>
+
+      {/* Controls */}
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
+            <Calendar className="h-4 w-4 text-white/70" />
+            <input
+              type="date"
+              value={selectedDateRange.start}
+              onChange={(e) => setSelectedDateRange(prev => ({ ...prev, start: e.target.value }))}
+              className="form-input text-sm"
+            />
+            <span className="text-white/70">to</span>
+            <input
+              type="date"
+              value={selectedDateRange.end}
+              onChange={(e) => setSelectedDateRange(prev => ({ ...prev, end: e.target.value }))}
+              className="form-input text-sm"
+            />
+          </div>
+        </div>
+        
+        <div className="flex items-center space-x-3">
+          <button 
+            onClick={refetchReports}
+            disabled={reportsLoading}
+            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
+          >
+            {reportsLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : 'Refresh'}
+          </button>
+          <button 
+            onClick={() => setShowReportGenerator(true)}
+            className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Generate Report
+          </button>
+        </div>
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <QuickActionCard
-            title="Generate Schedule Report"
-            description="Create installation schedule PDF for team distribution"
-            icon={<Calendar size={20} />}
-            action={() => handleQuickAction('schedule')}
-            color="bg-blue-50 text-blue-700 border-blue-200"
-          />
-          <QuickActionCard
-            title="Send Team Notifications"
-            description="Notify team members of new assignments"
-            icon={<Users size={20} />}
-            action={() => handleQuickAction('notifications')}
-            color="bg-green-50 text-green-700 border-green-200"
-          />
-          <QuickActionCard
-            title="Performance Report"
-            description="Generate weekly performance analytics"
-            icon={<TrendingUp size={20} />}
-            action={() => handleQuickAction('performance')}
-            color="bg-purple-50 text-purple-700 border-purple-200"
-          />
+      <div className="card">
+        <div className="card-body p-6">
+          <h2 className="text-xl font-semibold text-glass-primary mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <button 
+              onClick={handleGenerateScheduleReport}
+              disabled={generatingReports.size > 0}
+              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-blue-500/20 rounded-lg">
+                  {generatingReports.has('schedule') ? (
+                    <RefreshCw className="h-5 w-5 text-blue-400 animate-spin" />
+                  ) : (
+                    <Calendar className="h-5 w-5 text-blue-400" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-medium text-glass-primary">Schedule Report</h3>
+                  <p className="text-sm text-glass-muted">Generate route schedule PDF</p>
+                </div>
+              </div>
+            </button>
+            
+            <button 
+              onClick={() => handleGeneratePerformanceReport('month')}
+              disabled={generatingReports.size > 0}
+              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-green-500/20 rounded-lg">
+                  {generatingReports.has('performance') ? (
+                    <RefreshCw className="h-5 w-5 text-green-400 animate-spin" />
+                  ) : (
+                    <TrendingUp className="h-5 w-5 text-green-400" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-medium text-glass-primary">Performance Report</h3>
+                  <p className="text-sm text-glass-muted">Team performance analytics</p>
+                </div>
+              </div>
+            </button>
+
+            <button 
+              onClick={handleGenerateAnalyticsReport}
+              disabled={generatingReports.size > 0}
+              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-purple-500/20 rounded-lg">
+                  {generatingReports.has('analytics') ? (
+                    <RefreshCw className="h-5 w-5 text-purple-400 animate-spin" />
+                  ) : (
+                    <BarChart3 className="h-5 w-5 text-purple-400" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="font-medium text-glass-primary">Analytics Dashboard</h3>
+                  <p className="text-sm text-glass-muted">Comprehensive analytics report</p>
+                </div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Recent Activity */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Activity</h2>
-        <div className="space-y-4">
-          <ActivityItem
-            type="pdf"
-            title="Installation Schedule Report generated"
-            time="2 hours ago"
-            user="Sarah Johnson"
-            status="completed"
-          />
-          <ActivityItem
-            type="email"
-            title="Assignment notifications sent to 12 team members"
-            time="4 hours ago"
-            user="System"
-            status="delivered"
-          />
-          <ActivityItem
-            type="pdf"
-            title="Team Performance Report generated"
-            time="1 day ago"
-            user="Mike Chen"
-            status="completed"
-          />
-          <ActivityItem
-            type="email"
-            title="Customer confirmations sent for 8 installations"
-            time="1 day ago"
-            user="System"
-            status="delivered"
-          />
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderAnalytics = () => (
-    <div className="space-y-6">
-      {isLoading ? (
-        <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-3 text-gray-600">Loading analytics...</span>
-        </div>
-      ) : analytics ? (
-        <>
-          {/* Email Analytics */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">Email Performance</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <MetricCard
-                title="Delivery Rate"
-                value={`${analytics.emailMetrics.deliveryRate.toFixed(1)}%`}
-                subtitle={`${analytics.emailMetrics.totalDelivered} delivered`}
-                color="text-green-600"
-              />
-              <MetricCard
-                title="Open Rate"
-                value={`${analytics.emailMetrics.openRate.toFixed(1)}%`}
-                subtitle={`${analytics.emailMetrics.totalOpened} opened`}
-                color="text-blue-600"
-              />
-              <MetricCard
-                title="Click Rate"
-                value={`${analytics.emailMetrics.clickRate.toFixed(1)}%`}
-                subtitle={`${analytics.emailMetrics.totalClicked} clicked`}
-                color="text-purple-600"
-              />
-              <MetricCard
-                title="Bounce Rate"
-                value={`${analytics.emailMetrics.bounceRate.toFixed(1)}%`}
-                subtitle={`${analytics.emailMetrics.totalBounced} bounced`}
-                color="text-red-600"
-              />
+      {/* Recent Reports */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="card">
+          <div className="card-body p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-glass-primary">Recent Reports</h2>
+              <button 
+                onClick={refetchReports}
+                disabled={reportsLoading}
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              >
+                <RefreshCw className={`h-4 w-4 text-white/70 ${reportsLoading ? 'animate-spin' : ''}`} />
+              </button>
             </div>
-          </div>
-
-          {/* PDF Analytics */}
-          <div className="bg-white rounded-lg border border-gray-200 p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">PDF Generation Performance</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <MetricCard
-                title="Reports Generated"
-                value={analytics.pdfMetrics.totalGenerated.toString()}
-                subtitle="This period"
-                color="text-green-600"
-              />
-              <MetricCard
-                title="Downloads"
-                value={analytics.pdfMetrics.totalDownloaded.toString()}
-                subtitle="Total downloads"
-                color="text-blue-600"
-              />
-              <MetricCard
-                title="Avg Generation Time"
-                value={`${analytics.pdfMetrics.averageGenerationTime}s`}
-                subtitle="Per report"
-                color="text-purple-600"
-              />
-              <MetricCard
-                title="Failure Rate"
-                value={`${analytics.pdfMetrics.failureRate.toFixed(1)}%`}
-                subtitle="Generation failures"
-                color="text-red-600"
-              />
-            </div>
-          </div>
-
-          {/* Recommendations */}
-          {analytics.recommendations.length > 0 && (
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Recommendations</h2>
+            
+            {reportsLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <RefreshCw className="h-6 w-6 animate-spin text-accent-400" />
+              </div>
+            ) : recentReports.length > 0 ? (
               <div className="space-y-4">
-                {analytics.recommendations.map((rec, index) => (
-                  <RecommendationCard key={index} recommendation={rec} />
+                {recentReports.slice(0, 5).map((report) => (
+                  <div key={report.id} className="flex items-center justify-between py-3 border-b border-white/10 last:border-b-0">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-blue-500/20 rounded-lg">
+                        <FileText className="h-4 w-4 text-blue-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-glass-primary">{report.name}</p>
+                        <p className="text-sm text-glass-muted">
+                          {new Date(report.generatedAt).toLocaleDateString()} • {report.templateName}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-xs px-2 py-1 rounded-full ${
+                        report.status === 'completed' 
+                          ? 'bg-success-500/20 text-success-300' 
+                          : report.status === 'failed'
+                          ? 'bg-error-500/20 text-error-300'
+                          : 'bg-warning-500/20 text-warning-300'
+                      }`}>
+                        {report.status}
+                      </span>
+                      {report.fileUrl && (
+                        <a 
+                          href={report.fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-1 hover:bg-white/10 rounded text-accent-400"
+                        >
+                          <Download className="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="text-center py-12">
-          <AlertCircle className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No Analytics Data</h3>
-          <p className="text-gray-600">Analytics data will appear here once reports are generated.</p>
-        </div>
-      )}
-    </div>
-  );
-
-  const handleQuickAction = (action: string) => {
-    switch (action) {
-      case 'schedule':
-        // Generate schedule report
-        console.log('Generating schedule report...');
-        break;
-      case 'notifications':
-        // Send notifications
-        console.log('Sending team notifications...');
-        break;
-      case 'performance':
-        // Generate performance report
-        console.log('Generating performance report...');
-        break;
-    }
-  };
-
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'templates', label: 'Templates', icon: FileText },
-    { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-    { id: 'scheduled', label: 'Scheduled', icon: Clock }
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Reports & Communications</h1>
-          <p className="mt-2 text-gray-600">
-            Manage email templates, generate PDF reports, and analyze communication performance
-          </p>
-        </div>
-
-        {/* Tabs */}
-        <div className="mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
-              {tabs.map((tab) => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id as TabType)}
-                    className={`flex items-center gap-2 py-2 px-1 border-b-2 font-medium text-sm ${
-                      activeTab === tab.id
-                        ? 'border-blue-500 text-blue-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                    }`}
-                  >
-                    <Icon size={16} />
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </nav>
+            ) : (
+              <div className="text-center py-8 text-glass-muted">
+                <FileText className="h-12 w-12 mx-auto mb-4 text-white/20" />
+                <p>No recent reports generated</p>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Tab Content */}
-        <div>
-          {activeTab === 'overview' && renderOverview()}
-          {activeTab === 'templates' && user && (
-            <ReportManagement
-              currentUser={user as User}
-              onTemplateUpdate={(template) => console.log('Template updated:', template)}
-              onScheduleCreate={(schedule) => console.log('Schedule created:', schedule)}
-            />
-          )}
-          {activeTab === 'analytics' && renderAnalytics()}
-          {activeTab === 'scheduled' && (
-            <div className="text-center py-12">
-              <Clock className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Scheduled Reports</h3>
-              <p className="text-gray-600">Scheduled report management interface would be implemented here.</p>
+        {/* Scheduled Reports */}
+        <div className="card">
+          <div className="card-body p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-glass-primary">Scheduled Reports</h2>
+              <button 
+                onClick={handleAddScheduledReport}
+                className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                title="Add Scheduled Report"
+              >
+                <Plus className="h-4 w-4 text-white/70" />
+              </button>
             </div>
-          )}
+            
+            {scheduledLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <RefreshCw className="h-6 w-6 animate-spin text-accent-400" />
+              </div>
+            ) : scheduledReports.length > 0 ? (
+              <div className="space-y-4">
+                {scheduledReports.slice(0, 5).map((schedule) => (
+                  <div key={schedule.id} className="flex items-center justify-between py-3 border-b border-white/10 last:border-b-0">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-2 bg-purple-500/20 rounded-lg">
+                        <Clock className="h-4 w-4 text-purple-400" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-glass-primary">{schedule.name}</p>
+                        <p className="text-sm text-glass-muted">
+                          Next run: {new Date(schedule.nextRun).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-xs px-2 py-1 rounded-full ${
+                        schedule.isActive 
+                          ? 'bg-success-500/20 text-success-300' 
+                          : 'bg-white/10 text-white/60'
+                      }`}>
+                        {schedule.isActive ? 'Active' : 'Inactive'}
+                      </span>
+                      <button 
+                        onClick={() => handleViewScheduledReport(schedule.id)}
+                        className="p-1 hover:bg-white/10 rounded text-white/60"
+                        title="View Details"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-8 text-glass-muted">
+                <Clock className="h-12 w-12 mx-auto mb-4 text-white/20" />
+                <p>No scheduled reports configured</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Analytics Overview */}
+      <div className="card">
+        <div className="card-body p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-glass-primary">Analytics Overview</h2>
+            <span className="text-sm text-glass-muted">Last 30 days</span>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Reports Generated */}
+            <div className="glass-subtle p-4 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-glass-muted">Reports Generated</p>
+                  <p className="text-2xl font-bold text-glass-primary">{recentReports.length}</p>
+                </div>
+                <div className="p-2 bg-blue-500/20 rounded-lg">
+                  <FileText className="h-5 w-5 text-blue-400" />
+                </div>
+              </div>
+              {recentReports.length > 0 && (
+                <div className="mt-2">
+                  <span className="text-xs text-glass-muted">Based on recent activity</span>
+                </div>
+              )}
+            </div>
+
+            {/* Success Rate */}
+            <div className="glass-subtle p-4 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-glass-muted">Success Rate</p>
+                  <p className="text-2xl font-bold text-glass-primary">
+                    {recentReports.length > 0 
+                      ? Math.round((recentReports.filter(r => r.status === 'completed').length / recentReports.length) * 100)
+                      : 0}%
+                  </p>
+                </div>
+                <div className="p-2 bg-green-500/20 rounded-lg">
+                  <TrendingUp className="h-5 w-5 text-green-400" />
+                </div>
+              </div>
+              {recentReports.length > 0 && (
+                <div className="mt-2">
+                  <span className="text-xs text-glass-muted">Current period</span>
+                </div>
+              )}
+            </div>
+
+            {/* Scheduled Reports */}
+            <div className="glass-subtle p-4 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-glass-muted">Scheduled Reports</p>
+                  <p className="text-2xl font-bold text-glass-primary">{scheduledReports.length}</p>
+                </div>
+                <div className="p-2 bg-purple-500/20 rounded-lg">
+                  <Clock className="h-5 w-5 text-purple-400" />
+                </div>
+              </div>
+              <div className="mt-2">
+                <span className="text-xs text-glass-muted">
+                  {scheduledReports.length > 0 ? `${scheduledReports.filter(sr => sr.isActive).length} active` : 'No schedules configured'}
+                </span>
+              </div>
+            </div>
+
+            {/* Downloads */}
+            <div className="glass-subtle p-4 rounded-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-glass-muted">Downloads</p>
+                  <p className="text-2xl font-bold text-glass-primary">
+                    {recentReports.filter(r => r.fileUrl).length}
+                  </p>
+                </div>
+                <div className="p-2 bg-orange-500/20 rounded-lg">
+                  <Download className="h-5 w-5 text-orange-400" />
+                </div>
+              </div>
+              {recentReports.filter(r => r.fileUrl).length > 0 && (
+                <div className="mt-2">
+                  <span className="text-xs text-glass-muted">Available for download</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Report Types Chart */}
+          <div className="mt-8">
+            <h3 className="text-lg font-medium text-glass-primary mb-4">Report Types Distribution</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="mx-auto w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-2">
+                  <Calendar className="h-6 w-6 text-blue-400" />
+                </div>
+                <p className="text-sm text-glass-muted">Schedule Reports</p>
+                <p className="text-lg font-semibold text-glass-primary">
+                  {recentReports.filter(r => r.templateName.toLowerCase().includes('schedule')).length}
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-2">
+                  <TrendingUp className="h-6 w-6 text-green-400" />
+                </div>
+                <p className="text-sm text-glass-muted">Performance Reports</p>
+                <p className="text-lg font-semibold text-glass-primary">
+                  {recentReports.filter(r => r.templateName.toLowerCase().includes('performance')).length}
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="mx-auto w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center mb-2">
+                  <BarChart3 className="h-6 w-6 text-purple-400" />
+                </div>
+                <p className="text-sm text-glass-muted">Analytics Reports</p>
+                <p className="text-lg font-semibold text-glass-primary">
+                  {recentReports.filter(r => r.templateName.toLowerCase().includes('analytics')).length}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Schedule Report Modal */}
+      {showScheduleReportModal && (
+        <>
+          <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setShowScheduleReportModal(false)} />
+          <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+            <div className="bg-glass rounded-xl shadow-xl border border-white/20 w-full max-w-lg backdrop-filter backdrop-blur-md custom-scrollbar">
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-white/10">
+                <div className="flex items-center space-x-3">
+                  <div className="h-8 w-8 bg-gradient-to-br from-purple-500/30 to-purple-600/20 rounded-lg flex items-center justify-center">
+                    <Clock className="w-4 h-4 text-purple-400" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">Schedule Automated Report</h3>
+                </div>
+                <button
+                  onClick={() => setShowScheduleReportModal(false)}
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              {/* Content */}
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-white/90 mb-2">Report Name</label>
+                  <input
+                    type="text"
+                    placeholder="e.g., Weekly Performance Report"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-accent-500/50 focus:ring-accent-500/20"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white/90 mb-2">Report Type</label>
+                  <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:border-accent-500/50 focus:ring-accent-500/20">
+                    <option value="schedule">Schedule Report</option>
+                    <option value="performance">Performance Report</option>
+                    <option value="analytics">Analytics Report</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white/90 mb-2">Frequency</label>
+                  <select className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:border-accent-500/50 focus:ring-accent-500/20">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white/90 mb-2">Recipients</label>
+                  <input
+                    type="email"
+                    placeholder="emails separated by commas"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:border-accent-500/50 focus:ring-accent-500/20"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-white/90 mb-2">Delivery Time</label>
+                  <input
+                    type="time"
+                    defaultValue="08:00"
+                    className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:border-accent-500/50 focus:ring-accent-500/20"
+                  />
+                </div>
+                
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                  <div className="flex items-start space-x-2">
+                    <AlertCircle className="h-4 w-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <div className="text-sm text-blue-300">
+                      <p className="font-medium">Preview Schedule</p>
+                      <p className="text-blue-300/80 mt-1">This report will be generated and sent automatically according to your schedule.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Footer */}
+              <div className="flex items-center justify-between p-6 border-t border-white/10">
+                <button
+                  onClick={() => setShowScheduleReportModal(false)}
+                  className="px-6 py-2 bg-white/10 border border-white/20 rounded-xl text-white/90 hover:bg-white/15 transition-all duration-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => {
+                    setShowScheduleReportModal(false);
+                    // Here you would normally create the scheduled report
+                    console.log('Creating scheduled report...');
+                  }}
+                  className="px-6 py-2 bg-accent-500/20 border border-accent-500/30 rounded-xl text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+                >
+                  Create Schedule
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
-
-// Supporting Components
-
-interface StatCardProps {
-  title: string;
-  value: string;
-  change: string;
-  icon: React.ReactNode;
-  trend: 'up' | 'down' | 'stable';
-}
-
-const StatCard: React.FC<StatCardProps> = ({ title, value, change, icon, trend }) => (
-  <div className="bg-white rounded-lg border border-gray-200 p-6">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-sm font-medium text-gray-600">{title}</p>
-        <p className="text-2xl font-bold text-gray-900">{value}</p>
-        <p className={`text-sm ${
-          trend === 'up' ? 'text-green-600' : trend === 'down' ? 'text-red-600' : 'text-gray-600'
-        }`}>
-          {change}
-        </p>
-      </div>
-      <div className="p-3 bg-gray-50 rounded-lg">
-        {icon}
-      </div>
-    </div>
-  </div>
-);
-
-interface QuickActionCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  action: () => void;
-  color: string;
-}
-
-const QuickActionCard: React.FC<QuickActionCardProps> = ({ title, description, icon, action, color }) => (
-  <button
-    onClick={action}
-    className={`p-4 border rounded-lg text-left hover:shadow-md transition-shadow ${color}`}
-  >
-    <div className="flex items-center gap-3 mb-2">
-      {icon}
-      <h3 className="font-medium">{title}</h3>
-    </div>
-    <p className="text-sm opacity-80">{description}</p>
-  </button>
-);
-
-interface ActivityItemProps {
-  type: 'email' | 'pdf';
-  title: string;
-  time: string;
-  user: string;
-  status: string;
-}
-
-const ActivityItem: React.FC<ActivityItemProps> = ({ type, title, time, user, status }) => (
-  <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-    <div className={`p-2 rounded-full ${type === 'email' ? 'bg-blue-100' : 'bg-green-100'}`}>
-      {type === 'email' ? (
-        <Mail className="text-blue-600" size={16} />
-      ) : (
-        <FileText className="text-green-600" size={16} />
-      )}
-    </div>
-    <div className="flex-1">
-      <p className="font-medium text-gray-900">{title}</p>
-      <p className="text-sm text-gray-600">{time} • {user}</p>
-    </div>
-    <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-      status === 'completed' || status === 'delivered'
-        ? 'bg-green-100 text-green-800'
-        : 'bg-yellow-100 text-yellow-800'
-    }`}>
-      {status}
-    </div>
-  </div>
-);
-
-interface MetricCardProps {
-  title: string;
-  value: string;
-  subtitle: string;
-  color: string;
-}
-
-const MetricCard: React.FC<MetricCardProps> = ({ title, value, subtitle, color }) => (
-  <div className="p-4 bg-gray-50 rounded-lg">
-    <p className="text-sm font-medium text-gray-600">{title}</p>
-    <p className={`text-2xl font-bold ${color}`}>{value}</p>
-    <p className="text-sm text-gray-500">{subtitle}</p>
-  </div>
-);
-
-interface RecommendationCardProps {
-  recommendation: any;
-}
-
-const RecommendationCard: React.FC<RecommendationCardProps> = ({ recommendation }) => (
-  <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
-    <div className="flex items-start gap-3">
-      <div className="flex-shrink-0">
-        <div className={`p-2 rounded-full ${
-          recommendation.priority === 'high' ? 'bg-red-100' :
-          recommendation.priority === 'medium' ? 'bg-yellow-100' : 'bg-green-100'
-        }`}>
-          <AlertCircle className={`${
-            recommendation.priority === 'high' ? 'text-red-600' :
-            recommendation.priority === 'medium' ? 'text-yellow-600' : 'text-green-600'
-          }`} size={16} />
-        </div>
-      </div>
-      <div className="flex-1">
-        <h4 className="font-medium text-gray-900">{recommendation.description}</h4>
-        <p className="text-sm text-gray-600 mt-1">{recommendation.expectedImpact}</p>
-        <div className="mt-2">
-          <p className="text-xs font-medium text-gray-700">Action Items:</p>
-          <ul className="text-xs text-gray-600 mt-1 space-y-1">
-            {recommendation.actionItems.map((item: string, index: number) => (
-              <li key={index}>• {item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 export default ReportsPage;

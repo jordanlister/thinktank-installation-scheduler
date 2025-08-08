@@ -7,83 +7,282 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f1729',
+        /* =============================================================================
+         * DESIGN TOKEN COLORS - CSS Variable Based
+         * ============================================================================= */
+        
+        // Background Colors
+        background: 'var(--background)',
+        surface: {
+          DEFAULT: 'var(--surface)',
+          elevated: 'var(--surface-elevated)',
+          glass: 'var(--surface-glass)',
+          overlay: 'var(--surface-overlay)',
         },
-        accent: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+        
+        // Brand Colors - Think Tank Technologies
+        brand: {
+          primary: 'var(--brand-primary)',
+          secondary: 'var(--brand-secondary)', 
+          accent: 'var(--brand-accent)',
         },
+        
+        // Semantic Colors
         success: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          DEFAULT: 'var(--success)',
+          light: 'var(--success-light)',
+          dark: 'var(--success-dark)',
         },
         warning: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+          DEFAULT: 'var(--warning)',
+          light: 'var(--warning-light)',
+          dark: 'var(--warning-dark)',
         },
         error: {
-          50: '#fef2f2',
-          100: '#fee2e2',
-          200: '#fecaca',
-          300: '#fca5a5',
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
-          700: '#b91c1c',
-          800: '#991b1b',
-          900: '#7f1d1d',
+          DEFAULT: 'var(--error)',
+          light: 'var(--error-light)',
+          dark: 'var(--error-dark)',
         },
-        thinktank: {
-          blue: '#1a365d',
-          lightblue: '#4299e1',
-          gray: '#718096',
-          lightgray: '#e2e8f0',
-          dark: '#2d3748',
-        }
+        info: {
+          DEFAULT: 'var(--info)',
+          light: 'var(--info-light)',
+          dark: 'var(--info-dark)',
+        },
+        
+        // Text Colors
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          muted: 'var(--text-muted)',
+          disabled: 'var(--text-disabled)',
+        },
+        
+        // Border Colors
+        border: {
+          DEFAULT: 'var(--border)',
+          light: 'var(--border-light)',
+          focus: 'var(--border-focus)',
+          error: 'var(--border-error)',
+        },
       },
+      
+      /* =============================================================================
+       * TYPOGRAPHY TOKENS
+       * ============================================================================= */
+      
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+        sans: 'var(--font-sans)',
+        mono: 'var(--font-mono)',
       },
+      
+      fontSize: {
+        xs: 'var(--text-xs)',
+        sm: 'var(--text-sm)', 
+        base: 'var(--text-base)',
+        lg: 'var(--text-lg)',
+        xl: 'var(--text-xl)',
+        '2xl': 'var(--text-2xl)',
+        '3xl': 'var(--text-3xl)',
+        '4xl': 'var(--text-4xl)',
+        '5xl': 'var(--text-5xl)',
+        '6xl': 'var(--text-6xl)',
+        '7xl': 'var(--text-7xl)',
+      },
+      
+      lineHeight: {
+        tight: 'var(--leading-tight)',
+        snug: 'var(--leading-snug)',
+        normal: 'var(--leading-normal)',
+        relaxed: 'var(--leading-relaxed)',
+        loose: 'var(--leading-loose)',
+      },
+      
+      fontWeight: {
+        light: 'var(--font-light)',
+        normal: 'var(--font-normal)',
+        medium: 'var(--font-medium)',
+        semibold: 'var(--font-semibold)',
+        bold: 'var(--font-bold)',
+        extrabold: 'var(--font-extrabold)',
+        black: 'var(--font-black)',
+      },
+      
+      /* =============================================================================
+       * SPACING TOKENS
+       * ============================================================================= */
+      
+      spacing: {
+        px: 'var(--space-px)',
+        0: 'var(--space-0)',
+        0.5: 'var(--space-0-5)',
+        1: 'var(--space-1)',
+        1.5: 'var(--space-1-5)',
+        2: 'var(--space-2)',
+        2.5: 'var(--space-2-5)',
+        3: 'var(--space-3)',
+        3.5: 'var(--space-3-5)',
+        4: 'var(--space-4)',
+        5: 'var(--space-5)',
+        6: 'var(--space-6)',
+        7: 'var(--space-7)',
+        8: 'var(--space-8)',
+        9: 'var(--space-9)',
+        10: 'var(--space-10)',
+        11: 'var(--space-11)',
+        12: 'var(--space-12)',
+        14: 'var(--space-14)',
+        16: 'var(--space-16)',
+        20: 'var(--space-20)',
+        24: 'var(--space-24)',
+        28: 'var(--space-28)',
+        32: 'var(--space-32)',
+        36: 'var(--space-36)',
+        40: 'var(--space-40)',
+        44: 'var(--space-44)',
+        48: 'var(--space-48)',
+        52: 'var(--space-52)',
+        56: 'var(--space-56)',
+        60: 'var(--space-60)',
+        64: 'var(--space-64)',
+        72: 'var(--space-72)',
+        80: 'var(--space-80)',
+        96: 'var(--space-96)',
+      },
+      
+      /* =============================================================================
+       * BORDER RADIUS TOKENS
+       * ============================================================================= */
+      
+      borderRadius: {
+        none: 'var(--radius-none)',
+        sm: 'var(--radius-sm)',
+        DEFAULT: 'var(--radius)',
+        md: 'var(--radius-md)',
+        lg: 'var(--radius-lg)',
+        xl: 'var(--radius-xl)',
+        '2xl': 'var(--radius-2xl)',
+        '3xl': 'var(--radius-3xl)',
+        full: 'var(--radius-full)',
+      },
+      
+      /* =============================================================================
+       * SHADOW TOKENS
+       * ============================================================================= */
+      
+      boxShadow: {
+        sm: 'var(--shadow-sm)',
+        DEFAULT: 'var(--shadow)',
+        md: 'var(--shadow-md)',
+        lg: 'var(--shadow-lg)',
+        xl: 'var(--shadow-xl)',
+        '2xl': 'var(--shadow-2xl)',
+        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        none: 'none',
+        
+        // Glass shadows
+        glass: 'var(--shadow-glass)',
+        'glass-lg': 'var(--shadow-glass-lg)',
+        'glass-xl': 'var(--shadow-glass-xl)',
+        
+        // Glow effects
+        'glow-sm': 'var(--shadow-glow-sm)',
+        glow: 'var(--shadow-glow)',
+        'glow-lg': 'var(--shadow-glow-lg)',
+        'glow-xl': 'var(--shadow-glow-xl)',
+        
+        // Focus shadows
+        focus: 'var(--shadow-focus)',
+        'focus-error': 'var(--shadow-focus-error)',
+      },
+      
+      /* =============================================================================
+       * BACKDROP BLUR TOKENS
+       * ============================================================================= */
+      
+      backdropBlur: {
+        none: 'var(--blur-none)',
+        sm: 'var(--blur-sm)',
+        DEFAULT: 'var(--blur)',
+        md: 'var(--blur-md)',
+        lg: 'var(--blur-lg)',
+        xl: 'var(--blur-xl)',
+        '2xl': 'var(--blur-2xl)',
+        '3xl': 'var(--blur-3xl)',
+      },
+      
+      /* =============================================================================
+       * Z-INDEX TOKENS
+       * ============================================================================= */
+      
+      zIndex: {
+        auto: 'var(--z-auto)',
+        0: 'var(--z-0)',
+        10: 'var(--z-10)',
+        20: 'var(--z-20)',
+        30: 'var(--z-30)',
+        40: 'var(--z-40)',
+        50: 'var(--z-50)',
+        dropdown: 'var(--z-dropdown)',
+        sticky: 'var(--z-sticky)',
+        fixed: 'var(--z-fixed)',
+        'modal-backdrop': 'var(--z-modal-backdrop)',
+        modal: 'var(--z-modal)',
+        popover: 'var(--z-popover)',
+        tooltip: 'var(--z-tooltip)',
+        toast: 'var(--z-toast)',
+      },
+      
+      /* =============================================================================
+       * ANIMATION & MOTION TOKENS
+       * ============================================================================= */
+      
+      transitionDuration: {
+        75: 'var(--duration-75)',
+        100: 'var(--duration-100)',
+        150: 'var(--duration-150)',
+        200: 'var(--duration-200)',
+        300: 'var(--duration-300)',
+        500: 'var(--duration-500)',
+        700: 'var(--duration-700)',
+        1000: 'var(--duration-1000)',
+      },
+      
+      transitionTimingFunction: {
+        linear: 'var(--ease-linear)',
+        in: 'var(--ease-in)',
+        out: 'var(--ease-out)',
+        'in-out': 'var(--ease-in-out)',
+        back: 'var(--ease-back)',
+      },
+      
+      /* =============================================================================
+       * GRADIENTS
+       * ============================================================================= */
+      
+      backgroundImage: {
+        'gradient-hero': 'var(--gradient-hero)',
+        'gradient-accent': 'var(--gradient-accent)',
+        'gradient-glass': 'var(--gradient-glass)',
+        'gradient-surface': 'var(--gradient-surface)',
+        'gradient-primary': 'var(--gradient-primary)',
+        'gradient-secondary': 'var(--gradient-secondary)',
+        'gradient-danger': 'var(--gradient-danger)',
+      },
+      
+      /* =============================================================================
+       * ANIMATION KEYFRAMES
+       * ============================================================================= */
+      
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.3s ease-out',
-        'slide-down': 'slideDown 0.3s ease-out',
-        'scale-in': 'scaleIn 0.2s ease-out',
+        'fade-in': 'fadeIn var(--duration-500) var(--ease-out)',
+        'slide-up': 'slideUp var(--duration-300) var(--ease-out)',
+        'slide-down': 'slideDown var(--duration-300) var(--ease-out)',
+        'scale-in': 'scaleIn var(--duration-200) var(--ease-out)',
+        'glass-shine': 'glassShine 2s var(--ease-in-out) infinite',
+        'glass-float': 'glassFloat 6s var(--ease-in-out) infinite',
+        'glow-pulse': 'glowPulse 2s var(--ease-in-out) infinite alternate',
       },
+      
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
@@ -100,6 +299,18 @@ export default {
         scaleIn: {
           '0%': { transform: 'scale(0.95)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        glassShine: {
+          '0%': { transform: 'translateX(-100%) rotate(35deg)' },
+          '100%': { transform: 'translateX(100%) rotate(35deg)' },
+        },
+        glassFloat: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-4px)' },
+        },
+        glowPulse: {
+          '0%': { boxShadow: 'var(--shadow-glow)' },
+          '100%': { boxShadow: 'var(--shadow-glow-lg)' },
         },
       },
     },

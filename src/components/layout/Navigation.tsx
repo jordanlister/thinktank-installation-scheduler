@@ -85,7 +85,7 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
 
       {/* Sidebar - starts below header */}
       <aside
-        className={`fixed left-0 z-50 bg-white shadow-lg border-r border-primary-200 transform transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 z-50 nav-glass transform transition-all duration-300 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
         onMouseEnter={handleMouseEnter}
@@ -98,12 +98,12 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
         }}
       >
         {/* Mobile close button */}
-        <div className={`lg:hidden flex justify-end p-2 border-b border-primary-200 ${
+        <div className={`lg:hidden flex justify-end p-3 border-b border-white/10 ${
           shouldShowExpanded ? 'opacity-100' : 'opacity-0'
         }`}>
           <button
             onClick={onClose}
-            className="p-2 rounded-md text-primary-600 hover:text-primary-900 hover:bg-primary-100"
+            className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200"
             aria-label="Close sidebar"
           >
             <X className="h-5 w-5" />
@@ -121,10 +121,10 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
                   to={item.path}
                   onClick={() => handleNavClick(item.id)}
                   className={({ isActive }) =>
-                    `flex items-center ${shouldShowExpanded ? 'px-3' : 'px-3 justify-center'} py-2 text-sm font-medium rounded-md transition-all duration-200 relative ${
+                    `flex items-center ${shouldShowExpanded ? 'px-4' : 'px-3 justify-center'} py-3 text-sm font-medium rounded-lg transition-all duration-300 relative group ${
                       isActive
-                        ? 'bg-accent-100 text-accent-700 border-r-2 border-accent-600'
-                        : 'text-primary-700 hover:bg-primary-100 hover:text-primary-900'
+                        ? 'bg-gradient-to-r from-accent-500/20 to-accent-400/10 text-accent-300 border-r-2 border-accent-500 shadow-glow-accent'
+                        : 'text-white/80 hover:bg-white/10 hover:text-white'
                     }`
                   }
                   title={!shouldShowExpanded ? item.label : undefined}
@@ -135,14 +135,16 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
                   } whitespace-nowrap overflow-hidden`}>
                     {item.label}
                   </span>
+                  {/* Active indicator glow */}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                 </NavLink>
                 
                 {/* Tooltip for collapsed state */}
                 {!shouldShowExpanded && (
-                  <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900 text-white text-xs rounded-md opacity-0 group-hover/item:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-50">
+                  <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-3 px-3 py-2 glass-strong text-white text-xs rounded-lg opacity-0 group-hover/item:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-glass-lg">
                     {item.label}
-                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-full">
-                      <div className="border-4 border-transparent border-r-gray-900"></div>
+                    <div className="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1">
+                      <div className="border-4 border-transparent border-r-white/20"></div>
                     </div>
                   </div>
                 )}
@@ -151,26 +153,6 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
           })}
         </nav>
 
-        {/* Footer - User role indicator */}
-        <div className={`py-4 border-t border-primary-200 ${shouldShowExpanded ? 'px-4' : 'px-2'}`}>
-          <div className={`flex items-center ${shouldShowExpanded ? 'space-x-3' : 'justify-center'}`}>
-            <div className="h-8 w-8 bg-primary-200 rounded-full flex items-center justify-center flex-shrink-0">
-              <span className="text-xs font-medium text-primary-700">
-                {user?.firstName?.charAt(0)?.toUpperCase() || 'U'}
-              </span>
-            </div>
-            <div className={`flex-1 min-w-0 transition-all duration-300 ${
-              shouldShowExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0'
-            }`}>
-              <p className="text-sm font-medium text-primary-900 truncate">
-                {user ? `${user.firstName} ${user.lastName}` : 'Unknown User'}
-              </p>
-              <p className="text-xs text-primary-600 capitalize">
-                {user?.role || 'No Role'}
-              </p>
-            </div>
-          </div>
-        </div>
       </aside>
     </>
   );

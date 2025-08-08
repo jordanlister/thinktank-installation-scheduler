@@ -316,19 +316,19 @@ const MobileRouteNavigation: React.FC<MobileRouteNavigationProps> = ({
               <div className="flex space-x-2">
                 <button
                   onClick={() => exportRoute('json')}
-                  className="px-3 py-2 text-xs bg-gray-200 hover:bg-gray-300 rounded"
+                  className="btn-small btn-ghost"
                 >
                   JSON
                 </button>
                 <button
                   onClick={() => exportRoute('csv')}
-                  className="px-3 py-2 text-xs bg-gray-200 hover:bg-gray-300 rounded"
+                  className="btn-small btn-ghost"
                 >
                   CSV
                 </button>
                 <button
                   onClick={() => exportRoute('txt')}
-                  className="px-3 py-2 text-xs bg-gray-200 hover:bg-gray-300 rounded"
+                  className="btn-small btn-ghost"
                 >
                   TXT
                 </button>
@@ -363,7 +363,7 @@ const MobileRouteNavigation: React.FC<MobileRouteNavigationProps> = ({
           <div className="flex space-x-2">
             <button
               onClick={() => navigateToJob(currentJob)}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded text-sm font-medium flex items-center justify-center"
+              className="btn-primary flex-1 flex items-center justify-center"
             >
               <Navigation className="w-4 h-4 mr-2" />
               Navigate
@@ -372,7 +372,7 @@ const MobileRouteNavigation: React.FC<MobileRouteNavigationProps> = ({
             {currentJob.customerPhone && (
               <button
                 onClick={() => onCallCustomer?.(currentJob.customerPhone)}
-                className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded text-sm font-medium flex items-center justify-center"
+                className="btn-success flex items-center justify-center"
               >
                 <Phone className="w-4 h-4" />
               </button>

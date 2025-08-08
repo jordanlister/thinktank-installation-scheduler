@@ -229,35 +229,41 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="min-h-screen bg-dark-gradient flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+      {/* Background effects */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl animate-glass-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-400/4 rounded-full blur-3xl animate-glass-float" style={{ animationDelay: '2s' }}></div>
+      </div>
+      
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <div className="flex justify-center">
-          <div className="h-16 w-16 bg-accent-600 rounded-lg flex items-center justify-center">
-            <Building className="h-8 w-8 text-white" />
+          <div className="h-16 w-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center shadow-glow-accent">
+            <Building className="h-8 w-8 text-white drop-shadow-sm" />
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-semibold text-primary-900">
+        <h2 className="mt-6 text-center text-3xl font-semibold text-glass-primary">
           Think Tank Technologies
         </h2>
-        <p className="mt-2 text-center text-sm text-primary-600">
+        <p className="mt-2 text-center text-sm text-glass-secondary">
           Installation Scheduler
         </p>
-        <h3 className="mt-4 text-center text-xl font-medium text-primary-800">
+        <h3 className="mt-4 text-center text-xl font-medium text-glass-primary">
           {getTitle()}
         </h3>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <div className="modal-glass py-8 px-4 sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit} noValidate>
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-primary-700">
+              <label htmlFor="email" className="block text-sm font-medium text-glass-secondary">
                 Email address
               </label>
               <div className="mt-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-primary-400" />
+                  <Mail className="h-4 w-4 text-glass-muted" />
                 </div>
                 <input
                   id="email"
@@ -279,12 +285,12 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
             {/* First Name (Register only) */}
             {mode === 'register' && (
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-primary-700">
+                <label htmlFor="firstName" className="block text-sm font-medium text-glass-secondary">
                   First name
                 </label>
                 <div className="mt-1 relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-4 w-4 text-primary-400" />
+                    <User className="h-4 w-4 text-glass-muted" />
                   </div>
                   <input
                     id="firstName"
@@ -307,12 +313,12 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
             {/* Last Name (Register only) */}
             {mode === 'register' && (
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-primary-700">
+                <label htmlFor="lastName" className="block text-sm font-medium text-glass-secondary">
                   Last name
                 </label>
                 <div className="mt-1 relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <User className="h-4 w-4 text-primary-400" />
+                    <User className="h-4 w-4 text-glass-muted" />
                   </div>
                   <input
                     id="lastName"
@@ -335,7 +341,7 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
             {/* Role Selection (Register only) */}
             {mode === 'register' && (
               <div>
-                <label htmlFor="role" className="block text-sm font-medium text-primary-700">
+                <label htmlFor="role" className="block text-sm font-medium text-glass-secondary">
                   Role
                 </label>
                 <div className="mt-1">
@@ -358,12 +364,12 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
             {/* Password Field */}
             {mode !== 'forgot' && (
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-primary-700">
+                <label htmlFor="password" className="block text-sm font-medium text-glass-secondary">
                   Password
                 </label>
                 <div className="mt-1 relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-primary-400" />
+                    <Lock className="h-4 w-4 text-glass-muted" />
                   </div>
                   <input
                     id="password"
@@ -378,14 +384,10 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-glass-muted hover:text-glass-secondary transition-colors"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? (
-                      <EyeOff className="h-4 w-4 text-primary-400 hover:text-primary-600" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-primary-400 hover:text-primary-600" />
-                    )}
+                    {showPassword ? 'Hide' : 'Show'}
                   </button>
                 </div>
                 {errors.password && (
@@ -397,12 +399,12 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
             {/* Confirm Password Field (Register only) */}
             {mode === 'register' && (
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-primary-700">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-glass-secondary">
                   Confirm password
                 </label>
                 <div className="mt-1 relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-primary-400" />
+                    <Lock className="h-4 w-4 text-glass-muted" />
                   </div>
                   <input
                     id="confirmPassword"
@@ -417,14 +419,10 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs text-glass-muted hover:text-glass-secondary transition-colors"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   >
-                    {showConfirmPassword ? (
-                      <EyeOff className="h-4 w-4 text-primary-400 hover:text-primary-600" />
-                    ) : (
-                      <Eye className="h-4 w-4 text-primary-400 hover:text-primary-600" />
-                    )}
+                    {showConfirmPassword ? 'Hide' : 'Show'}
                   </button>
                 </div>
                 {errors.confirmPassword && (
@@ -435,10 +433,10 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
 
             {/* General Error/Success Message */}
             {errors.general && (
-              <div className={`p-3 rounded-md text-sm ${
+              <div className={`alert-glass text-sm ${
                 errors.general.includes('successful') || errors.general.includes('sent')
-                  ? 'bg-success-50 text-success-700 border border-success-200'
-                  : 'bg-error-50 text-error-700 border border-error-200'
+                  ? 'alert-success'
+                  : 'alert-error'
               }`}>
                 {errors.general}
               </div>
@@ -460,10 +458,10 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-primary-200" />
+                <div className="w-full border-t border-white/10" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-primary-500">
+                <span className="px-2 bg-black/20 text-glass-muted">
                   {mode === 'login' ? 'New to Think Tank?' : 'Already have an account?'}
                 </span>
               </div>
@@ -482,7 +480,7 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
                   <button
                     type="button"
                     onClick={() => setMode('forgot')}
-                    className="text-sm text-accent-600 hover:text-accent-500 text-center"
+                    className="text-sm text-accent-300 hover:text-accent-200 text-center transition-colors"
                   >
                     Forgot your password?
                   </button>

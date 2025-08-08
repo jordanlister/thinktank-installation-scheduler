@@ -48,6 +48,26 @@ export const formatDateTime = (date: string | Date, time?: string): string => {
   return time ? `${formattedDate} at ${formatTime(time)}` : formattedDate;
 };
 
+export const formatDistanceToNow = (date: Date): string => {
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInMinutes < 1) {
+    return 'just now';
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes}m`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}h`;
+  } else if (diffInDays < 7) {
+    return `${diffInDays}d`;
+  } else {
+    return formatDate(date, 'MMM DD');
+  }
+};
+
 export const isToday = (date: string | Date): boolean => {
   const today = new Date();
   const compareDate = new Date(date);

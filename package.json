@@ -69,11 +69,19 @@
     "pre-push": "npm run build && npm run test:coverage"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-dialog": "^1.1.14",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tabs": "^1.1.12",
     "@react-pdf/renderer": "^4.0.0",
     "@supabase/supabase-js": "^2.53.0",
     "@turf/turf": "^7.0.0",
     "@types/file-saver": "^2.0.7",
     "chart.js": "^4.4.6",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "csv-parser": "^3.2.0",
     "date-fns": "^4.0.0",
     "exceljs": "^4.4.0",
@@ -96,6 +104,7 @@
     "react-leaflet-cluster": "^3.1.0",
     "react-router-dom": "^6.26.1",
     "recharts": "^3.1.1",
+    "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.7"
   },
   "devDependencies": {

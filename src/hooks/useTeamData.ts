@@ -11,6 +11,7 @@ import type {
   TeamAnalytics,
   Availability
 } from '../types';
+import type { RealtimeChannel } from '@supabase/supabase-js';
 
 export const useTeamMembers = () => {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
@@ -224,10 +225,14 @@ export const useTeamMembers = () => {
             periodStart: latestPerformance.period_start,
             periodEnd: latestPerformance.period_end
           } : undefined,
-          emergencyContact: {
-            name: 'Emergency Contact',
-            relationship: 'Contact',
-            phoneNumber: '555-0000'
+          emergencyContact: tm.emergency_contact ? {
+            name: tm.emergency_contact.name || 'Not provided',
+            relationship: tm.emergency_contact.relationship || 'Not specified',
+            phoneNumber: tm.emergency_contact.phone || 'Not provided'
+          } : {
+            name: 'Not provided',
+            relationship: 'Not specified',
+            phoneNumber: 'Not provided'
           },
           preferredPartners: [],
           workPreferences: {
@@ -267,6 +272,51 @@ export const useTeamMembers = () => {
 
   useEffect(() => {
     fetchTeamMembers();
+
+    // Set up real-time subscriptions for team-related tables
+    const teamMembersChannel: RealtimeChannel = supabase
+      .channel('team-members-realtime')
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'team_members' 
+        }, 
+        (payload) => {
+          console.log('Team member real-time update:', payload);
+          fetchTeamMembers();
+        }
+      )
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'team_member_skills' 
+        }, 
+        (payload) => {
+          console.log('Team member skills real-time update:', payload);
+          fetchTeamMembers();
+        }
+      )
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'certifications' 
+        }, 
+        (payload) => {
+          console.log('Certifications real-time update:', payload);
+          fetchTeamMembers();
+        }
+      )
+      .subscribe((status) => {
+        console.log('Team members subscription status:', status);
+      });
+
+    // Cleanup subscription on unmount
+    return () => {
+      teamMembersChannel.unsubscribe();
+    };
   }, []);
 
   return {

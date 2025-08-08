@@ -174,11 +174,10 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
             {onAccept && (
               <button
                 onClick={() => onAccept(result.validData)}
-                className="btn-primary inline-flex items-center space-x-2"
+                className="btn-primary"
                 disabled={result.validData.length === 0}
               >
-                <Download className="h-4 w-4" />
-                <span>Import {result.validData.length} Records</span>
+                Import {result.validData.length} Records
               </button>
             )}
           </div>
@@ -280,18 +279,13 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
                 <button
                   key={column.key}
                   onClick={() => toggleColumn(column.key)}
-                  className={`inline-flex items-center space-x-1 px-2 py-1 rounded text-xs transition-colors ${
+                  className={`px-2 py-1 rounded text-xs transition-colors ${
                     selectedColumns.has(column.key)
                       ? 'bg-accent-100 text-accent-700 border border-accent-300'
                       : 'bg-white text-primary-600 border border-primary-300 hover:bg-primary-50'
                   }`}
                 >
-                  {selectedColumns.has(column.key) ? (
-                    <Eye className="h-3 w-3" />
-                  ) : (
-                    <EyeOff className="h-3 w-3" />
-                  )}
-                  <span>{column.label}</span>
+                  {selectedColumns.has(column.key) ? '✓' : ''} {column.label}
                 </button>
               ))}
             </div>
@@ -361,9 +355,8 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="inline-flex items-center px-3 py-1 border border-primary-300 rounded-md text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 border border-primary-300 rounded-md text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <ChevronLeft className="h-4 w-4 mr-1" />
                 Previous
               </button>
               
@@ -389,10 +382,9 @@ export const DataPreview: React.FC<DataPreviewProps> = ({
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="inline-flex items-center px-3 py-1 border border-primary-300 rounded-md text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-3 py-1 border border-primary-300 rounded-md text-sm font-medium text-primary-700 bg-white hover:bg-primary-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Next
-                <ChevronRight className="h-4 w-4 ml-1" />
               </button>
             </div>
           </div>

@@ -48,8 +48,8 @@ export const DataUpload: React.FC<DataUploadProps> = ({
   return (
     <div className={`card ${className}`}>
       <div className="card-body">
-        <h3 className="text-lg font-semibold text-primary-900 mb-4">
-          Upload Installation Data
+        <h3 className="text-lg font-semibold text-white mb-4">
+          Upload Route Data
         </h3>
         
         <div
@@ -57,12 +57,12 @@ export const DataUpload: React.FC<DataUploadProps> = ({
           className={`
             relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200
             ${isDragActive 
-              ? 'border-accent-500 bg-accent-50' 
+              ? 'border-accent-500 bg-white/20' 
               : uploadState.error 
-                ? 'border-error-300 bg-error-50'
+                ? 'border-red-500 bg-red-500/10'
                 : uploadState.result
-                  ? 'border-success-300 bg-success-50'
-                  : 'border-primary-300 bg-primary-50 hover:border-accent-400 hover:bg-accent-50'
+                  ? 'border-green-500 bg-green-500/10'
+                  : 'border-white/30 bg-white/5 hover:border-accent-400 hover:bg-white/10'
             }
           `}
         >
@@ -72,78 +72,77 @@ export const DataUpload: React.FC<DataUploadProps> = ({
             <div className="space-y-4">
               <LoadingSpinner size="lg" />
               <div>
-                <p className="text-primary-900 font-medium mb-2">
+                <p className="text-white font-medium mb-2">
                   Processing {uploadState.file?.name}...
                 </p>
-                <div className="w-full bg-primary-200 rounded-full h-2">
+                <div className="w-full bg-white/20 rounded-full h-2">
                   <div 
                     className={`h-2 rounded-full transition-all duration-300 ${getProgressColor(uploadState.progress)}`}
                     style={{ width: `${uploadState.progress}%` }}
                   />
                 </div>
-                <p className="text-sm text-primary-600 mt-1">
+                <p className="text-sm text-white/80 mt-1">
                   {uploadState.progress}% complete
                 </p>
               </div>
             </div>
           ) : uploadState.error ? (
             <div className="space-y-4">
-              <AlertCircle className="mx-auto h-12 w-12 text-error-500" />
+              <AlertCircle className="mx-auto h-12 w-12 text-red-400" />
               <div>
-                <h4 className="text-lg font-medium text-error-900 mb-2">
+                <h4 className="text-lg font-medium text-white mb-2">
                   Upload Failed
                 </h4>
-                <p className="text-error-700 mb-4">{uploadState.error}</p>
+                <p className="text-red-300 mb-4">{uploadState.error}</p>
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     resetUpload();
                   }}
-                  className="btn-secondary inline-flex items-center space-x-2"
+                  className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
                 >
-                  <X className="h-4 w-4" />
-                  <span>Clear and Try Again</span>
+                  Clear and Try Again
                 </button>
               </div>
             </div>
           ) : uploadState.result ? (
             <div className="space-y-4">
-              <CheckCircle2 className="mx-auto h-12 w-12 text-success-500" />
+              <CheckCircle2 className="mx-auto h-12 w-12 text-green-400" />
               <div>
-                <h4 className="text-lg font-medium text-success-900 mb-2">
+                <h4 className="text-lg font-medium text-white mb-2">
                   Upload Successful
                 </h4>
-                <div className="bg-white rounded-lg p-4 border border-success-200">
+                <div className="bg-white/10 rounded-lg p-4 border border-green-500/30">
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="text-primary-600">File:</span>
-                      <span className="ml-2 font-medium text-primary-900">
+                      <span className="text-white/70">File:</span>
+                      <span className="ml-2 font-medium text-white">
                         {uploadState.result.metadata.fileName}
                       </span>
                     </div>
                     <div>
-                      <span className="text-primary-600">Size:</span>
-                      <span className="ml-2 font-medium text-primary-900">
+                      <span className="text-white/70">Size:</span>
+                      <span className="ml-2 font-medium text-white">
                         {formatFileSize(uploadState.result.metadata.fileSize)}
                       </span>
                     </div>
                     <div>
-                      <span className="text-primary-600">Valid Records:</span>
-                      <span className="ml-2 font-medium text-success-700">
+                      <span className="text-white/70">Valid Records:</span>
+                      <span className="ml-2 font-medium text-green-300">
                         {uploadState.result.metadata.validRows}
                       </span>
                     </div>
                     <div>
-                      <span className="text-primary-600">Total Records:</span>
-                      <span className="ml-2 font-medium text-primary-900">
+                      <span className="text-white/70">Total Records:</span>
+                      <span className="ml-2 font-medium text-white">
                         {uploadState.result.metadata.totalRows}
                       </span>
                     </div>
                   </div>
                   
                   {uploadState.result.errors.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-success-200">
-                      <span className="text-error-600 text-sm">
+                    <div className="mt-3 pt-3 border-t border-white/20">
+                      <span className="text-red-300 text-sm">
                         {uploadState.result.errors.length} error(s) found
                       </span>
                     </div>
@@ -151,7 +150,7 @@ export const DataUpload: React.FC<DataUploadProps> = ({
                   
                   {uploadState.result.warnings.length > 0 && (
                     <div className="mt-2">
-                      <span className="text-yellow-600 text-sm">
+                      <span className="text-yellow-300 text-sm">
                         {uploadState.result.warnings.length} warning(s) found
                       </span>
                     </div>
@@ -164,7 +163,7 @@ export const DataUpload: React.FC<DataUploadProps> = ({
                       e.stopPropagation();
                       resetUpload();
                     }}
-                    className="btn-secondary"
+                    className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
                   >
                     Upload Another File
                   </button>
@@ -174,27 +173,27 @@ export const DataUpload: React.FC<DataUploadProps> = ({
           ) : (
             <div className="space-y-4">
               <div className={`mx-auto h-16 w-16 rounded-full flex items-center justify-center ${
-                isDragActive ? 'bg-accent-100' : 'bg-primary-100'
+                isDragActive ? 'bg-accent-500/20' : 'bg-white/10'
               }`}>
                 {isDragActive ? (
-                  <Upload className="h-8 w-8 text-accent-600" />
+                  <Upload className="h-8 w-8 text-accent-400" />
                 ) : (
-                  <FileSpreadsheet className="h-8 w-8 text-primary-600" />
+                  <FileSpreadsheet className="h-8 w-8 text-white/70" />
                 )}
               </div>
               
               <div>
-                <h4 className="text-lg font-medium text-primary-900 mb-2">
-                  {isDragActive ? 'Drop your file here' : 'Upload Installation Data'}
+                <h4 className="text-lg font-medium text-white mb-2">
+                  {isDragActive ? 'Drop your file here' : 'Upload Route Data'}
                 </h4>
-                <p className="text-primary-600 mb-4">
+                <p className="text-white/80 mb-4">
                   {isDragActive 
                     ? 'Release to upload your file'
                     : 'Drag and drop your Excel or CSV file here, or click to browse'
                   }
                 </p>
                 
-                <div className="text-sm text-primary-500 space-y-1">
+                <div className="text-sm text-white/60 space-y-1">
                   <p>Supported formats: .xlsx, .xls, .csv</p>
                   <p>Maximum file size: 10MB</p>
                 </div>
@@ -204,11 +203,11 @@ export const DataUpload: React.FC<DataUploadProps> = ({
         </div>
         
         {/* File Requirements */}
-        <div className="mt-6 bg-primary-50 rounded-lg p-4 border border-primary-200">
-          <h5 className="font-medium text-primary-900 mb-2">
+        <div className="mt-6 bg-white/10 rounded-lg p-4 border border-white/20 backdrop-filter backdrop-blur-md">
+          <h5 className="font-medium text-white mb-2">
             File Requirements
           </h5>
-          <div className="text-sm text-primary-700 space-y-1">
+          <div className="text-sm text-white/80 space-y-1">
             <p>• First row should contain column headers</p>
             <p>• Required fields: Customer Name, Install Date, Address (Street, City, State, ZIP)</p>
             <p>• Optional fields: Phone, Email, Job ID, Store Number, Installation Type, Priority</p>
@@ -219,26 +218,26 @@ export const DataUpload: React.FC<DataUploadProps> = ({
         
         {/* Column Mapping Preview */}
         {uploadState.result && Object.keys(uploadState.result.schemaMap).length > 0 && (
-          <div className="mt-6 bg-white rounded-lg p-4 border border-primary-200">
-            <h5 className="font-medium text-primary-900 mb-3">
+          <div className="mt-6 bg-white/10 rounded-lg p-4 border border-white/20 backdrop-filter backdrop-blur-md">
+            <h5 className="font-medium text-white mb-3">
               Detected Column Mapping
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
               {Object.entries(uploadState.result.schemaMap).map(([field, mapping]) => (
                 <div key={field} className="flex justify-between items-center">
-                  <span className="text-primary-600 capitalize">
+                  <span className="text-white/70 capitalize">
                     {field.replace(/([A-Z])/g, ' $1').trim()}:
                   </span>
                   <div className="flex items-center space-x-2">
-                    <span className="font-medium text-primary-900">
+                    <span className="font-medium text-white">
                       {mapping.detectedColumn}
                     </span>
                     <span className={`px-2 py-1 rounded-full text-xs ${
                       mapping.confidence >= 0.9 
-                        ? 'bg-success-100 text-success-700'
+                        ? 'bg-green-500/20 text-green-300'
                         : mapping.confidence >= 0.7
-                          ? 'bg-yellow-100 text-yellow-700'
-                          : 'bg-error-100 text-error-700'
+                          ? 'bg-yellow-500/20 text-yellow-300'
+                          : 'bg-red-500/20 text-red-300'
                     }`}>
                       {Math.round(mapping.confidence * 100)}%
                     </span>

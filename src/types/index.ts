@@ -1726,5 +1726,1002 @@ export interface ArchiveMetadata {
   tags: string[];
 }
 
+// Settings Management Types
+export interface UserPreferences {
+  theme: 'light' | 'dark' | 'auto';
+  timezone: string;
+  dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
+  timeFormat: '12h' | '24h';
+  defaultView: 'calendar' | 'list' | 'map';
+  language: string;
+  itemsPerPage: number;
+  showAvatars: boolean;
+  enableSounds: boolean;
+  autoRefresh: boolean;
+  refreshInterval: number; // in seconds
+}
+
+export interface SystemConfig {
+  workingHours: {
+    start: string; // HH:MM format
+    end: string;   // HH:MM format
+  };
+  defaultJobDuration: number; // in minutes
+  travelTimeBuffer: number;   // in minutes
+  maxJobsPerDay: number;
+  maxJobsPerTeamMember: number;
+  autoAssignments: boolean;
+  enableOptimization: boolean;
+  optimizationGoal: 'travel_distance' | 'workload_balance' | 'deadline_priority';
+  requireApprovalForChanges: boolean;
+  allowOvertimeAssignment: boolean;
+  backupTechnicianRequired: boolean;
+  weatherIntegration: boolean;
+  trafficIntegration: boolean;
+  customerPreferenceWeighting: number; // 0-100
+}
+
+export interface NotificationSettings {
+  emailNotifications: {
+    enabled: boolean;
+    scheduleChanges: boolean;
+    newAssignments: boolean;
+    deadlineReminders: boolean;
+    performanceReports: boolean;
+    systemAlerts: boolean;
+    weeklyDigest: boolean;
+    frequency: 'immediate' | 'daily' | 'weekly';
+  };
+  smsNotifications: {
+    enabled: boolean;
+    urgentOnly: boolean;
+    scheduleChanges: boolean;
+    newAssignments: boolean;
+    emergencyAlerts: boolean;
+    phoneNumber?: string;
+  };
+  pushNotifications: {
+    enabled: boolean;
+    scheduleChanges: boolean;
+    newAssignments: boolean;
+    deadlineReminders: boolean;
+    systemAlerts: boolean;
+  };
+  digestSettings: {
+    enabled: boolean;
+    frequency: 'daily' | 'weekly' | 'monthly';
+    deliveryTime: string; // HH:MM format
+    includeMetrics: boolean;
+    includeUpcoming: boolean;
+  };
+}
+
+export interface SecuritySettings {
+  passwordRequirements: {
+    minLength: number;
+    requireUppercase: boolean;
+    requireLowercase: boolean;
+    requireNumbers: boolean;
+    requireSpecialChars: boolean;
+    passwordExpiry: number; // in days, 0 for no expiry
+  };
+  authenticationSettings: {
+    twoFactorEnabled: boolean;
+    sessionTimeout: number; // in minutes
+    maxLoginAttempts: number;
+    lockoutDuration: number; // in minutes
+    requireReauthForSensitive: boolean;
+  };
+  dataSettings: {
+    allowExport: boolean;
+    allowBulkOperations: boolean;
+    auditLogging: boolean;
+    dataRetention: number; // in days
+    encryptSensitiveData: boolean;
+  };
+  accessControl: {
+    restrictIPAccess: boolean;
+    allowedIPs?: string[];
+    requireVPN: boolean;
+    blockConcurrentSessions: boolean;
+  };
+}
+
+export interface SettingsState {
+  userPreferences: UserPreferences;
+  systemConfig: SystemConfig;
+  notificationSettings: NotificationSettings;
+  securitySettings: SecuritySettings;
+  lastModified: string;
+  modifiedBy: string;
+}
+
+export interface SettingsFormData {
+  section: 'preferences' | 'system' | 'notifications' | 'security';
+  data: any;
+  isDirty: boolean;
+  validationErrors: { [field: string]: string };
+}
+
+// Assignment Management Types
+
+export interface Assignment {
+  id: string;
+  installationId: string;
+  leadId: string;
+  assistantId?: string;
+  assignedAt: string;
+  assignedBy: string;
+  status: AssignmentStatus;
+  priority: Priority;
+  estimatedDuration: number;
+  actualDuration?: number;
+  notes?: string;
+  metadata: AssignmentMetadata;
+  history: AssignmentHistoryEntry[];
+}
+
+export interface AssignmentMetadata {
+  autoAssigned: boolean;
+  conflictResolved: boolean;
+  originalAssignmentId?: string;
+  reassignmentReason?: string;
+  workloadScore: number;
+  efficiencyScore: number;
+  customerPreference?: boolean;
+}
+
+export interface AssignmentHistoryEntry {
+  id: string;
+  assignmentId: string;
+  action: AssignmentAction;
+  performedBy: string;
+  performedAt: string;
+  previousValue?: any;
+  newValue?: any;
+  reason?: string;
+  notes?: string;
+}
+
+export const AssignmentAction = {
+  CREATED: 'created',
+  ASSIGNED: 'assigned',
+  REASSIGNED: 'reassigned',
+  UNASSIGNED: 'unassigned',
+  STARTED: 'started',
+  COMPLETED: 'completed',
+  CANCELLED: 'cancelled',
+  RESCHEDULED: 'rescheduled',
+  CONFLICT_RESOLVED: 'conflict_resolved'
+} as const;
+
+export type AssignmentAction = typeof AssignmentAction[keyof typeof AssignmentAction];
+
+export interface AssignmentConflict {
+  id: string;
+  type: AssignmentConflictType;
+  affectedAssignments: string[];
+  severity: ConflictSeverity;
+  description: string;
+  detectedAt: string;
+  resolvedAt?: string;
+  resolvedBy?: string;
+  resolutionMethod?: ConflictResolutionMethod;
+  suggestedResolutions: ConflictResolution[];
+  autoResolvable: boolean;
+  impactScore: number;
+}
+
+export const AssignmentConflictType = {
+  TIME_OVERLAP: 'time_overlap',
+  SKILL_MISMATCH: 'skill_mismatch',
+  CAPACITY_EXCEEDED: 'capacity_exceeded',
+  TRAVEL_DISTANCE: 'travel_distance',
+  AVAILABILITY: 'availability',
+  GEOGRAPHIC_CLUSTER: 'geographic_cluster',
+  WORKLOAD_IMBALANCE: 'workload_imbalance',
+  DEADLINE_RISK: 'deadline_risk'
+} as const;
+
+export type AssignmentConflictType = typeof AssignmentConflictType[keyof typeof AssignmentConflictType];
+
+export const ConflictSeverity = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high',
+  CRITICAL: 'critical'
+} as const;
+
+export type ConflictSeverity = typeof ConflictSeverity[keyof typeof ConflictSeverity];
+
+export const ConflictResolutionMethod = {
+  AUTO_REASSIGN: 'auto_reassign',
+  MANUAL_REASSIGN: 'manual_reassign',
+  RESCHEDULE: 'reschedule',
+  SPLIT_ASSIGNMENT: 'split_assignment',
+  OVERRIDE: 'override',
+  ESCALATE: 'escalate'
+} as const;
+
+export type ConflictResolutionMethod = typeof ConflictResolutionMethod[keyof typeof ConflictResolutionMethod];
+
+export interface ConflictResolution {
+  id: string;
+  method: ConflictResolutionMethod;
+  description: string;
+  impactScore: number;
+  estimatedEffort: number;
+  affectedAssignments: string[];
+  newAssignments?: Partial<Assignment>[];
+  executionSteps: ResolutionStep[];
+}
+
+export interface ResolutionStep {
+  id: string;
+  order: number;
+  action: string;
+  parameters: { [key: string]: any };
+  validationRules: string[];
+  rollbackAction?: string;
+}
+
+export interface WorkloadData {
+  teamMemberId: string;
+  date: string;
+  assignedHours: number;
+  capacity: number;
+  efficiency: number;
+  conflicts: number;
+  utilizationPercentage: number;
+  workloadStatus: WorkloadStatus;
+  assignments: string[];
+  travelTime: number;
+  bufferTime: number;
+  overtimeHours: number;
+}
+
+export interface AssignmentMatrix {
+  dates: string[];
+  teamMembers: TeamMember[];
+  assignments: AssignmentMatrixCell[][];
+  conflicts: AssignmentConflict[];
+  workloadSummary: WorkloadSummary[];
+  optimizationScore: number;
+}
+
+export interface AssignmentMatrixCell {
+  date: string;
+  teamMemberId: string;
+  assignments: Assignment[];
+  capacity: number;
+  utilization: number;
+  conflicts: string[];
+  status: MatrixCellStatus;
+  travelDistance: number;
+  workloadScore: number;
+}
+
+export const MatrixCellStatus = {
+  AVAILABLE: 'available',
+  ASSIGNED: 'assigned',
+  OVERBOOKED: 'overbooked',
+  UNAVAILABLE: 'unavailable',
+  CONFLICT: 'conflict',
+  OPTIMIZED: 'optimized'
+} as const;
+
+export type MatrixCellStatus = typeof MatrixCellStatus[keyof typeof MatrixCellStatus];
+
+export interface WorkloadSummary {
+  teamMemberId: string;
+  totalAssignments: number;
+  totalHours: number;
+  averageUtilization: number;
+  peakUtilization: number;
+  conflicts: number;
+  efficiency: number;
+  travelDistance: number;
+  recommendations: string[];
+}
+
+export interface AutoAssignmentRule {
+  id: string;
+  name: string;
+  description: string;
+  isActive: boolean;
+  priority: number;
+  conditions: AutoAssignmentCondition[];
+  actions: AutoAssignmentAction[];
+  createdBy: string;
+  createdAt: string;
+  lastModified: string;
+  usageCount: number;
+  successRate: number;
+}
+
+export interface AutoAssignmentCondition {
+  id: string;
+  field: string;
+  operator: ConditionOperator;
+  value: any;
+  weight: number;
+  logicalOperator?: LogicalOperator;
+}
+
+export const ConditionOperator = {
+  EQUALS: 'equals',
+  NOT_EQUALS: 'not_equals',
+  GREATER_THAN: 'greater_than',
+  LESS_THAN: 'less_than',
+  CONTAINS: 'contains',
+  IN: 'in',
+  NOT_IN: 'not_in',
+  BETWEEN: 'between',
+  EXISTS: 'exists'
+} as const;
+
+export type ConditionOperator = typeof ConditionOperator[keyof typeof ConditionOperator];
+
+export const LogicalOperator = {
+  AND: 'AND',
+  OR: 'OR',
+  NOT: 'NOT'
+} as const;
+
+export type LogicalOperator = typeof LogicalOperator[keyof typeof LogicalOperator];
+
+export interface AutoAssignmentAction {
+  id: string;
+  type: AutoAssignmentActionType;
+  parameters: { [key: string]: any };
+  weight: number;
+  order: number;
+}
+
+export const AutoAssignmentActionType = {
+  ASSIGN_BY_SKILL: 'assign_by_skill',
+  ASSIGN_BY_LOCATION: 'assign_by_location',
+  ASSIGN_BY_AVAILABILITY: 'assign_by_availability',
+  ASSIGN_BY_WORKLOAD: 'assign_by_workload',
+  ASSIGN_BY_PERFORMANCE: 'assign_by_performance',
+  ASSIGN_BY_PREFERENCE: 'assign_by_preference',
+  SKIP_ASSIGNMENT: 'skip_assignment',
+  ESCALATE_ASSIGNMENT: 'escalate_assignment'
+} as const;
+
+export type AutoAssignmentActionType = typeof AutoAssignmentActionType[keyof typeof AutoAssignmentActionType];
+
+export interface AutoAssignmentCriteria {
+  optimizationGoal: OptimizationGoal;
+  considerSkills: boolean;
+  considerLocation: boolean;
+  considerAvailability: boolean;
+  considerWorkload: boolean;
+  considerPerformance: boolean;
+  considerPreferences: boolean;
+  maxTravelDistance: number;
+  workloadBalanceWeight: number;
+  skillMatchWeight: number;
+  performanceWeight: number;
+  urgencyWeight: number;
+  geographicWeight: number;
+}
+
+export const OptimizationGoal = {
+  MINIMIZE_TRAVEL: 'minimize_travel',
+  BALANCE_WORKLOAD: 'balance_workload',
+  MAXIMIZE_EFFICIENCY: 'maximize_efficiency',
+  PRIORITIZE_SKILLS: 'prioritize_skills',
+  CUSTOMER_SATISFACTION: 'customer_satisfaction',
+  HYBRID: 'hybrid'
+} as const;
+
+export type OptimizationGoal = typeof OptimizationGoal[keyof typeof OptimizationGoal];
+
+export interface AssignmentResult {
+  assignmentId: string;
+  installationId: string;
+  teamMemberId: string;
+  confidence: number;
+  score: number;
+  reasoning: string[];
+  alternatives: AlternativeAssignment[];
+  warnings: string[];
+}
+
+export interface AlternativeAssignment {
+  teamMemberId: string;
+  score: number;
+  reasoning: string[];
+  tradeoffs: string[];
+}
+
+export interface CreateAssignmentRequest {
+  installationId: string;
+  leadId?: string;
+  assistantId?: string;
+  scheduledDate: string;
+  scheduledTime: string;
+  priority: Priority;
+  notes?: string;
+  autoResolveConflicts: boolean;
+  preferredTeamMembers?: string[];
+  requiredSkills?: string[];
+  maxTravelDistance?: number;
+}
+
+export interface UpdateAssignmentRequest {
+  assignmentId: string;
+  leadId?: string;
+  assistantId?: string;
+  scheduledDate?: string;
+  scheduledTime?: string;
+  priority?: Priority;
+  status?: AssignmentStatus;
+  notes?: string;
+  reason?: string;
+}
+
+export interface BulkAssignmentRequest {
+  installationIds: string[];
+  criteria: AutoAssignmentCriteria;
+  overrideConflicts: boolean;
+  preserveExisting: boolean;
+  dryRun: boolean;
+}
+
+export interface BulkAssignmentResult {
+  totalRequests: number;
+  successful: number;
+  failed: number;
+  conflicts: number;
+  results: AssignmentResult[];
+  errors: BulkAssignmentError[];
+  summary: BulkAssignmentSummary;
+}
+
+export interface BulkAssignmentError {
+  installationId: string;
+  error: string;
+  reason: string;
+  suggestedAction: string;
+}
+
+export interface BulkAssignmentSummary {
+  processingTime: number;
+  optimizationScore: number;
+  workloadDistribution: { [teamMemberId: string]: number };
+  travelOptimization: number;
+  conflictsResolved: number;
+  recommendations: string[];
+}
+
+export interface AssignmentAnalytics {
+  period: {
+    start: string;
+    end: string;
+  };
+  totalAssignments: number;
+  autoAssignments: number;
+  manualAssignments: number;
+  reassignments: number;
+  conflicts: number;
+  resolutionRate: number;
+  averageResponseTime: number;
+  teamUtilization: TeamUtilizationMetrics[];
+  workloadDistribution: WorkloadDistributionMetrics;
+  efficiencyMetrics: AssignmentEfficiencyMetrics;
+  trendData: AssignmentTrendData[];
+  recommendations: AssignmentRecommendation[];
+}
+
+export interface TeamUtilizationMetrics {
+  teamMemberId: string;
+  name: string;
+  utilizationRate: number;
+  totalHours: number;
+  workingDays: number;
+  assignmentCount: number;
+  averageJobsPerDay: number;
+  travelTime: number;
+  efficiency: number;
+  overutilizedDays: number;
+  underutilizedDays: number;
+}
+
+export interface WorkloadDistributionMetrics {
+  variance: number;
+  standardDeviation: number;
+  balanceScore: number;
+  overutilizedTeamMembers: number;
+  underutilizedTeamMembers: number;
+  optimalTeamMembers: number;
+  redistributionOpportunities: number;
+}
+
+export interface AssignmentEfficiencyMetrics {
+  averageAssignmentTime: number;
+  averageTravelDistance: number;
+  skillMatchRate: number;
+  geographicEfficiency: number;
+  conflictRate: number;
+  autoResolutionRate: number;
+  customerSatisfactionImpact: number;
+  costPerAssignment: number;
+}
+
+export interface AssignmentTrendData {
+  date: string;
+  metric: AssignmentMetricType;
+  value: number;
+  target?: number;
+  variance?: number;
+}
+
+export const AssignmentMetricType = {
+  TOTAL_ASSIGNMENTS: 'total_assignments',
+  AUTO_ASSIGNMENTS: 'auto_assignments',
+  CONFLICTS: 'conflicts',
+  UTILIZATION: 'utilization',
+  EFFICIENCY: 'efficiency',
+  TRAVEL_DISTANCE: 'travel_distance',
+  RESPONSE_TIME: 'response_time'
+} as const;
+
+export type AssignmentMetricType = typeof AssignmentMetricType[keyof typeof AssignmentMetricType];
+
+export interface AssignmentRecommendation {
+  type: AssignmentRecommendationType;
+  priority: Priority;
+  description: string;
+  impact: string;
+  effort: RecommendationEffort;
+  expectedBenefit: string;
+  actionItems: ActionItem[];
+  affectedTeamMembers: string[];
+  timeline: string;
+  metrics: RecommendationMetrics;
+}
+
+export const AssignmentRecommendationType = {
+  WORKLOAD_REBALANCING: 'workload_rebalancing',
+  SKILL_TRAINING: 'skill_training',
+  GEOGRAPHIC_OPTIMIZATION: 'geographic_optimization',
+  CAPACITY_ADJUSTMENT: 'capacity_adjustment',
+  AUTOMATION_IMPROVEMENT: 'automation_improvement',
+  CONFLICT_PREVENTION: 'conflict_prevention',
+  PERFORMANCE_ENHANCEMENT: 'performance_enhancement'
+} as const;
+
+export type AssignmentRecommendationType = typeof AssignmentRecommendationType[keyof typeof AssignmentRecommendationType];
+
+export const RecommendationEffort = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high'
+} as const;
+
+export type RecommendationEffort = typeof RecommendationEffort[keyof typeof RecommendationEffort];
+
+export interface ActionItem {
+  id: string;
+  description: string;
+  assignee: string;
+  dueDate: string;
+  priority: Priority;
+  status: ActionItemStatus;
+  progress: number;
+  dependencies: string[];
+}
+
+export const ActionItemStatus = {
+  NOT_STARTED: 'not_started',
+  IN_PROGRESS: 'in_progress',
+  COMPLETED: 'completed',
+  BLOCKED: 'blocked',
+  CANCELLED: 'cancelled'
+} as const;
+
+export type ActionItemStatus = typeof ActionItemStatus[keyof typeof ActionItemStatus];
+
+export interface RecommendationMetrics {
+  expectedEfficiencyGain: number;
+  expectedCostSavings: number;
+  expectedConflictReduction: number;
+  riskLevel: RecommendationRisk;
+  confidenceLevel: number;
+}
+
+export const RecommendationRisk = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high'
+} as const;
+
+export type RecommendationRisk = typeof RecommendationRisk[keyof typeof RecommendationRisk];
+
+export interface AssignmentDashboardMetrics {
+  todayAssignments: number;
+  activeConflicts: number;
+  utilizationRate: number;
+  autoAssignmentRate: number;
+  averageResponseTime: number;
+  pendingReassignments: number;
+  teamMemberStats: TeamMemberDashboardStats[];
+  recentActivity: RecentAssignmentActivity[];
+  alerts: AssignmentAlert[];
+  quickActions: QuickAction[];
+}
+
+export interface TeamMemberDashboardStats {
+  teamMemberId: string;
+  name: string;
+  todayAssignments: number;
+  weekAssignments: number;
+  utilization: number;
+  efficiency: number;
+  conflicts: number;
+  status: TeamMemberAssignmentStatus;
+}
+
+export const TeamMemberAssignmentStatus = {
+  AVAILABLE: 'available',
+  ASSIGNED: 'assigned',
+  OVERBOOKED: 'overbooked',
+  UNAVAILABLE: 'unavailable'
+} as const;
+
+export type TeamMemberAssignmentStatus = typeof TeamMemberAssignmentStatus[keyof typeof TeamMemberAssignmentStatus];
+
+export interface RecentAssignmentActivity {
+  id: string;
+  type: AssignmentActivityType;
+  description: string;
+  timestamp: string;
+  performedBy: string;
+  affectedAssignments: string[];
+  impact: ActivityImpact;
+}
+
+export const AssignmentActivityType = {
+  ASSIGNMENT_CREATED: 'assignment_created',
+  ASSIGNMENT_MODIFIED: 'assignment_modified',
+  CONFLICT_DETECTED: 'conflict_detected',
+  CONFLICT_RESOLVED: 'conflict_resolved',
+  AUTO_ASSIGNMENT_RUN: 'auto_assignment_run',
+  BULK_UPDATE: 'bulk_update',
+  TEAM_MEMBER_UPDATED: 'team_member_updated'
+} as const;
+
+export type AssignmentActivityType = typeof AssignmentActivityType[keyof typeof AssignmentActivityType];
+
+export const ActivityImpact = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high'
+} as const;
+
+export type ActivityImpact = typeof ActivityImpact[keyof typeof ActivityImpact];
+
+export interface AssignmentAlert {
+  id: string;
+  type: AssignmentAlertType;
+  severity: AlertSeverity;
+  title: string;
+  message: string;
+  timestamp: string;
+  acknowledged: boolean;
+  acknowledgedBy?: string;
+  acknowledgedAt?: string;
+  actionRequired: boolean;
+  relatedAssignments: string[];
+  suggestedActions: string[];
+}
+
+export const AssignmentAlertType = {
+  CRITICAL_CONFLICT: 'critical_conflict',
+  CAPACITY_WARNING: 'capacity_warning',
+  SKILL_GAP: 'skill_gap',
+  DEADLINE_RISK: 'deadline_risk',
+  SYSTEM_ERROR: 'system_error',
+  PERFORMANCE_ISSUE: 'performance_issue'
+} as const;
+
+export type AssignmentAlertType = typeof AssignmentAlertType[keyof typeof AssignmentAlertType];
+
+export const AlertSeverity = {
+  INFO: 'info',
+  WARNING: 'warning',
+  ERROR: 'error',
+  CRITICAL: 'critical'
+} as const;
+
+export type AlertSeverity = typeof AlertSeverity[keyof typeof AlertSeverity];
+
+export interface QuickAction {
+  id: string;
+  label: string;
+  description: string;
+  icon: string;
+  action: string;
+  parameters?: { [key: string]: any };
+  permissions: UserRole[];
+  enabled: boolean;
+}
+
+// Bulk Assignment Types for Enhanced Modal
+export interface BulkAssignmentData {
+  selectedInstallations: string[];
+  assignmentType: 'lead' | 'assistant' | 'both';
+  targetTeamMembers: string[];
+  dateRange?: { start: string; end: string };
+  overrideConflicts: boolean;
+  preserveExisting: boolean;
+}
+
+// Duplicate interfaces removed - using the ones defined earlier in the file
+
+// Bulk Assignment Wizard Step Types
+export const BulkAssignmentStep = {
+  SELECTION: 'selection',
+  CONFIGURATION: 'configuration', 
+  PREVIEW: 'preview',
+  EXECUTE: 'execute'
+} as const;
+
+export type BulkAssignmentStep = typeof BulkAssignmentStep[keyof typeof BulkAssignmentStep];
+
+export interface BulkAssignmentWizardState {
+  currentStep: BulkAssignmentStep;
+  completedSteps: BulkAssignmentStep[];
+  canProgress: boolean;
+  data: BulkAssignmentData;
+  previewData?: BulkAssignmentResult;
+  executionProgress?: BulkExecutionProgress;
+}
+
+export interface BulkExecutionProgress {
+  total: number;
+  completed: number;
+  failed: number;
+  current?: string;
+  percentage: number;
+  status: 'pending' | 'running' | 'completed' | 'failed';
+  startTime?: string;
+  endTime?: string;
+}
+
+export interface TeamMemberAvailability {
+  teamMemberId: string;
+  availableSlots: number;
+  currentWorkload: number;
+  capacity: number;
+  utilizationPercentage: number;
+  conflicts: string[];
+  isOverloaded: boolean;
+}
+
+export interface InstallationSelectionCriteria {
+  status?: InstallationStatus[];
+  priority?: Priority[];
+  dateRange?: { start: string; end: string };
+  region?: string[];
+  unassignedOnly?: boolean;
+  hasConflicts?: boolean;
+  customFilter?: string;
+}
+
+// Enhanced Conflict Resolution Types
+export interface DateRange {
+  start: string;
+  end: string;
+}
+
+export interface ConflictResolutionEngine {
+  detectConflicts: (assignments: Assignment[], timeWindow: DateRange) => AssignmentConflict[];
+  suggestResolutions: (conflict: AssignmentConflict) => ConflictResolution[];
+  assessResolutionImpact: (resolution: ConflictResolution) => ResolutionImpact;
+  applyResolution: (conflict: AssignmentConflict, resolution: ConflictResolution) => Promise<void>;
+}
+
+export interface ConflictResolution {
+  id: string;
+  type: 'reschedule' | 'reassign' | 'split' | 'cancel';
+  description: string;
+  proposedChanges: ProposedChange[];
+  confidence: number; // 0-100
+  impact: ResolutionImpact;
+}
+
+export interface ResolutionImpact {
+  affectedAssignments: number;
+  customerImpact: 'none' | 'low' | 'medium' | 'high';
+  teamImpact: 'none' | 'low' | 'medium' | 'high';
+  costImpact: number;
+  timeImpact: number; // in minutes
+}
+
+export interface ProposedChange {
+  type: 'reschedule' | 'reassign' | 'modify';
+  installationId: string;
+  currentValue: any;
+  proposedValue: any;
+  reason: string;
+}
+
+export interface ConflictTimelineEvent {
+  id: string;
+  timestamp: string;
+  type: 'conflict_detected' | 'resolution_applied' | 'manual_override';
+  description: string;
+  relatedConflicts: string[];
+  performedBy?: string;
+}
+
+export interface ConflictAnalytics {
+  totalConflicts: number;
+  resolvedConflicts: number;
+  averageResolutionTime: number;
+  conflictsByType: { [key: string]: number };
+  resolutionSuccessRate: number;
+  preventionRecommendations: string[];
+}
+
+export interface ConflictResolutionHistory {
+  id: string;
+  conflictId: string;
+  resolutionId: string;
+  appliedAt: string;
+  appliedBy: string;
+  outcome: 'successful' | 'failed' | 'reverted';
+  metrics: ResolutionMetrics;
+  notes?: string;
+}
+
+export interface ResolutionMetrics {
+  timeToResolve: number; // in minutes
+  affectedTeamMembers: number;
+  customerSatisfactionImpact: number;
+  costSavings: number;
+  efficiencyGain: number;
+}
+
+// Notification System Types
+export interface AppNotification {
+  id: string;
+  userId: string;
+  type: AppNotificationType;
+  priority: NotificationPriority;
+  status: NotificationStatus;
+  title: string;
+  message: string;
+  relatedEntityType?: string;
+  relatedEntityId?: string;
+  data?: Record<string, any>;
+  actions?: NotificationAction[];
+  channels: NotificationChannel[];
+  sentAt: string;
+  readAt?: string;
+  dismissedAt?: string;
+  archivedAt?: string;
+  scheduledFor?: string;
+  expiresAt?: string;
+  threadId?: string;
+  parentId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NotificationAction {
+  id: string;
+  label: string;
+  action: string;
+  parameters?: Record<string, any>;
+  style?: 'primary' | 'secondary' | 'danger';
+  requireConfirmation?: boolean;
+}
+
+export interface NotificationPreferences {
+  id: string;
+  userId: string;
+  enabled: boolean;
+  quietHoursEnabled: boolean;
+  quietHoursStart: string;
+  quietHoursEnd: string;
+  timezone: string;
+  emailEnabled: boolean;
+  emailFrequency: NotificationFrequency;
+  smsEnabled: boolean;
+  smsPhone?: string;
+  pushEnabled: boolean;
+  inAppEnabled: boolean;
+  typePreferences: Record<string, any>;
+  prioritySettings: Record<string, any>;
+  digestEnabled: boolean;
+  digestFrequency: NotificationFrequency;
+  digestTime: string;
+  digestIncludeRead: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NotificationTemplate {
+  id: string;
+  type: AppNotificationType;
+  titleTemplate: string;
+  messageTemplate: string;
+  defaultPriority: NotificationPriority;
+  defaultChannels: NotificationChannel[];
+  variables: any[];
+  validationRules: Record<string, any>;
+  icon?: string;
+  color?: string;
+  sound?: string;
+  actionsTemplate: any[];
+  isActive: boolean;
+  expiresAfterHours?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NotificationThread {
+  id: string;
+  title: string;
+  description?: string;
+  entityType?: string;
+  entityId?: string;
+  isActive: boolean;
+  autoCloseAfterHours: number;
+  participants: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface NotificationStats {
+  total: number;
+  unread: number;
+  byPriority: Record<NotificationPriority, number>;
+  byType: Record<AppNotificationType, number>;
+  byStatus: Record<NotificationStatus, number>;
+  last24Hours: number;
+  thisWeek: number;
+  avgReadTime: number; // in minutes
+}
+
+export interface WebSocketMessage {
+  type: string;
+  payload: any;
+  timestamp: string;
+}
+
+export interface RealtimeSubscription {
+  subscribe: (channel: string, callback: (data: any) => void) => void;
+  unsubscribe: (channel: string, callback?: (data: any) => void) => void;
+  emit: (channel: string, data: any) => void;
+}
+
+// Notification Enums
+export type AppNotificationType = 
+  | 'installation_created'
+  | 'installation_updated' 
+  | 'installation_assigned'
+  | 'installation_completed'
+  | 'installation_cancelled'
+  | 'assignment_created'
+  | 'assignment_updated'
+  | 'assignment_cancelled'
+  | 'schedule_changed'
+  | 'conflict_detected'
+  | 'conflict_resolved'
+  | 'team_status_changed'
+  | 'performance_alert'
+  | 'system_maintenance'
+  | 'deadline_reminder'
+  | 'urgent_update';
+
+export type NotificationPriority = 'low' | 'medium' | 'high' | 'urgent';
+export type NotificationStatus = 'unread' | 'read' | 'dismissed' | 'archived';
+export type NotificationChannel = 'in_app' | 'email' | 'sms' | 'push';
+export type NotificationFrequency = 'immediate' | 'daily' | 'weekly' | 'monthly' | 'never';
 
 

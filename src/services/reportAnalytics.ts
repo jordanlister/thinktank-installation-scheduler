@@ -61,159 +61,419 @@ export class ReportAnalyticsService {
   }
 
   /**
-   * Calculate email analytics metrics
+   * Calculate email analytics metrics from real data
    */
   private async calculateEmailMetrics(period: { start: string; end: string }): Promise<EmailAnalyticsMetrics> {
-    // In a real implementation, this would query the database
-    const mockData = {
-      totalSent: 1247,
-      totalDelivered: 1198,
-      totalOpened: 856,
-      totalClicked: 234,
-      totalBounced: 49,
-      unsubscribed: 12,
-      spamComplaints: 3
-    };
+    try {
+      // Query email logs from Supabase
+      const { default: supabase } = await import('./supabase');
+      
+      const { data: emailLogs, error } = await supabase
+        .from('email_logs')
+        .select('*')
+        .gte('created_at', period.start)
+        .lte('created_at', period.end);
 
+      if (error) {
+        console.warn('Failed to fetch email metrics, using calculated values:', error);
+        // Return calculated values based on available data
+        return this.calculateFallbackEmailMetrics();
+      }
+
+      const totalSent = emailLogs?.length || 0;
+      const totalDelivered = emailLogs?.filter(log => log.status === 'delivered')?.length || 0;
+      const totalOpened = emailLogs?.filter(log => log.opened_at)?.length || 0;
+      const totalClicked = emailLogs?.filter(log => log.clicked_at)?.length || 0;
+      const totalBounced = emailLogs?.filter(log => log.status === 'bounced')?.length || 0;
+      const unsubscribed = emailLogs?.filter(log => log.unsubscribed_at)?.length || 0;
+      const spamComplaints = emailLogs?.filter(log => log.spam_complaint_at)?.length || 0;
+
+      return {
+        totalSent,
+        totalDelivered,
+        totalOpened,
+        totalClicked,
+        totalBounced,
+        deliveryRate: totalSent > 0 ? (totalDelivered / totalSent) * 100 : 0,
+        openRate: totalDelivered > 0 ? (totalOpened / totalDelivered) * 100 : 0,
+        clickRate: totalOpened > 0 ? (totalClicked / totalOpened) * 100 : 0,
+        bounceRate: totalSent > 0 ? (totalBounced / totalSent) * 100 : 0,
+        unsubscribeRate: totalDelivered > 0 ? (unsubscribed / totalDelivered) * 100 : 0,
+        spamComplaintRate: totalDelivered > 0 ? (spamComplaints / totalDelivered) * 100 : 0
+      };
+    } catch (error) {
+      console.error('Error calculating email metrics:', error);
+      return this.calculateFallbackEmailMetrics();
+    }
+  }
+
+  /**
+   * Fallback email metrics when database is not available
+   */
+  private calculateFallbackEmailMetrics(): EmailAnalyticsMetrics {
     return {
-      totalSent: mockData.totalSent,
-      totalDelivered: mockData.totalDelivered,
-      totalOpened: mockData.totalOpened,
-      totalClicked: mockData.totalClicked,
-      totalBounced: mockData.totalBounced,
-      deliveryRate: (mockData.totalDelivered / mockData.totalSent) * 100,
-      openRate: (mockData.totalOpened / mockData.totalDelivered) * 100,
-      clickRate: (mockData.totalClicked / mockData.totalOpened) * 100,
-      bounceRate: (mockData.totalBounced / mockData.totalSent) * 100,
-      unsubscribeRate: (mockData.unsubscribed / mockData.totalDelivered) * 100,
-      spamComplaintRate: (mockData.spamComplaints / mockData.totalDelivered) * 100
+      totalSent: 0,
+      totalDelivered: 0,
+      totalOpened: 0,
+      totalClicked: 0,
+      totalBounced: 0,
+      deliveryRate: 0,
+      openRate: 0,
+      clickRate: 0,
+      bounceRate: 0,
+      unsubscribeRate: 0,
+      spamComplaintRate: 0
     };
   }
 
   /**
-   * Calculate PDF analytics metrics
+   * Calculate PDF analytics metrics from real data
    */
   private async calculatePDFMetrics(period: { start: string; end: string }): Promise<PDFAnalyticsMetrics> {
-    const mockData = {
-      totalGenerated: 342,
-      totalDownloaded: 298,
-      failedGenerations: 8,
-      averageGenerationTime: 3.4,
-      averageFileSize: 1.2
-    };
+    try {
+      // Query PDF generation logs from Supabase
+      const { default: supabase } = await import('./supabase');
+      
+      const { data: pdfLogs, error } = await supabase
+        .from('pdf_reports')
+        .select('*')
+        .gte('created_at', period.start)
+        .lte('created_at', period.end);
 
+      if (error) {
+        console.warn('Failed to fetch PDF metrics, using calculated values:', error);
+        return this.calculateFallbackPDFMetrics();
+      }
+
+      const totalGenerated = pdfLogs?.length || 0;
+      const totalDownloaded = pdfLogs?.filter(log => log.downloaded_at)?.length || 0;
+      const failedGenerations = pdfLogs?.filter(log => log.status === 'failed')?.length || 0;
+      
+      // Calculate averages
+      const generationTimes = pdfLogs?.filter(log => log.generation_time_ms)?.map(log => log.generation_time_ms) || [];
+      const fileSizes = pdfLogs?.filter(log => log.file_size_mb)?.map(log => log.file_size_mb) || [];
+      
+      const averageGenerationTime = generationTimes.length > 0 
+        ? generationTimes.reduce((sum, time) => sum + time, 0) / generationTimes.length / 1000 // Convert to seconds
+        : 0;
+        
+      const averageFileSize = fileSizes.length > 0
+        ? fileSizes.reduce((sum, size) => sum + size, 0) / fileSizes.length
+        : 0;
+
+      // Get most popular templates
+      const templateCounts = pdfLogs?.reduce((acc, log) => {
+        acc[log.template_name] = (acc[log.template_name] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>) || {};
+      
+      const mostPopularTemplates = Object.entries(templateCounts)
+        .sort(([,a], [,b]) => b - a)
+        .slice(0, 3)
+        .map(([name]) => name);
+
+      return {
+        totalGenerated,
+        totalDownloaded,
+        averageGenerationTime,
+        averageFileSize,
+        failureRate: totalGenerated > 0 ? (failedGenerations / totalGenerated) * 100 : 0,
+        mostPopularTemplates,
+        peakGenerationTimes: ['09:00', '13:00', '17:00'] // This would need time analysis
+      };
+    } catch (error) {
+      console.error('Error calculating PDF metrics:', error);
+      return this.calculateFallbackPDFMetrics();
+    }
+  }
+
+  /**
+   * Fallback PDF metrics when database is not available
+   */
+  private calculateFallbackPDFMetrics(): PDFAnalyticsMetrics {
     return {
-      totalGenerated: mockData.totalGenerated,
-      totalDownloaded: mockData.totalDownloaded,
-      averageGenerationTime: mockData.averageGenerationTime,
-      averageFileSize: mockData.averageFileSize,
-      failureRate: (mockData.failedGenerations / mockData.totalGenerated) * 100,
-      mostPopularTemplates: ['Installation Schedule Report', 'Performance Report', 'Customer Summary'],
-      peakGenerationTimes: ['09:00', '13:00', '17:00']
+      totalGenerated: 0,
+      totalDownloaded: 0,
+      averageGenerationTime: 0,
+      averageFileSize: 0,
+      failureRate: 0,
+      mostPopularTemplates: [],
+      peakGenerationTimes: []
     };
   }
 
   /**
-   * Get template usage report
+   * Get template usage report from real data
    */
   private async getTemplateUsageReport(period: { start: string; end: string }): Promise<TemplateUsageReport[]> {
-    return [
-      {
-        templateId: 'email_assignment',
-        templateName: 'Assignment Notification',
-        templateType: 'email',
-        usageCount: 456,
-        lastUsed: '2024-01-15T10:30:00Z',
-        averageRating: 4.7,
-        popularVariables: ['teamMemberName', 'customerName', 'installDate'],
-        commonErrors: []
-      },
-      {
-        templateId: 'pdf_schedule',
-        templateName: 'Installation Schedule Report',
-        templateType: 'pdf',
-        usageCount: 123,
-        lastUsed: '2024-01-15T09:15:00Z',
-        popularVariables: ['region', 'dateRange', 'installations'],
-        commonErrors: ['Missing region data', 'Invalid date format']
+    try {
+      const { default: supabase } = await import('./supabase');
+      
+      // Query both email and PDF templates usage
+      const [emailResult, pdfResult] = await Promise.all([
+        supabase
+          .from('email_templates')
+          .select('*')
+          .gte('last_used', period.start)
+          .lte('last_used', period.end),
+        supabase
+          .from('pdf_templates')
+          .select('*')
+          .gte('last_used', period.start)
+          .lte('last_used', period.end)
+      ]);
+
+      const reports: TemplateUsageReport[] = [];
+      
+      // Process email templates
+      if (emailResult.data) {
+        emailResult.data.forEach(template => {
+          reports.push({
+            templateId: template.id,
+            templateName: template.name,
+            templateType: 'email',
+            usageCount: template.usage_count || 0,
+            lastUsed: template.last_used,
+            averageRating: template.average_rating || 0,
+            popularVariables: template.popular_variables || [],
+            commonErrors: template.common_errors || []
+          });
+        });
       }
-    ];
+      
+      // Process PDF templates
+      if (pdfResult.data) {
+        pdfResult.data.forEach(template => {
+          reports.push({
+            templateId: template.id,
+            templateName: template.name,
+            templateType: 'pdf',
+            usageCount: template.usage_count || 0,
+            lastUsed: template.last_used,
+            popularVariables: template.popular_variables || [],
+            commonErrors: template.common_errors || []
+          });
+        });
+      }
+      
+      return reports;
+    } catch (error) {
+      console.error('Error fetching template usage report:', error);
+      return [];
+    }
   }
 
   /**
-   * Get recipient engagement report
+   * Get recipient engagement report from real data
    */
   private async getRecipientEngagementReport(period: { start: string; end: string }): Promise<RecipientEngagementReport[]> {
-    return [
-      {
-        recipientId: 'user_1',
-        email: 'john.smith@example.com',
-        role: 'lead',
-        totalReceived: 45,
-        totalOpened: 38,
-        totalClicked: 12,
-        engagementScore: 84.4,
-        preferences: {
-          format: 'pdf',
+    try {
+      const { default: supabase } = await import('./supabase');
+      
+      // Get user engagement data from email logs and user preferences
+      const { data: engagementData, error } = await supabase
+        .from('user_email_engagement')
+        .select(`
+          *,
+          users!inner(
+            id,
+            email,
+            role
+          )
+        `)
+        .gte('period_start', period.start)
+        .lte('period_end', period.end);
+
+      if (error || !engagementData) {
+        console.warn('Failed to fetch engagement data:', error);
+        return [];
+      }
+
+      return engagementData.map(data => ({
+        recipientId: data.user_id,
+        email: data.users.email,
+        role: data.users.role,
+        totalReceived: data.total_received || 0,
+        totalOpened: data.total_opened || 0,
+        totalClicked: data.total_clicked || 0,
+        engagementScore: data.engagement_score || 0,
+        preferences: data.preferences || {
+          format: 'email',
           deliveryTime: '09:00',
           frequency: 'daily',
-          includeCharts: true,
+          includeCharts: false,
           includeRawData: false
         },
-        lastActive: '2024-01-15T14:22:00Z'
-      }
-    ];
+        lastActive: data.last_active
+      }));
+    } catch (error) {
+      console.error('Error fetching recipient engagement report:', error);
+      return [];
+    }
   }
 
   /**
-   * Get system performance metrics
+   * Get system performance metrics from real data
    */
   private async getSystemPerformance(period: { start: string; end: string }): Promise<ReportSystemPerformance> {
+    try {
+      const { default: supabase } = await import('./supabase');
+      
+      // Get system performance data
+      const { data: performanceData, error } = await supabase
+        .from('system_performance_logs')
+        .select('*')
+        .gte('created_at', period.start)
+        .lte('created_at', period.end)
+        .order('created_at', { ascending: false })
+        .limit(1000);
+
+      if (error || !performanceData?.length) {
+        console.warn('Failed to fetch system performance data:', error);
+        return this.getDefaultSystemPerformance();
+      }
+
+      // Calculate averages from real data
+      const emailTimes = performanceData.filter(d => d.email_delivery_time).map(d => d.email_delivery_time);
+      const pdfTimes = performanceData.filter(d => d.pdf_generation_time).map(d => d.pdf_generation_time);
+      
+      const averageEmailDeliveryTime = emailTimes.length > 0 
+        ? emailTimes.reduce((sum, time) => sum + time, 0) / emailTimes.length
+        : 0;
+        
+      const averagePDFGenerationTime = pdfTimes.length > 0
+        ? pdfTimes.reduce((sum, time) => sum + time, 0) / pdfTimes.length
+        : 0;
+
+      const errors = performanceData.filter(d => d.error_count > 0);
+      const errorRate = performanceData.length > 0 
+        ? (errors.length / performanceData.length) * 100
+        : 0;
+
+      // Calculate uptime (assuming we log every hour)
+      const uptimeRecords = performanceData.filter(d => d.system_uptime !== undefined);
+      const systemUptime = uptimeRecords.length > 0
+        ? uptimeRecords.reduce((sum, record) => sum + record.system_uptime, 0) / uptimeRecords.length
+        : 0;
+
+      return {
+        averageEmailDeliveryTime,
+        averagePDFGenerationTime,
+        systemUptime,
+        errorRate,
+        peakLoadTimes: ['09:00-10:00', '13:00-14:00', '17:00-18:00'], // This would need time analysis
+        resourceUtilization: {
+          cpu: performanceData[0]?.cpu_usage || 0,
+          memory: performanceData[0]?.memory_usage || 0,
+          storage: performanceData[0]?.storage_usage || 0,
+          bandwidth: performanceData[0]?.bandwidth_usage || 0
+        }
+      };
+    } catch (error) {
+      console.error('Error fetching system performance data:', error);
+      return this.getDefaultSystemPerformance();
+    }
+  }
+
+  /**
+   * Default system performance when no data is available
+   */
+  private getDefaultSystemPerformance(): ReportSystemPerformance {
     return {
-      averageEmailDeliveryTime: 2.3,
-      averagePDFGenerationTime: 3.4,
-      systemUptime: 99.8,
-      errorRate: 1.2,
-      peakLoadTimes: ['09:00-10:00', '13:00-14:00', '17:00-18:00'],
+      averageEmailDeliveryTime: 0,
+      averagePDFGenerationTime: 0,
+      systemUptime: 0,
+      errorRate: 0,
+      peakLoadTimes: [],
       resourceUtilization: {
-        cpu: 65,
-        memory: 72,
-        storage: 45,
-        bandwidth: 38
+        cpu: 0,
+        memory: 0,
+        storage: 0,
+        bandwidth: 0
       }
     };
   }
 
   /**
-   * Generate recommendations based on analytics
+   * Generate recommendations based on real analytics data
    */
   private async generateRecommendations(period: { start: string; end: string }): Promise<ReportRecommendation[]> {
-    return [
-      {
-        type: 'template_optimization',
-        priority: 'medium',
-        description: 'Email open rates for assignment notifications have decreased by 15% this month',
-        expectedImpact: 'Improving subject lines could increase open rates by 20-25%',
-        actionItems: [
-          'A/B test different subject line formats',
-          'Include urgency indicators in time-sensitive assignments',
+    try {
+      const emailMetrics = await this.calculateEmailMetrics(period);
+      const pdfMetrics = await this.calculatePDFMetrics(period);
+      const systemPerformance = await this.getSystemPerformance(period);
+      
+      const recommendations: ReportRecommendation[] = [];
+      
+      // Email performance recommendations
+      if (emailMetrics.openRate < 25) {
+        recommendations.push({
+          type: 'template_optimization',
+          priority: 'high',
+          description: `Email open rate is ${emailMetrics.openRate.toFixed(1)}%, which is below industry average (25%)`,
+          expectedImpact: 'Optimizing email content could increase open rates by 15-20%',
+          actionItems: [
+            'Review and improve email subject lines',
+            'Optimize send times based on recipient behavior',
           'Personalize subject lines with recipient names'
-        ],
-        estimatedEffort: '2-3 hours'
-      },
-      {
-        type: 'delivery_time',
-        priority: 'low',
-        description: 'Performance reports sent at 8 AM have 30% higher open rates than those sent at 5 PM',
-        expectedImpact: 'Optimizing delivery times could improve overall engagement by 15%',
-        actionItems: [
-          'Schedule performance reports for morning delivery',
-          'Allow recipients to set preferred delivery times',
-          'Consider time zones for multi-region teams'
-        ],
-        estimatedEffort: '4-6 hours'
+          ],
+          estimatedEffort: '2-3 hours'
+        });
       }
-    ];
+      
+      // PDF performance recommendations
+      if (pdfMetrics.failureRate > 5) {
+        recommendations.push({
+          type: 'system_optimization',
+          priority: 'high',
+          description: `PDF generation failure rate is ${pdfMetrics.failureRate.toFixed(1)}%, which is above acceptable threshold (5%)`,
+          expectedImpact: 'Improving system reliability could reduce failures by 80%',
+          actionItems: [
+            'Investigate PDF generation errors',
+            'Optimize PDF template complexity',
+            'Implement retry mechanism for failed generations'
+          ],
+          estimatedEffort: '4-8 hours'
+        });
+      }
+      
+      // System performance recommendations
+      if (systemPerformance.errorRate > 2) {
+        recommendations.push({
+          type: 'system_optimization',
+          priority: 'medium',
+          description: `System error rate is ${systemPerformance.errorRate.toFixed(1)}%, consider system optimization`,
+          expectedImpact: 'System improvements could reduce errors by 60%',
+          actionItems: [
+            'Review system logs for common errors',
+            'Optimize database queries',
+            'Implement better error handling'
+          ],
+          estimatedEffort: '6-10 hours'
+        });
+      }
+      
+      // Low engagement recommendations
+      if (emailMetrics.clickRate < 5) {
+        recommendations.push({
+          type: 'engagement_optimization',
+          priority: 'medium',
+          description: `Email click rate is ${emailMetrics.clickRate.toFixed(1)}%, below industry average (5%)`,
+          expectedImpact: 'Content optimization could improve click rates by 25%',
+          actionItems: [
+            'Review email content and call-to-action placement',
+            'A/B test different email layouts',
+            'Include more relevant and actionable content'
+          ],
+          estimatedEffort: '3-5 hours'
+        });
+      }
+      
+      return recommendations;
+    } catch (error) {
+      console.error('Error generating recommendations:', error);
+      return [];
+    }
   }
 
   /**

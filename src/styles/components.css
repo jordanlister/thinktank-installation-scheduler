@@ -1,0 +1,468 @@
+/**
+ * Think Tank Technologies Component Styles
+ * Supabase-inspired component designs using design tokens
+ * Built for scalable, maintainable theming
+ */
+
+@layer components {
+  
+  /* =============================================================================
+   * BUTTON COMPONENTS - Supabase Style
+   * ============================================================================= */
+  
+  /* Base Button */
+  .btn {
+    @apply inline-flex items-center justify-center;
+    @apply px-6 py-3 text-sm font-medium;
+    @apply rounded-lg transition-all duration-200;
+    @apply border border-transparent;
+    @apply focus:outline-none focus:shadow-focus;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply backdrop-blur-md;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn:disabled {
+    @apply pointer-events-none;
+  }
+  
+  /* Button Sizes */
+  .btn-xs {
+    @apply px-2 py-1 text-xs;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-2 text-xs;
+  }
+  
+  .btn-lg {
+    @apply px-8 py-4 text-base;
+  }
+  
+  .btn-xl {
+    @apply px-10 py-5 text-lg;
+  }
+  
+  /* Primary Button - TTT Brand Primary */
+  .btn-primary {
+    background: var(--gradient-primary);
+    @apply text-white border-brand-primary/30;
+    box-shadow: var(--shadow-glass), var(--shadow-glow-sm);
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    @apply border-brand-primary/50 scale-105;
+    box-shadow: var(--shadow-glass-lg), var(--shadow-glow);
+  }
+  
+  .btn-primary:active:not(:disabled) {
+    @apply scale-100;
+  }
+  
+  /* Secondary Button - Glass Effect */
+  .btn-secondary {
+    background: var(--gradient-secondary);
+    @apply text-text-primary border-border-light;
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(var(--blur-md));
+  }
+  
+  .btn-secondary:hover:not(:disabled) {
+    @apply border-brand-primary/50 bg-surface-glass scale-105;
+    box-shadow: var(--shadow-glass-lg), var(--shadow-glow-sm);
+  }
+  
+  /* Ghost Button */
+  .btn-ghost {
+    @apply bg-transparent text-brand-primary border-transparent;
+    @apply hover:bg-brand-primary/10 hover:border-brand-primary/30;
+    @apply hover:text-success-light;
+  }
+  
+  /* Danger Button */
+  .btn-danger {
+    background: var(--gradient-danger);
+    @apply text-white border-error/30;
+    box-shadow: var(--shadow-glass), 0 0 20px rgba(239, 68, 68, 0.3);
+  }
+  
+  .btn-danger:hover:not(:disabled) {
+    @apply border-error/50 scale-105;
+    box-shadow: var(--shadow-glass-lg), 0 0 30px rgba(239, 68, 68, 0.5);
+  }
+  
+  /* Success Button */
+  .btn-success {
+    background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+    @apply text-white border-success/30;
+    box-shadow: var(--shadow-glass), 0 0 20px rgba(34, 197, 94, 0.3);
+  }
+  
+  .btn-success:hover:not(:disabled) {
+    @apply border-success/50 scale-105;
+    box-shadow: var(--shadow-glass-lg), 0 0 30px rgba(34, 197, 94, 0.5);
+  }
+  
+  /* Warning Button */
+  .btn-warning {
+    background: linear-gradient(135deg, var(--warning) 0%, var(--warning-dark) 100%);
+    @apply text-white border-warning/30;
+    box-shadow: var(--shadow-glass), 0 0 20px rgba(245, 158, 11, 0.3);
+  }
+  
+  .btn-warning:hover:not(:disabled) {
+    @apply border-warning/50 scale-105;
+    box-shadow: var(--shadow-glass-lg), 0 0 30px rgba(245, 158, 11, 0.5);
+  }
+  
+  /* =============================================================================
+   * CARD COMPONENTS - Glassmorphism
+   * ============================================================================= */
+  
+  /* Base Card */
+  .card {
+    @apply bg-surface-glass border border-border rounded-xl;
+    @apply transition-all duration-300;
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(var(--blur-md));
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  .card:hover {
+    @apply border-brand-primary/30 bg-surface-glass;
+    box-shadow: var(--shadow-glass-lg), var(--shadow-glow-sm);
+  }
+  
+  .card:hover::before {
+    left: 100%;
+  }
+  
+  /* Feature Card - Enhanced for landing pages */
+  .card-feature {
+    @apply p-8 card group hover:scale-105;
+  }
+  
+  /* Glass Card - Stronger glass effect */
+  .card-glass {
+    background: var(--gradient-glass);
+    @apply border border-border rounded-xl;
+    @apply transition-all duration-300 hover:border-brand-primary/30;
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(var(--blur-xl));
+  }
+  
+  .card-glass:hover {
+    box-shadow: var(--shadow-glass-xl), var(--shadow-glow-sm);
+  }
+  
+  /* Stat Card - For metrics and KPIs */
+  .card-stat {
+    @apply card p-6;
+    background: linear-gradient(135deg, var(--surface-glass) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid var(--border-light);
+  }
+  
+  .card-stat::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--radius-xl);
+    padding: 1px;
+    background: linear-gradient(135deg, var(--brand-primary)/30, var(--success)/10);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+  
+  /* Code Block Card */
+  .code-block {
+    @apply bg-surface border border-border rounded-lg p-6;
+    @apply font-mono text-sm text-text-secondary;
+    @apply overflow-x-auto shadow-inner;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  }
+  
+  /* =============================================================================
+   * FORM COMPONENTS
+   * ============================================================================= */
+  
+  /* Base Input */
+  .form-input {
+    @apply block w-full px-4 py-3 text-text-primary;
+    @apply bg-surface-glass border border-border rounded-lg;
+    @apply transition-all duration-200;
+    @apply focus:outline-none focus:border-border-focus;
+    @apply placeholder:text-text-muted;
+    backdrop-filter: blur(var(--blur-sm));
+  }
+  
+  .form-input:hover {
+    @apply border-border-light bg-surface-glass;
+  }
+  
+  .form-input:focus {
+    box-shadow: var(--shadow-focus);
+    backdrop-filter: blur(var(--blur-md));
+  }
+  
+  .form-input:disabled {
+    @apply bg-surface/30 text-text-disabled cursor-not-allowed;
+  }
+  
+  /* Select Input */
+  .form-select {
+    @apply form-input;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Checkbox */
+  .form-checkbox {
+    @apply bg-surface-glass border border-border rounded;
+    @apply transition-all duration-200;
+    backdrop-filter: blur(var(--blur-sm));
+  }
+  
+  .form-checkbox:checked {
+    background: var(--gradient-primary);
+    @apply border-brand-primary;
+    box-shadow: 0 0 0 2px var(--brand-primary)/20;
+  }
+  
+  .form-checkbox:hover {
+    @apply border-border-light bg-surface-glass;
+  }
+  
+  /* =============================================================================
+   * BADGE COMPONENTS
+   * ============================================================================= */
+  
+  .badge {
+    @apply inline-flex items-center px-3 py-1;
+    @apply text-xs font-medium rounded-full;
+    @apply border transition-colors duration-200;
+    backdrop-filter: blur(var(--blur-sm));
+  }
+  
+  .badge-success {
+    @apply bg-success/20 border-success/30 text-success-light;
+  }
+  
+  .badge-warning {
+    @apply bg-warning/20 border-warning/30 text-warning-light;
+  }
+  
+  .badge-error {
+    @apply bg-error/20 border-error/30 text-error-light;
+  }
+  
+  .badge-info {
+    @apply bg-info/20 border-info/30 text-info-light;
+  }
+  
+  .badge-primary {
+    @apply bg-brand-primary/20 border-brand-primary/30 text-success-light;
+  }
+  
+  /* =============================================================================
+   * ALERT COMPONENTS
+   * ============================================================================= */
+  
+  .alert {
+    @apply p-4 rounded-lg border;
+    @apply transition-all duration-200;
+    backdrop-filter: blur(var(--blur-md));
+  }
+  
+  .alert-success {
+    @apply bg-success/15 border-success/30 text-success-light;
+  }
+  
+  .alert-warning {
+    @apply bg-warning/15 border-warning/30 text-warning-light;
+  }
+  
+  .alert-error {
+    @apply bg-error/15 border-error/30 text-error-light;
+  }
+  
+  .alert-info {
+    @apply bg-info/15 border-info/30 text-info-light;
+  }
+  
+  /* =============================================================================
+   * NAVIGATION COMPONENTS
+   * ============================================================================= */
+  
+  .nav-glass {
+    background: rgba(0, 0, 0, 0.3);
+    @apply border-r border-border;
+    backdrop-filter: blur(var(--blur-xl));
+  }
+  
+  .header-glass {
+    background: rgba(0, 0, 0, 0.2);
+    @apply border-b border-border;
+    backdrop-filter: blur(var(--blur-xl));
+  }
+  
+  /* =============================================================================
+   * MODAL COMPONENTS
+   * ============================================================================= */
+  
+  .modal-backdrop {
+    @apply fixed inset-0 z-modal-backdrop;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(var(--blur-sm));
+  }
+  
+  .modal-glass {
+    @apply bg-surface-glass border border-border-light rounded-2xl;
+    @apply shadow-glass-xl z-modal;
+    backdrop-filter: blur(var(--blur-xl));
+  }
+  
+  /* =============================================================================
+   * TABLE COMPONENTS
+   * ============================================================================= */
+  
+  .table-glass {
+    @apply bg-surface-glass border border-border rounded-xl overflow-hidden;
+    backdrop-filter: blur(var(--blur-md));
+  }
+  
+  .table-glass thead {
+    @apply bg-surface-glass border-b border-border;
+  }
+  
+  .table-glass tbody tr {
+    @apply border-b border-border/50 transition-colors duration-150;
+  }
+  
+  .table-glass tbody tr:hover {
+    @apply bg-surface-glass;
+  }
+  
+  /* =============================================================================
+   * LOADING & SKELETON COMPONENTS
+   * ============================================================================= */
+  
+  .loading-spinner {
+    @apply animate-spin h-6 w-6 rounded-full;
+    border: 2px solid var(--border);
+    border-top-color: var(--brand-primary);
+    filter: drop-shadow(0 0 6px var(--brand-primary)/50);
+  }
+  
+  .skeleton {
+    @apply bg-surface-glass rounded animate-pulse;
+    background: linear-gradient(90deg, var(--surface-glass) 25%, rgba(255,255,255,0.1) 50%, var(--surface-glass) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* =============================================================================
+   * SCROLLBAR STYLING
+   * ============================================================================= */
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--surface-glass);
+    border-radius: var(--radius-lg);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-primary)/50;
+    border-color: var(--brand-primary)/30;
+  }
+  
+  /* Firefox scrollbar support */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-light) var(--surface-glass);
+  }
+  
+  /* =============================================================================
+   * UTILITY COMPONENTS
+   * ============================================================================= */
+  
+  /* Glass Text Utilities */
+  .text-glass-primary { @apply text-text-primary; }
+  .text-glass-secondary { @apply text-text-secondary; }
+  .text-glass-muted { @apply text-text-muted; }
+  .text-glass-disabled { @apply text-text-disabled; }
+  
+  /* Glass Surface Utilities */
+  .surface-glass { @apply bg-surface-glass; }
+  .surface-elevated { @apply bg-surface-elevated; }
+  
+  /* Focus Ring Utilities */
+  .focus-ring {
+    @apply focus:outline-none focus:shadow-focus;
+  }
+  
+  .focus-ring-error {
+    @apply focus:outline-none focus:shadow-focus-error;
+  }
+  
+  /* Hover Glow Effect */
+  .hover-glow {
+    @apply transition-all duration-200;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow-sm);
+  }
+  
+  /* Interactive Scale */
+  .interactive-scale {
+    @apply transition-transform duration-200;
+  }
+  
+  .interactive-scale:hover {
+    @apply scale-105;
+  }
+  
+  .interactive-scale:active {
+    @apply scale-100;
+  }
+}

@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../services/supabase';
 import type { Installation, DashboardStats } from '../types';
+import type { RealtimeChannel } from '@supabase/supabase-js';
+import { DatabaseErrorHandler, useErrorHandler } from '../utils/errorHandling';
 
 interface InstallationWithAddress extends Omit<Installation, 'address'> {
   address: {
@@ -21,98 +23,105 @@ export const useInstallations = () => {
   const [installations, setInstallations] = useState<Installation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { withErrorHandling } = useErrorHandler();
 
   const fetchInstallations = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
+    setIsLoading(true);
+    setError(null);
 
-      const { data, error: installationsError } = await supabase
-        .from('installations')
-        .select(`
-          id,
-          job_id,
-          store_number,
-          customer_name,
-          customer_phone,
-          customer_email,
-          scheduled_date,
-          scheduled_time,
-          duration,
-          status,
-          priority,
-          installation_type,
-          specifications,
-          requirements,
-          region,
-          notes,
-          lead_id,
-          assistant_id,
-          estimated_revenue,
-          actual_revenue,
-          customer_satisfaction_score,
-          created_at,
-          updated_at,
-          addresses!inner (
-            id,
-            street,
-            city,
-            state,
-            zip_code,
-            coordinates
-          ),
-          lead:users!lead_id (
-            first_name,
-            last_name
-          ),
-          assistant:users!assistant_id (
-            first_name,
-            last_name
-          )
-        `);
-      
-      if (installationsError) {
-        throw installationsError;
+    const { data, error: fetchError } = await withErrorHandling(
+      async () => {
+        const { data, error: installationsError } = await supabase
+          .from('installation_details')
+          .select('*');
+        
+        if (installationsError) {
+          throw installationsError;
+        }
+
+        const transformedData: Installation[] = data.map((item: any) => {
+          // Parse address from the combined address string
+          const addressParts = item.address?.split(', ') || [];
+          const zipStateParts = addressParts[addressParts.length - 1]?.split(' ') || [];
+          const zipCode = zipStateParts[zipStateParts.length - 1] || '';
+          const state = zipStateParts.slice(0, -1).join(' ') || '';
+          
+          return {
+            id: item.id,
+            customerName: item.customer_name,
+            customerPhone: item.customer_phone || '',
+            customerEmail: item.customer_email || '',
+            address: {
+              street: addressParts[0] || '',
+              city: addressParts[1] || '',
+              state: state,
+              zipCode: zipCode,
+              coordinates: undefined // Not available in view
+            },
+            scheduledDate: item.scheduled_date,
+            scheduledTime: item.scheduled_time || '09:00',
+            duration: item.duration || 240,
+            status: item.status,
+            priority: item.priority,
+            notes: item.notes || '',
+            leadId: item.lead_id,
+            assistantId: item.assistant_id,
+            createdAt: item.created_at,
+            updatedAt: item.updated_at
+          };
+        });
+
+        return transformedData;
+      },
+      'fetchInstallations',
+      { 
+        maxRetries: 3, 
+        retryDelay: 1000,
+        retryOnNetworkError: true 
       }
+    );
 
-      const transformedData: Installation[] = data.map((item: any) => ({
-        id: item.id,
-        customerName: item.customer_name,
-        customerPhone: item.customer_phone || '',
-        customerEmail: item.customer_email || '',
-        address: {
-          street: item.addresses.street,
-          city: item.addresses.city,
-          state: item.addresses.state,
-          zipCode: item.addresses.zip_code,
-          coordinates: item.addresses.coordinates ? {
-            lat: item.addresses.coordinates.x,
-            lng: item.addresses.coordinates.y
-          } : undefined
-        },
-        scheduledDate: item.scheduled_date,
-        scheduledTime: item.scheduled_time || '09:00',
-        duration: item.duration || 240,
-        status: item.status,
-        priority: item.priority,
-        notes: item.notes,
-        leadId: item.lead_id,
-        assistantId: item.assistant_id,
-        createdAt: item.created_at,
-        updatedAt: item.updated_at
-      }));
-
-      setInstallations(transformedData);
-    } catch (err) {
-      console.error('Error fetching installations:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch installations');
-    } finally {
-      setIsLoading(false);
+    if (data) {
+      setInstallations(data);
+    } else if (fetchError) {
+      const errorMessage = DatabaseErrorHandler.getErrorMessage(fetchError);
+      setError(errorMessage);
+      
+      // If it's a network error, keep existing data if available
+      if (fetchError.isNetworkError && installations.length === 0) {
+        console.log('Network error and no cached data available');
+      }
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchInstallations();
+
+    // Set up real-time subscription for installations
+    const channel: RealtimeChannel = supabase
+      .channel('installations-realtime')
+      .on('postgres_changes', 
+        { 
+          event: '*', 
+          schema: 'public', 
+          table: 'installations' 
+        }, 
+        (payload) => {
+          console.log('Installation real-time update:', payload);
+          // Refetch installations when changes occur
+          fetchInstallations();
+        }
+      )
+      .subscribe((status) => {
+        console.log('Installation subscription status:', status);
+      });
+
+    // Cleanup subscription on unmount
+    return () => {
+      channel.unsubscribe();
+    };
   }, []);
 
   return {
@@ -211,66 +220,45 @@ export const useInstallationsForDate = (date: string) => {
       setError(null);
 
       const { data, error: installationsError } = await supabase
-        .from('installations')
-        .select(`
-          id,
-          job_id,
-          customer_name,
-          customer_phone,
-          customer_email,
-          scheduled_date,
-          scheduled_time,
-          duration,
-          status,
-          priority,
-          installation_type,
-          region,
-          notes,
-          lead_id,
-          assistant_id,
-          addresses!inner (
-            street,
-            city,
-            state,
-            zip_code
-          ),
-          lead:users!lead_id (
-            first_name,
-            last_name
-          ),
-          assistant:users!assistant_id (
-            first_name,
-            last_name
-          )
-        `)
+        .from('installation_details')
+        .select('*')
         .eq('scheduled_date', date);
       
       if (installationsError) {
         throw installationsError;
       }
 
-      const transformedData: Installation[] = data.map((item: any) => ({
-        id: item.id,
-        customerName: item.customer_name,
-        customerPhone: item.customer_phone || '',
-        customerEmail: item.customer_email || '',
-        address: {
-          street: item.addresses.street,
-          city: item.addresses.city,
-          state: item.addresses.state,
-          zipCode: item.addresses.zip_code
-        },
-        scheduledDate: item.scheduled_date,
-        scheduledTime: item.scheduled_time || '09:00',
-        duration: item.duration || 240,
-        status: item.status,
-        priority: item.priority,
-        notes: item.notes,
-        leadId: item.lead_id,
-        assistantId: item.assistant_id,
-        createdAt: item.created_at || new Date().toISOString(),
-        updatedAt: item.updated_at || new Date().toISOString()
-      }));
+      const transformedData: Installation[] = data.map((item: any) => {
+        // Parse address from the combined address string
+        const addressParts = item.address?.split(', ') || [];
+        const zipStateParts = addressParts[addressParts.length - 1]?.split(' ') || [];
+        const zipCode = zipStateParts[zipStateParts.length - 1] || '';
+        const state = zipStateParts.slice(0, -1).join(' ') || '';
+        
+        return {
+          id: item.id,
+          customerName: item.customer_name,
+          customerPhone: item.customer_phone || '',
+          customerEmail: item.customer_email || '',
+          address: {
+            street: addressParts[0] || '',
+            city: addressParts[1] || '',
+            state: state,
+            zipCode: zipCode,
+            coordinates: undefined // Not available in view
+          },
+          scheduledDate: item.scheduled_date,
+          scheduledTime: item.scheduled_time || '09:00',
+          duration: item.duration || 240,
+          status: item.status,
+          priority: item.priority,
+          notes: item.notes || '',
+          leadId: item.lead_id,
+          assistantId: item.assistant_id,
+          createdAt: item.created_at || new Date().toISOString(),
+          updatedAt: item.updated_at || new Date().toISOString()
+        };
+      });
 
       setInstallations(transformedData);
     } catch (err) {
