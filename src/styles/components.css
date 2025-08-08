@@ -570,7 +570,7 @@
   .header-glass {
     background: rgba(0, 0, 0, 0.3);
     @apply border-b border-border;
-    padding: var(--space-4) var(--space-6); /* 16px vertical, 24px horizontal */
+    padding: var(--space-2) var(--space-6); /* 8px vertical, 24px horizontal */
   }
 
   /* Navigation Menu Items */

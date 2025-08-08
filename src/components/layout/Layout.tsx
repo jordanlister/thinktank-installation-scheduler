@@ -68,8 +68,8 @@ export const Layout: React.FC = () => {
         {/* Main content area - Full width with left margin for collapsed sidebar */}
         <div className="ml-16 transition-none"
              style={{ 
-               minHeight: 'calc(100vh - 4rem)',
-               marginTop: '4rem' // Add top margin to push content below header
+               minHeight: 'calc(100vh - 3rem)',
+               marginTop: '3rem' // Add top margin to push content below header
              }}>
 
           {/* Main content */}

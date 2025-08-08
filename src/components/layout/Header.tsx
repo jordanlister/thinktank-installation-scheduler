@@ -40,8 +40,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
   }, []);
 
   return (
-    <header className="header-glass fixed top-0 left-0 right-0 z-40">
-      <div className="flex justify-between items-center pr-4 sm:pr-6 lg:pr-8 h-16">
+    <header className="header-glass fixed top-0 left-0 right-0 z-60">
+      <div className="flex justify-between items-center pr-4 sm:pr-6 lg:pr-8 h-12">
         {/* Left section - Logo and menu toggle */}
         <div className="flex items-center">
           <div className="flex items-center pl-4">

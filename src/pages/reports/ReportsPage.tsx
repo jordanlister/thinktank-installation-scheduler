@@ -92,23 +92,20 @@ const ReportsPage: React.FC = () => {
 
       {/* Controls */}
       <div className="flex justify-between items-center mb-6">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <Calendar className="h-4 w-4 text-white/70" />
-            <input
-              type="date"
-              value={selectedDateRange.start}
-              onChange={(e) => setSelectedDateRange(prev => ({ ...prev, start: e.target.value }))}
-              className="form-input text-sm"
-            />
-            <span className="text-white/70">to</span>
-            <input
-              type="date"
-              value={selectedDateRange.end}
-              onChange={(e) => setSelectedDateRange(prev => ({ ...prev, end: e.target.value }))}
-              className="form-input text-sm"
-            />
-          </div>
+        <div className="flex items-center space-x-2">
+          <input
+            type="date"
+            value={selectedDateRange.start}
+            onChange={(e) => setSelectedDateRange(prev => ({ ...prev, start: e.target.value }))}
+            className="form-input text-sm rounded-xl"
+          />
+          <span className="text-white/70">to</span>
+          <input
+            type="date"
+            value={selectedDateRange.end}
+            onChange={(e) => setSelectedDateRange(prev => ({ ...prev, end: e.target.value }))}
+            className="form-input text-sm rounded-xl"
+          />
         </div>
         
         <div className="flex items-center space-x-3">
@@ -121,81 +118,13 @@ const ReportsPage: React.FC = () => {
           </button>
           <button 
             onClick={() => setShowReportGenerator(true)}
-            className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
           >
-            <Plus className="h-4 w-4 mr-2" />
-            Generate Report
+            + Generate Report
           </button>
         </div>
       </div>
 
-      {/* Quick Actions */}
-      <div className="card">
-        <div className="card-body p-6">
-          <h2 className="text-xl font-semibold text-glass-primary mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button 
-              onClick={handleGenerateScheduleReport}
-              disabled={generatingReports.size > 0}
-              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-500/20 rounded-lg">
-                  {generatingReports.has('schedule') ? (
-                    <RefreshCw className="h-5 w-5 text-blue-400 animate-spin" />
-                  ) : (
-                    <Calendar className="h-5 w-5 text-blue-400" />
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-medium text-glass-primary">Schedule Report</h3>
-                  <p className="text-sm text-glass-muted">Generate route schedule PDF</p>
-                </div>
-              </div>
-            </button>
-            
-            <button 
-              onClick={() => handleGeneratePerformanceReport('month')}
-              disabled={generatingReports.size > 0}
-              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-green-500/20 rounded-lg">
-                  {generatingReports.has('performance') ? (
-                    <RefreshCw className="h-5 w-5 text-green-400 animate-spin" />
-                  ) : (
-                    <TrendingUp className="h-5 w-5 text-green-400" />
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-medium text-glass-primary">Performance Report</h3>
-                  <p className="text-sm text-glass-muted">Team performance analytics</p>
-                </div>
-              </div>
-            </button>
-
-            <button 
-              onClick={handleGenerateAnalyticsReport}
-              disabled={generatingReports.size > 0}
-              className="glass p-4 rounded-lg hover:shadow-glass-lg transition-all text-left disabled:opacity-50"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="p-2 bg-purple-500/20 rounded-lg">
-                  {generatingReports.has('analytics') ? (
-                    <RefreshCw className="h-5 w-5 text-purple-400 animate-spin" />
-                  ) : (
-                    <BarChart3 className="h-5 w-5 text-purple-400" />
-                  )}
-                </div>
-                <div>
-                  <h3 className="font-medium text-glass-primary">Analytics Dashboard</h3>
-                  <p className="text-sm text-glass-muted">Comprehensive analytics report</p>
-                </div>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Recent Reports */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

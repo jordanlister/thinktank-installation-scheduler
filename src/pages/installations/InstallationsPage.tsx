@@ -144,75 +144,45 @@ const InstallationsPage: React.FC = () => {
           </button>
           <button 
             onClick={handleNewInstallation}
-            className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
           >
-            <Plus className="h-4 w-4 mr-2 inline" />
-            New Installation
+            + New Installation
           </button>
         </div>
       </div>
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-        <div className="metric-card hover:scale-105 transition-transform">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-glass-muted">Total Installations</p>
-              <p className="text-2xl font-bold mt-1 text-glass-primary">{stats.total}</p>
-            </div>
-            <div className="p-3 rounded-lg bg-blue-500/20 text-blue-300">
-              <MapPin className="h-6 w-6" />
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card hover:scale-105 transition-transform">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-glass-muted">Pending</p>
-              <p className="text-2xl font-bold mt-1 text-glass-primary">{stats.pending}</p>
-            </div>
-            <div className="p-3 rounded-lg bg-yellow-500/20 text-yellow-300">
-              <MapPin className="h-6 w-6" />
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card hover:scale-105 transition-transform">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-glass-muted">Scheduled</p>
-              <p className="text-2xl font-bold mt-1 text-glass-primary">{stats.scheduled}</p>
-            </div>
-            <div className="p-3 rounded-lg bg-blue-500/20 text-blue-300">
-              <MapPin className="h-6 w-6" />
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card hover:scale-105 transition-transform">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-glass-muted">In Progress</p>
-              <p className="text-2xl font-bold mt-1 text-glass-primary">{stats.inProgress}</p>
-            </div>
-            <div className="p-3 rounded-lg bg-orange-500/20 text-orange-300">
-              <MapPin className="h-6 w-6" />
-            </div>
-          </div>
-        </div>
-
-        <div className="metric-card hover:scale-105 transition-transform">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-glass-muted">Completed</p>
-              <p className="text-2xl font-bold mt-1 text-glass-primary">{stats.completed}</p>
-            </div>
-            <div className="p-3 rounded-lg bg-green-500/20 text-green-300">
-              <MapPin className="h-6 w-6" />
-            </div>
-          </div>
-        </div>
+        <MetricCard
+          title="Total Installations"
+          value={stats.total}
+          icon={MapPin}
+          color="blue"
+        />
+        <MetricCard
+          title="Pending"
+          value={stats.pending}
+          icon={MapPin}
+          color="yellow"
+        />
+        <MetricCard
+          title="Scheduled"
+          value={stats.scheduled}
+          icon={MapPin}
+          color="blue"
+        />
+        <MetricCard
+          title="In Progress"
+          value={stats.inProgress}
+          icon={MapPin}
+          color="red"
+        />
+        <MetricCard
+          title="Completed"
+          value={stats.completed}
+          icon={MapPin}
+          color="green"
+        />
       </div>
 
       {/* Filters and Search */}
@@ -359,6 +329,47 @@ const InstallationsPage: React.FC = () => {
           </div>
         </>
       )}
+    </div>
+  );
+};
+
+// Metric Card Component
+const MetricCard: React.FC<{
+  title: string;
+  value: string | number;
+  icon: React.ComponentType<any>;
+  color: string;
+  alert?: boolean;
+}> = ({ title, value, icon: Icon, color, alert }) => {
+  const iconColors = {
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
+    purple: 'text-purple-400',
+    indigo: 'text-indigo-400',
+    gray: 'text-white/60'
+  };
+
+  const actualColor = alert ? 'red' : color;
+
+  return (
+    <div className="card group rounded-xl transition-all duration-300 min-w-0">
+      <div className="card-body p-4">
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-medium text-white/70 mb-1 leading-tight">
+              {title}
+            </p>
+            <p className="text-2xl font-bold text-white leading-none">
+              {value}
+            </p>
+          </div>
+          <div className="ml-3 flex-shrink-0">
+            <Icon className={`h-6 w-6 ${iconColors[actualColor as keyof typeof iconColors]}`} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

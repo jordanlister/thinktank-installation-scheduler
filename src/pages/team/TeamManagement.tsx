@@ -69,29 +69,25 @@ const TeamManagement: React.FC = () => {
       title: 'Total Team Members', 
       value: totalTeamMembers.toString(), 
       icon: Users, 
-      color: 'from-accent-500/20 to-accent-600/10', 
-      iconColor: 'text-accent-400' 
+      color: 'blue'
     },
     { 
       title: 'Available Today', 
       value: availableToday.toString(), 
       icon: Users, 
-      color: 'from-success-500/20 to-success-600/10', 
-      iconColor: 'text-success-400' 
+      color: 'green'
     },
     { 
       title: 'On Assignment', 
       value: onAssignment.toString(), 
       icon: AlertTriangle, 
-      color: 'from-warning-500/20 to-warning-600/10', 
-      iconColor: 'text-warning-400' 
+      color: 'yellow'
     },
     { 
       title: 'Avg Performance', 
       value: `${avgPerformance}%`, 
       icon: Users, 
-      color: 'from-purple-500/20 to-purple-600/10', 
-      iconColor: 'text-purple-400' 
+      color: 'purple'
     }
   ];
 
@@ -141,26 +137,13 @@ const TeamManagement: React.FC = () => {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {teamStats.map((stat, index) => (
-          <div key={stat.title} className="card-stat group rounded-xl transition-all duration-300">
-            <div className="card-body p-6">
-              <div className="flex items-center justify-between">
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-white/70 mb-1">
-                    {stat.title}
-                  </p>
-                  <p className="text-3xl font-bold text-white">
-                    {stat.value}
-                  </p>
-                </div>
-                <div className={`h-14 w-14 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center shadow-lg`}>
-                  <stat.icon className={`h-7 w-7 ${stat.iconColor}`} />
-                </div>
-              </div>
-              
-              {/* Subtle glow effect on hover */}
-              <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none`}></div>
-            </div>
-          </div>
+          <MetricCard
+            key={stat.title}
+            title={stat.title}
+            value={stat.value}
+            icon={stat.icon}
+            color={stat.color}
+          />
         ))}
       </div>
 
@@ -185,75 +168,109 @@ const TeamManagement: React.FC = () => {
               </button>
               <button 
                 onClick={handleAddMember}
-                className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
               >
-                <Plus className="h-4 w-4 mr-2" />
-                Add Member
+                + Add
               </button>
             </div>
           </div>
         </div>
-        <div className="card-body">
+        <div className="card-body p-0">
           {teamMembers.length > 0 ? (
-            <div className="space-y-4">
-              {teamMembers.map((member) => (
+            <div className="divide-y divide-white/10 pt-6">
+              {teamMembers.map((member, index) => (
                 <div 
                   key={member.id}
-                  className="glass-subtle p-6 rounded-xl hover:bg-white/15 transition-all duration-200"
+                  className="p-6 hover:bg-white/5"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4 cursor-pointer flex-1" onClick={() => handleViewMember(member)}>
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg ${
-                        member.isActive ? 'bg-success-500/20 border border-success-500/30' : 'bg-white/10 border border-white/20'
-                      }`}>
-                        <span className="text-lg font-semibold text-white">
-                          {member.firstName[0]}{member.lastName[0]}
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2">
-                          <h3 className="font-semibold text-white">
-                            {member.firstName} {member.lastName}
-                          </h3>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            member.isActive 
-                              ? 'bg-success-500/20 text-success-300 border border-success-500/30'
-                              : 'bg-white/10 text-white/70 border border-white/20'
-                          }`}>
-                            {member.isActive ? 'Active' : 'Inactive'}
-                          </span>
-                        </div>
-                        <p className="text-sm text-white/70">
-                          {member.role.charAt(0).toUpperCase() + member.role.slice(1)} • {member.region}
-                        </p>
-                        <div className="flex items-center space-x-4 mt-2 text-sm text-white/60">
-                          <span>Skills: {member.skills.length}</span>
-                          <span>Certifications: {member.certifications.length}</span>
-                          <span>Capacity: {member.capacity}/day</span>
-                        </div>
-                      </div>
+                  <div className="flex items-start space-x-4">
+                    {/* Avatar */}
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      member.isActive ? 'bg-success-500/20 border border-success-500/30' : 'bg-white/10 border border-white/20'
+                    }`}>
+                      <span className="text-sm font-semibold text-white">
+                        {member.firstName[0]}{member.lastName[0]}
+                      </span>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      {member.performanceMetrics && (
-                        <div className="text-right">
-                          <p className="text-sm font-medium text-white">
-                            {Math.round(member.performanceMetrics.completionRate * 100)}% completion
+                    
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <p className="text-sm font-medium text-white">
+                              {member.firstName} {member.lastName}
+                            </p>
+                            <span className={`px-2 py-1 rounded text-xs font-medium ${
+                              member.isActive 
+                                ? 'bg-green-500/20 text-green-400'
+                                : 'bg-gray-500/20 text-gray-400'
+                            }`}>
+                              {member.isActive ? 'Active' : 'Inactive'}
+                            </span>
+                          </div>
+                          <p className="text-sm text-white/70">
+                            {member.role.charAt(0).toUpperCase() + member.role.slice(1)} • {member.region}
                           </p>
-                          <p className="text-xs text-white/60">
-                            {member.performanceMetrics.totalJobs} jobs completed
-                          </p>
+                        </div>
+                        
+                        {member.performanceMetrics && (
+                          <div className="text-right">
+                            <p className="text-sm text-white/70">
+                              {Math.round(member.performanceMetrics.completionRate * 100)}% completion
+                            </p>
+                            <p className="text-xs text-white/50">
+                              {member.performanceMetrics.totalJobs} jobs completed
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Metrics */}
+                      <div className="flex items-center space-x-6 text-sm text-white/70">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium">Skills:</span>
+                          <span className="text-white/60">{member.skills.length}</span>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium">Certifications:</span>
+                          <span className="text-white/60">{member.certifications.length}</span>
+                        </div>
+                        
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium">Capacity:</span>
+                          <span className="text-white/60">{member.capacity}/day</span>
+                        </div>
+                      </div>
+                      
+                      {/* Specializations */}
+                      {member.specializations.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {member.specializations.map((spec, idx) => (
+                            <span 
+                              key={idx}
+                              className="px-2 py-1 bg-accent-500/20 text-accent-300 border border-accent-500/30 rounded text-xs"
+                            >
+                              {spec}
+                            </span>
+                          ))}
                         </div>
                       )}
+                    </div>
+                    
+                    {/* Actions */}
+                    <div className="flex items-center space-x-2 flex-shrink-0">
                       <button 
                         onClick={() => handleEditMember(member)}
-                        className="p-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
+                        className="text-white/50 hover:text-white/80"
                         title="Edit Member"
                       >
                         <Edit className="h-4 w-4" />
                       </button>
                       <button 
                         onClick={() => handleMemberSchedule(member)}
-                        className="p-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200"
+                        className="text-white/50 hover:text-white/80"
                         title="Manage Schedule"
                         disabled={isUpdating}
                       >
@@ -261,32 +278,16 @@ const TeamManagement: React.FC = () => {
                       </button>
                     </div>
                   </div>
-                  
-                  {/* Specializations */}
-                  {member.specializations.length > 0 && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {member.specializations.map((spec, idx) => (
-                        <span 
-                          key={idx}
-                          className="px-2 py-1 bg-accent-500/20 text-accent-300 border border-accent-500/30 rounded-full text-xs"
-                        >
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="h-20 w-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Users className="h-10 w-10 text-white/40" />
+            <div className="flex flex-col items-center justify-center py-16 px-6">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                <Users className="h-8 w-8 text-white/60" />
               </div>
-              <p className="text-white/80 text-lg mb-2">
-                No team members found
-              </p>
-              <p className="text-white/50">
+              <h3 className="text-xl font-semibold text-white mb-3">No Team Members Found</h3>
+              <p className="text-white/70 text-center max-w-md">
                 Add team members to get started with team management
               </p>
             </div>
@@ -317,6 +318,47 @@ const TeamManagement: React.FC = () => {
         }}
         onScheduleUpdated={handleScheduleUpdated}
       />
+    </div>
+  );
+};
+
+// Metric Card Component
+const MetricCard: React.FC<{
+  title: string;
+  value: string | number;
+  icon: React.ComponentType<any>;
+  color: string;
+  alert?: boolean;
+}> = ({ title, value, icon: Icon, color, alert }) => {
+  const iconColors = {
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
+    purple: 'text-purple-400',
+    indigo: 'text-indigo-400',
+    gray: 'text-white/60'
+  };
+
+  const actualColor = alert ? 'red' : color;
+
+  return (
+    <div className="card group rounded-xl transition-all duration-300 min-w-0">
+      <div className="card-body p-4">
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-medium text-white/70 mb-1 leading-tight">
+              {title}
+            </p>
+            <p className="text-2xl font-bold text-white leading-none">
+              {value}
+            </p>
+          </div>
+          <div className="ml-3 flex-shrink-0">
+            <Icon className={`h-6 w-6 ${iconColors[actualColor as keyof typeof iconColors]}`} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
