@@ -32,6 +32,7 @@ import type {
 
 interface TeamAssignmentMatrixProps {
   viewMode: 'grid' | 'list';
+  onViewModeChange: (mode: 'grid' | 'list') => void;
   dateRange: {
     start: string;
     end: string;
@@ -50,6 +51,7 @@ interface TeamAssignmentMatrixProps {
  */
 const TeamAssignmentMatrix: React.FC<TeamAssignmentMatrixProps> = ({ 
   viewMode, 
+  onViewModeChange,
   dateRange 
 }) => {
   const { 
@@ -213,23 +215,48 @@ const TeamAssignmentMatrix: React.FC<TeamAssignmentMatrixProps> = ({
           </div>
         </div>
         
-        <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 backdrop-filter backdrop-blur-md">
-          <div className="flex items-center space-x-6 text-sm">
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-green-400 rounded-full shadow-sm"></div>
-              <span className="text-white/90 font-medium">Available</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-blue-400 rounded-full shadow-sm"></div>
-              <span className="text-white/90 font-medium">Assigned</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-red-400 rounded-full shadow-sm"></div>
-              <span className="text-white/90 font-medium">Overbooked</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-3 h-3 bg-yellow-400 rounded-full shadow-sm"></div>
-              <span className="text-white/90 font-medium">Conflicts</span>
+        <div className="flex items-center space-x-4">
+          <div className="glass-subtle rounded-xl p-1 flex space-x-1">
+            <button
+              onClick={() => onViewModeChange('grid')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'grid'
+                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
+                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => onViewModeChange('list')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'list'
+                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
+                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
+              }`}
+            >
+              List
+            </button>
+          </div>
+          
+          <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 backdrop-filter backdrop-blur-md">
+            <div className="flex items-center space-x-6 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-green-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Available</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-blue-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Assigned</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-red-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Overbooked</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-yellow-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Conflicts</span>
+              </div>
             </div>
           </div>
         </div>

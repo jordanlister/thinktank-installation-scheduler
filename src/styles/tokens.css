@@ -52,6 +52,31 @@
   --info: #06b6d4;
   --info-light: #22d3ee;
   --info-dark: #0891b2;
+
+  /* Extended Color Palette for UI Components */
+  --accent-400: #4299e1;
+  --accent-500: #3182ce;
+  --accent-600: #2b77cb;
+
+  --success-400: #4ade80;
+  --success-500: #22c55e;
+  --success-600: #16a34a;
+
+  --warning-400: #facc15;
+  --warning-500: #eab308;
+  --warning-600: #ca8a04;
+
+  --error-400: #f87171;
+  --error-500: #ef4444;
+  --error-600: #dc2626;
+
+  --purple-400: #c084fc;
+  --purple-500: #a855f7;
+  --purple-600: #9333ea;
+
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
   
   /* =============================================================================
    * GRADIENTS

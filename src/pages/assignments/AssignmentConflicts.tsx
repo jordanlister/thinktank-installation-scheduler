@@ -498,27 +498,31 @@ const StatCard: React.FC<{
   color: string;
   alert?: boolean;
 }> = ({ title, value, icon: Icon, color, alert }) => {
-  const colorClasses = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    yellow: 'bg-yellow-50 text-yellow-600',
-    red: 'bg-red-50 text-red-600',
-    orange: 'bg-orange-50 text-orange-600',
-    gray: 'bg-white/10 text-glass-secondary'
+  const iconColors = {
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
+    orange: 'text-orange-400',
+    gray: 'text-white/60'
   };
 
+  const actualColor = alert ? 'red' : color;
+
   return (
-    <div className={`card ${alert ? 'ring-2 ring-red-500 ring-opacity-50' : ''}`}>
+    <div className="card group rounded-xl transition-all duration-300 min-w-0">
       <div className="card-body p-4">
-        <div className="flex items-center">
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-            colorClasses[color as keyof typeof colorClasses]
-          }`}>
-            <Icon className="h-4 w-4" />
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-medium text-white/70 mb-1 leading-tight">
+              {title}
+            </p>
+            <p className="text-2xl font-bold text-white leading-none">
+              {value}
+            </p>
           </div>
-          <div>
-            <p className="text-sm font-medium text-glass-secondary">{title}</p>
-            <p className="text-2xl font-bold text-glass-primary">{value}</p>
+          <div className="ml-3 flex-shrink-0">
+            <Icon className={`h-6 w-6 ${iconColors[actualColor as keyof typeof iconColors]}`} />
           </div>
         </div>
       </div>

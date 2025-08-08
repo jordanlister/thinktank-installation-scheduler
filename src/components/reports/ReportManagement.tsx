@@ -487,15 +487,15 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="page-container">
       {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+        <div className="alert alert-error mb-6">
           <div className="flex items-center gap-2">
             <span className="font-medium">Error:</span>
             <span>{error}</span>
             <button
               onClick={() => setError(null)}
-              className="ml-auto text-red-400 hover:text-red-600"
+              className="ml-auto text-error-light hover:text-error"
             >
               ×
             </button>
@@ -568,53 +568,58 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   };
 
   return (
-    <div className="card hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${getTypeColor()}`}>
-            {getTypeIcon()}
+    <div className="card card-structured hover:shadow-md transition-shadow">
+      <div className="card-header">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <div className={`p-2 rounded-lg ${getTypeColor()}`}>
+              {getTypeIcon()}
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">{template.name}</h3>
+              <p className="text-sm text-text-secondary capitalize">
+                {template.type?.replace('_', ' ')}
+              </p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-gray-900">{template.name}</h3>
-            <p className="text-sm text-gray-600 capitalize">
-              {template.type?.replace('_', ' ')}
-            </p>
+          <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+            template.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+          }`}>
+            {template.isActive ? 'Active' : 'Inactive'}
           </div>
-        </div>
-        <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-          template.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-        }`}>
-          {template.isActive ? 'Active' : 'Inactive'}
         </div>
       </div>
 
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-        {('description' in template ? template.description : template.metadata?.description) || 'No description available'}
-      </p>
+      <div className="card-body">
 
-      <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
-        <span>Version {template.version}</span>
-        <span>Updated {new Date(template.updatedAt).toLocaleDateString()}</span>
+        <p className="text-text-secondary text-sm line-clamp-2">
+          {('description' in template ? template.description : template.metadata?.description) || 'No description available'}
+        </p>
+
+        <div className="flex items-center justify-between text-xs text-text-muted mt-4">
+          <span>Version {template.version}</span>
+          <span>Updated {new Date(template.updatedAt).toLocaleDateString()}</span>
+        </div>
       </div>
 
-      <div className="flex items-center gap-2">
+      <div className="card-footer">
         <button
           onClick={() => onPreview(template)}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-elevated rounded-md transition-colors"
         >
           <Eye size={14} />
           Preview
         </button>
         <button
           onClick={() => onEdit(template)}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm text-brand-primary hover:text-success-light hover:bg-surface-elevated rounded-md transition-colors"
         >
           <Edit3 size={14} />
           Edit
         </button>
         <button
           onClick={() => onSchedule(template)}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm text-green-600 hover:text-green-700 hover:bg-green-50 rounded-md transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm text-success hover:text-success-light hover:bg-surface-elevated rounded-md transition-colors"
         >
           <Calendar size={14} />
           Schedule
@@ -626,86 +631,92 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
 
 // Placeholder components (would be implemented separately)
 const TemplateEditorComponent: React.FC<any> = ({ template, onSave, onCancel, isSaving }) => (
-  <div className="card">
-    <div className="card-body">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white">Edit Template: {template.name}</h2>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onCancel}
-          className="btn-ghost"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={onSave}
-          disabled={isSaving}
-          className="btn-primary flex items-center gap-2"
-        >
-          {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />}
-          {isSaving ? 'Saving...' : 'Save'}
-        </button>
+  <div className="card card-structured">
+    <div className="card-header">
+      <div className="flex items-center justify-between">
+        <h2>Edit Template: {template.name}</h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onCancel}
+            className="btn-ghost"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onSave}
+            disabled={isSaving}
+            className="btn-primary flex items-center gap-2"
+          >
+            {isSaving ? <RefreshCw className="animate-spin" size={16} /> : <Save size={16} />}
+            {isSaving ? 'Saving...' : 'Save'}
+          </button>
         </div>
       </div>
-      <div className="text-white/70">
+    </div>
+    <div className="card-body">
+      <p className="text-text-secondary">
         Template editor would be implemented here with rich text editing, variable insertion, and live preview.
-      </div>
+      </p>
     </div>
   </div>
 );
 
 const TemplatePreview: React.FC<any> = ({ template, onBack, onEdit }) => (
-  <div className="card">
-    <div className="card-body">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white">Preview: {template.name}</h2>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onBack}
-          className="btn-ghost"
-        >
-          Back
-        </button>
-        <button
-          onClick={onEdit}
-          className="btn-primary flex items-center gap-2"
-        >
-          <Edit3 size={16} />
-          Edit
-        </button>
+  <div className="card card-structured">
+    <div className="card-header">
+      <div className="flex items-center justify-between">
+        <h2>Preview: {template.name}</h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onBack}
+            className="btn-ghost"
+          >
+            Back
+          </button>
+          <button
+            onClick={onEdit}
+            className="btn-primary flex items-center gap-2"
+          >
+            <Edit3 size={16} />
+            Edit
+          </button>
         </div>
       </div>
-      <div className="text-white/70">
+    </div>
+    <div className="card-body">
+      <p className="text-text-secondary">
         Template preview would be rendered here with sample data.
-      </div>
+      </p>
     </div>
   </div>
 );
 
 const ReportScheduler: React.FC<any> = ({ template, onSave, onCancel }) => (
-  <div className="card">
-    <div className="card-body">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-white">Schedule: {template.name}</h2>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={onCancel}
-          className="btn-ghost"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={() => onSave({})}
-          className="btn-success flex items-center gap-2"
-        >
-          <Calendar size={16} />
-          Schedule
-        </button>
+  <div className="card card-structured">
+    <div className="card-header">
+      <div className="flex items-center justify-between">
+        <h2>Schedule: {template.name}</h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onCancel}
+            className="btn-ghost"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={() => onSave({})}
+            className="btn-success flex items-center gap-2"
+          >
+            <Calendar size={16} />
+            Schedule
+          </button>
         </div>
       </div>
-      <div className="text-white/70">
+    </div>
+    <div className="card-body">
+      <p className="text-text-secondary">
         Report scheduling interface would be implemented here with cron scheduling, recipient management, and automation settings.
-      </div>
+      </p>
     </div>
   </div>
 );

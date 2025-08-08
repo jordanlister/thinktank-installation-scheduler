@@ -12,7 +12,8 @@ import {
   Target,
   Activity,
   Calendar,
-  Filter
+  Filter,
+  Eye
 } from 'lucide-react';
 import { 
   useAppStore,
@@ -215,7 +216,7 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
       {/* Controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <div className="flex bg-white/10 rounded-lg p-1">
+          <div className="glass-subtle rounded-xl p-1 flex space-x-1">
             {[
               { id: 'overview', label: 'Overview' },
               { id: 'detailed', label: 'Detailed' },
@@ -224,10 +225,10 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
               <button
                 key={mode.id}
                 onClick={() => setViewMode(mode.id as any)}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                className={`px-4 py-2 rounded-lg transition-all text-sm font-medium ${
                   viewMode === mode.id
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-glass-secondary hover:text-glass-primary'
+                    ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
+                    : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
                 }`}
               >
                 {mode.label}
@@ -238,7 +239,7 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value as any)}
-            className="form-select text-sm"
+            className="form-select form-input-sm text-sm"
           >
             <option value="all">All Teams</option>
             <option value="overutilized">Overutilized</option>
@@ -249,7 +250,7 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="form-select text-sm"
+            className="form-select form-input-sm text-sm"
           >
             <option value="utilization">Sort by Utilization</option>
             <option value="name">Sort by Name</option>
@@ -261,18 +262,16 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
 
       {/* Recommendations */}
       {generateRecommendations().length > 0 && (
-        <div className="card border-yellow-200 bg-yellow-50">
-          <div className="card-body">
-            <div className="flex items-start space-x-3">
-              <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5" />
-              <div>
-                <h3 className="text-sm font-medium text-yellow-800 mb-2">Workload Optimization Recommendations</h3>
-                <ul className="space-y-1 text-sm text-yellow-700">
-                  {generateRecommendations().map((rec, index) => (
-                    <li key={index}>• {rec}</li>
-                  ))}
-                </ul>
-              </div>
+        <div className="alert-glass alert-warning">
+          <div className="flex items-start space-x-3">
+            <AlertTriangle className="h-5 w-5 text-warning-400 mt-0.5" />
+            <div>
+              <h3 className="text-sm font-medium text-white mb-2">Workload Optimization Recommendations</h3>
+              <ul className="space-y-1 text-sm text-white/80">
+                {generateRecommendations().map((rec, index) => (
+                  <li key={index}>• {rec}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -289,149 +288,144 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
           </div>
         </div>
         <div className="card-body p-0">
-          <div className="w-full">
-            <table className="w-full divide-y divide-white/10">
-              <thead className="bg-white/5">
-                <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Team Member
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Assignments
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Capacity
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Utilization
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Efficiency
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-3 py-3 text-center text-xs font-medium text-white/90 uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white/3 divide-y divide-white/10">
-                {filteredAndSortedTeams.map(team => (
-                  <tr key={team.teamId} className="hover:bg-white/15 transition-all duration-200">
-                    <td className="px-4 py-4">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-8 w-8">
-                          <div className="h-8 w-8 rounded-full bg-accent-500/20 flex items-center justify-center">
-                            <Users className="h-4 w-4 text-accent-400" />
-                          </div>
-                        </div>
-                        <div className="ml-3">
-                          <div className="text-sm font-medium text-white">
+          {filteredAndSortedTeams.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-16 px-6">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                <Users className="h-8 w-8 text-white/60" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">No Team Members Found</h3>
+              <p className="text-white/70 text-center max-w-md">
+                No team members match the current filter criteria.
+              </p>
+            </div>
+          ) : (
+            <div className="divide-y divide-white/10">
+              {filteredAndSortedTeams.map(team => (
+                <div key={team.teamId} className="p-6 hover:bg-white/5">
+                  <div className="flex items-start space-x-4">
+                    {/* Team Member Avatar */}
+                    <div className="w-10 h-10 rounded-full bg-accent-500/20 flex items-center justify-center flex-shrink-0">
+                      <Users className="w-5 h-5 text-accent-400" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-2">
+                        <div>
+                          <p className="text-sm font-medium text-white">
                             {team.name}
-                          </div>
-                          <div className="text-xs text-white/70">
-                            {team.region}
-                          </div>
+                          </p>
+                          <p className="text-sm text-white/70">
+                            {team.region} • Capacity: {team.capacity} jobs/day
+                          </p>
+                        </div>
+                        
+                        <div className="text-right">
+                          <p className="text-sm text-white/70">
+                            {team.assignments}/{team.capacity} assignments
+                          </p>
+                          <p className="text-xs text-white/50">
+                            {Math.round(team.utilization)}% utilized
+                          </p>
                         </div>
                       </div>
-                    </td>
-                    <td className="px-3 py-4 text-center">
-                      <div className="text-sm font-medium text-white">
-                        {team.assignments}
-                      </div>
-                      {team.conflicts > 0 && (
-                        <div className="text-xs text-red-400 flex items-center justify-center mt-1">
-                          <AlertTriangle className="h-3 w-3 mr-1" />
-                          {team.conflicts}
+                      
+                      {/* Metrics */}
+                      <div className="flex items-center space-x-6 text-sm text-white/70">
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium">Efficiency:</span>
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${
+                            team.efficiency > 0.85 ? 'bg-green-500/20 text-green-400' :
+                            team.efficiency > 0.7 ? 'bg-yellow-500/20 text-yellow-400' :
+                            'bg-red-500/20 text-red-400'
+                          }`}>
+                            {Math.round(team.efficiency * 100)}%
+                          </span>
                         </div>
-                      )}
-                    </td>
-                    <td className="px-3 py-4 text-center">
-                      <div className="text-sm text-white">
-                        {team.capacity}
+                        
+                        <div className="flex items-center space-x-2">
+                          <span className="font-medium">Status:</span>
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${
+                            team.status === 'optimal' ? 'bg-green-500/20 text-green-400' :
+                            team.status === 'overutilized' ? 'bg-red-500/20 text-red-400' :
+                            team.status === 'underutilized' ? 'bg-yellow-500/20 text-yellow-400' :
+                            'bg-blue-500/20 text-blue-400'
+                          }`}>
+                            {team.status.charAt(0).toUpperCase() + team.status.slice(1)}
+                          </span>
+                        </div>
+                        
+                        {team.conflicts > 0 && (
+                          <div className="flex items-center space-x-1 text-red-400">
+                            <AlertTriangle className="h-3 w-3" />
+                            <span className="text-xs">{team.conflicts} conflicts</span>
+                          </div>
+                        )}
                       </div>
-                    </td>
-                    <td className="px-3 py-4 text-center">
-                      <div className="text-sm font-medium text-white mb-1">
-                        {Math.round(team.utilization)}%
+                      
+                      {/* Utilization Bar */}
+                      <div className="mt-3">
+                        <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                          <div 
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                              team.utilization > 100 ? 'bg-red-500' : 
+                              team.utilization > 85 ? 'bg-yellow-500' : 'bg-green-500'
+                            }`}
+                            style={{ width: `${Math.min(team.utilization, 100)}%` }}
+                          ></div>
+                        </div>
                       </div>
-                      <div className="w-full bg-white/20 rounded-full h-1.5 mx-auto max-w-16">
-                        <div 
-                          className={`h-1.5 rounded-full transition-all duration-300 ${
-                            team.utilization > 100 ? 'bg-red-500' : 
-                            team.utilization > 85 ? 'bg-yellow-500' : 'bg-green-500'
-                          }`}
-                          style={{ width: `${Math.min(team.utilization, 100)}%` }}
-                        ></div>
-                      </div>
-                    </td>
-                    <td className="px-3 py-4 text-center">
-                      <div className="text-sm text-white mb-1">
-                        {Math.round(team.efficiency * 100)}%
-                      </div>
-                      <div className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                        team.efficiency > 0.85 ? 'bg-green-500/20 text-green-300' :
-                        team.efficiency > 0.7 ? 'bg-yellow-500/20 text-yellow-300' :
-                        'bg-red-500/20 text-red-300'
-                      }`}>
-                        {team.efficiency > 0.85 ? 'Excellent' :
-                         team.efficiency > 0.7 ? 'Good' : 'Poor'}
-                      </div>
-                    </td>
-                    <td className="px-3 py-4 text-center">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
-                        team.status === 'optimal' ? 'bg-green-500/20 text-green-300' :
-                        team.status === 'overutilized' ? 'bg-red-500/20 text-red-300' :
-                        team.status === 'underutilized' ? 'bg-yellow-500/20 text-yellow-300' :
-                        'bg-white/15 text-white/70'
-                      }`}>
-                        {team.status.charAt(0).toUpperCase() + team.status.slice(1)}
-                      </span>
-                    </td>
-                    <td className="px-3 py-4 text-center">
+                    </div>
+                    
+                    {/* Actions */}
+                    <div className="flex-shrink-0">
                       <button
                         onClick={() => setSelectedTeam(team.teamId)}
-                        className="px-3 py-1 bg-white/10 border border-white/20 rounded text-xs text-white/90 hover:bg-white/15 transition-all duration-200"
+                        className="text-white/50 hover:text-white/80"
                       >
-                        View
+                        <Eye className="w-4 h-4" />
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       {/* Workload Balance Chart */}
       <div className="card">
         <div className="card-header">
-          <h3 className="text-lg font-medium text-white">Workload Balance Visualization</h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium text-white">Workload Balance Visualization</h3>
+            <span className="text-sm text-white/80">
+              {filteredAndSortedTeams.length > 0 ? `${Math.min(filteredAndSortedTeams.length, 10)} of ${filteredAndSortedTeams.length} teams` : '0 of 0 teams'}
+            </span>
+          </div>
         </div>
         <div className="card-body">
-          <div className="space-y-4">
+          <div className="space-y-6">
             {filteredAndSortedTeams.slice(0, 10).map(team => (
-              <div key={team.teamId} className="space-y-2">
+              <div key={team.teamId} className="space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-glass-primary">{team.name}</span>
-                  <span className="text-glass-secondary">
+                  <span className="font-medium text-white">{team.name}</span>
+                  <span className="text-white/70">
                     {team.assignments}/{team.capacity} ({Math.round(team.utilization)}%)
                   </span>
                 </div>
-                <div className="w-full bg-white/20 rounded-full h-3">
+                <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
                   <div 
-                    className={`h-3 rounded-full transition-all duration-300 ${
-                      team.utilization > 100 ? 'bg-gradient-to-r from-red-500 to-red-600' : 
-                      team.utilization > 85 ? 'bg-gradient-to-r from-yellow-400 to-yellow-500' : 
-                      'bg-gradient-to-r from-green-400 to-green-500'
+                    className={`h-3 rounded-full transition-all duration-500 ${
+                      team.utilization > 100 ? 'bg-gradient-to-r from-error-500 to-error-600' : 
+                      team.utilization > 85 ? 'bg-gradient-to-r from-warning-500 to-warning-600' : 
+                      'bg-gradient-to-r from-success-500 to-success-600'
                     }`}
                     style={{ width: `${Math.min(team.utilization, 100)}%` }}
                   ></div>
                   {team.utilization > 100 && (
                     <div 
-                      className="h-3 bg-red-600 rounded-r-full -mt-3 opacity-75"
+                      className="h-3 bg-error-600 rounded-r-full -mt-3 opacity-75"
                       style={{ 
                         width: `${Math.min(team.utilization - 100, 50)}%`,
                         marginLeft: '100%'
@@ -441,6 +435,17 @@ const WorkloadDistribution: React.FC<WorkloadDistributionProps> = ({ dateRange }
                 </div>
               </div>
             ))}
+            {filteredAndSortedTeams.length === 0 && (
+              <div className="flex flex-col items-center justify-center py-16 px-6">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                  <BarChart3 className="h-8 w-8 text-white/60" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">No Data Available</h3>
+                <p className="text-white/70 text-center max-w-md">
+                  No workload data to visualize with current filters.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -457,36 +462,37 @@ const MetricCard: React.FC<{
   color: string;
   alert?: boolean;
 }> = ({ title, value, subtitle, icon: Icon, color, alert }) => {
-  const colorClasses = {
-    blue: 'bg-blue-50 text-blue-600',
-    green: 'bg-green-50 text-green-600',
-    yellow: 'bg-yellow-50 text-yellow-600',
-    red: 'bg-red-50 text-red-600',
-    purple: 'bg-purple-50 text-purple-600',
-    indigo: 'bg-indigo-50 text-indigo-600'
+  const iconColors = {
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
+    purple: 'text-purple-400',
+    indigo: 'text-indigo-400',
+    gray: 'text-white/60'
   };
 
+  const actualColor = alert ? 'red' : color;
+
   return (
-    <div className={`card ${alert ? 'border-red-200 bg-red-50' : ''}`}>
+    <div className="card group rounded-xl transition-all duration-300 min-w-0">
       <div className="card-body p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className={`text-sm font-medium ${alert ? 'text-red-600' : 'text-glass-secondary'}`}>
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-medium text-white/70 mb-1 leading-tight">
               {title}
             </p>
-            <p className={`text-2xl font-bold ${alert ? 'text-red-900' : 'text-glass-primary'}`}>
+            <p className="text-2xl font-bold text-white leading-none">
               {value}
             </p>
             {subtitle && (
-              <p className={`text-xs ${alert ? 'text-red-600' : 'text-glass-secondary'}`}>
+              <p className="text-xs text-white/60 mt-1">
                 {subtitle}
               </p>
             )}
           </div>
-          <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-            alert ? 'bg-red-100 text-red-600' : colorClasses[color as keyof typeof colorClasses]
-          }`}>
-            <Icon className="h-5 w-5" />
+          <div className="ml-3 flex-shrink-0">
+            <Icon className={`h-6 w-6 ${iconColors[actualColor as keyof typeof iconColors]}`} />
           </div>
         </div>
       </div>

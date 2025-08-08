@@ -190,7 +190,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
 
           {/* Title */}
           {title && (
-            <div className="px-6 pt-6 pb-2">
+            <div className="modal-header">
               <h2 id={titleId} className="text-xl font-semibold text-text-primary">
                 {title}
               </h2>
@@ -198,7 +198,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
           )}
 
           {/* Content */}
-          <div className={cn('px-6', { 'pt-6': !title, 'pb-6': !title })}>
+          <div className={cn('modal-body', { 'modal-content-only': !title })}>
             {children}
           </div>
         </div>
@@ -225,7 +225,7 @@ const ModalHeader = forwardRef<HTMLDivElement, ModalHeaderProps>(
     return (
       <div
         ref={ref}
-        className={cn('pb-4 border-b border-border', className)}
+        className={cn('modal-header', className)}
         data-testid={testId}
         {...props}
       >
@@ -249,7 +249,7 @@ const ModalBody = forwardRef<HTMLDivElement, ModalBodyProps>(
     return (
       <div
         ref={ref}
-        className={cn('py-4', className)}
+        className={cn('modal-body', className)}
         data-testid={testId}
         {...props}
       >
@@ -291,7 +291,7 @@ const ModalFooter = forwardRef<HTMLDivElement, ModalFooterProps>(
       <div
         ref={ref}
         className={cn(
-          'pt-4 border-t border-border flex items-center gap-3',
+          'modal-footer',
           justifyClasses[justify],
           className
         )}

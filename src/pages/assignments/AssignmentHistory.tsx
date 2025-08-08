@@ -362,10 +362,12 @@ const AssignmentHistory: React.FC<AssignmentHistoryProps> = ({ dateRange }) => {
         </div>
         <div className="card-body p-0">
           {filteredHistory.length === 0 ? (
-            <div className="text-center py-12">
-              <History className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-              <h4 className="text-lg font-medium text-glass-primary mb-2">No History Found</h4>
-              <p className="text-glass-secondary">
+            <div className="flex flex-col items-center justify-center py-16 px-6">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6">
+                <History className="h-8 w-8 text-white/60" />
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-3">No History Found</h3>
+              <p className="text-white/70 text-center max-w-md">
                 No assignment history matches your current filters.
               </p>
             </div>

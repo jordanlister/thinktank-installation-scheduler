@@ -243,6 +243,6 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
 IconButton.displayName = 'IconButton';
 
-export { IconButton };
+export { IconButton, ButtonGroup };
 export { Button };
 export default Button;

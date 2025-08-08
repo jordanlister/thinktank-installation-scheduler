@@ -28,25 +28,49 @@ export default {
         },
         
         // Semantic Colors
+        accent: {
+          400: 'var(--accent-400)',
+          500: 'var(--accent-500)', 
+          600: 'var(--accent-600)',
+        },
         success: {
           DEFAULT: 'var(--success)',
           light: 'var(--success-light)',
           dark: 'var(--success-dark)',
+          400: 'var(--success-400)',
+          500: 'var(--success-500)',
+          600: 'var(--success-600)',
         },
         warning: {
           DEFAULT: 'var(--warning)',
           light: 'var(--warning-light)',
           dark: 'var(--warning-dark)',
+          400: 'var(--warning-400)',
+          500: 'var(--warning-500)',
+          600: 'var(--warning-600)',
         },
         error: {
           DEFAULT: 'var(--error)',
           light: 'var(--error-light)',
           dark: 'var(--error-dark)',
+          400: 'var(--error-400)',
+          500: 'var(--error-500)',
+          600: 'var(--error-600)',
         },
         info: {
           DEFAULT: 'var(--info)',
           light: 'var(--info-light)',
           dark: 'var(--info-dark)',
+        },
+        purple: {
+          400: 'var(--purple-400)',
+          500: 'var(--purple-500)',
+          600: 'var(--purple-600)',
+        },
+        indigo: {
+          400: 'var(--indigo-400)',
+          500: 'var(--indigo-500)',
+          600: 'var(--indigo-600)',
         },
         
         // Text Colors

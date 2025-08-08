@@ -48,21 +48,17 @@ export const DataUpload: React.FC<DataUploadProps> = ({
   return (
     <div className={`card ${className}`}>
       <div className="card-body">
-        <h3 className="text-lg font-semibold text-white mb-4">
-          Upload Route Data
-        </h3>
-        
         <div
           {...getRootProps()}
           className={`
-            relative border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200
+            relative border-2 border-dashed rounded-xl p-16 text-center cursor-pointer transition-all duration-300 backdrop-blur-md min-h-[320px] flex flex-col items-center justify-center
             ${isDragActive 
-              ? 'border-accent-500 bg-white/20' 
+              ? 'border-accent-400/60 bg-accent-500/20 scale-105 shadow-glow-accent' 
               : uploadState.error 
-                ? 'border-red-500 bg-red-500/10'
+                ? 'border-red-400/60 bg-red-500/15 shadow-lg shadow-red-500/20'
                 : uploadState.result
-                  ? 'border-green-500 bg-green-500/10'
-                  : 'border-white/30 bg-white/5 hover:border-accent-400 hover:bg-white/10'
+                  ? 'border-green-400/60 bg-green-500/15 shadow-lg shadow-green-500/20'
+                  : 'border-white/40 glass hover:border-accent-400/50 hover:bg-white/12 hover:shadow-lg hover:shadow-accent-500/10'
             }
           `}
         >
@@ -171,29 +167,29 @@ export const DataUpload: React.FC<DataUploadProps> = ({
               </div>
             </div>
           ) : (
-            <div className="space-y-4">
-              <div className={`mx-auto h-16 w-16 rounded-full flex items-center justify-center ${
-                isDragActive ? 'bg-accent-500/20' : 'bg-white/10'
+            <div className="space-y-8">
+              <div className={`mx-auto h-24 w-24 rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                isDragActive ? 'bg-gradient-to-br from-accent-500 to-accent-600 shadow-glow-accent' : 'bg-gradient-to-br from-white/20 to-white/10 shadow-lg'
               }`}>
                 {isDragActive ? (
-                  <Upload className="h-8 w-8 text-accent-400" />
+                  <Upload className="h-12 w-12 text-white animate-bounce" />
                 ) : (
-                  <FileSpreadsheet className="h-8 w-8 text-white/70" />
+                  <FileSpreadsheet className="h-12 w-12 text-white/80" />
                 )}
               </div>
               
-              <div>
-                <h4 className="text-lg font-medium text-white mb-2">
+              <div className="space-y-4">
+                <h4 className="text-xl font-semibold text-white">
                   {isDragActive ? 'Drop your file here' : 'Upload Route Data'}
                 </h4>
-                <p className="text-white/80 mb-4">
+                <p className="text-white/80 text-base max-w-md mx-auto leading-relaxed">
                   {isDragActive 
                     ? 'Release to upload your file'
                     : 'Drag and drop your Excel or CSV file here, or click to browse'
                   }
                 </p>
                 
-                <div className="text-sm text-white/60 space-y-1">
+                <div className="text-sm text-white/60 space-y-2 pt-4">
                   <p>Supported formats: .xlsx, .xls, .csv</p>
                   <p>Maximum file size: 10MB</p>
                 </div>
@@ -203,25 +199,84 @@ export const DataUpload: React.FC<DataUploadProps> = ({
         </div>
         
         {/* File Requirements */}
-        <div className="mt-6 bg-white/10 rounded-lg p-4 border border-white/20 backdrop-filter backdrop-blur-md">
-          <h5 className="font-medium text-white mb-2">
-            File Requirements
-          </h5>
-          <div className="text-sm text-white/80 space-y-1">
-            <p>• First row should contain column headers</p>
-            <p>• Required fields: Customer Name, Install Date, Address (Street, City, State, ZIP)</p>
-            <p>• Optional fields: Phone, Email, Job ID, Store Number, Installation Type, Priority</p>
-            <p>• Dates should be in MM/DD/YYYY or similar standard format</p>
-            <p>• The system will automatically detect and map column names</p>
+        <div className="mt-8 card">
+          <div className="card-body">
+            <div className="flex items-center mb-6">
+              <div className="h-8 w-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg flex items-center justify-center mr-3">
+                <FileSpreadsheet className="h-4 w-4 text-white" />
+              </div>
+              <h5 className="text-lg font-semibold text-white">File Requirements</h5>
+            </div>
+            
+            <div className="space-y-6">
+              {/* Header requirement */}
+              <div className="flex items-start">
+                <div className="w-5 h-5 rounded-full bg-accent-500/20 border border-accent-400/40 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-accent-400"></div>
+                </div>
+                <div>
+                  <p className="text-white/90 font-medium mb-1">Column Headers Required</p>
+                  <p className="text-white/70 text-sm">First row must contain column headers</p>
+                </div>
+              </div>
+
+              {/* Required fields */}
+              <div className="flex items-start">
+                <div className="w-5 h-5 rounded-full bg-red-500/20 border border-red-400/40 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                </div>
+                <div>
+                  <p className="text-white/90 font-medium mb-1">Required Fields</p>
+                  <p className="text-white/70 text-sm">Customer Name, Install Date, Address (Street, City, State, ZIP)</p>
+                </div>
+              </div>
+
+              {/* Optional fields */}
+              <div className="flex items-start">
+                <div className="w-5 h-5 rounded-full bg-blue-500/20 border border-blue-400/40 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-blue-400"></div>
+                </div>
+                <div>
+                  <p className="text-white/90 font-medium mb-1">Optional Fields</p>
+                  <p className="text-white/70 text-sm">Phone, Email, Job ID, Store Number, Installation Type, Priority</p>
+                </div>
+              </div>
+
+              {/* Date format */}
+              <div className="flex items-start">
+                <div className="w-5 h-5 rounded-full bg-yellow-500/20 border border-yellow-400/40 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                </div>
+                <div>
+                  <p className="text-white/90 font-medium mb-1">Date Format</p>
+                  <p className="text-white/70 text-sm">MM/DD/YYYY or similar standard format</p>
+                </div>
+              </div>
+
+              {/* Auto detection */}
+              <div className="flex items-start">
+                <div className="w-5 h-5 rounded-full bg-green-500/20 border border-green-400/40 flex items-center justify-center mr-4 mt-0.5 flex-shrink-0">
+                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                </div>
+                <div>
+                  <p className="text-white/90 font-medium mb-1">Automatic Detection</p>
+                  <p className="text-white/70 text-sm">System automatically detects and maps column names</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
         {/* Column Mapping Preview */}
         {uploadState.result && Object.keys(uploadState.result.schemaMap).length > 0 && (
-          <div className="mt-6 bg-white/10 rounded-lg p-4 border border-white/20 backdrop-filter backdrop-blur-md">
-            <h5 className="font-medium text-white mb-3">
-              Detected Column Mapping
-            </h5>
+          <div className="mt-6 card">
+            <div className="card-body">
+              <h5 className="font-semibold text-white mb-4 flex items-center">
+                <div className="h-8 w-8 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-3">
+                  <CheckCircle2 className="h-4 w-4 text-white" />
+                </div>
+                Detected Column Mapping
+              </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
               {Object.entries(uploadState.result.schemaMap).map(([field, mapping]) => (
                 <div key={field} className="flex justify-between items-center">
@@ -244,6 +299,7 @@ export const DataUpload: React.FC<DataUploadProps> = ({
                   </div>
                 </div>
               ))}
+            </div>
             </div>
           </div>
         )}

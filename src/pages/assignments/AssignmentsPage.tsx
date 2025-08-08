@@ -232,6 +232,14 @@ const AssignmentsPage: React.FC = () => {
             {isProcessing ? 'Refreshing...' : 'Refresh'}
           </button>
           
+          <button 
+            onClick={handleExportAssignments}
+            className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md"
+          >
+            <Download className="h-4 w-4 mr-2 inline" />
+            Export Assignments
+          </button>
+          
           <button
             onClick={handleRunAutoAssignment}
             disabled={isProcessing || keyMetrics.unassignedJobs === 0}
@@ -290,69 +298,6 @@ const AssignmentsPage: React.FC = () => {
         />
       </div>
 
-      {/* Quick Actions */}
-      <div className="card group">
-        <div className="card-header">
-          <div className="flex items-center space-x-3">
-            <div className="h-8 w-8 bg-gradient-to-br from-accent-500/30 to-accent-600/20 rounded-lg flex items-center justify-center">
-              <TrendingUp className="h-4 w-4 text-accent-400" />
-            </div>
-            <h3 className="text-xl font-semibold text-white">Quick Actions</h3>
-          </div>
-        </div>
-        <div className="card-body">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setShowAutoAssignmentPanel(true)}
-                className="px-4 py-2 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
-              >
-                Configure Auto Assignment
-              </button>
-              
-              <button
-                onClick={() => detectConflicts()}
-                className="px-4 py-2 bg-warning-500/20 border border-warning-500/30 rounded-lg text-warning-300 hover:bg-warning-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
-              >
-                Detect Conflicts
-              </button>
-              
-              <button 
-                onClick={handleExportAssignments}
-                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md"
-              >
-                <Download className="h-4 w-4 mr-2 inline" />
-                Export Assignments
-              </button>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <div className="glass-subtle rounded-xl p-1 flex space-x-1">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded-lg transition-all ${
-                    viewMode === 'grid'
-                      ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
-                      : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
-                  }`}
-                >
-                  Grid
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 rounded-lg transition-all ${
-                    viewMode === 'list'
-                      ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
-                      : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
-                  }`}
-                >
-                  List
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Alerts */}
       {keyMetrics.activeConflicts > 0 && (
@@ -419,6 +364,7 @@ const AssignmentsPage: React.FC = () => {
         {activeTab === 'matrix' && (
           <TeamAssignmentMatrix 
             viewMode={viewMode}
+            onViewModeChange={setViewMode}
             dateRange={dateRange}
           />
         )}
@@ -463,59 +409,34 @@ const MetricCard: React.FC<{
   color: string;
   alert?: boolean;
 }> = ({ title, value, icon: Icon, color, alert }) => {
-  const gradients = {
-    blue: 'from-accent-500/20 to-accent-600/10',
-    green: 'from-success-500/20 to-success-600/10',
-    yellow: 'from-warning-500/20 to-warning-600/10',
-    red: 'from-error-500/20 to-error-600/10',
-    purple: 'from-purple-500/20 to-purple-600/10',
-    indigo: 'from-indigo-500/20 to-indigo-600/10',
-    gray: 'from-white/10 to-white/5'
-  };
-
   const iconColors = {
-    blue: 'text-accent-400',
-    green: 'text-success-400',
-    yellow: 'text-warning-400',
-    red: 'text-error-400',
+    blue: 'text-blue-400',
+    green: 'text-green-400',
+    yellow: 'text-yellow-400',
+    red: 'text-red-400',
     purple: 'text-purple-400',
     indigo: 'text-indigo-400',
     gray: 'text-white/60'
   };
 
+  const actualColor = alert ? 'red' : color;
+
   return (
-    <div className="card-stat group rounded-xl transition-all duration-300 min-w-0">
-      <div className="card-body p-8">
-        <div className="space-y-6">
-          <div>
-            <p className="text-sm font-medium text-white/70 mb-4 leading-relaxed">
+    <div className="card group rounded-xl transition-all duration-300 min-w-0">
+      <div className="card-body p-4">
+        <div className="flex items-start justify-between">
+          <div className="flex-1 min-w-0">
+            <p className="text-xs font-medium text-white/70 mb-1 leading-tight">
               {title}
             </p>
-            <p className="text-4xl font-bold text-white">
+            <p className="text-3xl font-bold text-white leading-none">
               {value}
             </p>
           </div>
-        </div>
-        
-        {/* Progress indicator bar */}
-        <div className="mt-4">
-          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-            <div className={`h-full bg-gradient-to-r ${
-              alert 
-                ? 'from-error-500/60 to-error-600/40' 
-                : gradients[color as keyof typeof gradients].replace('/20', '/60').replace('/10', '/40')
-            } rounded-full transition-all duration-500`}
-                 style={{ width: '75%' }}>
-            </div>
+          <div className="ml-3 flex-shrink-0">
+            <Icon className={`h-6 w-6 ${iconColors[actualColor as keyof typeof iconColors]}`} />
           </div>
         </div>
-        
-        {/* Subtle glow effect on hover */}
-        <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${
-          alert 
-            ? 'from-error-500/20 to-error-600/10' 
-            : gradients[color as keyof typeof gradients]
-        } opacity-0 group-hover:opacity-20 transition-opacity duration-300 pointer-events-none`}></div>
       </div>
     </div>
   );
