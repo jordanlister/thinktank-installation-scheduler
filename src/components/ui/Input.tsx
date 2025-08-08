@@ -34,7 +34,7 @@ import type { InputProps, BaseComponentProps, SelectOption, SelectProps } from '
  * />
  * ```
  */
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       className,
@@ -163,7 +163,7 @@ export interface TextareaProps extends Omit<InputProps, 'type' | 'leftIcon' | 'r
   resize?: 'none' | 'vertical' | 'horizontal' | 'both';
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
@@ -260,7 +260,7 @@ Textarea.displayName = 'Textarea';
 /**
  * Select component for dropdown selections
  */
-export const Select = forwardRef<HTMLSelectElement, SelectProps & { options: SelectOption[] }>(
+const Select = forwardRef<HTMLSelectElement, SelectProps & { options: SelectOption[] }>(
   (
     {
       className,
@@ -295,7 +295,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps & { options: Sel
           'form-select',
           sizeClasses[size],
           'appearance-none bg-no-repeat bg-right bg-[length:16px_16px] pr-10',
-          'bg-[url("data:image/svg+xml,%3csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3e%3cpath stroke=\'%236b7280\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'m6 8 4 4 4-4\'/%3e%3c/svg%3e")]',
+          'bg-dot-pattern',
           {
             'border-error focus:ring-error': error,
             'cursor-not-allowed opacity-50': disabled,
@@ -342,7 +342,7 @@ export interface CheckboxProps extends Omit<BaseComponentProps, 'children'> {
   id?: string;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       className,
@@ -442,7 +442,7 @@ export interface RadioGroupProps extends BaseComponentProps {
   orientation?: 'vertical' | 'horizontal';
 }
 
-export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
+const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
     {
       className,
@@ -550,7 +550,7 @@ export interface FormGroupProps extends BaseComponentProps {
   spacing?: 'sm' | 'md' | 'lg';
 }
 
-export const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
+const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
   ({ className, children, spacing = 'md', 'data-testid': testId, ...props }, ref) => {
     const spacingClasses = {
       sm: 'space-y-3',
@@ -573,4 +573,10 @@ export const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
 
 FormGroup.displayName = 'FormGroup';
 
-export { Input as default, Textarea, Select, Checkbox, RadioGroup, FormGroup };
+// Export all components
+export { Input as default };
+export { Textarea };  
+export { Select };
+export { Checkbox };
+export { RadioGroup };
+export { FormGroup };

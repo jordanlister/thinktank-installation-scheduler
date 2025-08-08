@@ -24,7 +24,7 @@ import type { TypographyProps, BaseComponentProps } from '../../lib/types';
  * </Heading>
  * ```
  */
-export const Heading = forwardRef<HTMLHeadingElement, TypographyProps>(
+const Heading = forwardRef<HTMLHeadingElement, TypographyProps>(
   (
     {
       className,
@@ -109,7 +109,7 @@ export interface TextProps extends TypographyProps {
   leading?: 'tight' | 'normal' | 'relaxed' | 'loose';
 }
 
-export const Text = forwardRef<HTMLParagraphElement, TextProps>(
+const Text = forwardRef<HTMLParagraphElement, TextProps>(
   (
     {
       className,
@@ -231,7 +231,7 @@ export interface CodeBlockProps extends BaseComponentProps {
   maxHeight?: string;
 }
 
-export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
+const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
   (
     {
       className,
@@ -363,7 +363,7 @@ export interface InlineCodeProps extends BaseComponentProps {
   variant?: 'default' | 'accent';
 }
 
-export const InlineCode = forwardRef<HTMLElement, InlineCodeProps>(
+const InlineCode = forwardRef<HTMLElement, InlineCodeProps>(
   (
     {
       className,
@@ -409,7 +409,7 @@ export interface LinkProps extends BaseComponentProps {
   underline?: boolean;
 }
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (
     {
       className,
@@ -480,7 +480,7 @@ export interface ListProps extends BaseComponentProps {
   spacing?: 'tight' | 'normal' | 'relaxed';
 }
 
-export const List = forwardRef<HTMLUListElement | HTMLOListElement, ListProps>(
+const List = forwardRef<HTMLUListElement | HTMLOListElement, ListProps>(
   (
     {
       className,
@@ -526,4 +526,10 @@ export const List = forwardRef<HTMLUListElement | HTMLOListElement, ListProps>(
 
 List.displayName = 'List';
 
-export { Heading as default, Text, CodeBlock, InlineCode, Link, List };
+// Export all typography components
+export { Heading as default };
+export { Text };
+export { CodeBlock };
+export { InlineCode };
+export { Link };
+export { List };

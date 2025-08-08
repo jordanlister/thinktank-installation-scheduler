@@ -61,6 +61,10 @@
     "security:audit": "npm audit --audit-level moderate",
     "security:fix": "npm audit fix",
     "security:check": "npm audit --audit-level high --json",
+    "security:scan": "node scripts/security-audit.js",
+    "security:headers": "node scripts/test-security-headers.js",
+    "security:headers:dev": "node scripts/test-security-headers.js http://localhost:3000",
+    "security:full": "npm run security:scan && npm run security:audit && npm run security:headers:dev",
     "deps:check": "npm outdated",
     "deps:update": "npm update",
     "deps:update:major": "npx npm-check-updates -u",
@@ -69,6 +73,7 @@
     "pre-push": "npm run build && npm run test:coverage"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.11",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-dropdown-menu": "^2.1.15",
@@ -86,6 +91,7 @@
     "date-fns": "^4.0.0",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
+    "framer-motion": "^12.23.12",
     "geokdbush": "^2.0.1",
     "geolib": "^3.3.4",
     "handlebars": "^4.7.8",
@@ -100,11 +106,14 @@
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
+    "react-hook-form": "^7.62.0",
     "react-leaflet": "^4.2.1",
     "react-leaflet-cluster": "^3.1.0",
     "react-router-dom": "^6.26.1",
     "recharts": "^3.1.1",
     "tailwind-merge": "^3.3.1",
+    "zod": "^4.0.15",
     "zustand": "^5.0.7"
   },
   "devDependencies": {

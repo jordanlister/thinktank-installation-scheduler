@@ -4,6 +4,7 @@ import { resolve } from 'path'
 import { nodePolyfills } from 'vite-plugin-node-polyfills'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
+import { securityPlugin, securityConfigs } from './src/lib/security/vitePlugin'
 
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -36,7 +37,9 @@ export default defineConfig(({ command, mode }) => {
           // Since Vite and its ecosystem explicitly excludes `fs`, we have to disable it.
           fs: false,
         },
-      })
+      }),
+      // Security plugin with environment-specific configuration
+      securityPlugin(securityConfigs[mode as keyof typeof securityConfigs] || securityConfigs.development)
     ],
     
     // Path resolution

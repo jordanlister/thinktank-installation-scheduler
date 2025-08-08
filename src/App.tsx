@@ -1,7 +1,8 @@
 // Think Tank Technologies Installation Scheduler - Main Application
 
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { MapPin, Users, Settings } from 'lucide-react';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -19,6 +20,16 @@ import { useAppStore, useIsAuthenticated, useIsLoading } from './stores/useAppSt
 import { auth } from './services/supabase';
 import { RealtimeProvider } from './contexts/RealtimeProvider';
 
+// Marketing Components
+import MarketingLayout from './components/marketing/layout/MarketingLayout';
+import HomePage from './pages/marketing/HomePage';
+import FeaturesPage from './pages/marketing/FeaturesPage';
+import SolutionsPage from './pages/marketing/SolutionsPage';
+import PricingPage from './pages/marketing/PricingPage';
+import ResourcesPage from './pages/marketing/ResourcesPage';
+import CompanyPage from './pages/marketing/CompanyPage';
+import ContactPage from './pages/marketing/ContactPage';
+
 
 
 // Authentication wrapper component
@@ -26,9 +37,81 @@ const LoginPage = () => {
   return <AuthForm />;
 };
 
-function App() {
+// Route checker to determine if path is a marketing route
+const isMarketingRoute = (pathname: string) => {
+  const marketingPaths = [
+    '/',
+    '/features',
+    '/solutions',
+    '/pricing', 
+    '/resources',
+    '/company',
+    '/contact',
+    '/demo'
+  ];
+  
+  return marketingPaths.includes(pathname) || 
+         pathname.startsWith('/features/') ||
+         pathname.startsWith('/solutions/') ||
+         pathname.startsWith('/resources/') ||
+         pathname.startsWith('/company/') ||
+         pathname.startsWith('/legal/');
+};
+
+// App Router Component
+const AppRouter = () => {
+  const location = useLocation();
   const isAuthenticated = useIsAuthenticated();
   const isLoading = useIsLoading();
+
+  // If it's a marketing route, always show marketing content
+  if (isMarketingRoute(location.pathname)) {
+    return (
+      <MarketingLayout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/company" element={<CompanyPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </MarketingLayout>
+    );
+  }
+
+  // For app routes, require authentication
+  if (isLoading) {
+    return <PageLoading message="Loading Think Tank Technologies..." />;
+  }
+
+  if (!isAuthenticated) {
+    return <LoginPage />;
+  }
+
+  // Authenticated app routes
+  return (
+    <RealtimeProvider>
+      <Routes>
+        <Route path="/app" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="schedules" element={<SchedulingDashboard />} />
+          <Route path="installations" element={<InstallationsPage />} />
+          <Route path="assignments" element={<AssignmentsPage />} />
+          <Route path="team" element={<TeamManagement />} />
+          <Route path="data-processing" element={<DataProcessing />} />
+          <Route path="reports" element={<ReportsPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/app" replace />} />
+      </Routes>
+    </RealtimeProvider>
+  );
+};
+
+function App() {
   const { setLoading, setAuthenticated, setUser } = useAppStore();
 
   useEffect(() => {
@@ -65,38 +148,14 @@ function App() {
     checkSession();
   }, [setLoading, setAuthenticated, setUser]);
 
-  if (isLoading) {
-    return <PageLoading message="Loading Think Tank Technologies..." />;
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <ErrorBoundary>
-        <LoginPage />
-      </ErrorBoundary>
-    );
-  }
-
   return (
-    <ErrorBoundary>
-      <RealtimeProvider>
+    <HelmetProvider>
+      <ErrorBoundary>
         <Router>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Dashboard />} />
-              <Route path="schedules" element={<SchedulingDashboard />} />
-              <Route path="installations" element={<InstallationsPage />} />
-              <Route path="assignments" element={<AssignmentsPage />} />
-              <Route path="team" element={<TeamManagement />} />
-              <Route path="data-processing" element={<DataProcessing />} />
-              <Route path="reports" element={<ReportsPage />} />
-              <Route path="settings" element={<SettingsPage />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Route>
-          </Routes>
+          <AppRouter />
         </Router>
-      </RealtimeProvider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

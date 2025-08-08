@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="5" failures="1" errors="0" time="0.151198959">
+    <testsuite name="src/components/common/Loading.test.tsx" timestamp="2025-08-08T04:20:30.642Z" hostname="macbookpro.lan" tests="5" failures="1" errors="0" skipped="0" time="0.151198959">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders loading component with default props" time="0.065650417">
+            <system-err>
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+            </system-err>
+        </testcase>
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom message" time="0.003272792">
+        </testcase>
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom size" time="0.055389458">
+            <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
+
+Expected the element to have class:
+[32m  text-4xl[39m
+Received:
+[31m  flex flex-col items-center space-y-2[39m" type="Error">
+Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
+
+Expected the element to have class:
+  text-4xl
+Received:
+  flex flex-col items-center space-y-2
+ ❯ src/components/common/Loading.test.tsx:25:28
+            </failure>
+            <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
+
+Expected the element to have class:
+[32m  text-4xl[39m
+Received:
+[31m  flex flex-col items-center space-y-2[39m" type="Error">
+Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
+
+Expected the element to have class:
+  text-4xl
+Received:
+  flex flex-col items-center space-y-2
+ ❯ src/components/common/Loading.test.tsx:25:28
+            </failure>
+            <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
+
+Expected the element to have class:
+[32m  text-4xl[39m
+Received:
+[31m  flex flex-col items-center space-y-2[39m" type="Error">
+Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
+
+Expected the element to have class:
+  text-4xl
+Received:
+  flex flex-col items-center space-y-2
+ ❯ src/components/common/Loading.test.tsx:25:28
+            </failure>
+        </testcase>
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; has proper accessibility attributes" time="0.013664">
+        </testcase>
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; applies custom className when provided" time="0.011992084">
+        </testcase>
+    </testsuite>
+</testsuites>

@@ -34,7 +34,7 @@ import type { ButtonProps } from '../../lib/types';
  * </Button>
  * ```
  */
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
@@ -166,7 +166,7 @@ export interface ButtonGroupProps {
   'data-testid'?: string;
 }
 
-export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
+const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
   ({ className, children, orientation = 'horizontal', size = 'md', 'data-testid': testId }, ref) => {
     return (
       <div
@@ -213,7 +213,7 @@ export interface IconButtonProps extends Omit<ButtonProps, 'leftIcon' | 'rightIc
   'aria-label': string; // Required for accessibility
 }
 
-export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ icon, className, size = 'md', 'aria-label': ariaLabel, ...props }, ref) => {
     const sizeClasses = {
       xs: 'w-8 h-8',
@@ -243,4 +243,6 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
 IconButton.displayName = 'IconButton';
 
+export { IconButton };
+export { Button };
 export default Button;

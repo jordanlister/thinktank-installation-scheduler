@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /features
+Allow: /solutions
+Allow: /pricing
+Allow: /resources
+Allow: /company
+Allow: /contact
+Allow: /legal/*
+Disallow: /app/*
+Disallow: /api/*
+Disallow: *.json
+Disallow: /admin/*
+Disallow: /dashboard/*
+Disallow: /private/*
+
+Sitemap: https://thinktanktechnologies.com/sitemap.xml
+
+Crawl-delay: 1

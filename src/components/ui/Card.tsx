@@ -36,7 +36,7 @@ import type { CardProps, BaseComponentProps, AnimationVariant } from '../../lib/
  * </Card>
  * ```
  */
-export const Card = forwardRef<HTMLDivElement, CardProps>(
+const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       className,
@@ -95,7 +95,7 @@ export interface CardHeaderProps extends BaseComponentProps {
   children: React.ReactNode;
 }
 
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
+const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, children, 'data-testid': testId, ...props }, ref) => {
     return (
       <div
@@ -119,7 +119,7 @@ export interface CardBodyProps extends BaseComponentProps {
   children: React.ReactNode;
 }
 
-export const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
+const CardBody = forwardRef<HTMLDivElement, CardBodyProps>(
   ({ className, children, 'data-testid': testId, ...props }, ref) => {
     return (
       <div
@@ -154,7 +154,7 @@ export interface FeatureCardProps extends Omit<CardProps, 'variant'> {
   benefits?: string[];
 }
 
-export const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
+const FeatureCard = forwardRef<HTMLDivElement, FeatureCardProps>(
   (
     {
       className,
@@ -294,7 +294,7 @@ export interface PricingCardProps extends Omit<CardProps, 'variant'> {
   popular?: boolean;
 }
 
-export const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
+const PricingCard = forwardRef<HTMLDivElement, PricingCardProps>(
   (
     {
       className,
@@ -415,7 +415,7 @@ export interface StatCardProps extends Omit<CardProps, 'variant' | 'children'> {
   };
 }
 
-export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
+const StatCard = forwardRef<HTMLDivElement, StatCardProps>(
   (
     {
       className,
@@ -479,5 +479,8 @@ StatCard.displayName = 'StatCard';
 Card.Header = CardHeader;
 Card.Body = CardBody;
 
-export { FeatureCard, PricingCard, StatCard };
+// Export all specialized card components
+export { FeatureCard };
+export { PricingCard };
+export { StatCard };
 export default Card;

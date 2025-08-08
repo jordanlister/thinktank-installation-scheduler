@@ -746,7 +746,7 @@ export class NotificationManager {
    */
   private updateMetrics(channel: NotificationChannel, type: keyof NotificationMetrics): void {
     if (typeof this.metrics[type] === 'number') {
-      (this.metrics[type] as number)++;
+      (this.metrics[type] as number) += 1;
     }
     
     this.metrics.byChannel[channel]++;

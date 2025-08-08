@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://thinktanktechnologies.com/</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/homepage-hero.jpg</image:loc>
+      <image:caption>Think Tank Technologies - AI-Powered Field Service Management Software</image:caption>
+      <image:title>Homepage Hero Image</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/features</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/features-overview.jpg</image:loc>
+      <image:caption>Advanced Features - Field Service Management Software</image:caption>
+      <image:title>Features Overview</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/solutions-industries.jpg</image:loc>
+      <image:caption>Industry-Specific Field Service Solutions</image:caption>
+      <image:title>Solutions for Different Industries</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/pricing</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/pricing-plans.jpg</image:loc>
+      <image:caption>Pricing Plans - Field Service Management Software</image:caption>
+      <image:title>Transparent Pricing Plans</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/resources-hub.jpg</image:loc>
+      <image:caption>Resources Hub - Field Service Management Guides &amp; Case Studies</image:caption>
+      <image:title>Educational Resources</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/company</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/company-team.jpg</image:loc>
+      <image:caption>About Think Tank Technologies - Field Service Management Leaders</image:caption>
+      <image:title>Company Team and Leadership</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/contact</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://thinktanktechnologies.com/images/og/contact-us.jpg</image:loc>
+      <image:caption>Contact Think Tank Technologies - Field Service Management Experts</image:caption>
+      <image:title>Contact Information</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/case-studies</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/documentation</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/webinars</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/blog</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/case-studies/hvac-pro-cost-reduction</loc>
+    <lastmod>2024-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/case-studies/solartech-optimization</loc>
+    <lastmod>2024-02-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/resources/case-studies/telecom-efficiency</loc>
+    <lastmod>2024-02-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions/hvac</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions/solar</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions/telecom</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions/security</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/solutions/enterprise</loc>
+    <lastmod>2025-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/legal/privacy</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/legal/terms</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://thinktanktechnologies.com/legal/security</loc>
+    <lastmod>2024-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>

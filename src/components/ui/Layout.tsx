@@ -29,7 +29,7 @@ import type { ContainerProps, GridProps, BaseComponentProps } from '../../lib/ty
  * </Container>
  * ```
  */
-export const Container = forwardRef<HTMLDivElement, ContainerProps>(
+const Container = forwardRef<HTMLDivElement, ContainerProps>(
   (
     {
       className,
@@ -90,7 +90,7 @@ export interface SectionProps extends BaseComponentProps {
   as?: keyof JSX.IntrinsicElements;
 }
 
-export const Section = forwardRef<HTMLElement, SectionProps>(
+const Section = forwardRef<HTMLElement, SectionProps>(
   (
     {
       className,
@@ -148,7 +148,7 @@ Section.displayName = 'Section';
 /**
  * Grid component for responsive layouts
  */
-export const Grid = forwardRef<HTMLDivElement, GridProps>(
+const Grid = forwardRef<HTMLDivElement, GridProps>(
   (
     {
       className,
@@ -234,7 +234,7 @@ export interface FlexProps extends BaseComponentProps {
   as?: keyof JSX.IntrinsicElements;
 }
 
-export const Flex = forwardRef<HTMLDivElement, FlexProps>(
+const Flex = forwardRef<HTMLDivElement, FlexProps>(
   (
     {
       className,
@@ -322,7 +322,7 @@ export interface StackProps extends BaseComponentProps {
   divider?: React.ReactNode;
 }
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>(
+const Stack = forwardRef<HTMLDivElement, StackProps>(
   (
     {
       className,
@@ -391,7 +391,7 @@ export interface SpacerProps extends BaseComponentProps {
   direction?: 'horizontal' | 'vertical';
 }
 
-export const Spacer = forwardRef<HTMLDivElement, SpacerProps>(
+const Spacer = forwardRef<HTMLDivElement, SpacerProps>(
   (
     {
       className,
@@ -448,7 +448,7 @@ export interface CenterProps extends BaseComponentProps {
   as?: keyof JSX.IntrinsicElements;
 }
 
-export const Center = forwardRef<HTMLDivElement, CenterProps>(
+const Center = forwardRef<HTMLDivElement, CenterProps>(
   (
     {
       className,

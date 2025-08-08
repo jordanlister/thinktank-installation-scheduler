@@ -5,7 +5,7 @@ import { Menu, X, Bell, User, LogOut, Settings, UserCircle, ChevronDown } from '
 import { useAppStore, useUser } from '../../stores/useAppStore';
 import { formatName } from '../../utils';
 import { ConnectionStatus } from '../common/ConnectionStatus';
-import { NotificationBell } from '../common/NotificationBell';
+import NotificationBell from '../common/NotificationBell';
 
 interface HeaderProps {
   onMenuToggle: () => void;
