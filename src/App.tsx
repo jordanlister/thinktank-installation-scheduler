@@ -85,7 +85,7 @@ const AppRouter = () => {
 
   // For app routes, require authentication
   if (isLoading) {
-    return <PageLoading message="Loading Think Tank Technologies..." />;
+    return <PageLoading message="Loading Lead Route..." />;
   }
 
   if (!isAuthenticated) {

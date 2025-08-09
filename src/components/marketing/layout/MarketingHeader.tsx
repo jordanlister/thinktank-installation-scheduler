@@ -2,11 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button, Navigation, Container } from '../../ui';
+import { useAppStore, useIsAuthenticated } from '../../../stores/useAppStore';
+import { auth } from '../../../services/supabase';
+import UserProfileDropdown from './UserProfileDropdown';
 
 const MarketingHeader: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isAuthenticated = useIsAuthenticated();
+  const { user, setUser, setAuthenticated } = useAppStore();
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+      setAuthenticated(false);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,18 +89,24 @@ const MarketingHeader: React.FC = () => {
             ))}
           </nav>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons / Profile */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Link to="/app">
-              <Button variant="ghost" size="sm" className="text-text-secondary hover:text-white hover:bg-white/10 px-4 py-2">
-                Sign In
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="primary" size="sm" className="px-4 py-2">
-                Get Started
-              </Button>
-            </Link>
+            {isAuthenticated && user ? (
+              <UserProfileDropdown user={user} onSignOut={handleSignOut} />
+            ) : (
+              <>
+                <Link to="/app">
+                  <Button variant="ghost" size="sm" className="text-text-secondary hover:text-white hover:bg-white/10 px-4 py-2">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="primary" size="sm" className="px-4 py-2">
+                    Get Started
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -117,16 +138,57 @@ const MarketingHeader: React.FC = () => {
                 </Link>
               ))}
               <div className="pt-4 mt-4 border-t border-border space-y-3">
-                <Link to="/app" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    Sign In
-                  </Button>
-                </Link>
-                <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                  <Button variant="primary" size="sm" className="w-full">
-                    Get Started
-                  </Button>
-                </Link>
+                {isAuthenticated && user ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3 px-4 py-3 bg-white/5 rounded-lg">
+                      <div className="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white font-medium text-sm">
+                        {user.full_name ? user.full_name[0].toUpperCase() : user.email?.[0].toUpperCase() || 'U'}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-white truncate">
+                          {user.full_name || user.email}
+                        </p>
+                        <p className="text-xs text-text-secondary truncate">
+                          {user.email}
+                        </p>
+                      </div>
+                    </div>
+                    <Link to="/app" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="w-full">
+                        Dashboard
+                      </Button>
+                    </Link>
+                    <Link to="/app/settings" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="w-full">
+                        Settings
+                      </Button>
+                    </Link>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="w-full text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        handleSignOut();
+                      }}
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <Link to="/app" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="ghost" size="sm" className="w-full">
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                      <Button variant="primary" size="sm" className="w-full">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </nav>
           </div>

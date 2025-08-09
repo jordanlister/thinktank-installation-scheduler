@@ -1,4 +1,4 @@
-// Think Tank Technologies Installation Scheduler - Loading Components
+// Lead Route Installation Scheduler - Loading Components
 
 import React from 'react';
 import { Loader2 } from 'lucide-react';
@@ -188,12 +188,12 @@ export const PageLoading: React.FC<PageLoadingProps> = ({
       <div className="text-center glass rounded-2xl p-12 animate-glass-float">
         <div className="mb-8">
           <div className="h-16 w-16 mx-auto bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center shadow-glow-accent mb-6">
-            <span className="text-white font-bold text-xl drop-shadow-sm">TT</span>
+            <span className="text-white font-bold text-xl drop-shadow-sm">LR</span>
           </div>
           <LoadingSpinner size="xl" />
         </div>
         <h2 className="text-2xl font-bold text-white mb-2">
-          Think Tank Technologies
+          Lead Route
         </h2>
         <p className="text-white/70 text-lg">{message}</p>
       </div>

@@ -1,7 +1,7 @@
 /**
  * Loading Components
  * Loading states, spinners, skeletons, and animation wrappers
- * Based on Think Tank Technologies Landing Page Design System
+ * Based on Lead Route Landing Page Design System
  */
 
 import React, { forwardRef } from 'react';
