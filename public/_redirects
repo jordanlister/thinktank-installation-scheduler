@@ -1,6 +1,2 @@
-# Fallback for Single Page Application routes
-# This ensures all routes are served by React Router
+# SPA fallback
 /*    /index.html   200
-
-# Specific redirects for SEO
-/home   /   301
