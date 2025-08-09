@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Enhanced Contact Form
+ * Lead Route - Enhanced Contact Form
  * React Hook Form + Zod validation with comprehensive security integration
  */
 
@@ -349,7 +349,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
           {...register('consent')}
           error={!!errors.consent}
           errorMessage={errors.consent?.message}
-          label="I agree to the Privacy Policy and consent to Think Tank Technologies contacting me about their services."
+          label="I agree to the Privacy Policy and consent to Lead Route contacting me about their services."
           required
           disabled={formState.isSubmitting}
         />

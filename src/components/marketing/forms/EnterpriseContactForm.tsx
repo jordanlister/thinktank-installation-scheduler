@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Enterprise Contact Form
+ * Lead Route - Enterprise Contact Form
  * Comprehensive form for high-value lead qualification with detailed requirements gathering
  */
 
@@ -328,7 +328,7 @@ export const EnterpriseContactForm: React.FC<EnterpriseContactFormProps> = ({
             Enterprise Inquiry Submitted!
           </h3>
           <p className="text-text-secondary mb-6">
-            Thank you for your interest in Think Tank Technologies Enterprise. 
+            Thank you for your interest in Lead Route Enterprise. 
             Our dedicated enterprise team will contact you within 24 hours.
           </p>
           
@@ -712,7 +712,7 @@ export const EnterpriseContactForm: React.FC<EnterpriseContactFormProps> = ({
                   {...register('consent')}
                   error={!!errors.consent}
                   errorMessage={errors.consent?.message}
-                  label="I agree to the Privacy Policy and consent to Think Tank Technologies contacting me about enterprise solutions."
+                  label="I agree to the Privacy Policy and consent to Lead Route contacting me about enterprise solutions."
                   required
                 />
                 

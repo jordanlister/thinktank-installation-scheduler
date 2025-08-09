@@ -1,6 +1,6 @@
 /**
  * Marketing Animation Components - Main Export
- * Comprehensive animation system for Think Tank Technologies landing pages
+ * Comprehensive animation system for Lead Route landing pages
  * Built with performance, accessibility, and design system integration
  */
 

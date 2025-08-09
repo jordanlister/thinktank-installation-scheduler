@@ -129,13 +129,13 @@ const FeaturesPage: React.FC = () => {
         twitterImageAlt="AI scheduling, route optimization, and team management features"
       />
       {/* Features Hero */}
-      <Section spacing="2xl">
+      <Section spacing="2xl" className="py-20">
         <Container>
           <div className="text-center max-w-4xl mx-auto">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
+            <Heading variant="h1" className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Powerful features for modern field service
             </Heading>
-            <Text size="xl" className="text-text-secondary">
+            <Text size="xl" className="text-text-secondary leading-relaxed max-w-3xl mx-auto">
               Every feature is designed to solve real-world challenges faced by 
               field service companies. From AI-powered scheduling to real-time 
               optimization, we've got you covered.
@@ -148,11 +148,11 @@ const FeaturesPage: React.FC = () => {
       {featureCategories.map((category, categoryIndex) => (
         <Section key={categoryIndex} spacing="2xl" className={categoryIndex % 2 === 1 ? 'bg-surface/30' : ''}>
           <Container>
-            <div className="text-center mb-16">
-              <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+            <div className="text-center mb-20">
+              <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
                 {category.title}
               </Heading>
-              <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+              <Text size="lg" className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
                 {category.description}
               </Text>
             </div>
@@ -163,16 +163,18 @@ const FeaturesPage: React.FC = () => {
                 const isReverse = featureIndex % 2 === 1;
                 
                 return (
-                  <div key={featureIndex} className={`grid lg:grid-cols-2 gap-12 items-center ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <div key={featureIndex} className={`grid lg:grid-cols-2 gap-16 items-center ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Feature Content */}
                     <div className={isReverse ? 'lg:col-start-2' : ''}>
-                      <div className="flex items-center mb-6">
-                        <div className="w-12 h-12 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mr-4">
-                          <Icon className="w-6 h-6 text-brand-primary" />
+                      <div className="flex items-start mb-6">
+                        <div className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                          <Icon className="w-7 h-7 text-brand-primary" />
                         </div>
-                        <Heading variant="h3" className="text-2xl font-bold text-white">
-                          {feature.name}
-                        </Heading>
+                        <div>
+                          <Heading variant="h3" className="text-2xl md:text-3xl font-bold text-white mb-2">
+                            {feature.name}
+                          </Heading>
+                        </div>
                       </div>
                       
                       <Text className="text-text-secondary mb-8 text-lg leading-relaxed">
@@ -180,30 +182,32 @@ const FeaturesPage: React.FC = () => {
                       </Text>
 
                       <div className="mb-8">
-                        <Text className="text-white font-semibold mb-4">Key Benefits:</Text>
-                        <ul className="space-y-3">
+                        <Text className="text-white font-semibold mb-6 text-lg">Key Benefits:</Text>
+                        <ul className="space-y-4">
                           {feature.benefits.map((benefit, benefitIndex) => (
-                            <li key={benefitIndex} className="flex items-center text-text-secondary">
-                              <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                              {benefit}
+                            <li key={benefitIndex} className="flex items-start text-text-secondary">
+                              <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0 mt-0.5" />
+                              <span className="leading-relaxed">{benefit}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <Button variant="primary" className="group">
+                      <Button variant="primary" size="lg" className="group">
                         Try This Feature
-                        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
 
                     {/* Feature Demo/Visual */}
                     <div className={isReverse ? 'lg:col-start-1' : ''}>
-                      <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8 hover:border-brand-primary/30 transition-colors">
-                        <div className="aspect-video bg-gradient-to-br from-surface to-surface-elevated rounded-lg border border-border flex items-center justify-center">
-                          <div className="text-center">
-                            <Icon className="w-16 h-16 text-brand-primary mx-auto mb-4" />
-                            <Text className="text-text-muted">Interactive demo coming soon</Text>
+                      <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8 hover:border-brand-primary/30 transition-all duration-300 group">
+                        <div className="aspect-video bg-gradient-to-br from-surface to-surface-elevated rounded-xl border border-border flex items-center justify-center overflow-hidden">
+                          <div className="text-center group-hover:scale-105 transition-transform duration-300">
+                            <div className="w-20 h-20 bg-brand-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                              <Icon className="w-10 h-10 text-brand-primary" />
+                            </div>
+                            <Text className="text-text-muted font-medium">Interactive demo coming soon</Text>
                           </div>
                         </div>
                       </div>
@@ -217,13 +221,13 @@ const FeaturesPage: React.FC = () => {
       ))}
 
       {/* Integration Ecosystem */}
-      <Section spacing="2xl">
+      <Section spacing="2xl" className="bg-surface/20">
         <Container>
           <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+            <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
               Seamless integrations with your existing tools
             </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
               Connect with the tools you already use. Our robust API and 
               pre-built integrations make setup effortless.
             </Text>
@@ -231,12 +235,12 @@ const FeaturesPage: React.FC = () => {
           
           <Grid cols={{ base: 2, md: 3, lg: 6 }} gap={6} className="mb-16">
             {integrations.map((integration, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6 hover:border-brand-primary/30 transition-colors text-center group">
-                <div className="w-12 h-12 bg-white rounded-lg mx-auto mb-4 flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <div className="text-gray-400 text-xs font-medium">{integration.name.slice(0, 3)}</div>
+              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6 hover:border-brand-primary/30 hover:bg-surface-glass/80 transition-all duration-300 text-center group">
+                <div className="w-14 h-14 bg-white/90 rounded-lg mx-auto mb-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-sm">
+                  <div className="text-gray-600 text-sm font-bold">{integration.name.slice(0, 2)}</div>
                 </div>
-                <Text className="font-medium text-white mb-1">{integration.name}</Text>
-                <Text size="sm" className="text-text-muted">{integration.category}</Text>
+                <Text className="font-medium text-white mb-1 text-sm">{integration.name}</Text>
+                <Text size="xs" className="text-text-muted">{integration.category}</Text>
               </div>
             ))}
           </Grid>
@@ -257,20 +261,20 @@ const FeaturesPage: React.FC = () => {
         </div>
         
         <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+          <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
             Ready to experience these features?
           </Heading>
-          <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
+          <Text size="lg" className="text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
             Start your free trial today and see how our features can transform 
             your field service operations.
           </Text>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button size="xl" className="group">
               Start Free Trial
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="secondary">
+            <Button size="xl" variant="secondary">
               Schedule Demo
             </Button>
           </div>

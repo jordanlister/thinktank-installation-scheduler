@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Newsletter Signup Form
+ * Lead Route - Newsletter Signup Form
  * Simple email capture form optimized for maximum conversion
  */
 

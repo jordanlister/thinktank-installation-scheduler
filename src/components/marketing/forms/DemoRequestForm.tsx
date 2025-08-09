@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Demo Request Form
+ * Lead Route - Demo Request Form
  * Multi-step form for qualified lead capture with progressive disclosure
  */
 
@@ -293,7 +293,7 @@ export const DemoRequestForm: React.FC<DemoRequestFormProps> = ({
             Demo Request Submitted!
           </h3>
           <p className="text-text-secondary mb-6">
-            Thank you for your interest in Think Tank Technologies. 
+            Thank you for your interest in Lead Route. 
             Our team will contact you within 24 hours to schedule your personalized demo.
           </p>
           <div className="bg-surface/50 rounded-lg p-4 text-left">
@@ -326,7 +326,7 @@ export const DemoRequestForm: React.FC<DemoRequestFormProps> = ({
           Request a Personalized Demo
         </h2>
         <p className="text-text-secondary">
-          See how Think Tank Technologies can transform your field service operations. 
+          See how Lead Route can transform your field service operations. 
           This takes just 3 minutes.
         </p>
       </div>
@@ -600,7 +600,7 @@ export const DemoRequestForm: React.FC<DemoRequestFormProps> = ({
                   {...register('consent')}
                   error={!!errors.consent}
                   errorMessage={errors.consent?.message}
-                  label="I agree to the Privacy Policy and consent to Think Tank Technologies contacting me about their services."
+                  label="I agree to the Privacy Policy and consent to Lead Route contacting me about their services."
                   required
                 />
                 

@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Marketing Forms
+ * Lead Route - Marketing Forms
  * Comprehensive form components for landing page lead capture and conversion
  */
 
@@ -21,7 +21,7 @@ export * from '../../../lib/forms/utils';
 /**
  * Marketing Forms Collection
  * 
- * This collection includes all form components needed for Think Tank Technologies
+ * This collection includes all form components needed for Lead Route
  * marketing and landing pages, each optimized for specific conversion goals:
  * 
  * 1. ContactForm - General inquiries and lead capture

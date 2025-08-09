@@ -33,53 +33,55 @@ const MarketingHeader: React.FC = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-surface-glass backdrop-blur-xl border-b border-border' 
+          ? 'bg-surface-glass backdrop-blur-xl border-b border-border shadow-lg' 
           : 'bg-transparent'
       }`}
     >
       <Container>
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16 lg:h-20 px-2">
           {/* Logo */}
           <Link 
             to="/" 
             className="flex items-center space-x-3 font-bold text-xl text-white hover:text-brand-primary transition-colors"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-brand-primary to-brand-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">TTT</span>
-            </div>
-            <span className="hidden sm:block">Think Tank Technologies</span>
+            <img 
+              src="/thinktanklogo.png" 
+              alt="Lead Route Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            <span className="hidden sm:block">Lead Route</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.path}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-lg ${
                   isActiveRoute(item.path)
-                    ? 'text-brand-primary'
-                    : 'text-text-secondary hover:text-white'
+                    ? 'text-brand-primary bg-brand-primary/10'
+                    : 'text-text-secondary hover:text-white hover:bg-white/5'
                 }`}
               >
                 {item.name}
                 {isActiveRoute(item.path) && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-primary rounded-full" />
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-brand-primary rounded-full" />
                 )}
               </Link>
             ))}
           </nav>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <Link to="/app">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="text-text-secondary hover:text-white hover:bg-white/10 px-4 py-2">
                 Sign In
               </Button>
             </Link>
             <Link to="/contact">
-              <Button variant="primary" size="sm" className="group">
-                Get Started
+              <Button variant="primary" size="sm" className="group px-4 py-2 flex items-center">
+                <span>Get Started</span>
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -97,23 +99,23 @@ const MarketingHeader: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-surface-glass backdrop-blur-xl border-t border-border">
-            <nav className="py-6 space-y-4">
+          <div className="lg:hidden bg-surface-glass backdrop-blur-xl border-t border-border shadow-xl">
+            <nav className="py-4 space-y-1 px-4">
               {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-6 py-3 text-sm font-medium transition-colors duration-200 ${
+                  className={`block px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-lg ${
                     isActiveRoute(item.path)
                       ? 'text-brand-primary bg-brand-primary/10'
-                      : 'text-text-secondary hover:text-white hover:bg-surface-elevated/50'
+                      : 'text-text-secondary hover:text-white hover:bg-white/5'
                   }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="px-6 pt-4 border-t border-border space-y-3">
+              <div className="pt-4 mt-4 border-t border-border space-y-3">
                 <Link to="/app" onClick={() => setIsMenuOpen(false)}>
                   <Button variant="ghost" size="sm" className="w-full">
                     Sign In

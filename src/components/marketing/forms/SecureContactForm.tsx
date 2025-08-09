@@ -1,4 +1,4 @@
-// Think Tank Technologies - Secure Contact Form Implementation
+// Lead Route - Secure Contact Form Implementation
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '../../ui/Button';
@@ -487,7 +487,7 @@ export const SecureContactForm: React.FC<SecureContactFormProps> = ({
           <a href="/privacy" className="text-blue-600 hover:underline">
             Privacy Policy
           </a>{' '}
-          and consent to Think Tank Technologies contacting me about their services. *
+          and consent to Lead Route contacting me about their services. *
         </label>
         {formErrors.consent && (
           <p className="text-red-600 text-sm mt-1">{formErrors.consent}</p>

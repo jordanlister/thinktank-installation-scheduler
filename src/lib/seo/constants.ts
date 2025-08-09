@@ -1,5 +1,5 @@
 /**
- * SEO Constants for Think Tank Technologies
+ * SEO Constants for Lead Route
  * 
  * Site-wide SEO configuration, metadata, and structured data constants
  * optimized for field service management software keywords.
@@ -7,20 +7,20 @@
 
 // Base Site Configuration
 export const SITE_CONFIG = {
-  siteName: 'Think Tank Technologies',
+  siteName: 'Lead Route',
   siteUrl: process.env.VITE_SITE_URL || 'https://thinktanktechnologies.com',
   siteDescription: 'Advanced field service management software with AI-powered scheduling, route optimization, and team management for HVAC, solar, telecom, and security installation companies.',
   logoUrl: '/thinktanklogo.png',
   
   // Company Information
   company: {
-    name: 'Think Tank Technologies',
-    legalName: 'Think Tank Technologies LLC',
+    name: 'Lead Route',
+    legalName: 'Lead Route LLC',
     foundingDate: '2020-01-15',
     description: 'Leading provider of AI-powered field service management software for installation and maintenance companies.',
     
     // Contact Information
-    email: 'contact@thinktanktechnologies.com',
+    email: 'contact@leadroute.com',
     phone: '+1-555-TTT-TECH',
     address: {
       streetAddress: '123 Innovation Drive',
@@ -117,7 +117,7 @@ export const INDUSTRY_KEYWORDS = {
 // Page-Specific Metadata
 export const PAGE_METADATA = {
   home: {
-    title: 'Think Tank Technologies - AI-Powered Field Service Management Software',
+    title: 'Lead Route - AI-Powered Field Service Management Software',
     description: 'Transform your field service operations with intelligent scheduling, route optimization, and team management. Reduce costs by 25% while improving customer satisfaction. Start your free trial today.',
     keywords: [
       ...PRIMARY_KEYWORDS,
@@ -130,7 +130,7 @@ export const PAGE_METADATA = {
   },
 
   features: {
-    title: 'Advanced Features - Field Service Management Software | Think Tank Technologies',
+    title: 'Advanced Features - Field Service Management Software | Lead Route',
     description: 'Discover powerful features including AI scheduling, route optimization, team management, real-time analytics, and seamless integrations. Built for modern field service teams.',
     keywords: [
       'AI scheduling features',
@@ -144,7 +144,7 @@ export const PAGE_METADATA = {
   },
 
   solutions: {
-    title: 'Industry Solutions - HVAC, Solar, Telecom & Security | Think Tank Technologies',
+    title: 'Industry Solutions - HVAC, Solar, Telecom & Security | Lead Route',
     description: 'Tailored field service solutions for HVAC, solar installation, telecommunications, and security system companies. Industry-specific features and optimizations.',
     keywords: [
       ...INDUSTRY_KEYWORDS.hvac.slice(0, 3),
@@ -157,7 +157,7 @@ export const PAGE_METADATA = {
   },
 
   pricing: {
-    title: 'Pricing Plans - Field Service Management Software | Think Tank Technologies',
+    title: 'Pricing Plans - Field Service Management Software | Lead Route',
     description: 'Simple, transparent pricing for field service teams of all sizes. Starter, Professional, and Enterprise plans with 14-day free trial. No hidden fees.',
     keywords: [
       'field service software pricing',
@@ -171,7 +171,7 @@ export const PAGE_METADATA = {
   },
 
   resources: {
-    title: 'Resources - Case Studies, Guides & Documentation | Think Tank Technologies',
+    title: 'Resources - Case Studies, Guides & Documentation | Lead Route',
     description: 'Comprehensive resources including customer success stories, implementation guides, API documentation, and industry insights for field service optimization.',
     keywords: [
       'field service case studies',
@@ -185,10 +185,10 @@ export const PAGE_METADATA = {
   },
 
   company: {
-    title: 'About Think Tank Technologies - Field Service Management Leaders',
-    description: 'Learn about Think Tank Technologies, the team behind the leading AI-powered field service management platform. Our mission, values, and commitment to innovation.',
+    title: 'About Lead Route - Field Service Management Leaders',
+    description: 'Learn about Lead Route, the team behind the leading AI-powered field service management platform. Our mission, values, and commitment to innovation.',
     keywords: [
-      'think tank technologies team',
+      'lead route team',
       'field service software company',
       'installation management leaders',
       'about field service platform',
@@ -199,7 +199,7 @@ export const PAGE_METADATA = {
   },
 
   contact: {
-    title: 'Contact Us - Get Started with Field Service Management | Think Tank Technologies',
+    title: 'Contact Us - Get Started with Field Service Management | Lead Route',
     description: 'Ready to transform your field operations? Contact our team for a personalized demo, pricing information, or technical support. Multiple ways to reach us.',
     keywords: [
       'field service software demo',
@@ -226,8 +226,8 @@ export const OPEN_GRAPH_DEFAULTS = {
 // Twitter Card Default Settings  
 export const TWITTER_DEFAULTS = {
   card: 'summary_large_image',
-  site: '@thinktanktech',
-  creator: '@thinktanktech'
+  site: '@leadroute',
+  creator: '@leadroute'
 } as const;
 
 // Structured Data Templates
@@ -267,7 +267,7 @@ export const STRUCTURED_DATA_DEFAULTS = {
   softwareApplication: {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Think Tank Technologies Installation Scheduler',
+    name: 'Lead Route Installation Scheduler',
     applicationCategory: 'BusinessApplication',
     applicationSubCategory: 'Field Service Management',
     operatingSystem: 'Web Browser, iOS, Android',

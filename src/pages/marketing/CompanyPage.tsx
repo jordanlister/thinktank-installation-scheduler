@@ -189,7 +189,7 @@ const CompanyPage: React.FC = () => {
       <CompanySEO 
         jsonLd={allSchemas}
         ogImage="/images/og/company-team.jpg"
-        ogImageAlt="About Think Tank Technologies - Field Service Management Leaders"
+        ogImageAlt="About Lead Route - Field Service Management Leaders"
         twitterImage="/images/twitter/company-team.jpg"
         twitterImageAlt="Meet the team behind the leading AI-powered field service platform"
       />
@@ -242,7 +242,7 @@ const CompanyPage: React.FC = () => {
               </Heading>
               <div className="space-y-6 text-text-secondary">
                 <Text>
-                  Think Tank Technologies was born from the frustration of watching talented field service 
+                  Lead Route was born from the frustration of watching talented field service 
                   teams struggle with inefficient scheduling and routing. Our founders, with decades of 
                   combined experience in operations and technology, knew there had to be a better way.
                 </Text>
@@ -434,7 +434,7 @@ const CompanyPage: React.FC = () => {
             Ready to transform your field operations?
           </Heading>
           <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Join hundreds of companies who trust Think Tank Technologies 
+            Join hundreds of companies who trust Lead Route 
             to optimize their field service operations.
           </Text>
           

@@ -1,5 +1,5 @@
 /**
- * Mock Data for Think Tank Technologies Marketing Pages
+ * Mock Data for Lead Route Marketing Pages
  * This file contains realistic placeholder data for testimonials, case studies, 
  * company information, and other marketing content.
  */
@@ -75,7 +75,7 @@ export interface Integration {
 export const testimonials: Testimonial[] = [
   {
     id: 'hvac-pro-sarah',
-    quote: "TTT's scheduling system reduced our travel costs by 30% in the first quarter. The AI-powered optimization is incredible.",
+    quote: "Lead Route's scheduling system reduced our travel costs by 30% in the first quarter. The AI-powered optimization is incredible.",
     author: 'Sarah Johnson',
     title: 'Operations Manager',
     company: 'HVAC Pro Services',
@@ -108,7 +108,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'security-david',
-    quote: "Customer satisfaction jumped to 96% after implementing TTT. The scheduling intelligence is remarkable.",
+    quote: "Customer satisfaction jumped to 96% after implementing Lead Route. The scheduling intelligence is remarkable.",
     author: 'David Kim',
     title: 'Operations Director',
     company: 'Security Systems Pro',
@@ -119,7 +119,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 'plumbing-plus-maria',
-    quote: "We've scaled from 50 to 200 technicians using TTT. The platform grows with your business perfectly.",
+    quote: "We've scaled from 50 to 200 technicians using Lead Route. The platform grows with your business perfectly.",
     author: 'Maria Gonzalez',
     title: 'CEO',
     company: 'Plumbing Plus',
@@ -138,7 +138,7 @@ export const caseStudies: CaseStudy[] = [
     company: 'HVAC Pro Services',
     industry: 'HVAC Installation & Service',
     challenge: 'HVAC Pro was struggling with inefficient routing, leading to high fuel costs and technician overtime. Manual scheduling was taking 3+ hours daily.',
-    solution: 'Implemented TTT\'s AI-powered scheduling and route optimization, integrated with their existing CRM, and trained dispatchers on the new system.',
+    solution: 'Implemented Lead Route\'s AI-powered scheduling and route optimization, integrated with their existing CRM, and trained dispatchers on the new system.',
     results: {
       'Cost Reduction': '28%',
       'Travel Time Saved': '40%',
@@ -244,7 +244,7 @@ export const teamMembers: TeamMember[] = [
     avatar: '/team/sarah-johnson.jpg',
     linkedin: 'https://linkedin.com/in/sarah-johnson-ttt',
     twitter: 'https://twitter.com/sarahj_ttt',
-    email: 'sarah@thinktanktech.com'
+    email: 'sarah@leadroute.com'
   },
   {
     id: 'michael-chen',

@@ -29,7 +29,7 @@ export const MARKETING_PAGES: SitemapEntry[] = [
     images: [
       {
         url: '/images/og/homepage-hero.jpg',
-        caption: 'Think Tank Technologies - AI-Powered Field Service Management Software',
+        caption: 'Lead Route - AI-Powered Field Service Management Software',
         title: 'Homepage Hero Image'
       }
     ]
@@ -94,7 +94,7 @@ export const MARKETING_PAGES: SitemapEntry[] = [
     images: [
       {
         url: '/images/og/company-team.jpg',
-        caption: 'About Think Tank Technologies - Field Service Management Leaders',
+        caption: 'About Lead Route - Field Service Management Leaders',
         title: 'Company Team and Leadership'
       }
     ]
@@ -107,7 +107,7 @@ export const MARKETING_PAGES: SitemapEntry[] = [
     images: [
       {
         url: '/images/og/contact-us.jpg',
-        caption: 'Contact Think Tank Technologies - Field Service Management Experts',
+        caption: 'Contact Lead Route - Field Service Management Experts',
         title: 'Contact Information'
       }
     ]

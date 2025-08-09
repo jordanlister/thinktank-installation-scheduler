@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - Free Trial Signup Form
+ * Lead Route - Free Trial Signup Form
  * Account creation workflow with minimal friction and progressive profiling
  */
 
@@ -269,7 +269,7 @@ export const TrialSignupForm: React.FC<TrialSignupFormProps> = ({
             <Sparkles className="w-10 h-10 text-success" />
           </div>
           <h3 className="text-2xl font-semibold text-success mb-4">
-            Welcome to Think Tank Technologies!
+            Welcome to Lead Route!
           </h3>
           <p className="text-text-secondary mb-6">
             Your free trial account has been created successfully. 
@@ -313,7 +313,7 @@ export const TrialSignupForm: React.FC<TrialSignupFormProps> = ({
           Start Your Free Trial
         </h2>
         <p className="text-text-secondary">
-          Get started with Think Tank Technologies in under 2 minutes. 
+          Get started with Lead Route in under 2 minutes. 
           No credit card required, cancel anytime.
         </p>
       </div>
@@ -608,7 +608,7 @@ export const TrialSignupForm: React.FC<TrialSignupFormProps> = ({
         {/* Footer Note */}
         <div className="text-center mt-6 text-xs text-text-muted">
           <p>
-            By signing up, you agree to receive emails from Think Tank Technologies. 
+            By signing up, you agree to receive emails from Lead Route. 
             You can unsubscribe at any time.
           </p>
           <p className="mt-2">

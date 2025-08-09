@@ -52,7 +52,7 @@ const ContactPage: React.FC = () => {
       title: 'General Inquiries',
       description: 'Get in touch with our team for general questions',
       icon: Mail,
-      contact: 'hello@thinktanktech.com',
+      contact: 'hello@leadroute.com',
       responseTime: 'Within 4 hours'
     },
     {
@@ -66,7 +66,7 @@ const ContactPage: React.FC = () => {
       title: 'Support',
       description: 'Get help from our technical support team',
       icon: MessageSquare,
-      contact: 'support@thinktanktech.com',
+      contact: 'support@leadroute.com',
       responseTime: 'Within 2 hours'
     }
   ];
@@ -166,7 +166,7 @@ const ContactPage: React.FC = () => {
       <ContactSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/contact-us.jpg"
-        ogImageAlt="Contact Think Tank Technologies - Field Service Management Experts"
+        ogImageAlt="Contact Lead Route - Field Service Management Experts"
         twitterImage="/images/twitter/contact-us.jpg"
         twitterImageAlt="Get in touch with our field service management experts"
       />
@@ -225,7 +225,7 @@ const ContactPage: React.FC = () => {
                 Request a personalized demo
               </Heading>
               <Text size="lg" className="text-text-secondary">
-                See how Think Tank Technologies can transform your field service operations. 
+                See how Lead Route can transform your field service operations. 
                 Fill out the form below and we'll schedule a custom demo tailored to your needs.
               </Text>
             </div>

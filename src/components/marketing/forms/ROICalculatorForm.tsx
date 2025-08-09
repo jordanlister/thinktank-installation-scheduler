@@ -1,5 +1,5 @@
 /**
- * Think Tank Technologies - ROI Calculator Form
+ * Lead Route - ROI Calculator Form
  * Interactive calculator with real-time calculations and lead capture
  */
 
@@ -318,7 +318,7 @@ export const ROICalculatorForm: React.FC<ROICalculatorProps> = ({
           ROI Calculator
         </h2>
         <p className="text-text-secondary">
-          Calculate the potential savings and ROI from implementing Think Tank Technologies' 
+          Calculate the potential savings and ROI from implementing Lead Route's 
           field service optimization platform.
         </p>
       </div>
@@ -566,7 +566,7 @@ export const ROICalculatorForm: React.FC<ROICalculatorProps> = ({
                   <div className="border border-success/20 rounded-lg p-4 bg-success/5">
                     <h5 className="font-medium text-white mb-3 flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-success" />
-                      Monthly Savings with TTT
+                      Monthly Savings with Lead Route
                     </h5>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
@@ -600,7 +600,7 @@ export const ROICalculatorForm: React.FC<ROICalculatorProps> = ({
                         <span className="text-white">{roiCalculations.efficiency.currentEfficiency.toFixed(1)} jobs/tech/day</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-text-muted">With TTT:</span>
+                        <span className="text-text-muted">With Lead Route:</span>
                         <span className="text-brand-primary">{roiCalculations.efficiency.improvedEfficiency.toFixed(1)} jobs/tech/day</span>
                       </div>
                       <div className="flex justify-between border-t border-brand-primary/20 pt-2 font-medium">
@@ -633,7 +633,7 @@ export const ROICalculatorForm: React.FC<ROICalculatorProps> = ({
                   Ready to achieve these savings?
                 </h4>
                 <p className="text-text-secondary mb-4">
-                  Schedule a demo to see how Think Tank Technologies can transform your operations.
+                  Schedule a demo to see how Lead Route can transform your operations.
                 </p>
                 <Button variant="primary" size="lg" className="w-full">
                   Schedule Demo
@@ -647,7 +647,7 @@ export const ROICalculatorForm: React.FC<ROICalculatorProps> = ({
                 Calculate Your ROI
               </h3>
               <p className="text-text-secondary">
-                Fill in your current operations data to see potential savings with Think Tank Technologies.
+                Fill in your current operations data to see potential savings with Lead Route.
               </p>
             </Card>
           )}

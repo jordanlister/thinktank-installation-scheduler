@@ -501,7 +501,7 @@ export const getFeaturesPageSchemas = (): SchemaOrgBase[] => [
 
 export const getPricingPageSchemas = (): SchemaOrgBase[] => [
   buildProductSchema({
-    name: 'Think Tank Technologies Installation Scheduler',
+    name: 'Lead Route Installation Scheduler',
     description: 'Field service management software with AI-powered scheduling and optimization',
     category: 'Business Software',
     offers: [
