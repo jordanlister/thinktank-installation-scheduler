@@ -401,12 +401,12 @@ export function RealtimeProvider({
     wsManager.subscribe(RealtimeEvents.BULK_OPERATION_PROGRESS, handleBulkUpdate);
     wsManager.subscribe(RealtimeEvents.BULK_OPERATION_COMPLETE, handleBulkUpdate);
 
-    // Auto-connect if enabled
-    if (autoConnect) {
-      wsManager.connect().catch(error => {
-        console.error('Failed to auto-connect WebSocket:', error);
-      });
-    }
+    // Auto-connect disabled for now - using Supabase Realtime instead
+    // if (autoConnect) {
+    //   wsManager.connect().catch(error => {
+    //     console.error('Failed to auto-connect WebSocket:', error);
+    //   });
+    // }
 
     // Cleanup function
     return () => {

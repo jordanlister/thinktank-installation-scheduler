@@ -10,6 +10,7 @@ import {
   FileText, 
   Settings,
   Upload,
+  Bell,
   X
 } from 'lucide-react';
 import { NAVIGATION_ITEMS } from '../../constants';
@@ -23,6 +24,7 @@ const iconMap = {
   Users,
   FileText,
   Upload,
+  Bell,
   Settings,
 };
 

@@ -249,7 +249,7 @@ const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
                 variantClasses[variant],
                 i === lines - 1 && 'w-3/4' // Make last line shorter
               )}
-              style={i === lines - 1 ? { width: '75%' } : style}
+              style={i === lines - 1 ? {} : style}
             />
           ))}
         </div>
@@ -319,11 +319,9 @@ const Pulse = forwardRef<HTMLDivElement, PulseProps>(
           'rounded-full animate-ping',
           sizeClasses[size],
           colorClasses[color],
+          `[animation-duration:${duration}]`,
           className
         )}
-        style={{
-          animationDuration: duration,
-        }}
         data-testid={testId}
         {...props}
       />
@@ -404,12 +402,9 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>(
             className={cn(
               'transition-all duration-300 ease-out rounded-full',
               colorClasses[color],
-              indeterminate && 'animate-pulse'
+              indeterminate ? 'animate-pulse w-full animate-[progress-indeterminate_2s_ease-in-out_infinite]' : '',
+              !indeterminate ? `w-[${clampedValue}%]` : ''
             )}
-            style={{
-              width: indeterminate ? '100%' : `${clampedValue}%`,
-              animation: indeterminate ? 'progress-indeterminate 2s ease-in-out infinite' : undefined,
-            }}
             role="progressbar"
             aria-valuenow={indeterminate ? undefined : clampedValue}
             aria-valuemin={0}
@@ -499,10 +494,8 @@ const AnimationWrapper = forwardRef<HTMLDivElement, AnimationWrapperProps>(
       none: '',
     };
 
-    const style: React.CSSProperties = {
-      animationDelay: delay ? `${delay}ms` : undefined,
-      animationDuration: duration ? `${duration}ms` : undefined,
-    };
+const delayClass = delay ? `[animation-delay:${delay}ms]` : '';
+    const durationClass = duration ? `[animation-duration:${duration}ms]` : '';
 
     return (
       <div
@@ -516,8 +509,7 @@ const AnimationWrapper = forwardRef<HTMLDivElement, AnimationWrapperProps>(
           }
           elementRef.current = node;
         }}
-        className={cn(animationClasses[animation], className)}
-        style={style}
+className={cn(animationClasses[animation], delayClass, durationClass, className)}
         data-testid={testId}
         {...props}
       >
@@ -580,12 +572,10 @@ const FadeTransition = forwardRef<HTMLDivElement, FadeTransitionProps>(
         ref={ref}
         className={cn(
           'transition-opacity ease-in-out',
+          `[transition-duration:${duration}ms]`,
           isVisible ? 'opacity-100' : 'opacity-0',
           className
         )}
-        style={{
-          transitionDuration: `${duration}ms`,
-        }}
         data-testid={testId}
         {...props}
       >
@@ -634,7 +624,7 @@ const LoadingOverlay = forwardRef<HTMLDivElement, LoadingOverlayProps>(
           blur && 'backdrop-blur-sm',
           className
         )}
-        style={{
+style={{
           backgroundColor: `rgba(10, 10, 10, ${opacity})`,
         }}
         data-testid={testId}

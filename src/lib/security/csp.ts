@@ -77,7 +77,7 @@ export function createCSPConfig(nonce: string, isDevelopment: boolean = false): 
         'https://vitals.vercel-analytics.com',
         // WebSocket connections
         'wss://*.supabase.co',
-        ...(isDevelopment ? ['ws://localhost:3000', 'http://localhost:3000'] : [])
+        ...(isDevelopment ? ['ws://localhost:3000', 'http://localhost:3000', 'ws://localhost:3001'] : [])
       ],
       'frame-src': [
         // YouTube embeds for demo videos

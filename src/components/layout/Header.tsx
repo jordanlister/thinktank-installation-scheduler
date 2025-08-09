@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Bell, User, LogOut, Settings, UserCircle, ChevronDown } from 'lucide-react';
 import { useAppStore, useUser } from '../../stores/useAppStore';
 import { formatName } from '../../utils';
-import { ConnectionStatus } from '../common/ConnectionStatus';
+import { SimpleConnectionStatus } from '../common/SimpleConnectionStatus';
 import NotificationBell from '../common/NotificationBell';
 
 interface HeaderProps {
@@ -49,10 +49,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
               <img 
                 src="/thinktanklogo.png" 
                 alt="Lead Route Logo" 
-                className="h-10 w-10 rounded-lg filter drop-shadow-lg"
-                style={{
-                  filter: 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)) drop-shadow(0 0 16px rgba(59, 130, 246, 0.3))'
-                }}
+                className="h-10 w-10 rounded-lg filter drop-shadow-lg [filter:drop-shadow(0_0_8px_rgba(59,130,246,0.5))_drop-shadow(0_0_16px_rgba(59,130,246,0.3))]"
               />
             </div>
           </div>
@@ -69,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
         {/* Right section - Notifications and user menu */}
         <div className="flex items-center space-x-3">
           {/* Connection Status */}
-          <ConnectionStatus className="hidden sm:flex" />
+          <SimpleConnectionStatus className="hidden sm:flex" />
           
           {/* Notifications */}
           <NotificationBell />

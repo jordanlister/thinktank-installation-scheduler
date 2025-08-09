@@ -176,7 +176,7 @@ const NotificationBell: React.FC<NotificationBellProps> = ({
                 onClick={() => {
                   setIsOpen(false);
                   // Navigate to notification settings
-                  window.location.href = '/settings/notifications';
+                  window.location.href = '/app/settings#notifications';
                 }}
                 className="p-1.5 text-white/60 hover:text-white/80 hover:bg-white/10 rounded-lg transition-all duration-200"
                 title="Notification settings"
@@ -251,7 +251,7 @@ const NotificationBell: React.FC<NotificationBellProps> = ({
               <button
                 onClick={() => {
                   setIsOpen(false);
-                  window.location.href = '/notifications';
+                  window.location.href = '/app/notifications';
                 }}
                 className="text-blue-400 hover:text-blue-300 text-sm font-medium"
               >

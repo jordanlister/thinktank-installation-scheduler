@@ -31,6 +31,11 @@ export const supabase = (!supabaseUrl || !supabaseAnonKey)
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: true
+      },
+      realtime: {
+        params: {
+          eventsPerSecond: 10
+        }
       }
     });
 
@@ -183,6 +188,80 @@ export const db = {
       return true;
     }
   })
+};
+
+// Realtime helpers
+export const realtime = {
+  /**
+   * Subscribe to real-time changes on a table
+   */
+  subscribe: (table: string, callback: (payload: any) => void) => {
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.warn('Realtime subscription failed - Supabase not configured');
+      return { unsubscribe: () => {} };
+    }
+
+    const channel = supabase
+      .channel(`public:${table}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: table,
+        },
+        callback
+      )
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          console.log(`✅ Subscribed to ${table} changes`);
+        } else if (status === 'CHANNEL_ERROR') {
+          console.error(`❌ Failed to subscribe to ${table} changes`);
+        }
+      });
+
+    return {
+      unsubscribe: () => {
+        supabase.removeChannel(channel);
+      }
+    };
+  },
+
+  /**
+   * Get connection status
+   */
+  getStatus: () => {
+    if (!supabaseUrl || !supabaseAnonKey) {
+      return { 
+        connected: false, 
+        connecting: false, 
+        error: 'Supabase not configured' 
+      };
+    }
+
+    // Check if we have an active connection
+    const channels = supabase.getChannels();
+    const hasActiveChannels = channels.length > 0;
+    
+    return {
+      connected: hasActiveChannels,
+      connecting: false,
+      error: null,
+      channels: channels.length
+    };
+  },
+
+  /**
+   * Create a custom channel for specific real-time communication
+   */
+  createChannel: (channelName: string) => {
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.warn('Cannot create channel - Supabase not configured');
+      return null;
+    }
+
+    return supabase.channel(channelName);
+  }
 };
 
 export default supabase;

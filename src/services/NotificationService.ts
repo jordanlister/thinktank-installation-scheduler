@@ -1,9 +1,10 @@
 // Think Tank Technologies Installation Scheduler - Notification Service
 // Comprehensive notification service with Supabase integration and real-time delivery
 
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { SupabaseClient } from '@supabase/supabase-js';
 import { getWebSocketManager, RealtimeEvents } from './WebSocketManager';
 import { getNotificationManager } from './NotificationManager';
+import { supabase as sharedSupabaseClient } from './supabase';
 import type { 
   User, 
   Installation, 
@@ -197,10 +198,8 @@ export class NotificationService {
   private subscriptions = new Set<string>();
 
   constructor(supabaseUrl?: string, supabaseAnonKey?: string) {
-    this.supabase = createClient(
-      supabaseUrl || import.meta.env.VITE_SUPABASE_URL!,
-      supabaseAnonKey || import.meta.env.VITE_SUPABASE_ANON_KEY!
-    );
+    // Use shared Supabase client to avoid multiple instances
+    this.supabase = sharedSupabaseClient;
 
     this.initializeRealtimeSubscriptions();
   }
@@ -401,7 +400,7 @@ export class NotificationService {
     let query = this.supabase
       .from('notifications')
       .select('*', { count: 'exact' })
-      .eq('user_id', userId)
+      .eq('recipient_id', userId)
       .order('created_at', { ascending: false })
       .range(offset, offset + limit - 1);
 

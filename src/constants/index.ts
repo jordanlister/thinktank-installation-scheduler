@@ -110,6 +110,13 @@ export const NAVIGATION_ITEMS: NavItem[] = [
     roles: [UserRole.ADMIN, UserRole.SCHEDULER],
   },
   {
+    id: 'notifications',
+    label: 'Notifications',
+    path: '/app/notifications',
+    icon: 'Bell',
+    roles: [UserRole.ADMIN, UserRole.SCHEDULER, UserRole.LEAD, UserRole.ASSISTANT],
+  },
+  {
     id: 'settings',
     label: 'Settings',
     path: '/app/settings',

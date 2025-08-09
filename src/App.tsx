@@ -13,6 +13,7 @@ import AssignmentsPage from './pages/assignments/AssignmentsPage';
 import ReportsPage from './pages/reports/ReportsPage';
 import InstallationsPage from './pages/installations/InstallationsPage';
 import SettingsPage from './pages/settings/SettingsPage';
+import NotificationsPage from './pages/notifications/NotificationsPage';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import { PageLoading } from './components/common/Loading';
 import AuthForm from './components/forms/AuthForm';
@@ -104,6 +105,7 @@ const AppRouter = () => {
           <Route path="team" element={<TeamManagement />} />
           <Route path="data-processing" element={<DataProcessing />} />
           <Route path="reports" element={<ReportsPage />} />
+          <Route path="notifications" element={<NotificationsPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/app" replace />} />

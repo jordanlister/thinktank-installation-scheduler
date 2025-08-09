@@ -134,8 +134,7 @@ export const Skeleton: React.FC<SkeletonProps> = ({
           key={index}
           className={`bg-white/10 rounded-lg h-4 ${
             index < rows - 1 ? 'mb-3' : ''
-          } shimmer`}
-          style={{ animationDelay: `${index * 0.1}s` }}
+          } shimmer animate-[shimmer_1.2s_ease-in-out_infinite] [animation-delay:${index * 0.1}s]`}
         />
       ))}
     </div>
