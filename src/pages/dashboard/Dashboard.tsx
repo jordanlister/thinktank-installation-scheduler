@@ -166,22 +166,22 @@ export const Dashboard: React.FC = () => {
               </h2>
             </div>
           </div>
-          <div className="card-body space-y-4">
+          <div className="card-body p-6 pt-8 space-y-3">
             <button 
-              onClick={() => navigate('/schedules')}
-              className="w-full px-4 py-3 bg-accent-500/20 border border-accent-500/30 rounded-lg text-accent-300 hover:bg-accent-500/30 transition-all duration-200 backdrop-filter backdrop-blur-md"
+              onClick={() => navigate('/app/schedules')}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 text-left"
             >
               Schedule New Route
             </button>
             <button 
-              onClick={() => navigate('/assignments')}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md"
+              onClick={() => navigate('/app/assignments')}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 text-left"
             >
               Manage Assignments
             </button>
             <button 
-              onClick={() => navigate('/installations')}
-              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 backdrop-filter backdrop-blur-md"
+              onClick={() => navigate('/app/installations')}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white/90 hover:bg-white/15 transition-all duration-200 text-left"
             >
               View Installations
             </button>

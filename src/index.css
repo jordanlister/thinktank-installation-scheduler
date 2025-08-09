@@ -34,6 +34,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     scroll-behavior: smooth;
+    overscroll-behavior: none;
   }
   
   body {
@@ -43,6 +44,8 @@
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
   }
   
   /* Ambient Background Pattern */

@@ -563,7 +563,7 @@
   
   .nav-glass {
     background: rgba(0, 0, 0, 0.4);
-    @apply border-r border-border;
+    @apply border-r border-t border-border;
     padding: var(--space-4) 0; /* 16px vertical padding */
   }
   
