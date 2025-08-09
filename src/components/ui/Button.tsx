@@ -56,23 +56,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : 'button';
     
     // Base button classes
-    const baseClasses = 'ttt-btn';
+    const baseClasses = 'btn';
     
     // Variant classes
     const variantClasses = {
-      primary: 'ttt-btn-primary',
-      secondary: 'ttt-btn-secondary',
-      ghost: 'ttt-btn-ghost',
-      danger: 'btn-danger', // Using existing danger class from index.css
+      primary: 'btn-primary',
+      secondary: 'btn-secondary',
+      ghost: 'btn-ghost',
+      danger: 'btn-danger',
     };
     
     // Size classes
     const sizeClasses = {
-      xs: 'ttt-btn-xs',
-      sm: 'ttt-btn-sm',
+      xs: 'btn-xs',
+      sm: 'btn-sm',
       md: '', // Default size
-      lg: 'ttt-btn-lg',
-      xl: 'ttt-btn-xl',
+      lg: 'btn-lg',
+      xl: 'btn-xl',
     };
     
     // Additional classes

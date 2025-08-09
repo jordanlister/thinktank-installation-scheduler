@@ -6,7 +6,6 @@ import {
   Award, 
   MapPin,
   Calendar,
-  ArrowRight,
   Linkedin,
   Twitter,
   Building,
@@ -194,153 +193,152 @@ const CompanyPage: React.FC = () => {
         twitterImageAlt="Meet the team behind the leading AI-powered field service platform"
       />
       {/* Company Hero */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
+      <section className="marketing-hero">
+        <div className="marketing-container">
+          <div className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Transforming field service through innovation
-            </Heading>
-            <Text size="xl" className="text-text-secondary mb-8">
+            </h1>
+            <p className="ttt-text-lead text-text-secondary mb-6">
               We're on a mission to revolutionize how field service companies operate, 
               making their teams more efficient and their customers happier.
-            </Text>
+            </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg">
                 Join Our Team
-                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
               <Button size="lg" variant="secondary">
                 Learn About Our Culture
               </Button>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Company Stats */}
-      <Section spacing="xl">
-        <Container>
-          <Grid cols={{ base: 2, md: 4 }} gap={8}>
+      <section className="marketing-section-tight">
+        <div className="marketing-container">
+          <div className="marketing-stats-grid">
             {companyStats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-brand-primary mb-2">{stat.metric}</div>
-                <div className="text-lg font-semibold text-white mb-1">{stat.label}</div>
-                <div className="text-sm text-text-secondary">{stat.description}</div>
+              <div key={index} className="marketing-stats-card">
+                <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">{stat.metric}</div>
+                <div className="ttt-text-small font-medium text-white mb-0.5">{stat.label}</div>
+                <div className="ttt-text-small text-text-muted">{stat.description}</div>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Our Story */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <Grid cols={{ base: 1, lg: 2 }} gap={12} className="items-center">
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+              <h2 className="ttt-section-header text-left text-white mb-6">
                 Our story
-              </Heading>
+              </h2>
               <div className="space-y-6 text-text-secondary">
-                <Text>
+                <p className="ttt-feature-description">
                   Lead Route was born from the frustration of watching talented field service 
                   teams struggle with inefficient scheduling and routing. Our founders, with decades of 
                   combined experience in operations and technology, knew there had to be a better way.
-                </Text>
-                <Text>
+                </p>
+                <p className="ttt-feature-description">
                   What started as a simple scheduling tool has evolved into a comprehensive platform that 
                   uses artificial intelligence to optimize every aspect of field service operations. Today, 
                   we help over 500 companies reduce costs, improve efficiency, and deliver better customer experiences.
-                </Text>
-                <Text>
+                </p>
+                <p className="ttt-feature-description">
                   We're proud to be at the forefront of the field service revolution, but we're just getting 
                   started. Our vision is a world where every field service operation runs with perfect efficiency, 
                   and every technician has the tools they need to succeed.
-                </Text>
+                </p>
               </div>
             </div>
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8">
-              <Heading variant="h3" className="text-2xl font-semibold text-white mb-6">
+            <div className="marketing-feature-card">
+              <h3 className="ttt-feature-title text-white mb-6">
                 Company Timeline
-              </Heading>
+              </h3>
               <div className="space-y-4">
                 {milestones.map((milestone, index) => (
                   <div key={index} className="flex items-start">
-                    <div className="w-16 text-brand-primary font-semibold text-sm mr-4 flex-shrink-0">
+                    <div className="w-16 text-brand-primary font-semibold ttt-text-small mr-4 flex-shrink-0">
                       {milestone.year}
                     </div>
-                    <div className="text-text-secondary text-sm">{milestone.event}</div>
+                    <div className="text-text-secondary ttt-text-small">{milestone.event}</div>
                   </div>
                 ))}
               </div>
             </div>
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Core Values */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Our core values
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto">
               These values guide everything we do, from how we build our product 
               to how we interact with customers and each other.
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 2, lg: 4 }} gap={8}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreValues.map((value, index) => {
               const Icon = value.icon;
               return (
-                <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-8 text-center hover:border-brand-primary/30 transition-colors">
-                  <div className="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <Icon className="w-8 h-8 text-brand-primary" />
+                <div key={index} className="marketing-feature-card text-center hover:border-brand-primary/30 transition-colors">
+                  <div className="marketing-feature-icon bg-brand-primary/10 mx-auto mb-4">
+                    <Icon className="w-6 h-6 text-brand-primary" />
                   </div>
-                  <Heading variant="h3" className="text-xl font-semibold text-white mb-4">
+                  <h3 className="ttt-feature-title text-white mb-4">
                     {value.title}
-                  </Heading>
-                  <Text className="text-text-secondary">
+                  </h3>
+                  <p className="ttt-feature-description">
                     {value.description}
-                  </Text>
+                  </p>
                 </div>
               );
             })}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Leadership Team */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Meet our leadership team
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto">
               Experienced leaders from top technology and field service companies, 
               united by a shared vision to transform operations.
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 2, lg: 3 }} gap={8}>
+          <div className="marketing-feature-grid">
             {teamMembers.map((member, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden hover:border-brand-primary/30 transition-colors group">
+              <div key={index} className="marketing-feature-card overflow-hidden hover:border-brand-primary/30 transition-colors group">
                 <div className="aspect-square bg-gradient-to-br from-surface to-surface-elevated flex items-center justify-center">
-                  <Users className="w-20 h-20 text-brand-primary" />
+                  <Users className="w-16 h-16 text-brand-primary" />
                 </div>
                 
                 <div className="p-6">
-                  <Heading variant="h3" className="text-xl font-semibold text-white mb-2">
+                  <h3 className="ttt-feature-title text-white mb-2">
                     {member.name}
-                  </Heading>
-                  <Text className="text-brand-primary font-medium mb-4">
+                  </h3>
+                  <p className="text-brand-primary font-medium mb-4 ttt-text-small">
                     {member.role}
-                  </Text>
-                  <Text className="text-text-secondary mb-6">
+                  </p>
+                  <p className="ttt-feature-description mb-6">
                     {member.bio}
-                  </Text>
+                  </p>
                   
                   <div className="flex space-x-3">
                     <a
@@ -359,51 +357,50 @@ const CompanyPage: React.FC = () => {
                 </div>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Careers Section */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Join our growing team
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto">
               We're looking for talented individuals who share our passion for innovation 
               and want to help transform the field service industry.
-            </Text>
+            </p>
           </div>
 
           <div className="space-y-4 mb-12">
             {openPositions.map((position, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6 hover:border-brand-primary/30 transition-colors">
+              <div key={index} className="marketing-feature-card hover:border-brand-primary/30 transition-colors">
                 <div className="flex flex-col md:flex-row md:items-center justify-between">
                   <div className="flex-1 mb-4 md:mb-0">
                     <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <Heading variant="h3" className="text-xl font-semibold text-white">
+                      <h3 className="ttt-feature-title text-white">
                         {position.title}
-                      </Heading>
-                      <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
+                      </h3>
+                      <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
                         {position.department}
                       </span>
-                      <span className="px-3 py-1 bg-surface-elevated text-text-secondary text-sm rounded-full">
+                      <span className="px-3 py-1 bg-surface-elevated text-text-secondary ttt-text-small rounded-full">
                         {position.type}
                       </span>
                     </div>
                     <div className="flex items-center text-text-muted mb-3">
                       <MapPin className="w-4 h-4 mr-2" />
-                      {position.location}
+                      <span className="ttt-text-small">{position.location}</span>
                     </div>
-                    <Text className="text-text-secondary">
+                    <p className="ttt-feature-description">
                       {position.description}
-                    </Text>
+                    </p>
                   </div>
                   <div className="flex-shrink-0">
                     <Button variant="primary">
                       Apply Now
-                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
                 </div>
@@ -412,43 +409,44 @@ const CompanyPage: React.FC = () => {
           </div>
 
           <div className="text-center">
-            <Text className="text-text-secondary mb-6">
+            <p className="ttt-feature-description mb-6">
               Don't see a role that fits? We're always looking for exceptional talent.
-            </Text>
+            </p>
             <Button variant="secondary" size="lg">
               <Building className="mr-2 w-5 h-5" />
               View All Open Positions
             </Button>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <Section spacing="2xl" className="relative overflow-hidden">
+      <section className="marketing-section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/30">
           <div className="absolute inset-0 bg-dot-pattern opacity-30"></div>
         </div>
         
-        <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
-            Ready to transform your field operations?
-          </Heading>
-          <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Join hundreds of companies who trust Lead Route 
-            to optimize their field service operations.
-          </Text>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group">
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="secondary">
-              Contact Sales
-            </Button>
+        <div className="marketing-container text-center relative z-10">
+          <div className="marketing-cta-section">
+            <h2 className="ttt-section-header text-white mb-6">
+              Ready to transform your field operations?
+            </h2>
+            <p className="ttt-text-lead text-text-secondary mb-8 marketing-text-container mx-auto">
+              Join hundreds of companies who trust Lead Route 
+              to optimize their field service operations.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg">
+                Start Free Trial
+              </Button>
+              <Button size="lg" variant="secondary">
+                Contact Sales
+              </Button>
+            </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

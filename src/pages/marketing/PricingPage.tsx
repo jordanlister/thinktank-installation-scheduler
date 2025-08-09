@@ -3,7 +3,6 @@ import { Container, Section, Heading, Text, Button, Grid } from '../../component
 import { 
   CheckCircle,
   X,
-  ArrowRight,
   Star,
   Calculator,
   HelpCircle,
@@ -164,7 +163,7 @@ const PricingPage: React.FC = () => {
   ];
 
   const getPrice = (plan: typeof pricingPlans[0]) => {
-    if (plan.customPricing) return 'Custom';
+    if (plan.customPricing) return 'Contact Us';
     const price = billingCycle === 'monthly' ? plan.monthlyPrice : plan.annualPrice;
     return `$${price}`;
   };
@@ -198,16 +197,16 @@ const PricingPage: React.FC = () => {
         twitterImageAlt="Simple, transparent pricing for field service teams of all sizes"
       />
       {/* Pricing Hero */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
+      <section className="marketing-hero">
+        <div className="marketing-container">
+          <div className="marketing-text-container text-center mb-12">
+            <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Simple, transparent pricing
-            </Heading>
-            <Text size="xl" className="text-text-secondary mb-8">
+            </h1>
+            <p className="ttt-text-lead text-text-secondary mb-6">
               Choose the plan that fits your team size and needs. 
               All plans include our core features with no hidden fees.
-            </Text>
+            </p>
             
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4">
@@ -234,101 +233,102 @@ const PricingPage: React.FC = () => {
               </span>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Pricing Cards */}
-      <Section spacing="xl">
-        <Container>
-          <Grid cols={{ base: 1, lg: 3 }} gap={8} className="max-w-6xl mx-auto">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {pricingPlans.map((plan, index) => (
               <div
                 key={index}
-                className={`relative bg-surface-glass backdrop-blur-xl border-2 rounded-2xl p-8 ${
+                className={`relative marketing-feature-card h-full flex flex-col ${
                   plan.popular 
-                    ? `${plan.color} shadow-xl shadow-brand-primary/20` 
-                    : `${plan.color} hover:border-brand-primary/30`
+                    ? `border-brand-primary shadow-xl shadow-brand-primary/20` 
+                    : `hover:border-brand-primary/30`
                 } transition-all duration-300`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <div className="bg-brand-primary text-white px-4 py-2 rounded-full text-sm font-medium flex items-center">
-                      <Star className="w-4 h-4 mr-1" />
-                      Most Popular
+                  <div className="absolute top-4 right-4">
+                    <div className="bg-brand-primary text-white p-2 rounded-full">
+                      <Star className="w-4 h-4 fill-current" />
                     </div>
                   </div>
                 )}
 
-                <div className="text-center mb-8">
-                  <Heading variant="h3" className="text-2xl font-bold text-white mb-2">
+                {/* Header Section */}
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-white mb-2">
                     {plan.name}
-                  </Heading>
-                  <Text className="text-text-secondary mb-6">
+                  </h3>
+                  <p className="text-sm text-text-secondary mb-6">
                     {plan.description}
-                  </Text>
+                  </p>
                   
                   <div className="mb-6">
-                    <div className="flex items-baseline justify-center">
-                      <span className="text-4xl font-bold text-white">
-                        {getPrice(plan)}
-                      </span>
-                      {!plan.customPricing && (
-                        <span className="text-text-secondary ml-2">
-                          {getPeriod()}
+                    <div className="flex items-baseline justify-center min-h-[4rem] items-center">
+                      <div className="text-center">
+                        <span className="text-3xl font-bold text-white">
+                          {getPrice(plan)}
                         </span>
-                      )}
+                        {!plan.customPricing && (
+                          <span className="text-text-secondary ml-2 text-sm">
+                            {getPeriod()}
+                          </span>
+                        )}
+                        {plan.customPricing && (
+                          <p className="text-sm text-text-secondary mt-1">
+                            Contact for pricing
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    {plan.customPricing && (
-                      <Text size="sm" className="text-text-secondary mt-2">
-                        Contact for pricing
-                      </Text>
-                    )}
                   </div>
 
                   <Button
                     variant={plan.popular ? 'primary' : 'secondary'}
-                    size="lg"
-                    className="w-full group"
+                    className="w-full"
                   >
                     {plan.cta}
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </div>
 
-                <div className="space-y-4">
+                {/* Features Section - Fixed height to align buttons */}
+                <div className="flex-1 space-y-1.5 min-h-[320px]">
                   {plan.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center">
-                      <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0" />
-                      <Text size="sm" className="text-text-secondary">
+                    <div key={featureIndex} className="flex items-start">
+                      <CheckCircle className="w-3.5 h-3.5 text-success mr-2.5 flex-shrink-0 mt-0.5" />
+                      <span className="text-xs text-text-secondary leading-relaxed">
                         {feature}
-                      </Text>
+                      </span>
                     </div>
                   ))}
                   {plan.notIncluded.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center opacity-50">
-                      <X className="w-5 h-5 text-text-muted mr-3 flex-shrink-0" />
-                      <Text size="sm" className="text-text-muted">
+                    <div key={featureIndex} className="flex items-start opacity-40">
+                      <X className="w-3.5 h-3.5 text-text-muted mr-2.5 flex-shrink-0 mt-0.5" />
+                      <span className="text-xs text-text-muted leading-relaxed">
                         {feature}
-                      </Text>
+                      </span>
                     </div>
                   ))}
                 </div>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Feature Comparison Table */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-6">
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Compare all features
-            </Heading>
-            <Text size="lg" className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary">
               See exactly what's included in each plan
-            </Text>
+            </p>
           </div>
           
           <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden">
@@ -338,13 +338,8 @@ const PricingPage: React.FC = () => {
                   <tr>
                     <th className="text-left p-6 text-white font-semibold">Features</th>
                     <th className="text-center p-6 text-white font-semibold">Starter</th>
-                    <th className="text-center p-6 text-white font-semibold relative">
+                    <th className="text-center p-6 text-brand-primary font-semibold">
                       Professional
-                      <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-                        <div className="bg-brand-primary text-white px-2 py-1 rounded text-xs">
-                          Popular
-                        </div>
-                      </div>
                     </th>
                     <th className="text-center p-6 text-white font-semibold">Enterprise</th>
                   </tr>
@@ -401,88 +396,87 @@ const PricingPage: React.FC = () => {
               </table>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* ROI Calculator */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Calculate your ROI
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto">
               See how much you could save with our intelligent scheduling 
               and optimization platform.
-            </Text>
+            </p>
           </div>
           
-          <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8 max-w-4xl mx-auto">
+          <div className="marketing-feature-card max-w-4xl mx-auto">
             <div className="flex items-center justify-center mb-8">
               <Calculator className="w-8 h-8 text-brand-primary mr-3" />
-              <Heading variant="h3" className="text-2xl font-semibold text-white">
+              <h3 className="ttt-feature-title text-white">
                 ROI Calculator
-              </Heading>
+              </h3>
             </div>
             
             <div className="bg-surface-elevated rounded-xl p-8">
               <div className="text-center">
                 <div className="text-6xl font-bold text-brand-primary mb-4">25%</div>
-                <Text className="text-xl font-semibold text-white mb-2">
+                <p className="ttt-text-lead text-white font-semibold mb-2">
                   Average Cost Reduction
-                </Text>
-                <Text className="text-text-secondary mb-8">
+                </p>
+                <p className="ttt-text-small text-text-secondary mb-8">
                   Based on 500+ customer implementations
-                </Text>
+                </p>
                 
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-success mb-2">40%</div>
-                    <div className="text-sm text-text-secondary">Travel Time Reduction</div>
+                    <div className="ttt-text-small text-text-secondary">Travel Time Reduction</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-success mb-2">35%</div>
-                    <div className="text-sm text-text-secondary">Fuel Cost Savings</div>
+                    <div className="ttt-text-small text-text-secondary">Fuel Cost Savings</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-success mb-2">25%</div>
-                    <div className="text-sm text-text-secondary">Capacity Increase</div>
+                    <div className="ttt-text-small text-text-secondary">Capacity Increase</div>
                   </div>
                 </div>
 
                 <Button size="lg" variant="primary">
                   Get Custom ROI Analysis
-                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </div>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* FAQ Section */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-6">
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Frequently asked questions
-            </Heading>
-            <Text size="lg" className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary">
               Get answers to common questions about our pricing and plans
-            </Text>
+            </p>
           </div>
           
           <div className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl overflow-hidden"
+                className="marketing-feature-card overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="w-full p-6 text-left flex items-center justify-between hover:bg-surface-elevated/50 transition-colors"
                 >
-                  <Text className="font-semibold text-white">{faq.question}</Text>
+                  <span className="ttt-feature-title text-white">{faq.question}</span>
                   {openFaq === index ? (
                     <ChevronUp className="w-5 h-5 text-text-secondary" />
                   ) : (
@@ -491,40 +485,41 @@ const PricingPage: React.FC = () => {
                 </button>
                 {openFaq === index && (
                   <div className="px-6 pb-6">
-                    <Text className="text-text-secondary">{faq.answer}</Text>
+                    <p className="ttt-feature-description">{faq.answer}</p>
                   </div>
                 )}
               </div>
             ))}
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <Section spacing="2xl" className="relative overflow-hidden">
+      <section className="marketing-section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/30">
           <div className="absolute inset-0 bg-dot-pattern opacity-30"></div>
         </div>
         
-        <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
-            Ready to get started?
-          </Heading>
-          <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Start your free trial today. No credit card required.
-          </Text>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group">
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="secondary">
-              Contact Sales
-            </Button>
+        <div className="marketing-container text-center relative z-10">
+          <div className="marketing-cta-section">
+            <h2 className="ttt-section-header text-white mb-6">
+              Ready to get started?
+            </h2>
+            <p className="ttt-text-lead text-text-secondary mb-8 marketing-text-container mx-auto">
+              Start your free trial today. No credit card required.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg">
+                Start Free Trial
+              </Button>
+              <Button size="lg" variant="secondary">
+                Contact Sales
+              </Button>
+            </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

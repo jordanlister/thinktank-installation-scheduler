@@ -5,7 +5,6 @@ import {
   Phone, 
   MapPin, 
   Calendar,
-  ArrowRight,
   CheckCircle,
   Clock,
   Users,
@@ -121,21 +120,21 @@ const ContactPage: React.FC = () => {
   if (isSubmitted) {
     return (
       <div className="pt-16 lg:pt-20">
-        <Section spacing="2xl" className="min-h-screen flex items-center">
-          <Container>
-            <div className="text-center max-w-2xl mx-auto">
-              <div className="w-20 h-20 bg-success/10 border border-success/20 rounded-full flex items-center justify-center mx-auto mb-8">
-                <CheckCircle className="w-10 h-10 text-success" />
+        <section className="marketing-hero min-h-screen flex items-center">
+          <div className="marketing-container">
+            <div className="marketing-text-container text-center">
+              <div className="w-16 h-16 bg-success/10 border border-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-8 h-8 text-success" />
               </div>
               
-              <Heading variant="h1" className="text-4xl font-bold text-white mb-6">
+              <h1 className="ttt-hero-heading font-bold text-white mb-4">
                 Thank you for your interest!
-              </Heading>
+              </h1>
               
-              <Text size="lg" className="text-text-secondary mb-8">
+              <p className="ttt-text-lead text-text-secondary mb-8">
                 We've received your {formData.requestType === 'demo' ? 'demo request' : 'message'} and will get back to you within 2 hours.
                 In the meantime, feel free to explore our resources or check out our documentation.
-              </Text>
+              </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button onClick={() => setIsSubmitted(false)}>
@@ -146,8 +145,8 @@ const ContactPage: React.FC = () => {
                 </Button>
               </div>
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
       </div>
     );
   }
@@ -171,66 +170,66 @@ const ContactPage: React.FC = () => {
         twitterImageAlt="Get in touch with our field service management experts"
       />
       {/* Contact Hero */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
+      <section className="marketing-hero">
+        <div className="marketing-container">
+          <div className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Get in touch with our team
-            </Heading>
-            <Text size="xl" className="text-text-secondary">
+            </h1>
+            <p className="ttt-text-lead text-text-secondary">
               Ready to transform your field service operations? We'd love to show you 
               how our platform can help you reduce costs and improve efficiency.
-            </Text>
+            </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Contact Methods */}
-      <Section spacing="xl">
-        <Container>
-          <Grid cols={{ base: 1, md: 3 }} gap={8} className="mb-16">
+      <section className="marketing-section-tight">
+        <div className="marketing-container">
+          <div className="marketing-feature-grid">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
               return (
-                <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-8 text-center hover:border-brand-primary/30 transition-colors">
-                  <div className="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <Icon className="w-8 h-8 text-brand-primary" />
+                <div key={index} className="marketing-feature-card text-center">
+                  <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
+                    <Icon className="w-6 h-6 text-brand-primary" />
                   </div>
-                  <Heading variant="h3" className="text-xl font-semibold text-white mb-3">
+                  <h3 className="ttt-feature-title text-white">
                     {method.title}
-                  </Heading>
-                  <Text className="text-text-secondary mb-4">
+                  </h3>
+                  <p className="ttt-feature-description mb-3">
                     {method.description}
-                  </Text>
-                  <div className="text-brand-primary font-semibold mb-2">
+                  </p>
+                  <div className="text-brand-primary font-semibold mb-2 ttt-text-small">
                     {method.contact}
                   </div>
-                  <div className="flex items-center justify-center text-sm text-text-muted">
-                    <Clock className="w-4 h-4 mr-2" />
+                  <div className="flex items-center justify-center ttt-text-small text-text-muted">
+                    <Clock className="w-3.5 h-3.5 mr-1.5" />
                     {method.responseTime}
                   </div>
                 </div>
               );
             })}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Form */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+            <div className="text-center mb-10">
+              <h2 className="ttt-section-header text-white mb-4">
                 Request a personalized demo
-              </Heading>
-              <Text size="lg" className="text-text-secondary">
+              </h2>
+              <p className="ttt-text-lead text-text-secondary">
                 See how Lead Route can transform your field service operations. 
                 Fill out the form below and we'll schedule a custom demo tailored to your needs.
-              </Text>
+              </p>
             </div>
 
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8">
+            <div className="marketing-feature-card">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Request Type */}
                 <div className="flex flex-wrap gap-4 p-4 bg-surface-elevated rounded-xl">
@@ -246,7 +245,7 @@ const ContactPage: React.FC = () => {
                     <div className={`w-4 h-4 border-2 rounded-full mr-3 ${formData.requestType === 'demo' ? 'border-brand-primary bg-brand-primary' : 'border-border'}`}>
                       {formData.requestType === 'demo' && <div className="w-2 h-2 bg-white rounded-full m-0.5" />}
                     </div>
-                    <Text>Schedule a Demo</Text>
+                    <span className="ttt-text-body">Schedule a Demo</span>
                   </label>
                   <label className="flex items-center cursor-pointer">
                     <input
@@ -260,12 +259,12 @@ const ContactPage: React.FC = () => {
                     <div className={`w-4 h-4 border-2 rounded-full mr-3 ${formData.requestType === 'contact' ? 'border-brand-primary bg-brand-primary' : 'border-border'}`}>
                       {formData.requestType === 'contact' && <div className="w-2 h-2 bg-white rounded-full m-0.5" />}
                     </div>
-                    <Text>General Inquiry</Text>
+                    <span className="ttt-text-body">General Inquiry</span>
                   </label>
                 </div>
 
                 {/* Personal Information */}
-                <Grid cols={{ base: 1, md: 2 }} gap={6}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     label="First Name"
                     value={formData.firstName}
@@ -280,9 +279,9 @@ const ContactPage: React.FC = () => {
                     placeholder="Enter your last name"
                     required
                   />
-                </Grid>
+                </div>
 
-                <Grid cols={{ base: 1, md: 2 }} gap={6}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     type="email"
                     label="Business Email"
@@ -299,10 +298,10 @@ const ContactPage: React.FC = () => {
                     placeholder="(555) 123-4567"
                     required
                   />
-                </Grid>
+                </div>
 
                 {/* Company Information */}
-                <Grid cols={{ base: 1, md: 2 }} gap={6}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Input
                     label="Company Name"
                     value={formData.company}
@@ -318,9 +317,9 @@ const ContactPage: React.FC = () => {
                     placeholder="Select your role"
                     required
                   />
-                </Grid>
+                </div>
 
-                <Grid cols={{ base: 1, md: 2 }} gap={6}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Select
                     label="Company Size"
                     value={formData.employees}
@@ -337,7 +336,7 @@ const ContactPage: React.FC = () => {
                     placeholder="Select your industry"
                     required
                   />
-                </Grid>
+                </div>
 
                 {/* Message */}
                 <Textarea
@@ -357,7 +356,7 @@ const ContactPage: React.FC = () => {
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full group"
+                    className="w-full"
                   >
                     {isSubmitting ? (
                       <>
@@ -377,110 +376,109 @@ const ContactPage: React.FC = () => {
                             Send Message
                           </>
                         )}
-                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
                   </Button>
                 </div>
 
-                <Text size="sm" className="text-text-muted text-center">
+                <p className="ttt-text-small text-text-muted text-center">
                   We respect your privacy. Your information will only be used to contact you about your inquiry.
-                </Text>
+                </p>
               </form>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Office Locations */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-6">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Our office locations
-            </Heading>
-            <Text size="lg" className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary">
               Visit us at one of our offices around the country
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 3 }} gap={8}>
+          <div className="marketing-feature-grid">
             {offices.map((office, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-8 text-center hover:border-brand-primary/30 transition-colors">
-                <div className="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <MapPin className="w-8 h-8 text-brand-primary" />
+              <div key={index} className="marketing-feature-card text-center">
+                <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
+                  <MapPin className="w-6 h-6 text-brand-primary" />
                 </div>
-                <div className="mb-2">
-                  <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
+                <div className="mb-3">
+                  <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
                     {office.type}
                   </span>
                 </div>
-                <Heading variant="h3" className="text-xl font-semibold text-white mb-4">
+                <h3 className="ttt-feature-title text-white">
                   {office.city}
-                </Heading>
-                <Text className="text-text-secondary mb-4 whitespace-pre-line">
+                </h3>
+                <p className="ttt-feature-description whitespace-pre-line">
                   {office.address}
-                </Text>
-                <Text className="text-brand-primary font-semibold">
+                </p>
+                <p className="text-brand-primary font-semibold ttt-text-small">
                   {office.phone}
-                </Text>
+                </p>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-6">
+      <section className="marketing-section bg-surface/30">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Common questions
-            </Heading>
-            <Text size="lg" className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary">
               Get quick answers to frequently asked questions
-            </Text>
+            </p>
           </div>
           
-          <div className="max-w-3xl mx-auto space-y-6">
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6">
-              <Heading variant="h4" className="text-lg font-semibold text-white mb-3">
+          <div className="max-w-3xl mx-auto space-y-4">
+            <div className="marketing-feature-card">
+              <h4 className="ttt-feature-title text-white mb-2">
                 How long does the demo take?
-              </Heading>
-              <Text className="text-text-secondary">
+              </h4>
+              <p className="ttt-feature-description">
                 Our personalized demos typically take 30-45 minutes. We'll customize the demo to focus on your specific industry and use cases.
-              </Text>
+              </p>
             </div>
             
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6">
-              <Heading variant="h4" className="text-lg font-semibold text-white mb-3">
+            <div className="marketing-feature-card">
+              <h4 className="ttt-feature-title text-white mb-2">
                 Is the demo really free with no obligation?
-              </Heading>
-              <Text className="text-text-secondary">
+              </h4>
+              <p className="ttt-feature-description">
                 Yes, absolutely! Our demos are completely free with no strings attached. We're confident that once you see our platform in action, you'll understand the value.
-              </Text>
+              </p>
             </div>
             
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6">
-              <Heading variant="h4" className="text-lg font-semibold text-white mb-3">
+            <div className="marketing-feature-card">
+              <h4 className="ttt-feature-title text-white mb-2">
                 What information do I need to provide for the demo?
-              </Heading>
-              <Text className="text-text-secondary">
+              </h4>
+              <p className="ttt-feature-description">
                 Just basic information about your company and current challenges. This helps us tailor the demo to show features most relevant to your business.
-              </Text>
+              </p>
             </div>
             
-            <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6">
-              <Heading variant="h4" className="text-lg font-semibold text-white mb-3">
+            <div className="marketing-feature-card">
+              <h4 className="ttt-feature-title text-white mb-2">
                 Can I get pricing information during the demo?
-              </Heading>
-              <Text className="text-text-secondary">
+              </h4>
+              <p className="ttt-feature-description">
                 Absolutely! We'll discuss pricing that fits your team size and needs. We offer transparent pricing with no hidden fees.
-              </Text>
+              </p>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

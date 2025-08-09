@@ -10,7 +10,6 @@ import {
   FileSpreadsheet, 
   BarChart3, 
   FileText,
-  ArrowRight,
   CheckCircle,
   Zap
 } from 'lucide-react';
@@ -129,85 +128,84 @@ const FeaturesPage: React.FC = () => {
         twitterImageAlt="AI scheduling, route optimization, and team management features"
       />
       {/* Features Hero */}
-      <Section spacing="2xl" className="py-20">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <Heading variant="h1" className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+      <section className="marketing-hero">
+        <div className="marketing-container">
+          <div className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-4 leading-tight">
               Powerful features for modern field service
-            </Heading>
-            <Text size="xl" className="text-text-secondary leading-relaxed max-w-3xl mx-auto">
+            </h1>
+            <p className="ttt-text-lead text-text-secondary leading-relaxed">
               Every feature is designed to solve real-world challenges faced by 
               field service companies. From AI-powered scheduling to real-time 
               optimization, we've got you covered.
-            </Text>
+            </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Feature Categories */}
       {featureCategories.map((category, categoryIndex) => (
-        <Section key={categoryIndex} spacing="2xl" className={categoryIndex % 2 === 1 ? 'bg-surface/30' : ''}>
-          <Container>
-            <div className="text-center mb-20">
-              <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
+        <section key={categoryIndex} className={`marketing-section ${categoryIndex % 2 === 1 ? 'bg-surface/30' : ''}`}>
+          <div className="marketing-container">
+            <div className="text-center mb-12">
+              <h2 className="ttt-section-header text-white mb-4">
                 {category.title}
-              </Heading>
-              <Text size="lg" className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
+              </h2>
+              <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto leading-relaxed">
                 {category.description}
-              </Text>
+              </p>
             </div>
 
-            <div className="space-y-24">
+            <div className="space-y-12">
               {category.features.map((feature, featureIndex) => {
                 const Icon = feature.icon;
                 const isReverse = featureIndex % 2 === 1;
                 
                 return (
-                  <div key={featureIndex} className={`grid lg:grid-cols-2 gap-16 items-center ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <div key={featureIndex} className={`grid lg:grid-cols-2 gap-8 items-center ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Feature Content */}
                     <div className={isReverse ? 'lg:col-start-2' : ''}>
-                      <div className="flex items-start mb-6">
-                        <div className="w-14 h-14 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
-                          <Icon className="w-7 h-7 text-brand-primary" />
+                      <div className="flex items-start mb-4">
+                        <div className="marketing-feature-icon bg-brand-primary/10 border border-brand-primary/20 mr-4 flex-shrink-0">
+                          <Icon className="w-6 h-6 text-brand-primary" />
                         </div>
                         <div>
-                          <Heading variant="h3" className="text-2xl md:text-3xl font-bold text-white mb-2">
+                          <h3 className="ttt-feature-title text-white">
                             {feature.name}
-                          </Heading>
+                          </h3>
                         </div>
                       </div>
                       
-                      <Text className="text-text-secondary mb-8 text-lg leading-relaxed">
+                      <p className="ttt-feature-description mb-4 leading-relaxed">
                         {feature.description}
-                      </Text>
+                      </p>
 
-                      <div className="mb-8">
-                        <Text className="text-white font-semibold mb-6 text-lg">Key Benefits:</Text>
-                        <ul className="space-y-4">
+                      <div className="mb-6">
+                        <p className="ttt-text-small text-white font-semibold mb-3">Key Benefits:</p>
+                        <ul className="space-y-2">
                           {feature.benefits.map((benefit, benefitIndex) => (
-                            <li key={benefitIndex} className="flex items-start text-text-secondary">
-                              <CheckCircle className="w-5 h-5 text-success mr-3 flex-shrink-0 mt-0.5" />
+                            <li key={benefitIndex} className="flex items-start text-text-secondary ttt-text-small">
+                              <CheckCircle className="w-4 h-4 text-success mr-2 flex-shrink-0 mt-0.5" />
                               <span className="leading-relaxed">{benefit}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <Button variant="primary" size="lg" className="group">
+                      <Button variant="primary">
                         Try This Feature
-                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
 
                     {/* Feature Demo/Visual */}
                     <div className={isReverse ? 'lg:col-start-1' : ''}>
-                      <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8 hover:border-brand-primary/30 transition-all duration-300 group">
+                      <div className="marketing-feature-card group">
                         <div className="aspect-video bg-gradient-to-br from-surface to-surface-elevated rounded-xl border border-border flex items-center justify-center overflow-hidden">
                           <div className="text-center group-hover:scale-105 transition-transform duration-300">
-                            <div className="w-20 h-20 bg-brand-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                              <Icon className="w-10 h-10 text-brand-primary" />
+                            <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                              <Icon className="w-8 h-8 text-brand-primary" />
                             </div>
-                            <Text className="text-text-muted font-medium">Interactive demo coming soon</Text>
+                            <p className="ttt-text-small text-text-muted font-medium">Interactive demo coming soon</p>
                           </div>
                         </div>
                       </div>
@@ -216,34 +214,34 @@ const FeaturesPage: React.FC = () => {
                 );
               })}
             </div>
-          </Container>
-        </Section>
+          </div>
+        </section>
       ))}
 
       {/* Integration Ecosystem */}
-      <Section spacing="2xl" className="bg-surface/20">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
+      <section className="marketing-section bg-surface/20">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Seamless integrations with your existing tools
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto leading-relaxed">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto leading-relaxed">
               Connect with the tools you already use. Our robust API and 
               pre-built integrations make setup effortless.
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 2, md: 3, lg: 6 }} gap={6} className="mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
             {integrations.map((integration, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-6 hover:border-brand-primary/30 hover:bg-surface-glass/80 transition-all duration-300 text-center group">
-                <div className="w-14 h-14 bg-white/90 rounded-lg mx-auto mb-4 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-sm">
-                  <div className="text-gray-600 text-sm font-bold">{integration.name.slice(0, 2)}</div>
+              <div key={index} className="marketing-feature-card text-center group p-4">
+                <div className="w-12 h-12 bg-white/90 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-sm">
+                  <div className="text-gray-600 text-xs font-bold">{integration.name.slice(0, 2)}</div>
                 </div>
-                <Text className="font-medium text-white mb-1 text-sm">{integration.name}</Text>
-                <Text size="xs" className="text-text-muted">{integration.category}</Text>
+                <p className="ttt-text-small font-medium text-white mb-1">{integration.name}</p>
+                <p className="ttt-text-small text-text-muted">{integration.category}</p>
               </div>
             ))}
-          </Grid>
+          </div>
 
           <div className="text-center">
             <Button variant="secondary" size="lg">
@@ -251,35 +249,36 @@ const FeaturesPage: React.FC = () => {
               View All 50+ Integrations
             </Button>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <Section spacing="2xl" className="relative overflow-hidden">
+      <section className="marketing-section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/30">
           <div className="absolute inset-0 bg-dot-pattern opacity-30"></div>
         </div>
         
-        <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Ready to experience these features?
-          </Heading>
-          <Text size="lg" className="text-text-secondary mb-12 max-w-2xl mx-auto leading-relaxed">
-            Start your free trial today and see how our features can transform 
-            your field service operations.
-          </Text>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="xl" className="group">
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="xl" variant="secondary">
-              Schedule Demo
-            </Button>
+        <div className="marketing-container text-center relative z-10">
+          <div className="marketing-cta-section">
+            <h2 className="ttt-section-header text-white mb-4">
+              Ready to experience these features?
+            </h2>
+            <p className="ttt-text-lead text-text-secondary mb-8 marketing-text-container mx-auto leading-relaxed">
+              Start your free trial today and see how our features can transform 
+              your field service operations.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="xl">
+                Start Free Trial
+              </Button>
+              <Button size="xl" variant="secondary">
+                Schedule Demo
+              </Button>
+            </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

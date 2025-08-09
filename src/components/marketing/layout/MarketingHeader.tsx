@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button, Navigation, Container } from '../../ui';
 
 const MarketingHeader: React.FC = () => {
@@ -80,9 +80,8 @@ const MarketingHeader: React.FC = () => {
               </Button>
             </Link>
             <Link to="/contact">
-              <Button variant="primary" size="sm" className="group px-4 py-2 flex items-center">
-                <span>Get Started</span>
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <Button variant="primary" size="sm" className="px-4 py-2">
+                Get Started
               </Button>
             </Link>
           </div>

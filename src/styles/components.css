@@ -868,6 +868,147 @@
   }
   
   /* =============================================================================
+   * TYPOGRAPHY SYSTEM - Professional SaaS Design Scale
+   * ============================================================================= */
+
+  /* Marketing Typography - Professional Scale following Supabase patterns */
+  .ttt-heading-1 {
+    font-size: var(--text-4xl); /* 36px - Professional, not overwhelming */
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .ttt-heading-2 {
+    font-size: var(--text-3xl); /* 30px - Clear hierarchy */
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .ttt-heading-3 {
+    font-size: var(--text-2xl); /* 24px - Section headers */
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+    letter-spacing: -0.015em;
+  }
+
+  .ttt-text-body {
+    font-size: var(--text-base); /* 16px - Readable body text */
+    font-weight: var(--font-normal);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .ttt-text-lead {
+    font-size: var(--text-lg); /* 18px - Lead/hero text */
+    font-weight: var(--font-normal);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .ttt-text-small {
+    font-size: var(--text-sm); /* 14px - Supporting text */
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
+    color: var(--text-muted);
+  }
+
+  .ttt-code-block {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    overflow-x: auto;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Responsive Typography Scaling */
+  @media (min-width: 768px) {
+    .ttt-heading-1 {
+      font-size: var(--text-5xl); /* 48px on tablet+ */
+    }
+
+    .ttt-heading-2 {
+      font-size: var(--text-4xl); /* 36px on tablet+ */
+    }
+
+    .ttt-heading-3 {
+      font-size: var(--text-3xl); /* 30px on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ttt-heading-1 {
+      font-size: var(--text-5xl); /* Max at 48px - professional scale */
+    }
+  }
+
+  /* Hero Typography - Special case for homepage hero */
+  .ttt-hero-heading {
+    font-size: var(--text-4xl); /* 36px base */
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (min-width: 768px) {
+    .ttt-hero-heading {
+      font-size: var(--text-5xl); /* 48px on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .ttt-hero-heading {
+      font-size: var(--text-6xl); /* 64px on desktop - maximum size */
+    }
+  }
+
+  /* Marketing Section Headers - Consistent sizing */
+  .ttt-section-header {
+    font-size: var(--text-2xl); /* 24px */
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: var(--space-4);
+  }
+
+  @media (min-width: 768px) {
+    .ttt-section-header {
+      font-size: var(--text-3xl); /* 30px on tablet+ */
+      margin-bottom: var(--space-6);
+    }
+  }
+
+  /* Feature Card Typography */
+  .ttt-feature-title {
+    font-size: var(--text-xl); /* 20px - Feature titles */
+    font-weight: var(--font-semibold);
+    line-height: var(--leading-snug);
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .ttt-feature-description {
+    font-size: var(--text-base); /* 16px - Feature descriptions */
+    font-weight: var(--font-normal);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  /* =============================================================================
    * UTILITY COMPONENTS
    * ============================================================================= */
   
@@ -1147,5 +1288,216 @@
     margin: var(--space-1) 0 0 0;
     font-size: var(--text-sm);
     color: var(--text-muted);
+  }
+
+  /* =============================================================================
+   * MARKETING LAYOUT CLASSES - Professional SaaS Patterns
+   * ============================================================================= */
+
+  /* Marketing Hero Section */
+  .marketing-hero {
+    min-height: 70vh; /* Reduced from 90vh for better proportion */
+    display: flex;
+    align-items: center;
+    padding: var(--space-12) 0; /* 48px vertical - reasonable spacing */
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .marketing-hero {
+      min-height: 75vh; /* Slightly taller on larger screens */
+      padding: var(--space-16) 0; /* 64px vertical on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marketing-hero {
+      min-height: 80vh; /* Maximum height on desktop */
+      padding: var(--space-20) 0; /* 80px vertical on desktop */
+    }
+  }
+
+  /* Marketing Section Spacing - Professional Scale */
+  .marketing-section {
+    padding: var(--space-12) 0; /* 48px vertical - substantial but not overwhelming */
+  }
+
+  @media (min-width: 768px) {
+    .marketing-section {
+      padding: var(--space-16) 0; /* 64px vertical on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marketing-section {
+      padding: var(--space-20) 0; /* 80px vertical on desktop */
+    }
+  }
+
+  /* Marketing Section Tight - For sections that need less space */
+  .marketing-section-tight {
+    padding: var(--space-8) 0; /* 32px vertical */
+  }
+
+  @media (min-width: 768px) {
+    .marketing-section-tight {
+      padding: var(--space-12) 0; /* 48px vertical on tablet+ */
+    }
+  }
+
+  /* Marketing Container - Professional max widths */
+  .marketing-container {
+    max-width: 1200px; /* Matches existing page-container */
+    margin: 0 auto;
+    padding: 0 var(--space-4); /* 16px horizontal on mobile */
+  }
+
+  @media (min-width: 768px) {
+    .marketing-container {
+      padding: 0 var(--space-6); /* 24px horizontal on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marketing-container {
+      padding: 0 var(--space-8); /* 32px horizontal on desktop */
+    }
+  }
+
+  /* Marketing Text Container - Optimal reading width */
+  .marketing-text-container {
+    max-width: 768px; /* Optimal line length for readability */
+    margin: 0 auto;
+  }
+
+  /* Marketing Feature Grid - Professional responsive grid */
+  .marketing-feature-grid {
+    display: grid;
+    gap: var(--space-6); /* 24px gap */
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .marketing-feature-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8); /* 32px gap on tablet+ */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marketing-feature-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Marketing Stats Grid - Clean 4-column layout */
+  .marketing-stats-grid {
+    display: grid;
+    gap: var(--space-4); /* 16px gap */
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .marketing-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6); /* 24px gap */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .marketing-stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Marketing Feature Card - Professional styling */
+  .marketing-feature-card {
+    background: var(--surface-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6); /* 24px - professional padding */
+    transition: all var(--duration-300) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .marketing-feature-card {
+      padding: var(--space-8); /* 32px on larger screens */
+    }
+  }
+
+  .marketing-feature-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Feature Card Icon */
+  .marketing-feature-icon {
+    width: 48px; /* Professional icon size */
+    height: 48px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4); /* 16px below icon */
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .marketing-feature-card:hover .marketing-feature-icon {
+    transform: scale(1.05);
+  }
+
+  /* Marketing Stats Card - Clean KPI styling */
+  .marketing-stats-card {
+    text-align: center;
+    padding: var(--space-6); /* 24px */
+    border-radius: var(--radius-xl);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .marketing-stats-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Marketing CTA Section - Professional call-to-action styling */
+  .marketing-cta-section {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-12); /* 48px */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .marketing-cta-section {
+      padding: var(--space-16); /* 64px on tablet+ */
+    }
+  }
+
+  /* Trust Indicators - Professional social proof styling */
+  .marketing-trust-indicators {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4); /* 16px on mobile */
+  }
+
+  @media (min-width: 640px) {
+    .marketing-trust-indicators {
+      gap: var(--space-6); /* 24px on tablet+ */
+    }
   }
 }

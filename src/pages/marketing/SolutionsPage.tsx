@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Section, Heading, Text, Button, Grid } from '../../components/ui';
+import { Button } from '../../components/ui';
 import { 
   Thermometer, 
   Sun, 
@@ -8,7 +8,6 @@ import {
   Globe, 
   Code, 
   Headphones,
-  ArrowRight,
   CheckCircle,
   TrendingUp
 } from 'lucide-react';
@@ -115,9 +114,9 @@ const SolutionsPage: React.FC = () => {
       ],
       results: {
         'Customer Satisfaction': '96%',
-        'No-Show Rate': '73% reduction',
-        'Installation Quality': '99% first-time success',
-        'Operational Efficiency': '41% improvement'
+        'No-Show Rate': '73%',
+        'Installation Quality': '99%', 
+        'Operational Efficiency': '41%'
       },
       caseStudy: '/case-studies/security-systems-pro',
       ctaText: 'Explore Security Solutions'
@@ -194,56 +193,74 @@ const SolutionsPage: React.FC = () => {
         twitterImageAlt="Tailored solutions for HVAC, solar, telecommunications, and security companies"
       />
       {/* Solutions Hero */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
-              Tailored solutions for every industry
-            </Heading>
-            <Text size="xl" className="text-text-secondary">
+      <section className="marketing-hero relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/30">
+          <div className="absolute inset-0 bg-subtle-dots opacity-20"></div>
+        </div>
+        
+        <div className="marketing-container relative z-10">
+          <div className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-6 leading-tight">
+              Tailored solutions for
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-success-light block mt-1">
+                every industry
+              </span>
+            </h1>
+            
+            <p className="ttt-text-lead text-text-secondary mb-8 leading-relaxed">
               We understand that every industry has unique challenges. 
               Our platform adapts to your specific needs and workflows.
-            </Text>
+            </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Industry Solutions Grid */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="space-y-16">
+      <section className="marketing-section bg-surface/50">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
+              Solutions by industry
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
+              Specialized features and workflows designed for your industry's unique needs
+            </p>
+          </div>
+          
+          <div className="space-y-12">
             {industrySolutions.map((solution, index) => {
               const Icon = solution.icon;
               const isReverse = index % 2 === 1;
               
               return (
-                <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden">
+                <div key={index} className="marketing-feature-card group overflow-hidden">
                   <div className={`grid lg:grid-cols-2 ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Content Side */}
-                    <div className={`p-8 lg:p-12 ${isReverse ? 'lg:col-start-2' : ''}`}>
+                    <div className={`p-6 lg:p-10 ${isReverse ? 'lg:col-start-2' : ''}`}>
                       <div className="flex items-center mb-6">
-                        <div className="w-16 h-16 bg-surface-elevated border border-border rounded-2xl flex items-center justify-center mr-4">
-                          <Icon className={`w-8 h-8 ${solution.iconColor}`} />
+                        <div className="marketing-feature-icon mr-4">
+                          <Icon className={`w-6 h-6 ${solution.iconColor}`} />
                         </div>
-                        <Heading variant="h2" className="text-2xl font-bold text-white">
+                        <h3 className="ttt-section-header text-white">
                           {solution.industry}
-                        </Heading>
+                        </h3>
                       </div>
                       
-                      <Text className="text-text-secondary mb-8 text-lg leading-relaxed">
+                      <p className="ttt-text-lead text-text-secondary mb-6 leading-relaxed">
                         {solution.description}
-                      </Text>
+                      </p>
 
-                      <div className="grid md:grid-cols-2 gap-8 mb-8">
+                      <div className="grid md:grid-cols-2 gap-6 mb-8">
                         {/* Challenges */}
                         <div>
-                          <Heading variant="h4" className="text-lg font-semibold text-white mb-4">
+                          <h4 className="ttt-feature-title text-white mb-4">
                             Common Challenges
-                          </Heading>
-                          <ul className="space-y-3">
+                          </h4>
+                          <ul className="space-y-2">
                             {solution.challenges.map((challenge, idx) => (
-                              <li key={idx} className="flex items-start text-text-secondary">
-                                <div className="w-2 h-2 bg-error rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                              <li key={idx} className="flex items-start ttt-feature-description">
+                                <div className="w-1.5 h-1.5 bg-error rounded-full mt-2 mr-3 flex-shrink-0"></div>
                                 {challenge}
                               </li>
                             ))}
@@ -252,13 +269,13 @@ const SolutionsPage: React.FC = () => {
 
                         {/* Solutions */}
                         <div>
-                          <Heading variant="h4" className="text-lg font-semibold text-white mb-4">
+                          <h4 className="ttt-feature-title text-white mb-4">
                             Our Solutions
-                          </Heading>
-                          <ul className="space-y-3">
+                          </h4>
+                          <ul className="space-y-2">
                             {solution.solutions.map((solutionItem, idx) => (
-                              <li key={idx} className="flex items-start text-text-secondary">
-                                <CheckCircle className="w-5 h-5 text-success mt-0.5 mr-3 flex-shrink-0" />
+                              <li key={idx} className="flex items-start ttt-feature-description">
+                                <CheckCircle className="w-4 h-4 text-success mt-0.5 mr-3 flex-shrink-0" />
                                 {solutionItem}
                               </li>
                             ))}
@@ -266,37 +283,35 @@ const SolutionsPage: React.FC = () => {
                         </div>
                       </div>
 
-                      <Button variant="primary" className="group">
+                      <Button variant="primary">
                         {solution.ctaText}
-                        <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </div>
 
                     {/* Results Side */}
-                    <div className={`bg-surface-elevated p-8 lg:p-12 ${isReverse ? 'lg:col-start-1' : ''}`}>
-                      <div className="mb-8">
-                        <Heading variant="h4" className="text-lg font-semibold text-white mb-6 flex items-center">
-                          <TrendingUp className="w-5 h-5 mr-2 text-success" />
+                    <div className={`bg-surface-elevated p-6 lg:p-10 ${isReverse ? 'lg:col-start-1' : ''}`}>
+                      <div className="mb-6">
+                        <h4 className="ttt-feature-title text-white mb-4 flex items-center">
+                          <TrendingUp className="w-4 h-4 mr-2 text-success" />
                           Proven Results
-                        </Heading>
-                        <Grid cols={2} gap={6}>
+                        </h4>
+                        <div className="grid grid-cols-2 gap-4">
                           {Object.entries(solution.results).map(([metric, value]) => (
-                            <div key={metric} className="text-center">
-                              <div className="text-2xl font-bold text-brand-primary mb-2">{value}</div>
-                              <div className="text-sm text-text-secondary">{metric}</div>
+                            <div key={metric} className="text-center p-5 bg-surface/40 rounded-xl border border-border/60 hover:border-brand-primary/30 transition-colors">
+                              <div className="text-3xl font-bold text-brand-primary mb-3">{value}</div>
+                              <div className="text-sm font-medium text-white leading-tight">{metric}</div>
                             </div>
                           ))}
-                        </Grid>
+                        </div>
                       </div>
 
-                      <div className="bg-surface-glass rounded-xl p-6 border border-border">
-                        <Text className="font-medium text-white mb-3">Case Study Available</Text>
-                        <Text size="sm" className="text-text-secondary mb-4">
+                      <div className="bg-surface-glass rounded-lg p-6 border border-border mt-6">
+                        <h5 className="text-lg font-semibold text-white mb-3">Case Study Available</h5>
+                        <p className="text-sm text-text-secondary mb-4 leading-relaxed">
                           Learn how companies in this industry achieved these results with our platform.
-                        </Text>
-                        <Button variant="ghost" size="sm">
+                        </p>
+                        <Button variant="primary" size="sm">
                           Read Case Study
-                          <ArrowRight className="ml-2 w-4 h-4" />
                         </Button>
                       </div>
                     </div>
@@ -305,76 +320,91 @@ const SolutionsPage: React.FC = () => {
               );
             })}
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Enterprise Solutions */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="text-center mb-16">
-            <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Enterprise-grade solutions for large operations
-            </Heading>
-            <Text size="lg" className="text-text-secondary max-w-3xl mx-auto">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Scaling to thousands of daily installations across multiple regions? 
               Our enterprise platform is built for your needs.
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 3 }} gap={8} className="mb-12">
+          <div className="marketing-feature-grid mb-10">
             {enterpriseFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-xl p-8 text-center hover:border-brand-primary/30 transition-colors">
-                  <div className="w-16 h-16 bg-brand-primary/10 border border-brand-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <Icon className="w-8 h-8 text-brand-primary" />
+                <div key={index} className="marketing-feature-card group text-center">
+                  <div className="marketing-feature-icon mx-auto mb-4">
+                    <Icon className="w-6 h-6 text-brand-primary" />
                   </div>
-                  <Heading variant="h3" className="text-xl font-semibold text-white mb-4">
+                  <h3 className="ttt-feature-title mb-3">
                     {feature.title}
-                  </Heading>
-                  <Text className="text-text-secondary">
+                  </h3>
+                  <p className="ttt-feature-description">
                     {feature.description}
-                  </Text>
+                  </p>
                 </div>
               );
             })}
-          </Grid>
+          </div>
 
           <div className="text-center">
             <Button size="lg" variant="primary">
               Contact Enterprise Sales
-              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* CTA Section */}
-      <Section spacing="2xl" className="relative overflow-hidden">
+      <section className="marketing-section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/30">
           <div className="absolute inset-0 bg-dot-pattern opacity-30"></div>
         </div>
         
-        <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
-            Find the perfect solution for your industry
-          </Heading>
-          <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Don't see your industry listed? Our platform is flexible enough to adapt 
-            to any field service business model.
-          </Text>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="group">
-              Start Free Trial
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="secondary">
-              Schedule Consultation
-            </Button>
+        <div className="marketing-container text-center relative z-10">
+          <div className="marketing-cta-section">
+            <h2 className="ttt-section-header text-white mb-6">
+              Find the perfect solution for your industry
+            </h2>
+            <p className="ttt-text-lead text-text-secondary mb-8 marketing-text-container mx-auto leading-relaxed">
+              Don't see your industry listed? Our platform is flexible enough to adapt 
+              to any field service business model.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <Button size="xl">
+                Start Free Trial
+              </Button>
+              <Button size="xl" variant="secondary">
+                Schedule Consultation
+              </Button>
+            </div>
+            
+            <div className="marketing-trust-indicators ttt-text-small text-text-muted">
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Free 14-day trial
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                No setup fees
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Custom industry setup
+              </span>
+            </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };

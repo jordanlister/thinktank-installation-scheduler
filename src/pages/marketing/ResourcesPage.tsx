@@ -7,11 +7,11 @@ import {
   Users, 
   TrendingUp,
   Clock,
-  ArrowRight,
   Download,
   Play,
   Calendar,
-  Star
+  Star,
+  CheckCircle
 } from 'lucide-react';
 import { ResourcesSEO } from '../../components/SEO';
 import { buildWebPageSchema, buildArticleSchema, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
@@ -248,219 +248,238 @@ const ResourcesPage: React.FC = () => {
         twitterImageAlt="Educational resources for field service professionals and teams"
       />
       {/* Resources Hero */}
-      <Section spacing="2xl">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <Heading variant="h1" className="text-5xl font-bold text-white mb-6">
-              Resources to help you succeed
-            </Heading>
-            <Text size="xl" className="text-text-secondary">
+      <section className="marketing-hero relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/30">
+          <div className="absolute inset-0 bg-subtle-dots opacity-20"></div>
+        </div>
+        
+        <div className="marketing-container relative z-10">
+          <div className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-6 leading-tight">
+              Resources to help you
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-success-light block mt-1">
+                succeed
+              </span>
+            </h1>
+            
+            <p className="ttt-text-lead text-text-secondary mb-8 leading-relaxed">
               Guides, case studies, and insights to help you optimize your 
               field service operations and get the most from our platform.
-            </Text>
+            </p>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Featured Resources */}
-      <Section spacing="xl">
-        <Container>
-          <div className="mb-12">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-4">
+      <section className="marketing-section bg-surface/50">
+        <div className="marketing-container">
+          <div className="text-center mb-12">
+            <h2 className="ttt-section-header text-white mb-4">
               Featured Resources
-            </Heading>
-            <Text className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Hand-picked content to help you get started and succeed
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 2, lg: 3 }} gap={8}>
+          <div className="marketing-feature-grid">
             {featuredResources.map((resource, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden hover:border-brand-primary/30 transition-colors group">
-                <div className="aspect-video bg-gradient-to-br from-surface to-surface-elevated flex items-center justify-center">
-                  <FileText className="w-16 h-16 text-brand-primary" />
+              <div key={index} className="marketing-feature-card group">
+                <div className="marketing-feature-icon bg-brand-primary/10">
+                  <FileText className="w-6 h-6 text-brand-primary" />
                 </div>
                 
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary text-sm font-medium rounded-full">
-                      {resource.type}
-                    </span>
-                    <div className="flex items-center text-text-muted text-sm">
-                      <Clock className="w-4 h-4 mr-1" />
-                      {resource.readTime}
-                    </div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs font-medium rounded-full">
+                    {resource.type}
+                  </span>
+                  <div className="flex items-center text-text-muted text-sm">
+                    <Clock className="w-3.5 h-3.5 mr-1" />
+                    {resource.readTime}
                   </div>
-                  
-                  <Heading variant="h3" className="text-xl font-semibold text-white mb-3 group-hover:text-brand-primary transition-colors">
-                    {resource.title}
-                  </Heading>
-                  
-                  <Text className="text-text-secondary mb-4">
-                    {resource.description}
-                  </Text>
-                  
-                  <Button variant="ghost" size="sm" className="p-0 h-auto font-medium">
-                    Read More
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
+                </div>
+                
+                <h3 className="ttt-feature-title group-hover:text-brand-primary transition-colors">
+                  {resource.title}
+                </h3>
+                
+                <p className="ttt-feature-description mb-4">
+                  {resource.description}
+                </p>
+                
+                <div className="ttt-text-small text-brand-primary font-medium">
+                  {resource.category}
                 </div>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Resource Categories */}
-      <Section spacing="2xl" className="bg-surface/30">
-        <Container>
-          <div className="space-y-16">
+      <section className="marketing-section">
+        <div className="marketing-container">
+          <div className="space-y-12">
             {resourceCategories.map((category, categoryIndex) => {
               const Icon = category.icon;
               
               return (
                 <div key={categoryIndex}>
-                  <div className="flex items-center mb-8">
-                    <div className="w-12 h-12 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mr-4">
-                      <Icon className="w-6 h-6 text-brand-primary" />
+                  <div className="flex items-center justify-between mb-8">
+                    <div className="flex items-center">
+                      <div className="marketing-feature-icon bg-brand-primary/10 mr-4">
+                        <Icon className="w-5 h-5 text-brand-primary" />
+                      </div>
+                      <div>
+                        <h2 className="ttt-section-header text-white mb-1">
+                          {category.title}
+                        </h2>
+                        <p className="ttt-text-small text-text-secondary">
+                          {category.description} • {category.count} resources available
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <Heading variant="h2" className="text-2xl font-bold text-white mb-2">
-                        {category.title}
-                      </Heading>
-                      <Text className="text-text-secondary">
-                        {category.description} • {category.count} resources available
-                      </Text>
-                    </div>
-                    <Button variant="secondary">
+                    <Button variant="secondary" size="sm">
                       View All
-                      <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
 
-                  <Grid cols={{ base: 1, md: 2, lg: 4 }} gap={6}>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {category.resources.map((resource, resourceIndex) => (
-                      <div key={resourceIndex} className={`bg-surface-glass backdrop-blur-xl border rounded-xl p-6 hover:border-brand-primary/30 transition-colors ${resource.featured ? 'border-brand-primary/20' : 'border-border'}`}>
+                      <div key={resourceIndex} className={`marketing-feature-card group ${resource.featured ? 'border-brand-primary/20' : ''}`}>
                         {resource.featured && (
-                          <div className="flex items-center mb-3">
-                            <Star className="w-4 h-4 text-warning mr-2" />
-                            <span className="text-warning text-sm font-medium">Featured</span>
+                          <div className="flex items-center mb-2">
+                            <Star className="w-3.5 h-3.5 text-warning mr-1.5" />
+                            <span className="text-warning ttt-text-small font-medium">Featured</span>
                           </div>
                         )}
                         
                         <div className="mb-3">
-                          <span className="px-2 py-1 bg-surface-elevated text-text-secondary text-xs font-medium rounded">
+                          <span className="px-2 py-1 bg-surface-elevated text-text-secondary ttt-text-small font-medium rounded">
                             {resource.type}
                           </span>
                         </div>
                         
-                        <Heading variant="h4" className="text-lg font-semibold text-white mb-2">
+                        <h4 className="ttt-feature-title mb-2">
                           {resource.title}
-                        </Heading>
+                        </h4>
                         
-                        <Text size="sm" className="text-text-secondary mb-4">
+                        <p className="ttt-feature-description mb-4">
                           {resource.description}
-                        </Text>
+                        </p>
                         
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center text-text-muted text-sm">
-                            <Clock className="w-4 h-4 mr-1" />
+                          <div className="flex items-center text-text-muted ttt-text-small">
+                            <Clock className="w-3.5 h-3.5 mr-1" />
                             {resource.readTime}
                           </div>
-                          <Button variant="ghost" size="sm" className="p-0 h-auto">
-                            <ArrowRight className="w-4 h-4" />
-                          </Button>
+                          <div className="ttt-text-small text-brand-primary font-medium">
+                            Read More
+                          </div>
                         </div>
                       </div>
                     ))}
-                  </Grid>
+                  </div>
                 </div>
               );
             })}
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
       {/* Upcoming Webinars */}
-      <Section spacing="2xl">
-        <Container>
+      <section className="marketing-section bg-surface/50">
+        <div className="marketing-container">
           <div className="text-center mb-12">
-            <Heading variant="h2" className="text-3xl font-bold text-white mb-4">
+            <h2 className="ttt-section-header text-white mb-4">
               Upcoming Webinars
-            </Heading>
-            <Text className="text-text-secondary">
+            </h2>
+            <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Join our live sessions and learn from industry experts
-            </Text>
+            </p>
           </div>
           
-          <Grid cols={{ base: 1, md: 2 }} gap={8} className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {upcomingWebinars.map((webinar, index) => (
-              <div key={index} className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl p-8 hover:border-brand-primary/30 transition-colors">
+              <div key={index} className="marketing-feature-card group">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex items-center justify-center mr-4">
-                    <Video className="w-6 h-6 text-brand-primary" />
+                  <div className="marketing-feature-icon bg-brand-primary/10 mr-3">
+                    <Video className="w-5 h-5 text-brand-primary" />
                   </div>
                   <div>
-                    <div className="text-brand-primary font-semibold text-sm">UPCOMING WEBINAR</div>
-                    <div className="text-text-muted text-sm">{webinar.date} • {webinar.time}</div>
+                    <div className="text-brand-primary font-semibold ttt-text-small">UPCOMING WEBINAR</div>
+                    <div className="text-text-muted ttt-text-small">{webinar.date} • {webinar.time}</div>
                   </div>
                 </div>
                 
-                <Heading variant="h3" className="text-xl font-semibold text-white mb-3">
+                <h3 className="ttt-feature-title mb-3">
                   {webinar.title}
-                </Heading>
+                </h3>
                 
-                <Text className="text-text-secondary mb-4">
+                <p className="ttt-feature-description mb-4">
                   {webinar.description}
-                </Text>
+                </p>
                 
                 <div className="flex items-center justify-between">
-                  <Text size="sm" className="text-text-muted">
+                  <div className="ttt-text-small text-text-muted">
                     Presented by {webinar.presenter}
-                  </Text>
+                  </div>
                   <Button variant="primary" size="sm">
-                    <Calendar className="mr-2 w-4 h-4" />
+                    <Calendar className="mr-1.5 w-3.5 h-3.5" />
                     Register
                   </Button>
                 </div>
               </div>
             ))}
-          </Grid>
-        </Container>
-      </Section>
+          </div>
+        </div>
+      </section>
 
       {/* Newsletter Signup */}
-      <Section spacing="2xl" className="relative overflow-hidden">
+      <section className="marketing-section relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/30">
           <div className="absolute inset-0 bg-dot-pattern opacity-30"></div>
         </div>
         
-        <Container className="text-center relative z-10">
-          <Heading variant="h2" className="text-4xl font-bold text-white mb-6">
-            Stay updated with the latest insights
-          </Heading>
-          <Text size="lg" className="text-text-secondary mb-8 max-w-2xl mx-auto">
-            Subscribe to our newsletter for the latest field service trends, 
-            tips, and platform updates delivered to your inbox.
-          </Text>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto mb-8">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-surface-glass backdrop-blur-xl border border-border rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-brand-primary"
-            />
-            <Button className="group">
-              Subscribe
-              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+        <div className="marketing-container text-center relative z-10">
+          <div className="marketing-cta-section">
+            <h2 className="ttt-section-header text-white mb-6">
+              Stay updated with the latest insights
+            </h2>
+            <p className="ttt-text-lead text-text-secondary mb-8 marketing-text-container mx-auto leading-relaxed">
+              Subscribe to our newsletter for the latest field service trends, 
+              tips, and platform updates delivered to your inbox.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto mb-8">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 bg-surface-glass backdrop-blur-xl border border-border rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-brand-primary transition-colors"
+              />
+              <Button size="lg">
+                Subscribe
+              </Button>
+            </div>
+            
+            <div className="marketing-trust-indicators ttt-text-small text-text-muted">
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                No spam, ever
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Unsubscribe anytime
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Privacy protected
+              </span>
+            </div>
           </div>
-          
-          <Text size="sm" className="text-text-muted">
-            No spam, unsubscribe at any time. Privacy policy applies.
-          </Text>
-        </Container>
-      </Section>
+        </div>
+      </section>
     </div>
   );
 };
