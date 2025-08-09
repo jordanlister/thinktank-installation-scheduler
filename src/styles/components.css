@@ -23,6 +23,32 @@
 @layer components {
   
   /* =============================================================================
+   * LAYOUT COMPONENTS - Fixed Sidebar
+   * ============================================================================= */
+  
+  /* Ensure sidebar is truly fixed and doesn't scroll */
+  .sidebar-fixed {
+    position: fixed !important;
+    top: 4rem !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    transform: translateZ(0); /* Force hardware acceleration */
+    will-change: transform;
+  }
+  
+  /* Prevent any scrolling on the sidebar */
+  .sidebar-fixed.sidebar-no-scroll {
+    overflow: hidden;
+  }
+  
+  .sidebar-fixed .sidebar-content {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  /* =============================================================================
    * BUTTON COMPONENTS - Supabase Style
    * ============================================================================= */
   
@@ -692,6 +718,34 @@
 
   .sidebar-nav-content {
     padding-top: var(--space-16); /* 64px to clear fixed header */
+  }
+
+  /* Fixed Sidebar Enhancements */
+  .sidebar-fixed {
+    position: fixed !important;
+    top: 4rem; /* 64px header height */
+    left: 0;
+    height: calc(100vh - 4rem);
+    z-index: 30;
+    width: 4rem; /* 64px collapsed width */
+    transition: width 300ms ease-out;
+  }
+
+  .sidebar-fixed:hover {
+    width: 16rem; /* 256px expanded width */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Main content positioning for fixed sidebar */
+  .main-content-with-sidebar {
+    margin-left: 4rem; /* 64px to account for collapsed sidebar */
+    transition: margin-left 300ms ease-out;
+  }
+
+  @media (max-width: 1024px) {
+    .main-content-with-sidebar {
+      margin-left: 0; /* No margin on mobile */
+    }
   }
   
   /* =============================================================================

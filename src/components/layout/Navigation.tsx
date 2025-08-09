@@ -91,9 +91,9 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
         />
       )}
 
-      {/* Sidebar - Hover to expand design */}
+      {/* Sidebar - Hover to expand design - Truly fixed positioning */}
       <aside
-        className={`fixed left-0 top-16 z-30 h-[calc(100vh-4rem)] bg-white/5 backdrop-filter backdrop-blur-md border-r border-white/10 transform transition-all duration-300 ease-out group hover:w-64 w-16 lg:w-16 lg:hover:w-64 ${
+        className={`sidebar-fixed sidebar-no-scroll bg-white/5 backdrop-filter backdrop-blur-md border-r border-white/10 transform transition-all duration-300 ease-out group hover:w-64 w-16 lg:w-16 lg:hover:w-64 ${
           sidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0'
         }`}
       >
@@ -110,8 +110,9 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
 
         {/* Project selector moved to header - this space can be used for other navigation elements */}
 
-        {/* Navigation menu */}
-        <nav className="flex-1 p-2 space-y-1 overflow-y-auto custom-scrollbar">
+        {/* Navigation menu with proper scrolling wrapper */}
+        <div className="sidebar-content">
+          <nav className="flex-1 p-2 space-y-1">
           {filteredNavItems.map((item) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
             const isActive = location.pathname === item.path || 
@@ -140,14 +141,15 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
               </NavLink>
             );
           })}
-        </nav>
+          </nav>
 
-        {/* Bottom section - Optional status or help */}
+          {/* Bottom section - Optional status or help */}
         <div className="p-2 border-t border-white/10 mt-auto">
           <div className="text-xs text-white/60 text-center group-hover:text-left transition-all duration-300">
             <p className="mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Installation Scheduler</p>
             <p className="text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">v2.0</p>
           </div>
+        </div>
         </div>
       </aside>
     </>

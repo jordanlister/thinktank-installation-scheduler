@@ -5,7 +5,6 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Navigation from './Navigation';
-import Breadcrumbs from './Breadcrumbs';
 import { useAppStore } from '../../stores/useAppStore';
 import ErrorBoundary from '../common/ErrorBoundary';
 
@@ -64,17 +63,10 @@ export const Layout: React.FC = () => {
         onClose={handleSidebarClose} 
       />
 
-      {/* Main content area */}
-      <div className="lg:ml-16 transition-all duration-300 ease-out">
-        {/* Breadcrumbs bar */}
-        <div className="sticky top-16 z-20 bg-white/5 backdrop-filter backdrop-blur-md border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <Breadcrumbs />
-          </div>
-        </div>
-
-        {/* Main content */}
-        <main className="min-h-[calc(100vh-8rem)]">
+      {/* Main content area - Fixed positioning for both header and sidebar */}
+      <div className="lg:ml-16 transition-all duration-300 ease-out pt-16 min-h-screen">
+        {/* Main content - Scrollable area */}
+        <main className="min-h-[calc(100vh-4rem)] overflow-y-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <ErrorBoundary>
               <Outlet />
