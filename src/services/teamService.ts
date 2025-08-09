@@ -71,15 +71,16 @@ export const teamService = {
         email: data.email,
         first_name: data.firstName,
         last_name: data.lastName,
-        role: data.role
+        role: data.role,
+        is_active: true
       };
 
       // Add emergency contact if provided
-      if (data.emergencyContactName) {
+      if (data.emergencyContactName || data.emergencyContactPhone) {
         userInsert.emergency_contact = {
-          name: data.emergencyContactName,
-          phone: data.emergencyContactPhone,
-          relationship: data.emergencyContactRelationship
+          name: data.emergencyContactName || '',
+          phone: data.emergencyContactPhone || '',
+          relationship: data.emergencyContactRelationship || ''
         };
       }
 
@@ -89,7 +90,10 @@ export const teamService = {
         .select()
         .single();
 
-      if (userError) throw userError;
+      if (userError) {
+        console.error('User creation error:', userError);
+        throw new Error(`Failed to create user: ${userError.message}`);
+      }
 
       // Then create the team member record using the same ID
       const { data: teamMemberData, error: teamMemberError } = await supabase
@@ -98,21 +102,27 @@ export const teamService = {
           id: userData.id, // Use the same ID as the user
           employee_id: `EMP${Date.now()}`, // Generate employee ID
           region: data.region,
-          capacity: data.capacity,
-          travel_radius: data.travelRadius,
+          capacity: data.capacity || 8,
+          travel_radius: data.travelRadius || 50,
           specializations: data.specializations || [],
           hire_date: new Date().toISOString().split('T')[0],
           employment_status: 'active',
-          job_title: this.getRoleTitle(data.role)
+          job_title: this.getRoleTitle(data.role),
+          department: 'Installation Services'
         })
         .select()
         .single();
 
-      if (teamMemberError) throw teamMemberError;
+      if (teamMemberError) {
+        console.error('Team member creation error:', teamMemberError);
+        // If team member creation fails, try to clean up the user
+        await supabase.from('users').delete().eq('id', userData.id);
+        throw new Error(`Failed to create team member: ${teamMemberError.message}`);
+      }
 
       // Create work preferences if provided
       if (data.preferredStartTime || data.maxDailyJobs) {
-        await supabase
+        const { error: workPrefError } = await supabase
           .from('work_preferences')
           .insert({
             team_member_id: teamMemberData.id,
@@ -124,12 +134,30 @@ export const teamService = {
             overtime_available: data.overtimeAvailable || false,
             travel_preference: data.travelPreference || 'regional'
           });
+
+        if (workPrefError) {
+          console.warn('Work preferences creation failed:', workPrefError);
+        }
       }
 
       // Return the complete team member data
       return await this.getTeamMemberById(teamMemberData.id);
     } catch (error) {
       console.error('Error creating team member:', error);
+      
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes('duplicate key value') || error.message.includes('already exists')) {
+          throw new Error('A team member with this email already exists');
+        } else if (error.message.includes('permission denied') || error.message.includes('not authorized')) {
+          throw new Error('You do not have permission to create team members');
+        } else if (error.message.includes('foreign key constraint') || error.message.includes('violates')) {
+          throw new Error('Invalid data provided for team member creation');
+        } else if (error.message.includes('relation') && error.message.includes('does not exist')) {
+          throw new Error('Database tables are not properly configured. Please contact system administrator.');
+        }
+      }
+      
       throw error;
     }
   },
@@ -137,7 +165,7 @@ export const teamService = {
   // Update an existing team member
   async updateTeamMember(id: string, updates: UpdateTeamMemberData): Promise<TeamMember> {
     try {
-      // Update user data if name, email, or emergency contact changed (team_member.id = user.id)
+      // Update user data if name, email, or emergency contact changed
       if (updates.firstName || updates.lastName || updates.email || updates.role || 
           updates.emergencyContactName || updates.emergencyContactPhone || updates.emergencyContactRelationship) {
         const userUpdates: any = {};
@@ -149,18 +177,21 @@ export const teamService = {
         // Handle emergency contact
         if (updates.emergencyContactName || updates.emergencyContactPhone || updates.emergencyContactRelationship) {
           userUpdates.emergency_contact = {
-            name: updates.emergencyContactName,
-            phone: updates.emergencyContactPhone,
-            relationship: updates.emergencyContactRelationship
+            name: updates.emergencyContactName || '',
+            phone: updates.emergencyContactPhone || '',
+            relationship: updates.emergencyContactRelationship || ''
           };
         }
 
         const { error: userError } = await supabase
           .from('users')
           .update(userUpdates)
-          .eq('id', id); // Use the same ID
+          .eq('id', id);
 
-        if (userError) throw userError;
+        if (userError) {
+          console.error('User update error:', userError);
+          throw new Error(`Failed to update user: ${userError.message}`);
+        }
       }
 
       // Update team member data
@@ -178,7 +209,10 @@ export const teamService = {
           .update(teamMemberUpdates)
           .eq('id', id);
 
-        if (teamMemberError) throw teamMemberError;
+        if (teamMemberError) {
+          console.error('Team member update error:', teamMemberError);
+          throw new Error(`Failed to update team member: ${teamMemberError.message}`);
+        }
       }
 
       // Update work preferences if provided
@@ -192,13 +226,13 @@ export const teamService = {
         if (updates.overtimeAvailable !== undefined) workPrefUpdates.overtime_available = updates.overtimeAvailable;
         if (updates.travelPreference) workPrefUpdates.travel_preference = updates.travelPreference;
 
-        // First try to update existing preferences
+        // Try to update existing preferences, if none exist then insert
         const { error: updateError } = await supabase
           .from('work_preferences')
           .update(workPrefUpdates)
           .eq('team_member_id', id);
 
-        // If no existing preferences, create new ones
+        // If no rows were affected, insert new preferences
         if (updateError && updateError.code === 'PGRST116') {
           await supabase
             .from('work_preferences')
@@ -207,13 +241,23 @@ export const teamService = {
               ...workPrefUpdates
             });
         } else if (updateError) {
-          throw updateError;
+          console.warn('Work preferences update failed:', updateError);
         }
       }
 
       return await this.getTeamMemberById(id);
     } catch (error) {
       console.error('Error updating team member:', error);
+      
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes('permission denied')) {
+          throw new Error('You do not have permission to update team members');
+        } else if (error.message.includes('not found')) {
+          throw new Error('Team member not found');
+        }
+      }
+      
       throw error;
     }
   },
@@ -222,12 +266,15 @@ export const teamService = {
   async deleteTeamMember(id: string): Promise<void> {
     try {
       // Instead of hard delete, mark as inactive
-      const { error: updateError } = await supabase
+      const { error: teamMemberError } = await supabase
         .from('team_members')
         .update({ employment_status: 'terminated' })
         .eq('id', id);
 
-      if (updateError) throw updateError;
+      if (teamMemberError) {
+        console.error('Team member deactivation error:', teamMemberError);
+        throw new Error(`Failed to deactivate team member: ${teamMemberError.message}`);
+      }
 
       // Also deactivate the user (same ID)
       const { error: userError } = await supabase
@@ -235,9 +282,22 @@ export const teamService = {
         .update({ is_active: false })
         .eq('id', id);
 
-      if (userError) throw userError;
+      if (userError) {
+        console.error('User deactivation error:', userError);
+        throw new Error(`Failed to deactivate user: ${userError.message}`);
+      }
     } catch (error) {
       console.error('Error deleting team member:', error);
+      
+      // Provide more specific error messages
+      if (error instanceof Error) {
+        if (error.message.includes('permission denied')) {
+          throw new Error('You do not have permission to delete team members');
+        } else if (error.message.includes('not found')) {
+          throw new Error('Team member not found');
+        }
+      }
+      
       throw error;
     }
   },
