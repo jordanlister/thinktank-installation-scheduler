@@ -1,0 +1,6 @@
+# Fallback for Single Page Application routes
+# This ensures all routes are served by React Router
+/*    /index.html   200
+
+# Specific redirects for SEO
+/home   /   301
