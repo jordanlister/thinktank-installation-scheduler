@@ -5,26 +5,12 @@
     <link rel="icon" type="image/png" href="/thinktanklogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lead Route</title>
-    <script>
-        // For SPA routing - redirect to the same path but on the main index
-        // This preserves the current URL so React Router can handle it
-        const currentPath = window.location.pathname + window.location.search + window.location.hash;
-        sessionStorage.setItem('redirectPath', currentPath);
-        window.location.replace('/' + window.location.search);
-    </script>
 </head>
 <body>
     <div id="root"></div>
     <noscript>
         <p>This application requires JavaScript to run. Please enable JavaScript and refresh the page.</p>
     </noscript>
-    <script>
-        // Fallback redirect if the above doesn't work
-        setTimeout(() => {
-            if (!document.getElementById('root').hasChildNodes()) {
-                window.location.href = '/';
-            }
-        }, 100);
-    </script>
+    <p>Page not found. <a href="/">Return to home</a></p>
 </body>
 </html>

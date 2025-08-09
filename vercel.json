@@ -74,7 +74,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api|assets|favicon.ico|robots.txt|sitemap.xml|manifest.json|sw.js|offline.html).*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ],

@@ -64,14 +64,6 @@ const AppRouter = () => {
   const isAuthenticated = useIsAuthenticated();
   const isLoading = useIsLoading();
 
-  // Handle 404 redirect from sessionStorage (for SPA routing fallback)
-  useEffect(() => {
-    const redirectPath = sessionStorage.getItem('redirectPath');
-    if (redirectPath && redirectPath !== location.pathname) {
-      sessionStorage.removeItem('redirectPath');
-      window.location.replace(redirectPath);
-    }
-  }, [location]);
 
   // If it's a marketing route, always show marketing content
   if (isMarketingRoute(location.pathname)) {
