@@ -545,10 +545,4 @@ export const TeamWorkloadDemo: React.FC<{ className?: string }> = ({ className }
   );
 };
 
-// Export all demo components
-export {
-  SchedulingDemo,
-  RouteOptimizationDemo,
-  DataProcessingDemo,
-  TeamWorkloadDemo,
-};
+// Components are individually exported above

@@ -15,6 +15,19 @@ import {
 } from 'lucide-react';
 import { FeaturesSEO } from '../../components/SEO';
 import { getFeaturesPageSchemas, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
+import {
+  MarketingPageWrapper,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton,
+  FeatureGrid,
+  ScrollProgressIndicator
+} from '../../components/marketing/animations';
 
 const FeaturesPage: React.FC = () => {
   const featureCategories = [
@@ -120,6 +133,7 @@ const FeaturesPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <FeaturesSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/features-overview.jpg"
@@ -128,18 +142,27 @@ const FeaturesPage: React.FC = () => {
         twitterImageAlt="AI scheduling, route optimization, and team management features"
       />
       {/* Features Hero */}
-      <section className="marketing-hero">
-        <div className="marketing-container">
-          <div className="marketing-text-container text-center">
-            <h1 className="ttt-hero-heading font-bold text-white mb-4 leading-tight">
-              Powerful features for modern field service
+      <section className="marketing-hero relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-brand-secondary/30">
+          <div className="absolute inset-0 bg-subtle-dots opacity-20"></div>
+        </div>
+        
+        <div className="marketing-container relative z-10">
+          <HeroReveal className="marketing-text-container text-center">
+            <h1 className="ttt-hero-heading font-bold text-white mb-6 leading-tight">
+              Powerful features for
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-success-light block mt-1">
+                modern field service
+              </span>
             </h1>
-            <p className="ttt-text-lead text-text-secondary leading-relaxed">
+            
+            <p className="ttt-text-lead text-text-secondary mb-8 leading-relaxed">
               Every feature is designed to solve real-world challenges faced by 
               field service companies. From AI-powered scheduling to real-time 
               optimization, we've got you covered.
             </p>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
@@ -147,73 +170,79 @@ const FeaturesPage: React.FC = () => {
       {featureCategories.map((category, categoryIndex) => (
         <section key={categoryIndex} className={`marketing-section ${categoryIndex % 2 === 1 ? 'bg-surface/30' : ''}`}>
           <div className="marketing-container">
-            <div className="text-center mb-12">
+            <ScrollReveal className="text-center mb-12">
               <h2 className="ttt-section-header text-white mb-4">
                 {category.title}
               </h2>
-              <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto leading-relaxed">
+              <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
                 {category.description}
               </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="space-y-12">
+            <StaggerGroup className="space-y-12">
               {category.features.map((feature, featureIndex) => {
                 const Icon = feature.icon;
                 const isReverse = featureIndex % 2 === 1;
                 
                 return (
-                  <div key={featureIndex} className={`grid lg:grid-cols-2 gap-8 items-center ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <StaggerItem key={featureIndex}>
+                    <div className="marketing-feature-card group overflow-hidden">
+                    <div className={`grid lg:grid-cols-2 ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Feature Content */}
-                    <div className={isReverse ? 'lg:col-start-2' : ''}>
-                      <div className="flex items-start mb-4">
-                        <div className="marketing-feature-icon bg-brand-primary/10 border border-brand-primary/20 mr-4 flex-shrink-0">
-                          <Icon className="w-6 h-6 text-brand-primary" />
+                    <div className={`p-6 lg:p-10 ${isReverse ? 'lg:col-start-2' : ''}`}>
+                      <div className="flex items-center mb-6">
+                        <div className="marketing-feature-icon mr-4">
+                          <InteractiveIcon rotateOnHover>
+                            <Icon className="w-6 h-6 text-brand-primary" />
+                          </InteractiveIcon>
                         </div>
-                        <div>
-                          <h3 className="ttt-feature-title text-white">
-                            {feature.name}
-                          </h3>
-                        </div>
+                        <h3 className="ttt-section-header text-white">
+                          {feature.name}
+                        </h3>
                       </div>
                       
-                      <p className="ttt-feature-description mb-4 leading-relaxed">
+                      <p className="ttt-text-lead text-text-secondary mb-6 leading-relaxed">
                         {feature.description}
                       </p>
 
-                      <div className="mb-6">
-                        <p className="ttt-text-small text-white font-semibold mb-3">Key Benefits:</p>
+                      <div className="mb-8">
+                        <h4 className="ttt-feature-title text-white mb-4">
+                          Key Benefits
+                        </h4>
                         <ul className="space-y-2">
                           {feature.benefits.map((benefit, benefitIndex) => (
-                            <li key={benefitIndex} className="flex items-start text-text-secondary ttt-text-small">
-                              <CheckCircle className="w-4 h-4 text-success mr-2 flex-shrink-0 mt-0.5" />
+                            <li key={benefitIndex} className="flex items-start ttt-feature-description">
+                              <CheckCircle className="w-4 h-4 text-success mt-0.5 mr-3 flex-shrink-0" />
                               <span className="leading-relaxed">{benefit}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <Button variant="primary">
+                      <CTAButton variant="primary">
                         Try This Feature
-                      </Button>
+                      </CTAButton>
                     </div>
 
                     {/* Feature Demo/Visual */}
-                    <div className={isReverse ? 'lg:col-start-1' : ''}>
-                      <div className="marketing-feature-card group">
-                        <div className="aspect-video bg-gradient-to-br from-surface to-surface-elevated rounded-xl border border-border flex items-center justify-center overflow-hidden">
-                          <div className="text-center group-hover:scale-105 transition-transform duration-300">
-                            <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <div className={`bg-surface-elevated p-6 lg:p-10 ${isReverse ? 'lg:col-start-1' : ''}`}>
+                      <AnimatedCard className="aspect-video bg-gradient-to-br from-surface to-surface-elevated rounded-xl border border-border flex items-center justify-center overflow-hidden" hoverLift>
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                            <InteractiveIcon pulseOnHover size="lg">
                               <Icon className="w-8 h-8 text-brand-primary" />
-                            </div>
-                            <p className="ttt-text-small text-text-muted font-medium">Interactive demo coming soon</p>
+                            </InteractiveIcon>
                           </div>
+                          <p className="ttt-text-small text-text-muted font-medium">Interactive demo coming soon</p>
                         </div>
-                      </div>
+                      </AnimatedCard>
                     </div>
-                  </div>
+                    </div>
+                    </div>
+                  </StaggerItem>
                 );
               })}
-            </div>
+            </StaggerGroup>
           </div>
         </section>
       ))}
@@ -221,34 +250,42 @@ const FeaturesPage: React.FC = () => {
       {/* Integration Ecosystem */}
       <section className="marketing-section bg-surface/20">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Seamless integrations with your existing tools
             </h2>
-            <p className="ttt-text-lead text-text-secondary marketing-text-container mx-auto leading-relaxed">
+            <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Connect with the tools you already use. Our robust API and 
               pre-built integrations make setup effortless.
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <StaggerGroup className="marketing-feature-grid mb-10">
             {integrations.map((integration, index) => (
-              <div key={index} className="marketing-feature-card text-center group p-4">
-                <div className="w-12 h-12 bg-white/90 rounded-lg mx-auto mb-3 flex items-center justify-center group-hover:scale-105 transition-transform duration-200 shadow-sm">
-                  <div className="text-gray-600 text-xs font-bold">{integration.name.slice(0, 2)}</div>
-                </div>
-                <p className="ttt-text-small font-medium text-white mb-1">{integration.name}</p>
-                <p className="ttt-text-small text-text-muted">{integration.category}</p>
-              </div>
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card group text-center" hoverLift>
+                  <InteractiveIcon className="mx-auto mb-4" size="lg">
+                    <div className="w-12 h-12 bg-white/90 rounded-lg flex items-center justify-center shadow-sm">
+                      <div className="text-gray-600 text-xs font-bold">{integration.name.slice(0, 2)}</div>
+                    </div>
+                  </InteractiveIcon>
+                  <h3 className="ttt-feature-title mb-3">
+                    {integration.name}
+                  </h3>
+                  <p className="ttt-feature-description">
+                    {integration.category}
+                  </p>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
 
-          <div className="text-center">
-            <Button variant="secondary" size="lg">
+          <CTAReveal className="text-center">
+            <CTAButton variant="secondary" size="lg">
               <Zap className="mr-2 w-5 h-5" />
               View All 50+ Integrations
-            </Button>
-          </div>
+            </CTAButton>
+          </CTAReveal>
         </div>
       </section>
 
@@ -259,7 +296,7 @@ const FeaturesPage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-4">
               Ready to experience these features?
             </h2>
@@ -268,15 +305,30 @@ const FeaturesPage: React.FC = () => {
               your field service operations.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <CTAButton size="xl">
                 Start Free Trial
-              </Button>
+              </CTAButton>
               <Button size="xl" variant="secondary">
                 Schedule Demo
               </Button>
             </div>
-          </div>
+            
+            <div className="marketing-trust-indicators ttt-text-small text-text-muted">
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Free 14-day trial
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                No setup fees
+              </span>
+              <span className="flex items-center">
+                <CheckCircle className="w-3.5 h-3.5 mr-1.5 text-success" />
+                Full feature access
+              </span>
+            </div>
+          </CTAReveal>
         </div>
       </section>
     </div>

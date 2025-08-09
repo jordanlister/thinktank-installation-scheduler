@@ -15,6 +15,17 @@ import {
 } from 'lucide-react';
 import { CompanySEO } from '../../components/SEO';
 import { buildOrganizationSchema, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
+import {
+  ScrollProgressIndicator,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton
+} from '../../components/marketing/animations';
 
 const CompanyPage: React.FC = () => {
   const teamMembers = [
@@ -185,6 +196,7 @@ const CompanyPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <CompanySEO 
         jsonLd={allSchemas}
         ogImage="/images/og/company-team.jpg"
@@ -195,7 +207,7 @@ const CompanyPage: React.FC = () => {
       {/* Company Hero */}
       <section className="marketing-hero">
         <div className="marketing-container">
-          <div className="marketing-text-container text-center">
+          <HeroReveal className="marketing-text-container text-center">
             <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Transforming field service through innovation
             </h1>
@@ -204,29 +216,31 @@ const CompanyPage: React.FC = () => {
               making their teams more efficient and their customers happier.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
+              <CTAButton size="lg">
                 Join Our Team
-              </Button>
-              <Button size="lg" variant="secondary">
+              </CTAButton>
+              <CTAButton size="lg" variant="secondary">
                 Learn About Our Culture
-              </Button>
+              </CTAButton>
             </div>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
       {/* Company Stats */}
       <section className="marketing-section-tight">
         <div className="marketing-container">
-          <div className="marketing-stats-grid">
+          <StaggerGroup className="marketing-stats-grid">
             {companyStats.map((stat, index) => (
-              <div key={index} className="marketing-stats-card">
-                <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">{stat.metric}</div>
-                <div className="ttt-text-small font-medium text-white mb-0.5">{stat.label}</div>
-                <div className="ttt-text-small text-text-muted">{stat.description}</div>
-              </div>
+              <StaggerItem key={index}>
+                <div className="marketing-stats-card">
+                  <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">{stat.metric}</div>
+                  <div className="ttt-text-small font-medium text-white mb-0.5">{stat.label}</div>
+                  <div className="ttt-text-small text-text-muted">{stat.description}</div>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -235,9 +249,11 @@ const CompanyPage: React.FC = () => {
         <div className="marketing-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="ttt-section-header text-left text-white mb-6">
-                Our story
-              </h2>
+              <ScrollReveal>
+                <h2 className="ttt-section-header text-left text-white mb-6">
+                  Our story
+                </h2>
+              </ScrollReveal>
               <div className="space-y-6 text-text-secondary">
                 <p className="ttt-feature-description">
                   Lead Route was born from the frustration of watching talented field service 
@@ -256,21 +272,23 @@ const CompanyPage: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="marketing-feature-card">
-              <h3 className="ttt-feature-title text-white mb-6">
-                Company Timeline
-              </h3>
-              <div className="space-y-4">
-                {milestones.map((milestone, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="w-16 text-brand-primary font-semibold ttt-text-small mr-4 flex-shrink-0">
-                      {milestone.year}
+            <ScrollReveal>
+              <div className="marketing-feature-card">
+                <h3 className="ttt-feature-title text-white mb-6">
+                  Company Timeline
+                </h3>
+                <div className="space-y-4">
+                  {milestones.map((milestone, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="w-16 text-brand-primary font-semibold ttt-text-small mr-4 flex-shrink-0">
+                        {milestone.year}
+                      </div>
+                      <div className="text-text-secondary ttt-text-small">{milestone.event}</div>
                     </div>
-                    <div className="text-text-secondary ttt-text-small">{milestone.event}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -278,7 +296,7 @@ const CompanyPage: React.FC = () => {
       {/* Core Values */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Our core values
             </h2>
@@ -286,33 +304,35 @@ const CompanyPage: React.FC = () => {
               These values guide everything we do, from how we build our product 
               to how we interact with customers and each other.
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {coreValues.map((value, index) => {
               const Icon = value.icon;
               return (
-                <div key={index} className="marketing-feature-card text-center hover:border-brand-primary/30 transition-colors">
-                  <div className="marketing-feature-icon bg-brand-primary/10 mx-auto mb-4">
-                    <Icon className="w-6 h-6 text-brand-primary" />
-                  </div>
-                  <h3 className="ttt-feature-title text-white mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="ttt-feature-description">
-                    {value.description}
-                  </p>
-                </div>
+                <StaggerItem key={index}>
+                  <AnimatedCard className="marketing-feature-card text-center hover:border-brand-primary/30 transition-colors">
+                    <InteractiveIcon className="marketing-feature-icon bg-brand-primary/10 mx-auto mb-4">
+                      <Icon className="w-6 h-6 text-brand-primary" />
+                    </InteractiveIcon>
+                    <h3 className="ttt-feature-title text-white mb-4">
+                      {value.title}
+                    </h3>
+                    <p className="ttt-feature-description">
+                      {value.description}
+                    </p>
+                  </AnimatedCard>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Leadership Team */}
       <section className="marketing-section bg-surface/30">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Meet our leadership team
             </h2>
@@ -320,51 +340,55 @@ const CompanyPage: React.FC = () => {
               Experienced leaders from top technology and field service companies, 
               united by a shared vision to transform operations.
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-feature-grid">
+          <StaggerGroup className="marketing-feature-grid">
             {teamMembers.map((member, index) => (
-              <div key={index} className="marketing-feature-card overflow-hidden hover:border-brand-primary/30 transition-colors group">
-                <div className="aspect-square bg-gradient-to-br from-surface to-surface-elevated flex items-center justify-center">
-                  <Users className="w-16 h-16 text-brand-primary" />
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="ttt-feature-title text-white mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-brand-primary font-medium mb-4 ttt-text-small">
-                    {member.role}
-                  </p>
-                  <p className="ttt-feature-description mb-6">
-                    {member.bio}
-                  </p>
-                  
-                  <div className="flex space-x-3">
-                    <a
-                      href={member.linkedin}
-                      className="w-10 h-10 bg-surface-elevated hover:bg-brand-primary/10 border border-border hover:border-brand-primary/30 rounded-lg flex items-center justify-center text-text-secondary hover:text-brand-primary transition-all"
-                    >
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                    <a
-                      href={member.twitter}
-                      className="w-10 h-10 bg-surface-elevated hover:bg-brand-primary/10 border border-border hover:border-brand-primary/30 rounded-lg flex items-center justify-center text-text-secondary hover:text-brand-primary transition-all"
-                    >
-                      <Twitter className="w-5 h-5" />
-                    </a>
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card overflow-hidden hover:border-brand-primary/30 transition-colors group">
+                  <div className="aspect-square bg-gradient-to-br from-surface to-surface-elevated flex items-center justify-center">
+                    <InteractiveIcon>
+                      <Users className="w-16 h-16 text-brand-primary" />
+                    </InteractiveIcon>
                   </div>
-                </div>
-              </div>
+                  
+                  <div className="p-6">
+                    <h3 className="ttt-feature-title text-white mb-2">
+                      {member.name}
+                    </h3>
+                    <p className="text-brand-primary font-medium mb-4 ttt-text-small">
+                      {member.role}
+                    </p>
+                    <p className="ttt-feature-description mb-6">
+                      {member.bio}
+                    </p>
+                    
+                    <div className="flex space-x-3">
+                      <a
+                        href={member.linkedin}
+                        className="w-10 h-10 bg-surface-elevated hover:bg-brand-primary/10 border border-border hover:border-brand-primary/30 rounded-lg flex items-center justify-center text-text-secondary hover:text-brand-primary transition-all"
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a
+                        href={member.twitter}
+                        className="w-10 h-10 bg-surface-elevated hover:bg-brand-primary/10 border border-border hover:border-brand-primary/30 rounded-lg flex items-center justify-center text-text-secondary hover:text-brand-primary transition-all"
+                      >
+                        <Twitter className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Careers Section */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Join our growing team
             </h2>
@@ -372,51 +396,53 @@ const CompanyPage: React.FC = () => {
               We're looking for talented individuals who share our passion for innovation 
               and want to help transform the field service industry.
             </p>
-          </div>
+          </ScrollReveal>
 
-          <div className="space-y-4 mb-12">
+          <StaggerGroup className="space-y-4 mb-12">
             {openPositions.map((position, index) => (
-              <div key={index} className="marketing-feature-card hover:border-brand-primary/30 transition-colors">
-                <div className="flex flex-col md:flex-row md:items-center justify-between">
-                  <div className="flex-1 mb-4 md:mb-0">
-                    <div className="flex flex-wrap items-center gap-3 mb-2">
-                      <h3 className="ttt-feature-title text-white">
-                        {position.title}
-                      </h3>
-                      <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
-                        {position.department}
-                      </span>
-                      <span className="px-3 py-1 bg-surface-elevated text-text-secondary ttt-text-small rounded-full">
-                        {position.type}
-                      </span>
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card hover:border-brand-primary/30 transition-colors">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between">
+                    <div className="flex-1 mb-4 md:mb-0">
+                      <div className="flex flex-wrap items-center gap-3 mb-2">
+                        <h3 className="ttt-feature-title text-white">
+                          {position.title}
+                        </h3>
+                        <span className="px-3 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
+                          {position.department}
+                        </span>
+                        <span className="px-3 py-1 bg-surface-elevated text-text-secondary ttt-text-small rounded-full">
+                          {position.type}
+                        </span>
+                      </div>
+                      <div className="flex items-center text-text-muted mb-3">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        <span className="ttt-text-small">{position.location}</span>
+                      </div>
+                      <p className="ttt-feature-description">
+                        {position.description}
+                      </p>
                     </div>
-                    <div className="flex items-center text-text-muted mb-3">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span className="ttt-text-small">{position.location}</span>
+                    <div className="flex-shrink-0">
+                      <CTAButton variant="primary">
+                        Apply Now
+                      </CTAButton>
                     </div>
-                    <p className="ttt-feature-description">
-                      {position.description}
-                    </p>
                   </div>
-                  <div className="flex-shrink-0">
-                    <Button variant="primary">
-                      Apply Now
-                    </Button>
-                  </div>
-                </div>
-              </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
 
-          <div className="text-center">
+          <CTAReveal className="text-center">
             <p className="ttt-feature-description mb-6">
               Don't see a role that fits? We're always looking for exceptional talent.
             </p>
-            <Button variant="secondary" size="lg">
+            <CTAButton variant="secondary" size="lg">
               <Building className="mr-2 w-5 h-5" />
               View All Open Positions
-            </Button>
-          </div>
+            </CTAButton>
+          </CTAReveal>
         </div>
       </section>
 
@@ -427,7 +453,7 @@ const CompanyPage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-6">
               Ready to transform your field operations?
             </h2>
@@ -437,14 +463,14 @@ const CompanyPage: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
+              <CTAButton size="lg">
                 Start Free Trial
-              </Button>
-              <Button size="lg" variant="secondary">
+              </CTAButton>
+              <CTAButton size="lg" variant="secondary">
                 Contact Sales
-              </Button>
+              </CTAButton>
             </div>
-          </div>
+          </CTAReveal>
         </div>
       </section>
     </div>

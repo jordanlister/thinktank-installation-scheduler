@@ -20,11 +20,11 @@ export {
 // Interactive Elements
 export {
   AnimatedFeatureCard,
-  AnimatedButton,
+  AnimatedButton as InteractiveAnimatedButton,
   AnimatedInput,
   AnimatedStatCard,
   AnimatedTestimonialCard,
-  ScrollReveal,
+  ScrollReveal as InteractiveScrollReveal,
 } from './InteractiveElements';
 
 // Demo Visualizations
@@ -49,6 +49,63 @@ export {
   LoadingAnimationStyles,
 } from './LoadingAnimations';
 
+// Scroll Animations
+export {
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  Parallax,
+  SmoothScrollLink,
+  ScrollProgressIndicator,
+  HeroReveal,
+  FeatureGrid,
+  AnimatedStats,
+  CTAReveal,
+  useSmoothScroll,
+} from './ScrollAnimations';
+
+// Page Transitions
+export {
+  PageTransition,
+  RouteTransition,
+  FadeTransition,
+  SlideTransition,
+  ScaleTransition,
+  MarketingPageTransition,
+  SectionTransition,
+  LoadingTransition,
+  LayoutTransition,
+  SharedLayoutTransition,
+  useRouteTransition,
+  usePageLoading,
+} from './PageTransitions';
+
+// Interactive Components
+export {
+  AnimatedButton,
+  CTAButton,
+  AnimatedCard,
+  FeatureCard,
+  InteractiveIcon,
+  HoverReveal,
+  LoadingButton,
+  FloatingActionButton,
+  AnimatedTooltip,
+} from './InteractiveComponents';
+
+// Motion Wrappers
+export {
+  MarketingPageWrapper,
+  MarketingSection,
+  HeroSection,
+  ContentSection,
+  FeatureSection,
+  Container,
+  ResponsiveGrid,
+  AnimatedLayout,
+  ConditionalFade,
+} from './MotionWrapper';
+
 // Animation utilities (re-export from lib)
 export {
   fadeVariants,
@@ -64,42 +121,5 @@ export {
   ANIMATION_TOKENS,
 } from '@/lib/animations';
 
-// Component collections for easy import
-export const HeroComponents = {
-  AnimatedGrid,
-  FloatingElements,
-  AnimatedText,
-  HeroGradient,
-  ProductMockup,
-  Particles,
-  AnimatedCounter,
-  HeroAnimations,
-};
-
-export const InteractiveComponents = {
-  AnimatedFeatureCard,
-  AnimatedButton,
-  AnimatedInput,
-  AnimatedStatCard,
-  AnimatedTestimonialCard,
-  ScrollReveal,
-};
-
-export const DemoComponents = {
-  SchedulingDemo,
-  RouteOptimizationDemo,
-  DataProcessingDemo,
-  TeamWorkloadDemo,
-};
-
-export const LoadingComponents = {
-  Skeleton,
-  SkeletonCard,
-  SkeletonTable,
-  LoadingSpinner,
-  ProgressBar,
-  CircularProgress,
-  StateIcon,
-  LoadingOverlay,
-  TypingAnimation,
-};
+// Component collections removed to avoid circular dependencies
+// Import individual components directly instead

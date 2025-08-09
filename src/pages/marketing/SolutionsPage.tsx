@@ -14,6 +14,19 @@ import {
 import { SolutionsSEO } from '../../components/SEO';
 import { buildWebPageSchema, buildServiceSchema, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
 import { INDUSTRY_KEYWORDS } from '../../lib/seo/constants';
+import {
+  MarketingPageWrapper,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton,
+  AnimatedStats,
+  ScrollProgressIndicator
+} from '../../components/marketing/animations';
 
 const SolutionsPage: React.FC = () => {
   const industrySolutions = [
@@ -184,6 +197,7 @@ const SolutionsPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <SolutionsSEO 
         keywords={industryKeywords}
         jsonLd={allSchemas}
@@ -200,7 +214,7 @@ const SolutionsPage: React.FC = () => {
         </div>
         
         <div className="marketing-container relative z-10">
-          <div className="marketing-text-container text-center">
+          <HeroReveal className="marketing-text-container text-center">
             <h1 className="ttt-hero-heading font-bold text-white mb-6 leading-tight">
               Tailored solutions for
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-success-light block mt-1">
@@ -212,29 +226,30 @@ const SolutionsPage: React.FC = () => {
               We understand that every industry has unique challenges. 
               Our platform adapts to your specific needs and workflows.
             </p>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
       {/* Industry Solutions Grid */}
       <section className="marketing-section bg-surface/50">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Solutions by industry
             </h2>
             <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Specialized features and workflows designed for your industry's unique needs
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="space-y-12">
+          <StaggerGroup className="space-y-12">
             {industrySolutions.map((solution, index) => {
               const Icon = solution.icon;
               const isReverse = index % 2 === 1;
               
               return (
-                <div key={index} className="marketing-feature-card group overflow-hidden">
+                <StaggerItem key={index}>
+                  <div className="marketing-feature-card group overflow-hidden">
                   <div className={`grid lg:grid-cols-2 ${isReverse ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Content Side */}
                     <div className={`p-6 lg:p-10 ${isReverse ? 'lg:col-start-2' : ''}`}>
@@ -316,17 +331,18 @@ const SolutionsPage: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                  </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Enterprise Solutions */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Enterprise-grade solutions for large operations
             </h2>
@@ -334,13 +350,14 @@ const SolutionsPage: React.FC = () => {
               Scaling to thousands of daily installations across multiple regions? 
               Our enterprise platform is built for your needs.
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-feature-grid mb-10">
+          <StaggerGroup className="marketing-feature-grid mb-10">
             {enterpriseFeatures.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={index} className="marketing-feature-card group text-center">
+                <StaggerItem key={index}>
+                  <div className="marketing-feature-card group text-center">
                   <div className="marketing-feature-icon mx-auto mb-4">
                     <Icon className="w-6 h-6 text-brand-primary" />
                   </div>
@@ -350,16 +367,17 @@ const SolutionsPage: React.FC = () => {
                   <p className="ttt-feature-description">
                     {feature.description}
                   </p>
-                </div>
+                  </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
 
-          <div className="text-center">
+          <CTAReveal className="text-center">
             <Button size="lg" variant="primary">
               Contact Enterprise Sales
             </Button>
-          </div>
+          </CTAReveal>
         </div>
       </section>
 
@@ -370,7 +388,7 @@ const SolutionsPage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-6">
               Find the perfect solution for your industry
             </h2>
@@ -402,7 +420,7 @@ const SolutionsPage: React.FC = () => {
                 Custom industry setup
               </span>
             </div>
-          </div>
+          </CTAReveal>
         </div>
       </section>
     </div>

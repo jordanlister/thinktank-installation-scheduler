@@ -568,12 +568,4 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   );
 };
 
-// Export all components
-export {
-  AnimatedFeatureCard,
-  AnimatedButton,
-  AnimatedInput,
-  AnimatedStatCard,
-  AnimatedTestimonialCard,
-  ScrollReveal,
-};
+// Components are individually exported above

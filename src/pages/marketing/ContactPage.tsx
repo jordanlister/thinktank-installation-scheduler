@@ -13,6 +13,19 @@ import {
 } from 'lucide-react';
 import { ContactSEO } from '../../components/SEO';
 import { getContactPageSchemas, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
+import {
+  MarketingPageWrapper,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton,
+  AnimatedInput,
+  ScrollProgressIndicator
+} from '../../components/marketing/animations';
 
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -122,7 +135,7 @@ const ContactPage: React.FC = () => {
       <div className="pt-16 lg:pt-20">
         <section className="marketing-hero min-h-screen flex items-center">
           <div className="marketing-container">
-            <div className="marketing-text-container text-center">
+            <HeroReveal className="marketing-text-container text-center">
               <div className="w-16 h-16 bg-success/10 border border-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-8 h-8 text-success" />
               </div>
@@ -137,14 +150,14 @@ const ContactPage: React.FC = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button onClick={() => setIsSubmitted(false)}>
+                <CTAButton onClick={() => setIsSubmitted(false)}>
                   Submit Another Request
-                </Button>
-                <Button variant="secondary" onClick={() => window.location.href = '/resources'}>
+                </CTAButton>
+                <CTAButton variant="secondary" onClick={() => window.location.href = '/resources'}>
                   Explore Resources
-                </Button>
+                </CTAButton>
               </div>
-            </div>
+            </HeroReveal>
           </div>
         </section>
       </div>
@@ -162,6 +175,7 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <ContactSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/contact-us.jpg"
@@ -172,7 +186,7 @@ const ContactPage: React.FC = () => {
       {/* Contact Hero */}
       <section className="marketing-hero">
         <div className="marketing-container">
-          <div className="marketing-text-container text-center">
+          <HeroReveal className="marketing-text-container text-center">
             <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Get in touch with our team
             </h1>
@@ -180,38 +194,42 @@ const ContactPage: React.FC = () => {
               Ready to transform your field service operations? We'd love to show you 
               how our platform can help you reduce costs and improve efficiency.
             </p>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
       {/* Contact Methods */}
       <section className="marketing-section-tight">
         <div className="marketing-container">
-          <div className="marketing-feature-grid">
+          <StaggerGroup className="marketing-feature-grid">
             {contactMethods.map((method, index) => {
               const Icon = method.icon;
               return (
-                <div key={index} className="marketing-feature-card text-center">
-                  <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
-                    <Icon className="w-6 h-6 text-brand-primary" />
-                  </div>
-                  <h3 className="ttt-feature-title text-white">
-                    {method.title}
-                  </h3>
-                  <p className="ttt-feature-description mb-3">
-                    {method.description}
-                  </p>
-                  <div className="text-brand-primary font-semibold mb-2 ttt-text-small">
-                    {method.contact}
-                  </div>
-                  <div className="flex items-center justify-center ttt-text-small text-text-muted">
-                    <Clock className="w-3.5 h-3.5 mr-1.5" />
-                    {method.responseTime}
-                  </div>
-                </div>
+                <StaggerItem key={index}>
+                  <AnimatedCard className="marketing-feature-card text-center">
+                    <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
+                      <InteractiveIcon>
+                        <Icon className="w-6 h-6 text-brand-primary" />
+                      </InteractiveIcon>
+                    </div>
+                    <h3 className="ttt-feature-title text-white">
+                      {method.title}
+                    </h3>
+                    <p className="ttt-feature-description mb-3">
+                      {method.description}
+                    </p>
+                    <div className="text-brand-primary font-semibold mb-2 ttt-text-small">
+                      {method.contact}
+                    </div>
+                    <div className="flex items-center justify-center ttt-text-small text-text-muted">
+                      <Clock className="w-3.5 h-3.5 mr-1.5" />
+                      {method.responseTime}
+                    </div>
+                  </AnimatedCard>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -219,7 +237,7 @@ const ContactPage: React.FC = () => {
       <section className="marketing-section bg-surface/30">
         <div className="marketing-container">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
+            <ScrollReveal className="text-center mb-10">
               <h2 className="ttt-section-header text-white mb-4">
                 Request a personalized demo
               </h2>
@@ -227,9 +245,10 @@ const ContactPage: React.FC = () => {
                 See how Lead Route can transform your field service operations. 
                 Fill out the form below and we'll schedule a custom demo tailored to your needs.
               </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="marketing-feature-card">
+            <CTAReveal>
+              <div className="marketing-feature-card">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Request Type */}
                 <div className="flex flex-wrap gap-4 p-4 bg-surface-elevated rounded-xl">
@@ -385,7 +404,8 @@ const ContactPage: React.FC = () => {
                   We respect your privacy. Your information will only be used to contact you about your inquiry.
                 </p>
               </form>
-            </div>
+              </div>
+            </CTAReveal>
           </div>
         </div>
       </section>
@@ -393,90 +413,102 @@ const ContactPage: React.FC = () => {
       {/* Office Locations */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Our office locations
             </h2>
             <p className="ttt-text-lead text-text-secondary">
               Visit us at one of our offices around the country
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-feature-grid">
+          <StaggerGroup className="marketing-feature-grid">
             {offices.map((office, index) => (
-              <div key={index} className="marketing-feature-card text-center">
-                <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
-                  <MapPin className="w-6 h-6 text-brand-primary" />
-                </div>
-                <div className="mb-3">
-                  <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
-                    {office.type}
-                  </span>
-                </div>
-                <h3 className="ttt-feature-title text-white">
-                  {office.city}
-                </h3>
-                <p className="ttt-feature-description whitespace-pre-line">
-                  {office.address}
-                </p>
-                <p className="text-brand-primary font-semibold ttt-text-small">
-                  {office.phone}
-                </p>
-              </div>
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card text-center">
+                  <div className="marketing-feature-icon bg-brand-primary/10 mx-auto">
+                    <InteractiveIcon>
+                      <MapPin className="w-6 h-6 text-brand-primary" />
+                    </InteractiveIcon>
+                  </div>
+                  <div className="mb-3">
+                    <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary ttt-text-small font-medium rounded-full">
+                      {office.type}
+                    </span>
+                  </div>
+                  <h3 className="ttt-feature-title text-white">
+                    {office.city}
+                  </h3>
+                  <p className="ttt-feature-description whitespace-pre-line">
+                    {office.address}
+                  </p>
+                  <p className="text-brand-primary font-semibold ttt-text-small">
+                    {office.phone}
+                  </p>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="marketing-section bg-surface/30">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Common questions
             </h2>
             <p className="ttt-text-lead text-text-secondary">
               Get quick answers to frequently asked questions
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="max-w-3xl mx-auto space-y-4">
-            <div className="marketing-feature-card">
-              <h4 className="ttt-feature-title text-white mb-2">
-                How long does the demo take?
-              </h4>
-              <p className="ttt-feature-description">
-                Our personalized demos typically take 30-45 minutes. We'll customize the demo to focus on your specific industry and use cases.
-              </p>
-            </div>
+          <StaggerGroup className="max-w-3xl mx-auto space-y-4">
+            <StaggerItem>
+              <AnimatedCard className="marketing-feature-card">
+                <h4 className="ttt-feature-title text-white mb-2">
+                  How long does the demo take?
+                </h4>
+                <p className="ttt-feature-description">
+                  Our personalized demos typically take 30-45 minutes. We'll customize the demo to focus on your specific industry and use cases.
+                </p>
+              </AnimatedCard>
+            </StaggerItem>
             
-            <div className="marketing-feature-card">
-              <h4 className="ttt-feature-title text-white mb-2">
-                Is the demo really free with no obligation?
-              </h4>
-              <p className="ttt-feature-description">
-                Yes, absolutely! Our demos are completely free with no strings attached. We're confident that once you see our platform in action, you'll understand the value.
-              </p>
-            </div>
+            <StaggerItem>
+              <AnimatedCard className="marketing-feature-card">
+                <h4 className="ttt-feature-title text-white mb-2">
+                  Is the demo really free with no obligation?
+                </h4>
+                <p className="ttt-feature-description">
+                  Yes, absolutely! Our demos are completely free with no strings attached. We're confident that once you see our platform in action, you'll understand the value.
+                </p>
+              </AnimatedCard>
+            </StaggerItem>
             
-            <div className="marketing-feature-card">
-              <h4 className="ttt-feature-title text-white mb-2">
-                What information do I need to provide for the demo?
-              </h4>
-              <p className="ttt-feature-description">
-                Just basic information about your company and current challenges. This helps us tailor the demo to show features most relevant to your business.
-              </p>
-            </div>
+            <StaggerItem>
+              <AnimatedCard className="marketing-feature-card">
+                <h4 className="ttt-feature-title text-white mb-2">
+                  What information do I need to provide for the demo?
+                </h4>
+                <p className="ttt-feature-description">
+                  Just basic information about your company and current challenges. This helps us tailor the demo to show features most relevant to your business.
+                </p>
+              </AnimatedCard>
+            </StaggerItem>
             
-            <div className="marketing-feature-card">
-              <h4 className="ttt-feature-title text-white mb-2">
-                Can I get pricing information during the demo?
-              </h4>
-              <p className="ttt-feature-description">
-                Absolutely! We'll discuss pricing that fits your team size and needs. We offer transparent pricing with no hidden fees.
-              </p>
-            </div>
-          </div>
+            <StaggerItem>
+              <AnimatedCard className="marketing-feature-card">
+                <h4 className="ttt-feature-title text-white mb-2">
+                  Can I get pricing information during the demo?
+                </h4>
+                <p className="ttt-feature-description">
+                  Absolutely! We'll discuss pricing that fits your team size and needs. We offer transparent pricing with no hidden fees.
+                </p>
+              </AnimatedCard>
+            </StaggerItem>
+          </StaggerGroup>
         </div>
       </section>
     </div>

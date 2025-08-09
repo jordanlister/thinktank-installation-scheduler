@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { PricingSEO } from '../../components/SEO';
 import { getPricingPageSchemas, buildBreadcrumbListSchema, buildFAQPageSchema } from '../../lib/seo/jsonld';
+import { ScrollProgressIndicator } from '../../components/marketing/animations';
 
 const PricingPage: React.FC = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
@@ -189,6 +190,7 @@ const PricingPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <PricingSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/pricing-plans.jpg"

@@ -3,6 +3,18 @@ import { Container, Section, Heading, Text, Button, Grid } from '../../component
 import { CheckCircle, Calendar, MapPin, Users, BarChart3, Database, Zap } from 'lucide-react';
 import { HomeSEO } from '../../components/SEO';
 import { getHomePageSchemas, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
+import { 
+  HeroReveal,
+  ScrollReveal,
+  FeatureGrid,
+  AnimatedStats,
+  CTAReveal,
+  SectionTransition,
+  ScrollProgressIndicator,
+  CTAButton,
+  FeatureCard,
+  InteractiveIcon
+} from '../../components/marketing/animations';
 
 const HomePage: React.FC = () => {
   // Generate structured data for homepage
@@ -14,6 +26,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <HomeSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/homepage-hero.jpg"
@@ -29,7 +42,7 @@ const HomePage: React.FC = () => {
         </div>
         
         <div className="marketing-container relative z-10">
-          <div className="marketing-text-container text-center">
+          <HeroReveal className="marketing-text-container text-center">
             
             {/* Badge */}
             <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-success/10 border border-success/30 text-success mb-6 text-sm">
@@ -54,9 +67,9 @@ const HomePage: React.FC = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-              <Button size="lg">
+              <CTAButton size="lg">
                 Start Free Trial
-              </Button>
+              </CTAButton>
               <Button size="lg" variant="secondary">
                 Watch Demo
               </Button>
@@ -77,7 +90,7 @@ const HomePage: React.FC = () => {
                 Setup in under 5 minutes
               </span>
             </div>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
@@ -85,7 +98,7 @@ const HomePage: React.FC = () => {
       <section className="marketing-section bg-surface/50">
         <div className="marketing-container">
           {/* Section Header */}
-          <div className="text-center mb-12">
+          <ScrollReveal direction="up" className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Everything you need to scale field operations
             </h2>
@@ -93,113 +106,125 @@ const HomePage: React.FC = () => {
               From AI-powered scheduling to real-time optimization, 
               our platform handles the complexity so you can focus on growth.
             </p>
-          </div>
+          </ScrollReveal>
           
           {/* Features Grid */}
-          <div className="marketing-feature-grid">
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-brand-primary/10">
-                <Calendar className="w-6 h-6 text-brand-primary" />
-              </div>
-              <h3 className="ttt-feature-title">
-                AI-Powered Scheduling
-              </h3>
-              <p className="ttt-feature-description">
-                Smart algorithms optimize schedules based on location, skills, and availability
-              </p>
+          <FeatureGrid className="marketing-feature-grid">
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-brand-primary/10">
+                  <InteractiveIcon rotateOnHover>
+                    <Calendar className="w-6 h-6 text-brand-primary" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="AI-Powered Scheduling"
+              description="Smart algorithms optimize schedules based on location, skills, and availability"
+            >
               <div className="ttt-text-small text-brand-primary font-medium">
                 40% reduction in travel time
               </div>
-            </div>
+            </FeatureCard>
 
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-success/10">
-                <MapPin className="w-6 h-6 text-success" />
-              </div>
-              <h3 className="ttt-feature-title">
-                Route Optimization
-              </h3>
-              <p className="ttt-feature-description">
-                Reduce travel time by 40% with intelligent geographic clustering
-              </p>
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-success/10">
+                  <InteractiveIcon rotateOnHover>
+                    <MapPin className="w-6 h-6 text-success" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="Route Optimization"
+              description="Reduce travel time by 40% with intelligent geographic clustering"
+            >
               <div className="ttt-text-small text-success font-medium">
                 35% fuel cost savings
               </div>
-            </div>
+            </FeatureCard>
 
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-brand-accent/10">
-                <Users className="w-6 h-6 text-brand-accent" />
-              </div>
-              <h3 className="ttt-feature-title">
-                Team Management
-              </h3>
-              <p className="ttt-feature-description">
-                Comprehensive profiles, skills tracking, and performance analytics
-              </p>
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-brand-accent/10">
+                  <InteractiveIcon pulseOnHover>
+                    <Users className="w-6 h-6 text-brand-accent" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="Team Management"
+              description="Comprehensive profiles, skills tracking, and performance analytics"
+            >
               <div className="ttt-text-small text-brand-accent font-medium">
                 25% increase in capacity
               </div>
-            </div>
+            </FeatureCard>
 
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-warning/10">
-                <BarChart3 className="w-6 h-6 text-warning" />
-              </div>
-              <h3 className="ttt-feature-title">
-                Real-time Analytics
-              </h3>
-              <p className="ttt-feature-description">
-                Live dashboards and automated reports for data-driven decisions
-              </p>
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-warning/10">
+                  <InteractiveIcon rotateOnHover>
+                    <BarChart3 className="w-6 h-6 text-warning" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="Real-time Analytics"
+              description="Live dashboards and automated reports for data-driven decisions"
+            >
               <div className="ttt-text-small text-warning font-medium">
                 90% faster reporting
               </div>
-            </div>
+            </FeatureCard>
 
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-info/10">
-                <Database className="w-6 h-6 text-info" />
-              </div>
-              <h3 className="ttt-feature-title">
-                Smart Data Processing
-              </h3>
-              <p className="ttt-feature-description">
-                Automatic CSV processing with intelligent column mapping
-              </p>
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-info/10">
+                  <InteractiveIcon pulseOnHover>
+                    <Database className="w-6 h-6 text-info" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="Smart Data Processing"
+              description="Automatic CSV processing with intelligent column mapping"
+            >
               <div className="ttt-text-small text-info font-medium">
                 Zero manual mapping
               </div>
-            </div>
+            </FeatureCard>
 
-            <div className="marketing-feature-card group">
-              <div className="marketing-feature-icon bg-brand-primary/10">
-                <Zap className="w-6 h-6 text-brand-primary" />
-              </div>
-              <h3 className="ttt-feature-title">
-                Seamless Integrations
-              </h3>
-              <p className="ttt-feature-description">
-                Connect with your existing CRM, accounting, and communication tools
-              </p>
+            <FeatureCard 
+              className="marketing-feature-card"
+              icon={
+                <div className="marketing-feature-icon bg-brand-primary/10">
+                  <InteractiveIcon rotateOnHover>
+                    <Zap className="w-6 h-6 text-brand-primary" />
+                  </InteractiveIcon>
+                </div>
+              }
+              title="Seamless Integrations"
+              description="Connect with your existing CRM, accounting, and communication tools"
+            >
               <div className="ttt-text-small text-brand-primary font-medium">
                 50+ integrations
               </div>
-            </div>
-          </div>
+            </FeatureCard>
+          </FeatureGrid>
         </div>
       </section>
 
       {/* Stats Section */}
       <section className="marketing-section-tight">
         <div className="marketing-container">
-          <div className="text-center mb-10">
+          <ScrollReveal direction="up" className="text-center mb-10">
             <p className="ttt-text-lead text-text-secondary">
               Trusted by leading field service companies
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-stats-grid">
+          <AnimatedStats className="marketing-stats-grid">
             <div className="marketing-stats-card">
               <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">500+</div>
               <div className="ttt-text-small font-medium text-white mb-0.5">Companies</div>
@@ -220,7 +245,7 @@ const HomePage: React.FC = () => {
               <div className="ttt-text-small font-medium text-white mb-0.5">Uptime</div>
               <div className="ttt-text-small text-text-muted">Enterprise-grade reliability</div>
             </div>
-          </div>
+          </AnimatedStats>
         </div>
       </section>
 
@@ -231,7 +256,7 @@ const HomePage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-6">
               Ready to transform your operations?
             </h2>
@@ -241,9 +266,9 @@ const HomePage: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button size="xl">
+              <CTAButton size="xl">
                 Start Free Trial
-              </Button>
+              </CTAButton>
               <Button size="xl" variant="secondary">
                 Schedule Demo
               </Button>
@@ -263,7 +288,7 @@ const HomePage: React.FC = () => {
                 Cancel anytime
               </span>
             </div>
-          </div>
+          </CTAReveal>
         </div>
       </section>
     </div>

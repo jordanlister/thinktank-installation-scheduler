@@ -15,6 +15,18 @@ import {
 } from 'lucide-react';
 import { ResourcesSEO } from '../../components/SEO';
 import { buildWebPageSchema, buildArticleSchema, buildBreadcrumbListSchema } from '../../lib/seo/jsonld';
+import {
+  MarketingPageWrapper,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton,
+  ScrollProgressIndicator
+} from '../../components/marketing/animations';
 
 const ResourcesPage: React.FC = () => {
   const featuredResources = [
@@ -240,6 +252,7 @@ const ResourcesPage: React.FC = () => {
 
   return (
     <div className="pt-16 lg:pt-20">
+      <ScrollProgressIndicator />
       <ResourcesSEO 
         jsonLd={allSchemas}
         ogImage="/images/og/resources-hub.jpg"
@@ -255,7 +268,7 @@ const ResourcesPage: React.FC = () => {
         </div>
         
         <div className="marketing-container relative z-10">
-          <div className="marketing-text-container text-center">
+          <HeroReveal className="marketing-text-container text-center">
             <h1 className="ttt-hero-heading font-bold text-white mb-6 leading-tight">
               Resources to help you
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-success-light block mt-1">
@@ -267,172 +280,190 @@ const ResourcesPage: React.FC = () => {
               Guides, case studies, and insights to help you optimize your 
               field service operations and get the most from our platform.
             </p>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
       {/* Featured Resources */}
       <section className="marketing-section bg-surface/50">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Featured Resources
             </h2>
             <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Hand-picked content to help you get started and succeed
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-feature-grid">
+          <StaggerGroup className="marketing-feature-grid">
             {featuredResources.map((resource, index) => (
-              <div key={index} className="marketing-feature-card group">
-                <div className="marketing-feature-icon bg-brand-primary/10">
-                  <FileText className="w-6 h-6 text-brand-primary" />
-                </div>
-                
-                <div className="flex items-center justify-between mb-3">
-                  <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs font-medium rounded-full">
-                    {resource.type}
-                  </span>
-                  <div className="flex items-center text-text-muted text-sm">
-                    <Clock className="w-3.5 h-3.5 mr-1" />
-                    {resource.readTime}
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card group">
+                  <div className="marketing-feature-icon bg-brand-primary/10">
+                    <InteractiveIcon>
+                      <FileText className="w-6 h-6 text-brand-primary" />
+                    </InteractiveIcon>
                   </div>
-                </div>
-                
-                <h3 className="ttt-feature-title group-hover:text-brand-primary transition-colors">
-                  {resource.title}
-                </h3>
-                
-                <p className="ttt-feature-description mb-4">
-                  {resource.description}
-                </p>
-                
-                <div className="ttt-text-small text-brand-primary font-medium">
-                  {resource.category}
-                </div>
-              </div>
+                  
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="px-2 py-1 bg-brand-primary/10 text-brand-primary text-xs font-medium rounded-full">
+                      {resource.type}
+                    </span>
+                    <div className="flex items-center text-text-muted text-sm">
+                      <Clock className="w-3.5 h-3.5 mr-1" />
+                      {resource.readTime}
+                    </div>
+                  </div>
+                  
+                  <h3 className="ttt-feature-title group-hover:text-brand-primary transition-colors">
+                    {resource.title}
+                  </h3>
+                  
+                  <p className="ttt-feature-description mb-4">
+                    {resource.description}
+                  </p>
+                  
+                  <div className="ttt-text-small text-brand-primary font-medium">
+                    {resource.category}
+                  </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Resource Categories */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="space-y-12">
+          <StaggerGroup className="space-y-12">
             {resourceCategories.map((category, categoryIndex) => {
               const Icon = category.icon;
               
               return (
-                <div key={categoryIndex}>
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="flex items-center">
-                      <div className="marketing-feature-icon bg-brand-primary/10 mr-4">
-                        <Icon className="w-5 h-5 text-brand-primary" />
+                <StaggerItem key={categoryIndex}>
+                  <div>
+                    <ScrollReveal className="flex items-center justify-between mb-8">
+                      <div className="flex items-center">
+                        <div className="marketing-feature-icon bg-brand-primary/10 mr-4">
+                          <InteractiveIcon>
+                            <Icon className="w-5 h-5 text-brand-primary" />
+                          </InteractiveIcon>
+                        </div>
+                        <div>
+                          <h2 className="ttt-section-header text-white mb-1">
+                            {category.title}
+                          </h2>
+                          <p className="ttt-text-small text-text-secondary">
+                            {category.description} • {category.count} resources available
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h2 className="ttt-section-header text-white mb-1">
-                          {category.title}
-                        </h2>
-                        <p className="ttt-text-small text-text-secondary">
-                          {category.description} • {category.count} resources available
-                        </p>
-                      </div>
-                    </div>
-                    <Button variant="secondary" size="sm">
-                      View All
-                    </Button>
-                  </div>
+                      <CTAButton>
+                        <Button variant="secondary" size="sm">
+                          View All
+                        </Button>
+                      </CTAButton>
+                    </ScrollReveal>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {category.resources.map((resource, resourceIndex) => (
-                      <div key={resourceIndex} className={`marketing-feature-card group ${resource.featured ? 'border-brand-primary/20' : ''}`}>
-                        {resource.featured && (
-                          <div className="flex items-center mb-2">
-                            <Star className="w-3.5 h-3.5 text-warning mr-1.5" />
-                            <span className="text-warning ttt-text-small font-medium">Featured</span>
-                          </div>
-                        )}
-                        
-                        <div className="mb-3">
-                          <span className="px-2 py-1 bg-surface-elevated text-text-secondary ttt-text-small font-medium rounded">
-                            {resource.type}
-                          </span>
-                        </div>
-                        
-                        <h4 className="ttt-feature-title mb-2">
-                          {resource.title}
-                        </h4>
-                        
-                        <p className="ttt-feature-description mb-4">
-                          {resource.description}
-                        </p>
-                        
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center text-text-muted ttt-text-small">
-                            <Clock className="w-3.5 h-3.5 mr-1" />
-                            {resource.readTime}
-                          </div>
-                          <div className="ttt-text-small text-brand-primary font-medium">
-                            Read More
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                    <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                      {category.resources.map((resource, resourceIndex) => (
+                        <StaggerItem key={resourceIndex}>
+                          <AnimatedCard className={`marketing-feature-card group ${resource.featured ? 'border-brand-primary/20' : ''}`}>
+                            {resource.featured && (
+                              <div className="flex items-center mb-2">
+                                <Star className="w-3.5 h-3.5 text-warning mr-1.5" />
+                                <span className="text-warning ttt-text-small font-medium">Featured</span>
+                              </div>
+                            )}
+                            
+                            <div className="mb-3">
+                              <span className="px-2 py-1 bg-surface-elevated text-text-secondary ttt-text-small font-medium rounded">
+                                {resource.type}
+                              </span>
+                            </div>
+                            
+                            <h4 className="ttt-feature-title mb-2">
+                              {resource.title}
+                            </h4>
+                            
+                            <p className="ttt-feature-description mb-4">
+                              {resource.description}
+                            </p>
+                            
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center text-text-muted ttt-text-small">
+                                <Clock className="w-3.5 h-3.5 mr-1" />
+                                {resource.readTime}
+                              </div>
+                              <div className="ttt-text-small text-brand-primary font-medium">
+                                Read More
+                              </div>
+                            </div>
+                          </AnimatedCard>
+                        </StaggerItem>
+                      ))}
+                    </StaggerGroup>
                   </div>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Upcoming Webinars */}
       <section className="marketing-section bg-surface/50">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Upcoming Webinars
             </h2>
             <p className="ttt-text-lead text-text-secondary marketing-text-container leading-relaxed">
               Join our live sessions and learn from industry experts
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {upcomingWebinars.map((webinar, index) => (
-              <div key={index} className="marketing-feature-card group">
-                <div className="flex items-center mb-4">
-                  <div className="marketing-feature-icon bg-brand-primary/10 mr-3">
-                    <Video className="w-5 h-5 text-brand-primary" />
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card group">
+                  <div className="flex items-center mb-4">
+                    <div className="marketing-feature-icon bg-brand-primary/10 mr-3">
+                      <InteractiveIcon>
+                        <Video className="w-5 h-5 text-brand-primary" />
+                      </InteractiveIcon>
+                    </div>
+                    <div>
+                      <div className="text-brand-primary font-semibold ttt-text-small">UPCOMING WEBINAR</div>
+                      <div className="text-text-muted ttt-text-small">{webinar.date} • {webinar.time}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-brand-primary font-semibold ttt-text-small">UPCOMING WEBINAR</div>
-                    <div className="text-text-muted ttt-text-small">{webinar.date} • {webinar.time}</div>
+                  
+                  <h3 className="ttt-feature-title mb-3">
+                    {webinar.title}
+                  </h3>
+                  
+                  <p className="ttt-feature-description mb-4">
+                    {webinar.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="ttt-text-small text-text-muted">
+                      Presented by {webinar.presenter}
+                    </div>
+                    <CTAButton>
+                      <Button variant="primary" size="sm">
+                        <Calendar className="mr-1.5 w-3.5 h-3.5" />
+                        Register
+                      </Button>
+                    </CTAButton>
                   </div>
-                </div>
-                
-                <h3 className="ttt-feature-title mb-3">
-                  {webinar.title}
-                </h3>
-                
-                <p className="ttt-feature-description mb-4">
-                  {webinar.description}
-                </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="ttt-text-small text-text-muted">
-                    Presented by {webinar.presenter}
-                  </div>
-                  <Button variant="primary" size="sm">
-                    <Calendar className="mr-1.5 w-3.5 h-3.5" />
-                    Register
-                  </Button>
-                </div>
-              </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -443,7 +474,7 @@ const ResourcesPage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-6">
               Stay updated with the latest insights
             </h2>
@@ -458,9 +489,11 @@ const ResourcesPage: React.FC = () => {
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 bg-surface-glass backdrop-blur-xl border border-border rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-brand-primary transition-colors"
               />
-              <Button size="lg">
-                Subscribe
-              </Button>
+              <CTAButton>
+                <Button size="lg">
+                  Subscribe
+                </Button>
+              </CTAButton>
             </div>
             
             <div className="marketing-trust-indicators ttt-text-small text-text-muted">
@@ -477,7 +510,7 @@ const ResourcesPage: React.FC = () => {
                 Privacy protected
               </span>
             </div>
-          </div>
+          </CTAReveal>
         </div>
       </section>
     </div>

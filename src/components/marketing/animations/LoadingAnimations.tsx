@@ -222,7 +222,7 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
             style={{
               backgroundColor: color,
               height: size === 'sm' ? '12px' : size === 'md' ? '16px' : size === 'lg' ? '20px' : '24px',
-              animation: `bars-loading 1.2s ease-in-out infinite`,
+              animation: `pulse 1.2s ease-in-out infinite`,
               animationDelay: `${index * 0.1}s`,
             }}
           />
@@ -542,31 +542,8 @@ export const TypingAnimation: React.FC<TypingAnimationProps> = ({
 // CSS ANIMATION KEYFRAMES
 // ============================================================================
 
-const LoadingAnimationStyles = () => (
-  <style jsx global>{`
-    @keyframes bars-loading {
-      0%, 40%, 100% {
-        opacity: 0.3;
-        transform: scaleY(0.4);
-      }
-      20% {
-        opacity: 1;
-        transform: scaleY(1);
-      }
-    }
-  `}</style>
-);
+// CSS animations are now handled via Tailwind CSS classes
+// The bars-loading animation is applied via CSS custom properties
+export const LoadingAnimationStyles = () => null;
 
-// Export all components
-export {
-  Skeleton,
-  SkeletonCard,
-  SkeletonTable,
-  LoadingSpinner,
-  ProgressBar,
-  CircularProgress,
-  StateIcon,
-  LoadingOverlay,
-  TypingAnimation,
-  LoadingAnimationStyles,
-};
+// Components are individually exported above
