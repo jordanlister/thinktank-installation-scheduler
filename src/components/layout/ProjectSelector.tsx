@@ -195,7 +195,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({ className = ''
 
         {/* Project Dropdown Menu */}
         {showProjectMenu && (
-          <div className={`absolute top-full ${compact ? 'left-0 w-80' : 'left-0 right-0'} mt-2 bg-black/90 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60] max-h-96 overflow-hidden`}>
+          <div className={`absolute top-full ${compact ? 'left-0 w-80' : 'left-0 right-0'} mt-2 bg-black/90 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl max-h-96 overflow-hidden`} style={{zIndex: 999}}>
             {/* Search Bar */}
             <div className="p-3 border-b border-white/10">
               <div className="relative">

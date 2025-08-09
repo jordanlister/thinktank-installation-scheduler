@@ -2,6 +2,7 @@
 // Clean Supabase-inspired design with organization and user controls in single header
 
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   Menu, 
   X, 
@@ -37,8 +38,10 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
   const { setAuthenticated, setUser } = useAppStore();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showOrgMenu, setShowOrgMenu] = useState(false);
+  const [orgMenuPosition, setOrgMenuPosition] = useState({ top: 0, left: 0 });
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const orgDropdownRef = useRef<HTMLDivElement>(null);
+  const orgButtonRef = useRef<HTMLButtonElement>(null);
 
   // Mock list of available organizations for switching
   const availableOrganizations = [
@@ -65,6 +68,17 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
     setShowOrgMenu(false);
   };
 
+  const handleOrgMenuToggle = () => {
+    if (!showOrgMenu && orgButtonRef.current) {
+      const rect = orgButtonRef.current.getBoundingClientRect();
+      setOrgMenuPosition({
+        top: rect.bottom + 8,
+        left: rect.left
+      });
+    }
+    setShowOrgMenu(!showOrgMenu);
+  };
+
   const handleOrganizationSwitch = async (orgId: string) => {
     if (orgId !== organization?.id && !isLoading) {
       try {
@@ -79,10 +93,17 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Handle user dropdown
       if (userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node)) {
         setShowUserMenu(false);
       }
-      if (orgDropdownRef.current && !orgDropdownRef.current.contains(event.target as Node)) {
+      
+      // Handle org dropdown - check both the dropdown and the button
+      if (showOrgMenu && 
+          orgDropdownRef.current && 
+          !orgDropdownRef.current.contains(event.target as Node) &&
+          orgButtonRef.current &&
+          !orgButtonRef.current.contains(event.target as Node)) {
         setShowOrgMenu(false);
       }
     };
@@ -102,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
   }
 
   return (
-    <header className="bg-white/5 backdrop-filter backdrop-blur-md border-b border-white/10 h-16 fixed top-0 left-0 right-0 z-50">
+    <header className="bg-white/5 backdrop-filter backdrop-blur-md border-b border-white/10 h-16 fixed top-0 left-0 right-0" style={{zIndex: 1000}}>
       <div className="flex items-center justify-between h-full px-6 max-w-none">
         {/* Left section - Logo, org info, and mobile menu toggle */}
         <div className="flex items-center space-x-4">
@@ -122,7 +143,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
           {/* Organization selector */}
           <div className="relative" ref={orgDropdownRef}>
             <button
-              onClick={() => setShowOrgMenu(!showOrgMenu)}
+              ref={orgButtonRef}
+              onClick={handleOrgMenuToggle}
               className="flex items-center space-x-3 px-3 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-colors"
               disabled={isLoading}
             >
@@ -141,9 +163,17 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
               <ChevronDown className={`h-4 w-4 text-white/70 transition-transform ${showOrgMenu ? 'rotate-180' : ''} ${isLoading ? 'animate-spin' : ''}`} />
             </button>
 
-            {/* Organization Dropdown Menu */}
-            {showOrgMenu && (
-              <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60]">
+            {/* Organization Dropdown Menu - Using Portal */}
+            {showOrgMenu && createPortal(
+              <div 
+                className="fixed w-80 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl" 
+                style={{
+                  top: orgMenuPosition.top,
+                  left: orgMenuPosition.left,
+                  zIndex: 9999
+                }}
+                ref={orgDropdownRef}
+              >
                 {/* Current Organization Section */}
                 <div className="p-4 border-b border-white/10">
                   <div className="flex items-center space-x-3">
@@ -229,7 +259,8 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
                     <span>Help & Support</span>
                   </button>
                 </div>
-              </div>
+              </div>,
+              document.body
             )}
           </div>
 
@@ -289,7 +320,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
 
             {/* User Dropdown Menu */}
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60]">
+              <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl" style={{zIndex: 999}}>
                 <div className="py-2">
                   <button
                     onClick={() => {
