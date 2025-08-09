@@ -20,7 +20,8 @@ import {
   CTAReveal,
   AnimatedCard,
   InteractiveIcon,
-  CTAButton
+  CTAButton,
+  AnimatedCounter
 } from '../../components/marketing/animations';
 
 const PricingPage: React.FC = () => {
@@ -352,7 +353,13 @@ const PricingPage: React.FC = () => {
           
           <AnimatedCard className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full table-fixed">
+                <colgroup>
+                  <col className="w-2/5" />
+                  <col className="w-1/5" />
+                  <col className="w-1/5" />
+                  <col className="w-1/5" />
+                </colgroup>
                 <thead className="bg-surface-elevated">
                   <tr>
                     <th className="text-left p-6 text-white font-semibold">Features</th>
@@ -373,51 +380,57 @@ const PricingPage: React.FC = () => {
                       </tr>
                       {category.features.map((feature, featureIndex) => (
                         <tr key={featureIndex} className="border-t border-border">
-                          <td className="p-4 text-text-secondary">{feature.name}</td>
-                          <td className="p-4 text-center">
-                            {typeof feature.starter === 'boolean' ? (
-                              feature.starter ? (
-                                <InteractiveIcon>
-                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
-                                </InteractiveIcon>
+                          <td className="p-4 text-text-secondary font-medium">{feature.name}</td>
+                          <td className="p-4 text-center align-middle">
+                            <div className="flex items-center justify-center min-h-[24px]">
+                              {typeof feature.starter === 'boolean' ? (
+                                feature.starter ? (
+                                  <InteractiveIcon>
+                                    <CheckCircle className="w-5 h-5 text-success" />
+                                  </InteractiveIcon>
+                                ) : (
+                                  <InteractiveIcon>
+                                    <X className="w-5 h-5 text-text-muted" />
+                                  </InteractiveIcon>
+                                )
                               ) : (
-                                <InteractiveIcon>
-                                  <X className="w-5 h-5 text-text-muted mx-auto" />
-                                </InteractiveIcon>
-                              )
-                            ) : (
-                              <span className="text-text-secondary">{feature.starter}</span>
-                            )}
+                                <span className="text-text-secondary font-medium">{feature.starter}</span>
+                              )}
+                            </div>
                           </td>
-                          <td className="p-4 text-center">
-                            {typeof feature.professional === 'boolean' ? (
-                              feature.professional ? (
-                                <InteractiveIcon>
-                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
-                                </InteractiveIcon>
+                          <td className="p-4 text-center align-middle">
+                            <div className="flex items-center justify-center min-h-[24px]">
+                              {typeof feature.professional === 'boolean' ? (
+                                feature.professional ? (
+                                  <InteractiveIcon>
+                                    <CheckCircle className="w-5 h-5 text-success" />
+                                  </InteractiveIcon>
+                                ) : (
+                                  <InteractiveIcon>
+                                    <X className="w-5 h-5 text-text-muted" />
+                                  </InteractiveIcon>
+                                )
                               ) : (
-                                <InteractiveIcon>
-                                  <X className="w-5 h-5 text-text-muted mx-auto" />
-                                </InteractiveIcon>
-                              )
-                            ) : (
-                              <span className="text-text-secondary">{feature.professional}</span>
-                            )}
+                                <span className="text-text-secondary font-medium">{feature.professional}</span>
+                              )}
+                            </div>
                           </td>
-                          <td className="p-4 text-center">
-                            {typeof feature.enterprise === 'boolean' ? (
-                              feature.enterprise ? (
-                                <InteractiveIcon>
-                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
-                                </InteractiveIcon>
+                          <td className="p-4 text-center align-middle">
+                            <div className="flex items-center justify-center min-h-[24px]">
+                              {typeof feature.enterprise === 'boolean' ? (
+                                feature.enterprise ? (
+                                  <InteractiveIcon>
+                                    <CheckCircle className="w-5 h-5 text-success" />
+                                  </InteractiveIcon>
+                                ) : (
+                                  <InteractiveIcon>
+                                    <X className="w-5 h-5 text-text-muted" />
+                                  </InteractiveIcon>
+                                )
                               ) : (
-                                <InteractiveIcon>
-                                  <X className="w-5 h-5 text-text-muted mx-auto" />
-                                </InteractiveIcon>
-                              )
-                            ) : (
-                              <span className="text-text-secondary">{feature.enterprise}</span>
-                            )}
+                                <span className="text-text-secondary font-medium">{feature.enterprise}</span>
+                              )}
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -444,50 +457,60 @@ const PricingPage: React.FC = () => {
           </ScrollReveal>
           
           <AnimatedCard className="marketing-feature-card max-w-4xl mx-auto">
-            <div className="flex items-center justify-center mb-8">
-              <InteractiveIcon>
-                <Calculator className="w-8 h-8 text-brand-primary mr-3" />
-              </InteractiveIcon>
-              <h3 className="ttt-feature-title text-white">
-                ROI Calculator
-              </h3>
-            </div>
-            
-            <div className="bg-surface-elevated rounded-xl p-8">
-              <div className="text-center">
-                <div className="text-6xl font-bold text-brand-primary mb-4">25%</div>
+            <div className="text-center">
+              <div className="flex items-center justify-center mb-6">
+                <div className="marketing-feature-icon bg-brand-primary/10 border border-brand-primary/20 mr-4">
+                  <InteractiveIcon>
+                    <Calculator className="w-6 h-6 text-brand-primary" />
+                  </InteractiveIcon>
+                </div>
+                <h3 className="ttt-feature-title text-white">
+                  ROI Calculator
+                </h3>
+              </div>
+              
+              <div className="mb-8">
+                <div className="text-6xl font-bold text-brand-primary mb-4 tabular-nums">
+                  <AnimatedCounter value={25} suffix="%" duration={2.5} delay={0.5} />
+                </div>
                 <p className="ttt-text-lead text-white font-semibold mb-2">
                   Average Cost Reduction
                 </p>
                 <p className="ttt-text-small text-text-secondary mb-8">
-                  Based on 500+ customer implementations
+                  Based on <AnimatedCounter value={500} suffix="+" duration={2} delay={0.8} /> customer implementations
                 </p>
-                
-                <StaggerGroup className="grid md:grid-cols-3 gap-6 mb-8">
-                  <StaggerItem>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-success mb-2">40%</div>
-                      <div className="ttt-text-small text-text-secondary">Travel Time Reduction</div>
-                    </div>
-                  </StaggerItem>
-                  <StaggerItem>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-success mb-2">35%</div>
-                      <div className="ttt-text-small text-text-secondary">Fuel Cost Savings</div>
-                    </div>
-                  </StaggerItem>
-                  <StaggerItem>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-success mb-2">25%</div>
-                      <div className="ttt-text-small text-text-secondary">Capacity Increase</div>
-                    </div>
-                  </StaggerItem>
-                </StaggerGroup>
-
-                <CTAButton size="lg" variant="primary">
-                  Get Custom ROI Analysis
-                </CTAButton>
               </div>
+              
+              <StaggerGroup className="grid md:grid-cols-3 gap-8 mb-8">
+                <StaggerItem>
+                  <div className="text-center p-4 bg-surface-elevated/30 rounded-xl border border-border/40">
+                    <div className="text-3xl font-bold text-success mb-3 tabular-nums">
+                      <AnimatedCounter value={40} suffix="%" duration={2.2} delay={1.0} />
+                    </div>
+                    <div className="ttt-text-small text-text-secondary font-medium">Travel Time Reduction</div>
+                  </div>
+                </StaggerItem>
+                <StaggerItem>
+                  <div className="text-center p-4 bg-surface-elevated/30 rounded-xl border border-border/40">
+                    <div className="text-3xl font-bold text-success mb-3 tabular-nums">
+                      <AnimatedCounter value={35} suffix="%" duration={2.2} delay={1.2} />
+                    </div>
+                    <div className="ttt-text-small text-text-secondary font-medium">Fuel Cost Savings</div>
+                  </div>
+                </StaggerItem>
+                <StaggerItem>
+                  <div className="text-center p-4 bg-surface-elevated/30 rounded-xl border border-border/40">
+                    <div className="text-3xl font-bold text-success mb-3 tabular-nums">
+                      <AnimatedCounter value={25} suffix="%" duration={2.2} delay={1.4} />
+                    </div>
+                    <div className="ttt-text-small text-text-secondary font-medium">Capacity Increase</div>
+                  </div>
+                </StaggerItem>
+              </StaggerGroup>
+
+              <CTAButton size="lg" variant="primary">
+                Get Custom ROI Analysis
+              </CTAButton>
             </div>
           </AnimatedCard>
         </div>
