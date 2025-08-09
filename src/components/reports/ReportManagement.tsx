@@ -97,8 +97,8 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
             orientation: 'portrait',
             margins: { top: 72, right: 72, bottom: 72, left: 72 }
           },
-          variables: template.variables || [],
-          styling: template.styling || {
+          variables: [],
+          styling: {
             fontFamily: 'Helvetica',
             fontSize: 12,
             primaryColor: '#1a365d',
@@ -107,14 +107,15 @@ const ReportManagement: React.FC<ReportManagementProps> = ({
             backgroundColor: '#ffffff',
             textColor: '#2d3748'
           },
-          isActive: template.is_active,
-          createdAt: template.created_at,
-          updatedAt: template.updated_at,
-          createdBy: template.created_by,
-          version: template.version || 1,
-          metadata: template.metadata || {}
-        }));
-        setPdfTemplates(pdfTemplates);
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          createdBy: 'system',
+          version: 1,
+          metadata: {}
+        }
+      ];
+      setPdfTemplates(mockPdfTemplates);
       }
     } catch (err) {
       setError('Failed to load templates');

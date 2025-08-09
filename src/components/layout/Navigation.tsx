@@ -1,6 +1,7 @@
-// Think Tank Technologies Installation Scheduler - Navigation Component
+// Think Tank Technologies Installation Scheduler - Clean Sidebar Navigation
+// Supabase-inspired clean sidebar design with consistent width and minimal styling
 
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -11,10 +12,13 @@ import {
   Settings,
   Upload,
   Bell,
-  X
+  X,
+  BarChart3,
+  FolderOpen
 } from 'lucide-react';
 import { NAVIGATION_ITEMS } from '../../constants';
 import { useUser } from '../../stores/useAppStore';
+import { useCurrentProject, useTenantPermissions } from '../../contexts/TenantProvider';
 
 // Icon mapping for dynamic icon rendering
 const iconMap = {
@@ -26,6 +30,8 @@ const iconMap = {
   Upload,
   Bell,
   Settings,
+  BarChart3,
+  FolderOpen,
 };
 
 interface NavigationProps {
@@ -36,12 +42,36 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) => {
   const user = useUser();
   const location = useLocation();
-  const [isHovered, setIsHovered] = useState(false);
+  const currentProject = useCurrentProject();
+  const { hasProjectPermission } = useTenantPermissions();
 
-  // Filter navigation items based on user role
+  // Filter navigation items based on user role and tenant permissions
   const filteredNavItems = NAVIGATION_ITEMS.filter(item => {
     if (!user || !item.roles) return true;
-    return item.roles.includes(user.role);
+    
+    // Check user role
+    const hasUserRole = item.roles.includes(user.role);
+    if (!hasUserRole) return false;
+
+    // Additional project-level permission checks when in project context
+    if (currentProject) {
+      switch (item.id) {
+        case 'installations':
+          return hasProjectPermission('manage_installations');
+        case 'assignments':
+          return hasProjectPermission('manage_assignments');
+        case 'schedules':
+          return hasProjectPermission('manage_schedules');
+        case 'reports':
+          return hasProjectPermission('manage_reports');
+        case 'settings':
+          return hasProjectPermission('update_project');
+        default:
+          return true;
+      }
+    }
+    
+    return true;
   });
 
   const handleNavClick = () => {
@@ -51,94 +81,74 @@ export const Navigation: React.FC<NavigationProps> = ({ sidebarOpen, onClose }) 
     }
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  // Sidebar is always collapsed on desktop, always expanded on mobile when open
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
-  const shouldShowExpanded = isMobile || isHovered;
-
   return (
     <>
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
           onClick={onClose}
         />
       )}
 
-      {/* Sidebar - starts below header */}
+      {/* Sidebar - Hover to expand design */}
       <aside
-        className={`fixed left-0 z-30 nav-glass transform transition-all ease-linear ${
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        className={`fixed left-0 top-16 z-30 h-[calc(100vh-4rem)] bg-white/5 backdrop-filter backdrop-blur-md border-r border-white/10 transform transition-all duration-300 ease-out group hover:w-64 w-16 lg:w-16 lg:hover:w-64 ${
+          sidebarOpen ? 'translate-x-0 w-64' : '-translate-x-full lg:translate-x-0'
         }`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          top: '4rem', // Create clean separation like Supabase (64px)
-          bottom: 0,
-          width: shouldShowExpanded ? '12rem' : '3rem',
-          transitionDuration: '150ms',
-          transitionProperty: 'width, transform',
-        }}
       >
         {/* Mobile close button */}
-        <div className={`lg:hidden flex justify-end p-3 border-b border-white/10 ${
-          shouldShowExpanded ? 'opacity-100' : 'opacity-0'
-        }`}>
+        <div className="lg:hidden flex justify-end p-4 border-b border-white/10">
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-150"
+            className="p-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors"
             aria-label="Close sidebar"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
+        {/* Project selector moved to header - this space can be used for other navigation elements */}
+
         {/* Navigation menu */}
-        <nav className={`flex-1 pb-2 space-y-0.5 ${shouldShowExpanded ? 'px-2' : 'px-1'}`}>
+        <nav className="flex-1 p-2 space-y-1 overflow-y-auto custom-scrollbar">
           {filteredNavItems.map((item) => {
             const Icon = iconMap[item.icon as keyof typeof iconMap];
             const isActive = location.pathname === item.path || 
               (item.path === '/app' && location.pathname === '/app');
             
             return (
-              <div key={item.id} className="relative group">
-                <NavLink
-                  to={item.path}
-                  onClick={handleNavClick}
-                  className={`flex items-center ${shouldShowExpanded ? 'px-2' : 'px-1.5 justify-center'} py-1.5 text-sm font-normal rounded-md transition-colors duration-150 ${
-                    isActive
-                      ? 'bg-white/15 text-white'
-                      : 'text-white/80 hover:bg-white/10 hover:text-white'
-                  }`}
-                  title={!shouldShowExpanded ? item.label : undefined}
-                >
-                  {Icon && <Icon className="h-4 w-4 flex-shrink-0" />}
-                  <span className={`whitespace-nowrap overflow-hidden transition-all duration-150 ease-linear ${
-                    shouldShowExpanded ? 'opacity-100 ml-2.5 w-auto' : 'opacity-0 ml-0 w-0'
-                  }`}>
+              <NavLink
+                key={item.id}
+                to={item.path}
+                onClick={handleNavClick}
+                title={item.label}
+                className={({ isActive: linkActive }) => `
+                  flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-300 group-hover:justify-start justify-center
+                  ${(isActive || linkActive)
+                    ? 'bg-white/15 text-white shadow-sm border border-white/20'
+                    : 'text-white/80 hover:bg-white/10 hover:text-white border border-transparent'
+                  }
+                `}
+              >
+                <div className="flex items-center space-x-3 w-full">
+                  {Icon && <Icon className="h-5 w-5 flex-shrink-0" />}
+                  <span className="truncate opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                     {item.label}
                   </span>
-                </NavLink>
-                
-                {/* Tooltip for collapsed state */}
-                {!shouldShowExpanded && (
-                  <div className="absolute left-full top-1/2 transform -translate-y-1/2 ml-2 px-2 py-1 bg-gray-900/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap z-50">
-                    {item.label}
-                  </div>
-                )}
-              </div>
+                </div>
+              </NavLink>
             );
           })}
         </nav>
 
+        {/* Bottom section - Optional status or help */}
+        <div className="p-2 border-t border-white/10 mt-auto">
+          <div className="text-xs text-white/60 text-center group-hover:text-left transition-all duration-300">
+            <p className="mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Installation Scheduler</p>
+            <p className="text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">v2.0</p>
+          </div>
+        </div>
       </aside>
     </>
   );

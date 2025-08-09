@@ -1,28 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="5" failures="1" errors="0" time="0.151198959">
-    <testsuite name="src/components/common/Loading.test.tsx" timestamp="2025-08-08T04:20:30.642Z" hostname="macbookpro.lan" tests="5" failures="1" errors="0" skipped="0" time="0.151198959">
-        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders loading component with default props" time="0.065650417">
+<testsuites name="vitest tests" tests="7" failures="3" errors="0" time="0.156112792">
+    <testsuite name="tests/a11y/accessibility.spec.ts" timestamp="2025-08-09T09:37:52.853Z" hostname="macbookpro.lan" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="tests/a11y/accessibility.spec.ts" name="tests/a11y/accessibility.spec.ts" time="0">
+            <failure message="Failed to resolve import &quot;@axe-core/playwright&quot; from &quot;tests/a11y/accessibility.spec.ts&quot;. Does the file exist?" type="Error">
+Error: Failed to resolve import &quot;@axe-core/playwright&quot; from &quot;tests/a11y/accessibility.spec.ts&quot;. Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/jordanlister/Documents/ThinktankTechnologies/installation-scheduler/tests/a11y/accessibility.spec.ts:10:23
+  1  |  import { test, expect } from &quot;@playwright/test&quot;;
+  2  |  import AxeBuilder from &quot;@axe-core/playwright&quot;;
+     |                          ^
+  3  |  const MARKETING_PAGES = [
+  4  |    { path: &quot;/&quot;, name: &quot;Homepage&quot; },
+ ❯ TransformPluginContext._formatLog node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:31460:43
+ ❯ TransformPluginContext.error node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:31457:14
+ ❯ normalizeUrl node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:29999:18
+ ❯ node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:30057:32
+ ❯ TransformPluginContext.transform node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:30025:4
+ ❯ EnvironmentPluginContainer.transform node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:31274:14
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BHkUv4Z8.js:26451:26
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/perf/performance.spec.ts" timestamp="2025-08-09T09:37:52.855Z" hostname="macbookpro.lan" tests="1" failures="1" errors="0" skipped="0" time="0">
+        <testcase classname="tests/perf/performance.spec.ts" name="tests/perf/performance.spec.ts" time="0">
+            <failure message="Playwright Test did not expect test.describe() to be called here.
+Most common reasons include:
+- You are calling test.describe() in a configuration file.
+- You are calling test.describe() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test." type="Error">
+Error: Playwright Test did not expect test.describe() to be called here.
+Most common reasons include:
+- You are calling test.describe() in a configuration file.
+- You are calling test.describe() in a file that is imported by the configuration file.
+- You have two different versions of @playwright/test. This usually happens
+  when one of the dependencies in your package.json depends on @playwright/test.
+ ❯ TestTypeImpl._currentSuite node_modules/playwright/lib/common/testType.js:74:13
+ ❯ TestTypeImpl._describe node_modules/playwright/lib/common/testType.js:114:24
+ ❯ Function.describe node_modules/playwright/lib/transform/transform.js:275:12
+ ❯ tests/perf/performance.spec.ts:46:8
+ ❯ tests/perf/performance.spec.ts:45:17
+            </failure>
+        </testcase>
+    </testsuite>
+    <testsuite name="src/components/common/Loading.test.tsx" timestamp="2025-08-09T09:37:52.856Z" hostname="macbookpro.lan" tests="5" failures="1" errors="0" skipped="0" time="0.156112792">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders loading component with default props" time="0.069078208">
             <system-err>
 ⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
 ⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
 
             </system-err>
         </testcase>
-        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom message" time="0.003272792">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom message" time="0.003920459">
         </testcase>
-        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom size" time="0.055389458">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; renders with custom size" time="0.056081541">
             <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
 
 Expected the element to have class:
 [32m  text-4xl[39m
 Received:
-[31m  flex flex-col items-center space-y-2[39m" type="Error">
+[31m  flex flex-col items-center space-y-3[39m" type="Error">
 Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
 
 Expected the element to have class:
   text-4xl
 Received:
-  flex flex-col items-center space-y-2
+  flex flex-col items-center space-y-3
  ❯ src/components/common/Loading.test.tsx:25:28
             </failure>
             <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
@@ -30,13 +73,13 @@ Received:
 Expected the element to have class:
 [32m  text-4xl[39m
 Received:
-[31m  flex flex-col items-center space-y-2[39m" type="Error">
+[31m  flex flex-col items-center space-y-3[39m" type="Error">
 Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
 
 Expected the element to have class:
   text-4xl
 Received:
-  flex flex-col items-center space-y-2
+  flex flex-col items-center space-y-3
  ❯ src/components/common/Loading.test.tsx:25:28
             </failure>
             <failure message="[2mexpect([22m[31melement[39m[2m).toHaveClass([22m[32m[32m&quot;text-4xl&quot;[32m[39m[2m)[22m
@@ -44,19 +87,19 @@ Received:
 Expected the element to have class:
 [32m  text-4xl[39m
 Received:
-[31m  flex flex-col items-center space-y-2[39m" type="Error">
+[31m  flex flex-col items-center space-y-3[39m" type="Error">
 Error: expect(element).toHaveClass(&quot;text-4xl&quot;)
 
 Expected the element to have class:
   text-4xl
 Received:
-  flex flex-col items-center space-y-2
+  flex flex-col items-center space-y-3
  ❯ src/components/common/Loading.test.tsx:25:28
             </failure>
         </testcase>
-        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; has proper accessibility attributes" time="0.013664">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; has proper accessibility attributes" time="0.013837916">
         </testcase>
-        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; applies custom className when provided" time="0.011992084">
+        <testcase classname="src/components/common/Loading.test.tsx" name="Loading Component &gt; applies custom className when provided" time="0.011999625">
         </testcase>
     </testsuite>
 </testsuites>

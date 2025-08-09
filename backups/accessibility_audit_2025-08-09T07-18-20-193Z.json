@@ -1,0 +1,2181 @@
+{
+  "timestamp": "2025-08-09T07:18:20.192Z",
+  "audit_type": "WCAG_AA_Compliance",
+  "summary": {
+    "total_components": 116,
+    "components_passed": 2,
+    "components_need_work": 114,
+    "pass_rate": 2,
+    "total_issues": 757,
+    "total_warnings": 480
+  },
+  "components_passed": [
+    "PerformanceUtils.tsx",
+    "Loading.test.tsx"
+  ],
+  "components_need_work": [
+    {
+      "file": "SEO.tsx",
+      "path": "src/components/SEO.tsx",
+      "issues": [],
+      "warnings": [
+        "Status messages should use role=\"alert\" or aria-live",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Typography.tsx",
+      "path": "src/components/ui/Typography.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using semantic heading tags (h1-h6) instead of styled div elements",
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "Navigation.tsx",
+      "path": "src/components/ui/Navigation.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            className={cn(linkClasses, 'w-..."
+      ],
+      "warnings": [
+        "Verify that custom ARIA roles are appropriate and well-supported",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Consider adding skip links for keyboard navigation"
+      ]
+    },
+    {
+      "file": "Modal.tsx",
+      "path": "src/components/ui/Modal.tsx",
+      "issues": [
+        "Clickable div missing keyboard event handler and tabIndex",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Loading.tsx",
+      "path": "src/components/ui/Loading.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Verify that custom ARIA roles are appropriate and well-supported",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "Layout.tsx",
+      "path": "src/components/ui/Layout.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Consider adding skip links for keyboard navigation"
+      ]
+    },
+    {
+      "file": "Input.tsx",
+      "path": "src/components/ui/Input.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n            ref={ref}\n            id={input...",
+        "Interactive element missing accessible label: <textarea\n          ref={ref}\n          id={textar...",
+        "Interactive element missing accessible label: <select\n        ref={ref}\n        id={selectId}\n  ...",
+        "Interactive element missing accessible label: <input\n            ref={ref}\n            id={check...",
+        "Interactive element missing accessible label: <input\n                    id={radioId}\n          ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "Card.tsx",
+      "path": "src/components/ui/Card.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={onCtaClick}\n       ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Error states should include aria-invalid attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Button.tsx",
+      "path": "src/components/ui/Button.tsx",
+      "issues": [],
+      "warnings": [
+        "Verify that custom ARIA roles are appropriate and well-supported",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "TeamMemberModal.tsx",
+      "path": "src/components/team/TeamMemberModal.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={handleDelete}...",
+        "Interactive element missing accessible label: <button\n                    onClick={handleSave}\n ...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={onClose}\n        ...",
+        "Interactive element missing accessible label: <button\n                key={tab.id}\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"email\"\n              ...",
+        "Interactive element missing accessible label: <select\n                value={formData.role || ''...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <select\n                value={formData.isActive ?...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"tel\"\n              ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                value={newSkill.skillId}\n ...",
+        "Interactive element missing accessible label: <select\n                value={newSkill.level}\n   ...",
+        "Interactive element missing accessible label: <textarea\n              value={newSkill.notes}\n   ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleAddSkill}\n   ...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"url\"\n              valu...",
+        "Interactive element missing accessible label: <textarea\n              value={newCertification.no...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleAddCertificat...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={selectedEquipmentId}\n...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleAssignEquipme...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                type=\"time\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"time\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                  type=\"date\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"date\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"time\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"time\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <textarea\n                value={newAvailability.n...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={handleAddAvailabi...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>..."
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "TeamMemberDirectory.tsx",
+      "path": "src/components/team/TeamMemberDirectory.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={handleExportData}\n   ...",
+        "Interactive element missing accessible label: <input\n              type=\"file\"\n              acc...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={clearFilters}\n     ...",
+        "Interactive element missing accessible label: <select\n                  multiple\n               ...",
+        "Interactive element missing accessible label: <select\n                  multiple\n               ...",
+        "Interactive element missing accessible label: <select\n                  className=\"w-full border...",
+        "Interactive element missing accessible label: <select\n                  className=\"w-full border...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "TeamDataImportExport.tsx",
+      "path": "src/components/team/TeamDataImportExport.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={onClose}\n          ...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={onBackToUpload}\n     ...",
+        "Interactive element missing accessible label: <button\n            onClick={onBackToUpload}\n     ...",
+        "Interactive element missing accessible label: <button\n            onClick={onImport}\n           ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <input\n          ref={fileInputRef}\n          type...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ScheduleManagementModal.tsx",
+      "path": "src/components/team/ScheduleManagementModal.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={onClose}\n        ...",
+        "Interactive element missing accessible label: <button\n                key={view.id}\n            ...",
+        "Interactive element missing accessible label: <button\n                        onClick={prevMonth...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                        onClick={nextMonth...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                              onClick={() ...",
+        "Interactive element missing accessible label: <button \n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button \n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button \n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button \n                          onClick={handle...",
+        "Interactive element missing accessible label: <button \n                          onClick={handle...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                            type=\"date\"\n   ...",
+        "Interactive element missing accessible label: <input\n                            type=\"date\"\n   ...",
+        "Interactive element missing accessible label: <input\n                            type=\"time\"\n   ...",
+        "Interactive element missing accessible label: <input\n                            type=\"time\"\n   ...",
+        "Interactive element missing accessible label: <input\n                            type=\"checkbox\"...",
+        "Interactive element missing accessible label: <input\n                            type=\"checkbox\"...",
+        "Interactive element missing accessible label: <input\n                                  type=\"che...",
+        "Interactive element missing accessible label: <textarea\n                          value={newEntr...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                          onClick={handleA..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "AvailabilityCalendar.tsx",
+      "path": "src/components/team/AvailabilityCalendar.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={goToToday}\n        ...",
+        "Interactive element missing accessible label: <button\n                  key={mode}\n             ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <select className=\"text-sm border border-gray-300 ...",
+        "Interactive element missing accessible label: <select className=\"text-sm border border-gray-300 ...",
+        "Interactive element missing accessible label: <button onClick={onClose} className=\"text-gray-400...",
+        "Interactive element missing accessible label: <select\n              value={formData.teamMemberId...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <select\n              value={formData.type}\n      ...",
+        "Interactive element missing accessible label: <textarea\n              value={formData.reason}\n  ...",
+        "Interactive element missing accessible label: <button\n              type=\"button\"\n              ...",
+        "Interactive element missing accessible label: <button\n              type=\"submit\"\n              ...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "TeamWorkloadChart.tsx",
+      "path": "src/components/scheduling/TeamWorkloadChart.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information"
+      ]
+    },
+    {
+      "file": "TeamMemberSelector.tsx",
+      "path": "src/components/scheduling/TeamMemberSelector.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n                value={assignmentType}\n   ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <button\n                onClick={handleSelectAllAv...",
+        "Interactive element missing accessible label: <select\n                value={sortBy}\n           ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                    value={filterByRole}\n ...",
+        "Interactive element missing accessible label: <select\n                    value={filterByRegion}...",
+        "Interactive element missing accessible label: <select\n                    value={filterByAvailab...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "ScheduleOptimizationPanel.tsx",
+      "path": "src/components/scheduling/ScheduleOptimizationPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={onClose}\n            ...",
+        "Interactive element missing accessible label: <button\n                  key={value}\n            ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"text\"\n               ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <button\n            onClick={onClose}\n            ...",
+        "Interactive element missing accessible label: <button\n            onClick={handleOptimize}\n     ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ScheduleMapView.tsx",
+      "path": "src/components/scheduling/ScheduleMapView.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ScheduleListView.tsx",
+      "path": "src/components/scheduling/ScheduleListView.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n            value={filterTeam}\n           ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    className=\"text-sm tex...",
+        "Interactive element missing accessible label: <button\n                      className=\"text-sm t..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "ScheduleCalendarView.tsx",
+      "path": "src/components/scheduling/ScheduleCalendarView.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <nav> element for navigation components",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ResolutionSuggestions.tsx",
+      "path": "src/components/scheduling/ResolutionSuggestions.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={generateAIRecommendatio...",
+        "Interactive element missing accessible label: <select\n              value={confidenceThreshold}\n...",
+        "Interactive element missing accessible label: <button\n            onClick={handleApplySelected}\n...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ResolutionHistory.tsx",
+      "path": "src/components/scheduling/ResolutionHistory.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n          value={sortBy}\n          onChang...",
+        "Interactive element missing accessible label: <select\n          value={filters.outcome}\n        ...",
+        "Interactive element missing accessible label: <select\n          value={filters.appliedBy}\n      ...",
+        "Interactive element missing accessible label: <input\n          type=\"date\"\n          value={filt...",
+        "Interactive element missing accessible label: <input\n          type=\"date\"\n          value={filt...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              key={id}\n              onCli...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Form input missing associated label",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "OptimizationMetricsCard.tsx",
+      "path": "src/components/scheduling/OptimizationMetricsCard.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "InstallationSelector.tsx",
+      "path": "src/components/scheduling/InstallationSelector.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={handleSelectAll}\n  ...",
+        "Interactive element missing accessible label: <button className=\"flex items-center space-x-1 px-...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={`${sortBy}-${sortOrde...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                        type=\"checkbox\"\n   ...",
+        "Interactive element missing accessible label: <input\n                        type=\"checkbox\"\n   ...",
+        "Interactive element missing accessible label: <input\n                    type=\"date\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"date\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "ImpactAssessment.tsx",
+      "path": "src/components/scheduling/ImpactAssessment.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={runImpactSimulation}\n...",
+        "Interactive element missing accessible label: <button\n              key={id}\n              onCli...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ConflictTimeline.tsx",
+      "path": "src/components/scheduling/ConflictTimeline.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              key={view}\n              onC...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button className=\"p-2 text-gray-600 hover:bg-gray...",
+        "Interactive element missing accessible label: <button\n                  key={severity}\n         ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ConflictResolutionPanel.tsx",
+      "path": "src/components/scheduling/ConflictResolutionPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button className=\"px-4 py-2 border border-gray-30...",
+        "Interactive element missing accessible label: <button \n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={handleBulkResolve...",
+        "Interactive element missing accessible label: <button onClick={onClose} className=\"text-gray-400...",
+        "Interactive element missing accessible label: <button\n                key={id}\n                o...",
+        "Interactive element missing accessible label: <button \n              onClick={() =>...",
+        "Interactive element missing accessible label: <button \n              onClick={onClose} \n        ...",
+        "Interactive element missing accessible label: <button \n              onClick={handleAutoResolve}...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ConflictPreview.tsx",
+      "path": "src/components/scheduling/ConflictPreview.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n          onClick={handleAnimateChanges}\n ...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <select\n        value={filterType}\n        onChang...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              key={id}\n              onCli...",
+        "Interactive element missing accessible label: <button\n            onClick={onRevertChanges}\n    ...",
+        "Interactive element missing accessible label: <button\n            onClick={handleApplyChanges}\n ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "BulkAssignmentWizard.tsx",
+      "path": "src/components/scheduling/BulkAssignmentWizard.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                      onClick={() =>..."
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "BulkAssignmentProgress.tsx",
+      "path": "src/components/scheduling/BulkAssignmentProgress.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={handleExport}\n   ...",
+        "Interactive element missing accessible label: <button\n                onClick={onUndo}\n         ..."
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "BulkAssignmentModal.tsx",
+      "path": "src/components/scheduling/BulkAssignmentModal.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={onClose}\n          ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={onClose}\n          ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={onClose}\n        ..."
+      ],
+      "warnings": [
+        "Consider using <nav> element for navigation components",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ReportManagement.tsx",
+      "path": "src/components/reports/ReportManagement.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={handleCreateTemplate}\n ...",
+        "Interactive element missing accessible label: <select\n            value={filterActive === null ?...",
+        "Interactive element missing accessible label: <button\n              onClick={handleCreateTemplat...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={onCancel}\n           ...",
+        "Interactive element missing accessible label: <button\n            onClick={onSave}\n            d...",
+        "Interactive element missing accessible label: <button\n            onClick={onBack}\n            c...",
+        "Interactive element missing accessible label: <button\n            onClick={onEdit}\n            c...",
+        "Interactive element missing accessible label: <button\n            onClick={onCancel}\n           ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ProjectManagement.tsx",
+      "path": "src/components/project/ProjectManagement.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <textarea\n            id=\"projectDescription\"\n    ...",
+        "Interactive element missing accessible label: <button\n                  key={day.id}\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <select\n              value={selectedUserId}\n     ...",
+        "Interactive element missing accessible label: <select\n              value={selectedRole}\n       ...",
+        "Interactive element missing accessible label: <select\n                    value={role}\n         ...",
+        "Interactive element missing accessible label: <button\n                  key={tab.id}\n           ..."
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "UserManagement.tsx",
+      "path": "src/components/organization/UserManagement.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={roleFilter}\n         ...",
+        "Interactive element missing accessible label: <button className=\"btn-secondary flex items-center...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                          value={user.orga...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                type=\"email\"\n              ...",
+        "Interactive element missing accessible label: <select\n                value={formData.organizati...",
+        "Interactive element missing accessible label: <button type=\"button\" onClick={onClose} className=...",
+        "Interactive element missing accessible label: <button type=\"submit\" className=\"btn-primary\">...",
+        "Interactive element missing accessible label: <textarea\n                value={emails}\n         ...",
+        "Interactive element missing accessible label: <select\n                value={organizationRole}\n ...",
+        "Interactive element missing accessible label: <button type=\"button\" onClick={onClose} className=...",
+        "Interactive element missing accessible label: <button type=\"submit\" className=\"btn-primary\">..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "TeamManagement.tsx",
+      "path": "src/components/organization/TeamManagement.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n            id=\"orgRole\"\n            value...",
+        "Interactive element missing accessible label: <select\n                value={selectedProject}\n  ...",
+        "Interactive element missing accessible label: <select\n                value={selectedProjectRole...",
+        "Interactive element missing accessible label: <select\n            id=\"orgRole\"\n            value...",
+        "Interactive element missing accessible label: <select\n              id=\"project\"\n              v...",
+        "Interactive element missing accessible label: <select\n                value={formData.projectRol...",
+        "Interactive element missing accessible label: <textarea\n            id=\"message\"\n            row...",
+        "Interactive element missing accessible label: <select\n              value={roleFilter}\n         ...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "OrganizationSetupWizard.tsx",
+      "path": "src/components/organization/OrganizationSetupWizard.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <textarea\n            id=\"projectDescription\"\n    ...",
+        "Interactive element missing accessible label: <select\n                value={invite.role}\n      ...",
+        "Interactive element missing accessible label: <button\n            className={`px-6 py-2 rounded-...",
+        "Interactive element missing accessible label: <button\n            className={`px-6 py-2 rounded-...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "OrganizationSettings.tsx",
+      "path": "src/components/organization/OrganizationSettings.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                type=\"file\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"color\"\n              ...",
+        "Interactive element missing accessible label: <input\n                type=\"color\"\n              ...",
+        "Interactive element missing accessible label: <input\n                type=\"color\"\n              ...",
+        "Interactive element missing accessible label: <textarea\n            id=\"emailSignature\"\n        ...",
+        "Interactive element missing accessible label: <select\n              id=\"timezone\"\n              ...",
+        "Interactive element missing accessible label: <select\n              id=\"currency\"\n              ...",
+        "Interactive element missing accessible label: <select\n              id=\"dateFormat\"\n            ...",
+        "Interactive element missing accessible label: <select\n              id=\"timeFormat\"\n            ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <button\n              key={tab.id}\n              o..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "UserOnboarding.tsx",
+      "path": "src/components/onboarding/UserOnboarding.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n              value={preferences.theme}\n  ...",
+        "Interactive element missing accessible label: <select\n              value={preferences.dateForma...",
+        "Interactive element missing accessible label: <select\n              value={preferences.timeForma...",
+        "Interactive element missing accessible label: <select\n              value={preferences.preferenc...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Ensure all interactive elements support keyboard navigation",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "UserProfileDropdown.tsx",
+      "path": "src/components/marketing/layout/UserProfileDropdown.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleSignOut}\n    ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "MarketingLayout.tsx",
+      "path": "src/components/marketing/layout/MarketingLayout.tsx",
+      "issues": [],
+      "warnings": [
+        "Error states should include aria-invalid attribute",
+        "Consider adding skip links for keyboard navigation"
+      ]
+    },
+    {
+      "file": "MarketingHeader.tsx",
+      "path": "src/components/marketing/layout/MarketingHeader.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "MarketingFooter.tsx",
+      "path": "src/components/marketing/layout/MarketingFooter.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "TrialSignupForm.tsx",
+      "path": "src/components/marketing/forms/TrialSignupForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                        type=\"button\"\n    ...",
+        "Interactive element missing accessible label: <button\n                      type=\"button\"\n      ...",
+        "Interactive element missing accessible label: <input\n            type=\"text\"\n            {...reg...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "SecureContactForm.tsx",
+      "path": "src/components/marketing/forms/SecureContactForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n        type=\"text\"\n        name=\"_website\"...",
+        "Interactive element missing accessible label: <input\n          type=\"checkbox\"\n          id=\"con..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "ROICalculatorForm.tsx",
+      "path": "src/components/marketing/forms/ROICalculatorForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n              type=\"text\"\n              {.....",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "NewsletterSignup.tsx",
+      "path": "src/components/marketing/forms/NewsletterSignup.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n              type=\"text\"\n              {....."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "EnterpriseContactForm.tsx",
+      "path": "src/components/marketing/forms/EnterpriseContactForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n          type=\"text\"\n          {...registe..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "DemoRequestForm.tsx",
+      "path": "src/components/marketing/forms/DemoRequestForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n          type=\"text\"\n          {...registe..."
+      ],
+      "warnings": [
+        "Ensure all interactive elements support keyboard navigation",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ContactForm.tsx",
+      "path": "src/components/marketing/forms/ContactForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n          type=\"text\"\n          {...registe...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "ScrollAnimations.tsx",
+      "path": "src/components/marketing/animations/ScrollAnimations.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "PageTransitions.tsx",
+      "path": "src/components/marketing/animations/PageTransitions.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content"
+      ]
+    },
+    {
+      "file": "MotionWrapper.tsx",
+      "path": "src/components/marketing/animations/MotionWrapper.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content"
+      ]
+    },
+    {
+      "file": "LoadingAnimations.tsx",
+      "path": "src/components/marketing/animations/LoadingAnimations.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Verify that custom ARIA roles are appropriate and well-supported",
+        "Ensure aria-hidden elements are truly decorative and not essential content",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "InteractiveElements.tsx",
+      "path": "src/components/marketing/animations/InteractiveElements.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n      className={cn(\n        'relative inl..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "InteractiveComponents.tsx",
+      "path": "src/components/marketing/animations/InteractiveComponents.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "HeroAnimations.tsx",
+      "path": "src/components/marketing/animations/HeroAnimations.tsx",
+      "issues": [],
+      "warnings": [
+        "Ensure aria-hidden elements are truly decorative and not essential content"
+      ]
+    },
+    {
+      "file": "DemoAnimations.tsx",
+      "path": "src/components/marketing/animations/DemoAnimations.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            key={index}\n            classN...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "AnimatedCounter.tsx",
+      "path": "src/components/marketing/animations/AnimatedCounter.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content"
+      ]
+    },
+    {
+      "file": "RouteOptimizationPanel.tsx",
+      "path": "src/components/mapping/RouteOptimizationPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={exportResults}\n  ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"number\"\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <button\n            onClick={runOptimization}\n    ...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute"
+      ]
+    },
+    {
+      "file": "MobileRouteNavigation.tsx",
+      "path": "src/components/mapping/MobileRouteNavigation.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={shareRoute}\n       ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                value={navigationApp}\n    ...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <nav> element for navigation components",
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "InteractiveMap.tsx",
+      "path": "src/components/mapping/InteractiveMap.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={exportMapData}\n      ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "GeographicAnalytics.tsx",
+      "path": "src/components/mapping/GeographicAnalytics.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n              value={filterRegion}\n       ...",
+        "Interactive element missing accessible label: <button\n              onClick={exportAnalytics}\n  ...",
+        "Interactive element missing accessible label: <button\n              key={key}\n              onCl...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ThemeProvider.tsx",
+      "path": "src/components/layout/ThemeProvider.tsx",
+      "issues": [],
+      "warnings": [
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ProjectSelector.tsx",
+      "path": "src/components/layout/ProjectSelector.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                        key={project.id}\n ...",
+        "Interactive element missing accessible label: <button\n                            onClick={(e) =...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "OrganizationHeader.tsx",
+      "path": "src/components/layout/OrganizationHeader.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 text-left text...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 text-left text...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 text-left text...",
+        "Interactive element missing accessible label: <button\n                          key={org.id}\n   ...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 text-left text...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 text-left text...",
+        "Interactive element missing accessible label: <button\n                    onClick={handleSignOut..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Navigation.tsx",
+      "path": "src/components/layout/Navigation.tsx",
+      "issues": [
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Consider adding skip links for keyboard navigation",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Layout.tsx",
+      "path": "src/components/layout/Layout.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Consider adding skip links for keyboard navigation",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Header.tsx",
+      "path": "src/components/layout/Header.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={handleSignO..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Breadcrumbs.tsx",
+      "path": "src/components/layout/Breadcrumbs.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={() =>..."
+      ],
+      "warnings": [
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "AuthForm.tsx",
+      "path": "src/components/forms/AuthForm.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n                    id=\"role\"\n            ...",
+        "Interactive element missing accessible label: <button\n                    type=\"button\"\n        ...",
+        "Interactive element missing accessible label: <button\n                    type=\"button\"\n        ...",
+        "Interactive element missing accessible label: <button\n                type=\"submit\"\n            ...",
+        "Interactive element missing accessible label: <button\n                    type=\"button\"\n        ...",
+        "Interactive element missing accessible label: <button\n                    type=\"button\"\n        ...",
+        "Interactive element missing accessible label: <button\n                  type=\"button\"\n          ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "ErrorReport.tsx",
+      "path": "src/components/data/ErrorReport.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={onDownloadReport}\n ...",
+        "Interactive element missing accessible label: <select\n              value={severityFilter}\n     ...",
+        "Interactive element missing accessible label: <select\n              value={categoryFilter}\n     ...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "DataUpload.tsx",
+      "path": "src/components/data/DataUpload.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input {...getInputProps()} />...",
+        "Interactive element missing accessible label: <button\n                  onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={(e) =>...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "DataPreview.tsx",
+      "path": "src/components/data/DataPreview.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button onClick={onReject} className=\"btn-secondar...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={filter}\n             ...",
+        "Interactive element missing accessible label: <select\n              value={itemsPerPage}\n       ...",
+        "Interactive element missing accessible label: <button\n                  key={column.key}\n       ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      key={page}\n         ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "DataExport.tsx",
+      "path": "src/components/data/DataExport.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={exportOptions.format}...",
+        "Interactive element missing accessible label: <select\n              value={exportOptions.dateFor...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <button\n          onClick={handleExport}\n         ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ToastNotification.tsx",
+      "path": "src/components/common/ToastNotification.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                    key={action.id}\n      ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "SimpleConnectionStatus.tsx",
+      "path": "src/components/common/SimpleConnectionStatus.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "RealtimeIndicators.tsx",
+      "path": "src/components/common/RealtimeIndicators.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                className=\"w-full text-sm ...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "NotificationBell.tsx",
+      "path": "src/components/common/NotificationBell.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  key={action.id}\n        ...",
+        "Interactive element missing accessible label: <button\n            onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                onClick={(e) =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "Loading.tsx",
+      "path": "src/components/common/Loading.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n      type={type}\n      onClick={onClick}\n..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Verify that custom ARIA roles are appropriate and well-supported",
+        "Error states should include aria-invalid attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ErrorBoundary.tsx",
+      "path": "src/components/common/ErrorBoundary.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                  onClick={this.handleRese..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ConnectionStatus.tsx",
+      "path": "src/components/common/ConnectionStatus.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "AcceptInvitation.tsx",
+      "path": "src/components/auth/AcceptInvitation.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                  type=\"email\"\n            ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type={showPassword ? 'tex...",
+        "Interactive element missing accessible label: <button\n                  type=\"button\"\n          ...",
+        "Interactive element missing accessible label: <input\n                  type={showConfirmPassword...",
+        "Interactive element missing accessible label: <button\n                  type=\"button\"\n          ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <button\n                type=\"submit\"\n            ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "AdvancedAnalytics.tsx",
+      "path": "src/components/analytics/AdvancedAnalytics.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              className=\"p-2 text-gray-600...",
+        "Interactive element missing accessible label: <button\n            key={id}\n            onClick={...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                multiple\n                v...",
+        "Interactive element missing accessible label: <select\n                multiple\n                v...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <button\n            onClick={onMaximize}\n         ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "TeamManagement.tsx",
+      "path": "src/pages/team/TeamManagement.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={refetch}\n        ...",
+        "Interactive element missing accessible label: <button \n                onClick={refetch}\n       ...",
+        "Interactive element missing accessible label: <button \n                onClick={handleAddMember}...",
+        "Interactive element missing accessible label: <button \n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button \n                        onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "UserPreferencesPanel.tsx",
+      "path": "src/pages/settings/UserPreferencesPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                      key={value}\n        ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <select\n                  value={userPreferences.d...",
+        "Interactive element missing accessible label: <select\n                  value={userPreferences.i...",
+        "Interactive element missing accessible label: <select\n                  value={userPreferences.l...",
+        "Interactive element missing accessible label: <select\n                  value={userPreferences.t...",
+        "Interactive element missing accessible label: <input\n                        type=\"radio\"\n      ...",
+        "Interactive element missing accessible label: <input\n                        type=\"radio\"\n      ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <select\n                  value={userPreferences.r...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Radio button groups should be wrapped in fieldset with legend",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "SystemConfigPanel.tsx",
+      "path": "src/pages/settings/SystemConfigPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"number\"\n         ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                          type=\"radio\"\n    ...",
+        "Interactive element missing accessible label: <input\n                    type=\"range\"\n          ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Radio button groups should be wrapped in fieldset with legend",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "SettingsPage.tsx",
+      "path": "src/pages/settings/SettingsPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n        type=\"checkbox\"\n        checked={ch...",
+        "Interactive element missing accessible label: <button\n            onClick={saveSettings}\n       ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"text\"\n             ...",
+        "Interactive element missing accessible label: <select\n                  value={settings.timezone...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                        type=\"checkbox\"\n   ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <select\n                  value={settings.optimiza...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "SecuritySettings.tsx",
+      "path": "src/pages/settings/SecuritySettings.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                    type=\"number\"\n         ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <select\n                    value={securitySetting...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <select\n                      value={securitySetti...",
+        "Interactive element missing accessible label: <input\n                    type=\"number\"\n         ...",
+        "Interactive element missing accessible label: <input\n                    type=\"number\"\n         ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <select\n                    value={securitySetting...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <textarea\n                      value={securitySet...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "NotificationSettings.tsx",
+      "path": "src/pages/settings/NotificationSettings.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n          onClick={handleSave}\n          d...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <button\n                  key={freq.frequency}\n   ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <select\n                        value={typeSetting...",
+        "Interactive element missing accessible label: <button\n                              key={channel...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "BillingPage.tsx",
+      "path": "src/pages/settings/BillingPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                type=\"radio\"\n              ...",
+        "Interactive element missing accessible label: <input\n                type=\"radio\"\n              ...",
+        "Interactive element missing accessible label: <input\n                type=\"radio\"\n              ...",
+        "Interactive element missing accessible label: <input\n              type=\"radio\"\n              {....",
+        "Interactive element missing accessible label: <input\n              type=\"radio\"\n              {....",
+        "Interactive element missing accessible label: <select {...register('reason')} className=\"w-full ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Radio button groups should be wrapped in fieldset with legend",
+        "Required fields should include aria-required attribute",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "SchedulingDashboard.tsx",
+      "path": "src/pages/schedules/SchedulingDashboard.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={refetchTeams}\n   ...",
+        "Interactive element missing accessible label: <button\n          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={runOptimization}\n      ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  key={view}\n             ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <input\n                type=\"date\"\n               ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleExportSchedul...",
+        "Form input missing associated label",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "ReportsPage.tsx",
+      "path": "src/pages/reports/ReportsPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n            type=\"date\"\n            value={...",
+        "Interactive element missing accessible label: <input\n            type=\"date\"\n            value={...",
+        "Interactive element missing accessible label: <button \n            onClick={refetchReports}\n    ...",
+        "Interactive element missing accessible label: <button \n            onClick={() =>...",
+        "Interactive element missing accessible label: <button \n                onClick={refetchReports}\n...",
+        "Interactive element missing accessible label: <button \n                onClick={handleAddSchedul...",
+        "Interactive element missing accessible label: <button \n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <select className=\"w-full px-3 py-2 bg-white/10 bo...",
+        "Interactive element missing accessible label: <select className=\"w-full px-3 py-2 bg-white/10 bo...",
+        "Interactive element missing accessible label: <input\n                    type=\"time\"\n           ...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "NotificationsPage.tsx",
+      "path": "src/pages/notifications/NotificationsPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <select\n              value={viewMode}\n           ...",
+        "Interactive element missing accessible label: <select\n              value={sortBy}\n             ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <select\n                value={filters.dateRange}\n...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <input\n          type=\"checkbox\"\n          checked...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <input\n          type=\"checkbox\"\n          checked...",
+        "Interactive element missing accessible label: <button\n                    key={action.id}\n      ...",
+        "Interactive element missing accessible label: <button\n          onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n                onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Interactive element missing accessible label: <button\n              onClick={(e) =>...",
+        "Clickable div missing keyboard event handler and tabIndex",
+        "Clickable div missing keyboard event handler and tabIndex",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "SolutionsPage.tsx",
+      "path": "src/pages/marketing/SolutionsPage.tsx",
+      "issues": [],
+      "warnings": [
+        "Error states should include aria-invalid attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ResourcesPage.tsx",
+      "path": "src/pages/marketing/ResourcesPage.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "PricingPage.tsx",
+      "path": "src/pages/marketing/PricingPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "HomePage.tsx",
+      "path": "src/pages/marketing/HomePage.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "FeaturesPage.tsx",
+      "path": "src/pages/marketing/FeaturesPage.tsx",
+      "issues": [],
+      "warnings": [
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "ContactPage.tsx",
+      "path": "src/pages/marketing/ContactPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                      type=\"radio\"\n        ...",
+        "Interactive element missing accessible label: <input\n                      type=\"radio\"\n        ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure all interactive elements support keyboard navigation",
+        "Radio button groups should be wrapped in fieldset with legend",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "CompanyPage.tsx",
+      "path": "src/pages/marketing/CompanyPage.tsx",
+      "issues": [],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "InstallationsPage.tsx",
+      "path": "src/pages/installations/InstallationsPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button \n            onClick={refetch}\n           ...",
+        "Interactive element missing accessible label: <button \n            onClick={handleExportData}\n  ...",
+        "Interactive element missing accessible label: <button \n            onClick={handleNewInstallatio...",
+        "Interactive element missing accessible label: <button \n                onClick={handleFilter}\n  ...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <select\n                    value={filterStatus}\n ...",
+        "Interactive element missing accessible label: <select\n                    value={filterPriority}...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "InstallationModal.tsx",
+      "path": "src/pages/installations/InstallationModal.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={handleClose}\n    ...",
+        "Interactive element missing accessible label: <input\n                    type=\"text\"\n           ...",
+        "Interactive element missing accessible label: <input\n                    type=\"tel\"\n            ...",
+        "Interactive element missing accessible label: <input\n                    type=\"email\"\n          ...",
+        "Interactive element missing accessible label: <input\n                    type=\"text\"\n           ...",
+        "Interactive element missing accessible label: <input\n                      type=\"text\"\n         ...",
+        "Interactive element missing accessible label: <input\n                      type=\"text\"\n         ...",
+        "Interactive element missing accessible label: <input\n                    type=\"text\"\n           ...",
+        "Interactive element missing accessible label: <input\n                      type=\"date\"\n         ...",
+        "Interactive element missing accessible label: <input\n                      type=\"time\"\n         ...",
+        "Interactive element missing accessible label: <input\n                    type=\"number\"\n         ...",
+        "Interactive element missing accessible label: <select\n                      value={formData.stat...",
+        "Interactive element missing accessible label: <select\n                      value={formData.prio...",
+        "Interactive element missing accessible label: <select\n                      value={formData.lead...",
+        "Interactive element missing accessible label: <select\n                      value={formData.assi...",
+        "Interactive element missing accessible label: <textarea\n                    value={formData.note...",
+        "Interactive element missing accessible label: <button\n                type=\"button\"\n            ...",
+        "Interactive element missing accessible label: <button\n                  type=\"submit\"\n          ..."
+      ],
+      "warnings": [
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Required fields should include aria-required attribute"
+      ]
+    },
+    {
+      "file": "InstallationList.tsx",
+      "path": "src/pages/installations/InstallationList.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n              value={itemsPerPage}\n       ...",
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                        className=\"p-1 tex...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    key={pageNumber}\n     ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "InstallationFilters.tsx",
+      "path": "src/pages/installations/InstallationFilters.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={handleClearAll}\n     ...",
+        "Interactive element missing accessible label: <input\n              type=\"date\"\n              val...",
+        "Interactive element missing accessible label: <input\n              type=\"date\"\n              val...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <input\n                      type=\"checkbox\"\n     ...",
+        "Interactive element missing accessible label: <input\n                    type=\"checkbox\"\n       ...",
+        "Interactive element missing accessible label: <input\n                        type=\"checkbox\"\n   ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "InstallationCard.tsx",
+      "path": "src/pages/installations/InstallationCard.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n              type=\"checkbox\"\n             ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button className=\"p-2 text-gray-400 hover:text-gr...",
+        "Form input missing associated label"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "BulkActions.tsx",
+      "path": "src/pages/installations/BulkActions.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n                  value={assignmentData.le...",
+        "Interactive element missing accessible label: <select\n                  value={assignmentData.as...",
+        "Interactive element missing accessible label: <input\n                  type=\"date\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"time\"\n             ...",
+        "Interactive element missing accessible label: <input\n                  type=\"number\"\n           ...",
+        "Interactive element missing accessible label: <select\n                value={statusUpdate}\n     ...",
+        "Interactive element missing accessible label: <select\n                value={priorityUpdate}\n   ...",
+        "Interactive element missing accessible label: <button onClick={onClose} className=\"text-gray-400...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={executeAction...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live"
+      ]
+    },
+    {
+      "file": "DataProcessing.tsx",
+      "path": "src/pages/data-processing/DataProcessing.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={loadProcessingHis...",
+        "Interactive element missing accessible label: <button\n                  onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                    onClick={handleStartOv...",
+        "Interactive element missing accessible label: <button\n                    onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "Dashboard.tsx",
+      "path": "src/pages/dashboard/Dashboard.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                onClick={refetchStats}\n   ...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                onClick={() =>...",
+        "Interactive element missing accessible label: <button \n              onClick={() =>...",
+        "Interactive element missing accessible label: <button \n              onClick={() =>...",
+        "Interactive element missing accessible label: <button \n              onClick={() =>...",
+        "Interactive element missing accessible label: <button \n              onClick={() =>...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "WorkloadDistribution.tsx",
+      "path": "src/pages/assignments/WorkloadDistribution.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n                key={mode.id}\n            ...",
+        "Interactive element missing accessible label: <select\n            value={filterStatus}\n         ...",
+        "Interactive element missing accessible label: <select\n            value={sortBy}\n            onC...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>..."
+      ],
+      "warnings": [
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "TeamAssignmentMatrix.tsx",
+      "path": "src/pages/assignments/TeamAssignmentMatrix.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n              value={filterStatus}\n       ...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "AutoAssignmentPanel.tsx",
+      "path": "src/pages/assignments/AutoAssignmentPanel.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n                  type=\"checkbox\"\n         ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <input\n                type=\"range\"\n              ...",
+        "Interactive element missing accessible label: <input\n                    type=\"range\"\n          ...",
+        "Interactive element missing accessible label: <button\n            onClick={handleRunAssignment}\n...",
+        "Interactive element missing accessible label: <button\n            onClick={handleBulkAssignment}...",
+        "Interactive element missing accessible label: <button className=\"px-4 py-2 bg-accent-500/20 bord...",
+        "Interactive element missing accessible label: <button className=\"px-4 py-2 bg-accent-500/20 bord...",
+        "Interactive element missing accessible label: <input\n                        type=\"checkbox\"\n   ...",
+        "Interactive element missing accessible label: <button className=\"px-3 py-1 bg-white/10 border bo...",
+        "Interactive element missing accessible label: <button\n              onClick={handleBulkAssignmen...",
+        "Interactive element missing accessible label: <button className=\"w-full px-4 py-2 bg-white/10 bo...",
+        "Interactive element missing accessible label: <button\n            onClick={onClose}\n            ...",
+        "Interactive element missing accessible label: <button\n              key={tab.id}\n              o...",
+        "Clickable div missing keyboard event handler and tabIndex"
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Required fields should include aria-required attribute",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "AssignmentsPage.tsx",
+      "path": "src/pages/assignments/AssignmentsPage.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <input\n            type=\"date\"\n            value={...",
+        "Interactive element missing accessible label: <input\n            type=\"date\"\n            value={...",
+        "Interactive element missing accessible label: <button\n            onClick={handleRefreshData}\n  ...",
+        "Interactive element missing accessible label: <button \n            onClick={handleExportAssignme...",
+        "Interactive element missing accessible label: <button\n            onClick={handleRunAutoAssignme...",
+        "Interactive element missing accessible label: <button\n              key={tab.id}\n              o..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    },
+    {
+      "file": "AssignmentHistory.tsx",
+      "path": "src/pages/assignments/AssignmentHistory.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <select\n            value={filterAction}\n         ...",
+        "Interactive element missing accessible label: <select\n            value={filterUser}\n           ...",
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n          onClick={handleExport}\n         ...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n            onClick={onClose}\n            ..."
+      ],
+      "warnings": [
+        "Consider using <main> element for main content area",
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Ensure color is not the only way to convey important information",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden"
+      ]
+    },
+    {
+      "file": "AssignmentConflicts.tsx",
+      "path": "src/pages/assignments/AssignmentConflicts.tsx",
+      "issues": [
+        "Interactive element missing accessible label: <button\n            onClick={() =>...",
+        "Interactive element missing accessible label: <button\n              onClick={handleAutoResolve}\n...",
+        "Interactive element missing accessible label: <select\n            value={filterSeverity}\n       ...",
+        "Interactive element missing accessible label: <select\n            value={filterType}\n           ...",
+        "Interactive element missing accessible label: <select\n            value={sortBy}\n            onC...",
+        "Interactive element missing accessible label: <input\n                type=\"checkbox\"\n           ...",
+        "Interactive element missing accessible label: <button\n                        onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                          onClick={() =>...",
+        "Interactive element missing accessible label: <button\n                              onClick={() ...",
+        "Interactive element missing accessible label: <button\n            onClick={onClose}\n            ...",
+        "Interactive element missing accessible label: <button\n                      onClick={() =>..."
+      ],
+      "warnings": [
+        "Consider using <ul>/<ol> and <li> elements for list content",
+        "Modal/Dialog components should implement proper focus management",
+        "Ensure color is not the only way to convey important information",
+        "Error states should include aria-invalid attribute",
+        "Status messages should use role=\"alert\" or aria-live",
+        "Icons should have aria-label or be marked as decorative with aria-hidden",
+        "Ensure interactive elements have visible focus indicators"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "Keyboard Navigation",
+      "recommendation": "Ensure all interactive elements are keyboard accessible",
+      "implementation": "Add onKeyDown handlers and proper tabIndex values"
+    },
+    {
+      "priority": "HIGH",
+      "category": "Screen Readers",
+      "recommendation": "Provide descriptive labels for all form controls",
+      "implementation": "Use aria-label, aria-labelledby, or associated label elements"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Semantic HTML",
+      "recommendation": "Use semantic HTML elements for better structure",
+      "implementation": "Replace generic divs with nav, main, section, article elements"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "Focus Management",
+      "recommendation": "Implement proper focus management in modals and navigation",
+      "implementation": "Trap focus in modals, return focus after close, manage route changes"
+    },
+    {
+      "priority": "LOW",
+      "category": "Color Contrast",
+      "recommendation": "Ensure sufficient color contrast ratios (4.5:1 for normal text)",
+      "implementation": "Use tools like WebAIM contrast checker, avoid color-only indicators"
+    }
+  ],
+  "next_steps": [
+    "Review and fix high-priority accessibility issues",
+    "Test with screen readers (NVDA, JAWS, VoiceOver)",
+    "Verify keyboard navigation flows",
+    "Validate color contrast ratios",
+    "Conduct user testing with assistive technology users"
+  ]
+}

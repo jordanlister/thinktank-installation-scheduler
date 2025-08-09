@@ -148,24 +148,39 @@
   }
   
   /* =============================================================================
-   * CARD COMPONENTS - Glassmorphism
+   * CARD COMPONENTS - Clean Supabase-like Design
    * ============================================================================= */
   
-  /* Base Card - Matte with Proper Padding */
+  /* Base Card - Clean with subtle background */
   .card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     @apply border border-border rounded-xl;
-    @apply transition-all duration-300;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    @apply transition-all duration-200;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: relative;
     overflow: hidden;
     padding: var(--space-6); /* 24px base padding */
   }
   
   .card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+
+  /* Clean Card - Even more minimal */
+  .card-clean {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .card-clean:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
   
   /* Feature Card - Matte Enhanced */
@@ -558,19 +573,37 @@
   }
   
   /* =============================================================================
-   * NAVIGATION COMPONENTS - Enhanced Container Spacing
+   * NAVIGATION COMPONENTS - Clean Supabase-like Design
    * ============================================================================= */
   
   .nav-glass {
-    background: rgba(0, 0, 0, 0.4);
-    @apply border-r border-t border-border;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    @apply border-r border-border;
     padding: var(--space-4) 0; /* 16px vertical padding */
   }
   
   .header-glass {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
     @apply border-b border-border;
-    padding: var(--space-2) var(--space-6); /* 8px vertical, 24px horizontal */
+    padding: var(--space-3) var(--space-6); /* 12px vertical, 24px horizontal */
+  }
+
+  /* Clean Header Styling */
+  .header-clean {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    height: 4rem; /* 64px consistent height */
+  }
+
+  /* Clean Sidebar Styling */
+  .sidebar-clean {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    width: 16rem; /* 256px consistent width */
   }
 
   /* Navigation Menu Items */
@@ -1468,6 +1501,128 @@
     border-color: rgba(255, 255, 255, 0.1);
     transform: translateY(-1px);
   }
+
+  /* =============================================================================
+   * CLEAN SUPABASE-INSPIRED UTILITY CLASSES
+   * ============================================================================= */
+
+  /* Clean Background Utilities */
+  .bg-clean-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .bg-clean-elevated {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .bg-clean-header {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .bg-clean-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Clean Text Utilities */
+  .text-clean-primary {
+    color: #ffffff;
+  }
+
+  .text-clean-secondary {
+    color: #a1a1aa;
+  }
+
+  .text-clean-muted {
+    color: #71717a;
+  }
+
+  .text-clean-subtle {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Clean Button Utilities */
+  .btn-clean {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-200) var(--ease-out);
+    font-weight: var(--font-medium);
+  }
+
+  .btn-clean:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .btn-clean-primary {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+  }
+
+  .btn-clean-primary:hover {
+    background: rgba(16, 185, 129, 0.25);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #ffffff;
+  }
+
+  /* Clean Input Utilities */
+  .input-clean {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .input-clean:focus {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  }
+
+  .input-clean::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Clean Hover Effects */
+  .hover-clean {
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .hover-clean:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-1px);
+  }
+
+  /* Clean Focus States */
+  .focus-clean {
+    transition: all var(--duration-200) var(--ease-out);
+  }
+
+  .focus-clean:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+
+  /* Clean Spacing Utilities */
+  .space-clean-xs { gap: var(--space-2); }
+  .space-clean-sm { gap: var(--space-3); }
+  .space-clean-md { gap: var(--space-4); }
+  .space-clean-lg { gap: var(--space-6); }
+  .space-clean-xl { gap: var(--space-8); }
 
   /* Marketing CTA Section - Professional call-to-action styling */
   .marketing-cta-section {

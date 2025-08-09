@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-09T07:01:36.917Z",
+    "backup_type": "pre_migration",
+    "database_url": "https://wgcmoorllvctbnabwqux.supabase.co",
+    "migration_target": "multi_tenant_transformation"
+  },
+  "tables": {
+    "users": {
+      "tableName": "users",
+      "success": true,
+      "data": [],
+      "count": 0,
+      "schema": null
+    },
+    "team_members": {
+      "tableName": "team_members",
+      "success": true,
+      "data": [],
+      "count": 0,
+      "schema": null
+    },
+    "installations": {
+      "tableName": "installations",
+      "success": true,
+      "data": [],
+      "count": 0,
+      "schema": null
+    },
+    "assignments": {
+      "tableName": "assignments",
+      "success": true,
+      "data": [],
+      "count": 0,
+      "schema": null
+    },
+    "notifications": {
+      "tableName": "notifications",
+      "success": true,
+      "data": [],
+      "count": 0,
+      "schema": null
+    }
+  },
+  "validation": {
+    "isValid": true,
+    "issues": [],
+    "stats": {
+      "totalTables": 5,
+      "totalRecords": 0,
+      "tablesWithData": 0,
+      "emptyTables": [
+        "users",
+        "team_members",
+        "installations",
+        "assignments",
+        "notifications"
+      ]
+    }
+  }
+}

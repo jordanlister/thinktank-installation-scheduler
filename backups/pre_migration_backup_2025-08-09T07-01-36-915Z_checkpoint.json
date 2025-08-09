@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-08-09T07:01:39.965Z",
+  "database_url": "https://wgcmoorllvctbnabwqux.supabase.co",
+  "migration_status": "pre_migration",
+  "system_info": {
+    "node_version": "v22.17.0",
+    "platform": "darwin",
+    "cwd": "/Users/jordanlister/Documents/ThinktankTechnologies/installation-scheduler"
+  },
+  "backup_metadata": {
+    "tables_count": 5,
+    "backup_method": "supabase_client_export"
+  }
+}

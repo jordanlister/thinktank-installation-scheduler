@@ -1,16 +1,19 @@
 // Think Tank Technologies Installation Scheduler - Authentication Form Component
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, User, Mail, Lock, Building } from 'lucide-react';
-import { auth } from '../../services/supabase';
-import { useAppStore } from '../../stores/useAppStore';
-import { UserRole, type User as UserType } from '../../types';
+import { authService } from '../../services/authService';
+import { invitationService } from '../../services/invitationService';
+import { useOrganizationAuth } from '../../contexts/OrganizationProvider';
+import { UserRole, type AuthUser, OrganizationRole } from '../../types';
 
 interface AuthFormProps {
   /** Optional callback when authentication is successful */
-  onSuccess?: (user: UserType) => void;
+  onSuccess?: (user: AuthUser) => void;
   /** Optional callback when there's an error */
   onError?: (error: string) => void;
+  /** Optional invitation token for signup */
+  invitationToken?: string;
 }
 
 interface FormData {
@@ -31,8 +34,10 @@ interface FormErrors {
   general?: string;
 }
 
-export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
-  const [mode, setMode] = useState<'login' | 'register' | 'forgot'>('login');
+export default function AuthForm({ onSuccess, onError, invitationToken }: AuthFormProps) {
+  const [mode, setMode] = useState<'login' | 'register' | 'forgot' | 'accept-invitation'>(
+    invitationToken ? 'accept-invitation' : 'login'
+  );
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,8 +50,31 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
     role: UserRole.SCHEDULER,
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [invitation, setInvitation] = useState<any>(null);
 
-  const { setAuthenticated, setUser, setLoading } = useAppStore();
+  const { signIn, isLoading: authLoading, currentUser } = useOrganizationAuth();
+
+  // Load and validate invitation if token provided
+  useEffect(() => {
+    if (invitationToken) {
+      const validateInvitation = async () => {
+        const result = await invitationService.validateInvitation(invitationToken);
+        if (result.valid && result.invitation) {
+          setInvitation(result.invitation);
+          setFormData(prev => ({
+            ...prev,
+            email: result.invitation!.email,
+            firstName: result.invitation!.metadata?.firstName || '',
+            lastName: result.invitation!.metadata?.lastName || '',
+          }));
+        } else {
+          setErrors({ general: result.error || 'Invalid invitation' });
+          setMode('login');
+        }
+      };
+      validateInvitation();
+    }
+  }, [invitationToken]);
 
   // Form validation
   const validateForm = (): boolean => {
@@ -79,8 +107,8 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
       }
     }
 
-    // Name validation (register only)
-    if (mode === 'register') {
+    // Name validation (register and accept-invitation)
+    if (mode === 'register' || mode === 'accept-invitation') {
       if (!formData.firstName.trim()) {
         newErrors.firstName = 'First name is required';
       }
@@ -107,68 +135,30 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
     if (!validateForm()) return;
 
     setIsLoading(true);
-    setLoading(true);
     setErrors({});
 
     try {
       if (mode === 'login') {
-        const { data, error } = await auth.signIn(formData.email, formData.password);
+        const result = await signIn(formData.email, formData.password);
         
-        if (error) {
-          const errorMessage = error.message === 'Supabase not configured' 
-            ? 'Authentication service not configured. Using demo mode.'
-            : 'Invalid email or password. Please try again.';
-          
-          if (error.message === 'Supabase not configured') {
-            // Demo mode - simulate successful login
-            const mockUser: UserType = {
-              id: '1',
-              email: formData.email,
-              firstName: 'Demo',
-              lastName: 'User',
-              role: 'admin',
-              isActive: true,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
-            
-            setAuthenticated(true);
-            setUser(mockUser);
-            onSuccess?.(mockUser);
-            return;
-          }
-          
-          throw new Error(errorMessage);
+        if (!result.success) {
+          throw new Error(result.error || 'Login failed');
         }
-
-        if (data.user) {
-          const user: UserType = {
-            id: data.user.id,
-            email: data.user.email || '',
-            firstName: data.user.user_metadata?.first_name || 'User',
-            lastName: data.user.user_metadata?.last_name || '',
-            role: data.user.user_metadata?.role || UserRole.SCHEDULER,
-            isActive: data.user.user_metadata?.is_active ?? true,
-            createdAt: data.user.created_at || new Date().toISOString(),
-            updatedAt: data.user.updated_at || new Date().toISOString(),
-          };
-          
-          setAuthenticated(true);
-          setUser(user);
-          onSuccess?.(user);
-        }
+        
+        // Success callback will be handled by OrganizationProvider's onAuthStateChange
+        onSuccess?.(currentUser!);
+        
       } else if (mode === 'register') {
-        const { data: _, error } = await auth.signUp(formData.email, formData.password, {
+        const response = await authService.signUp({
+          email: formData.email,
+          password: formData.password,
           firstName: formData.firstName,
           lastName: formData.lastName,
-          role: formData.role,
+          organizationRole: formData.role as OrganizationRole
         });
 
-        if (error) {
-          const errorMessage = error.message === 'Supabase not configured'
-            ? 'Registration service not configured. Please contact your administrator.'
-            : error.message;
-          throw new Error(errorMessage);
+        if (response.error) {
+          throw new Error(response.error);
         }
 
         // For most Supabase setups, user needs to verify email before they can sign in
@@ -181,14 +171,36 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
           setMode('login');
           setErrors({});
         }, 3000);
-      } else if (mode === 'forgot') {
-        const { error } = await auth.resetPassword(formData.email);
         
-        if (error) {
-          const errorMessage = error.message === 'Supabase not configured'
-            ? 'Password reset service not configured. Please contact your administrator.'
-            : error.message;
-          throw new Error(errorMessage);
+      } else if (mode === 'accept-invitation' && invitationToken) {
+        const result = await invitationService.acceptInvitation({
+          token: invitationToken,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          password: formData.password
+        });
+
+        if (!result.success) {
+          throw new Error(result.error || 'Failed to accept invitation');
+        }
+
+        // Set success message and auto-login
+        setErrors({
+          general: 'Account created successfully! You can now sign in.'
+        });
+        
+        // Switch to login mode and pre-fill email
+        setTimeout(() => {
+          setMode('login');
+          setFormData(prev => ({ ...prev, email: invitation?.email || '' }));
+          setErrors({});
+        }, 3000);
+        
+      } else if (mode === 'forgot') {
+        const response = await authService.resetPassword(formData.email);
+        
+        if (response.error) {
+          throw new Error(response.error);
         }
 
         setErrors({
@@ -207,22 +219,23 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
       onError?.(message);
     } finally {
       setIsLoading(false);
-      setLoading(false);
     }
   };
 
   const getTitle = () => {
     switch (mode) {
       case 'register': return 'Create Your Account';
+      case 'accept-invitation': return 'Complete Your Registration';
       case 'forgot': return 'Reset Password';
       default: return 'Welcome Back';
     }
   };
 
   const getSubmitButtonText = () => {
-    if (isLoading) return 'Please wait...';
+    if (isLoading || authLoading) return 'Please wait...';
     switch (mode) {
       case 'register': return 'Create Account';
+      case 'accept-invitation': return 'Complete Registration';
       case 'forgot': return 'Send Reset Email';
       default: return 'Sign In';
     }
@@ -251,6 +264,18 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
         <h3 className="mt-4 text-center text-xl font-medium text-glass-primary">
           {getTitle()}
         </h3>
+        {mode === 'accept-invitation' && invitation && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-glass-secondary">
+              You've been invited to join <span className="font-medium text-accent-400">{invitation.organizations?.name}</span>
+            </p>
+            {invitation.projects && (
+              <p className="text-xs text-glass-muted mt-1">
+                Project: {invitation.projects.name}
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
@@ -271,7 +296,8 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
                   type="email"
                   autoComplete="email"
                   required
-                  className={`form-input pl-10 ${errors.email ? 'border-error-500 focus:border-error-500' : ''}`}
+                  disabled={mode === 'accept-invitation'}
+                  className={`form-input pl-10 ${errors.email ? 'border-error-500 focus:border-error-500' : ''} ${mode === 'accept-invitation' ? 'opacity-50 cursor-not-allowed' : ''}`}
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
@@ -282,8 +308,8 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
               )}
             </div>
 
-            {/* First Name (Register only) */}
-            {mode === 'register' && (
+            {/* First Name (Register and Accept Invitation) */}
+            {(mode === 'register' || mode === 'accept-invitation') && (
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-glass-secondary">
                   First name
@@ -310,8 +336,8 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
               </div>
             )}
 
-            {/* Last Name (Register only) */}
-            {mode === 'register' && (
+            {/* Last Name (Register and Accept Invitation) */}
+            {(mode === 'register' || mode === 'accept-invitation') && (
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium text-glass-secondary">
                   Last name
@@ -338,7 +364,7 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
               </div>
             )}
 
-            {/* Role Selection (Register only) */}
+            {/* Role Selection (Register only - not for invitation acceptance) */}
             {mode === 'register' && (
               <div>
                 <label htmlFor="role" className="block text-sm font-medium text-glass-secondary">
@@ -462,13 +488,15 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-black/20 text-glass-muted">
-                  {mode === 'login' ? 'New to Think Tank?' : 'Already have an account?'}
+                  {mode === 'login' ? 'New to Think Tank?' : 
+                   mode === 'accept-invitation' ? 'Already have an account?' :
+                   'Already have an account?'}
                 </span>
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-3">
-              {mode === 'login' && (
+              {mode === 'login' && !invitationToken && (
                 <>
                   <button
                     type="button"
@@ -487,7 +515,7 @@ export default function AuthForm({ onSuccess, onError }: AuthFormProps) {
                 </>
               )}
               
-              {(mode === 'register' || mode === 'forgot') && (
+              {(mode === 'register' || mode === 'forgot' || mode === 'accept-invitation') && (
                 <button
                   type="button"
                   onClick={() => setMode('login')}

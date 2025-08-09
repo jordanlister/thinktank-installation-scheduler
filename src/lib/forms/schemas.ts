@@ -405,3 +405,397 @@ export const validateFormWithSchema = <T>(schema: z.ZodSchema<T>, data: unknown)
     return { success: false, errors: { general: 'Validation failed' } };
   }
 };
+
+// =====================================================
+// BILLING AND SUBSCRIPTION FORM SCHEMAS
+// =====================================================
+
+/**
+ * Billing Address Schema
+ * Standard address validation for billing information
+ */
+export const billingAddressSchema = z.object({
+  line1: z
+    .string()
+    .min(1, 'Address line 1 is required')
+    .max(100, 'Address line 1 is too long'),
+  line2: z
+    .string()
+    .max(100, 'Address line 2 is too long')
+    .optional(),
+  city: z
+    .string()
+    .min(1, 'City is required')
+    .max(50, 'City name is too long')
+    .regex(/^[a-zA-Z\s\-'.]+$/, 'City contains invalid characters'),
+  state: z
+    .string()
+    .min(1, 'State/Province is required')
+    .max(50, 'State/Province is too long')
+    .regex(/^[a-zA-Z\s\-'.]+$/, 'State/Province contains invalid characters'),
+  postalCode: z
+    .string()
+    .min(1, 'Postal/ZIP code is required')
+    .max(20, 'Postal/ZIP code is too long')
+    .regex(/^[a-zA-Z0-9\s\-]+$/, 'Postal/ZIP code contains invalid characters'),
+  country: z
+    .string()
+    .min(2, 'Country is required')
+    .max(2, 'Country code must be 2 characters')
+    .regex(/^[A-Z]{2}$/, 'Country must be a valid 2-letter code (e.g., US, CA)')
+    .default('US')
+});
+
+export type BillingAddressData = z.infer<typeof billingAddressSchema>;
+
+/**
+ * Tax ID Schema
+ * Validation for business tax identification numbers
+ */
+export const taxIdSchema = z.object({
+  type: z.enum([
+    'us_ein',
+    'ca_bn', 
+    'gb_vat',
+    'au_abn',
+    'eu_vat',
+    'generic'
+  ], {
+    errorMap: () => ({ message: 'Please select a valid tax ID type' })
+  }),
+  value: z
+    .string()
+    .min(1, 'Tax ID value is required')
+    .max(50, 'Tax ID value is too long')
+    .regex(/^[a-zA-Z0-9\-]+$/, 'Tax ID contains invalid characters')
+});
+
+export type TaxIdData = z.infer<typeof taxIdSchema>;
+
+/**
+ * Subscription Plan Selection Schema
+ * Validation for plan selection and billing cycle
+ */
+export const subscriptionPlanSchema = z.object({
+  planId: z.enum(['free', 'professional', 'enterprise'], {
+    errorMap: () => ({ message: 'Please select a valid subscription plan' })
+  }),
+  billingCycle: z.enum(['monthly', 'yearly'], {
+    errorMap: () => ({ message: 'Please select monthly or yearly billing' })
+  }).default('monthly')
+});
+
+export type SubscriptionPlanData = z.infer<typeof subscriptionPlanSchema>;
+
+/**
+ * Subscription Signup Form Schema
+ * Complete subscription signup with billing details
+ */
+export const subscriptionSignupSchema = z.object({
+  // Plan Selection
+  planId: z.enum(['professional', 'enterprise'], {
+    errorMap: () => ({ message: 'Please select a subscription plan' })
+  }),
+  billingCycle: z.enum(['monthly', 'yearly']).default('monthly'),
+  
+  // Billing Contact Information
+  billingDetails: z.object({
+    name: z
+      .string()
+      .min(1, 'Billing name is required')
+      .max(100, 'Name is too long')
+      .regex(/^[a-zA-Z\s\-'.]+$/, 'Name contains invalid characters'),
+    email: emailSchema,
+    address: billingAddressSchema
+  }),
+  
+  // Payment Method (will be handled by Stripe Elements)
+  paymentMethodId: z
+    .string()
+    .optional(),
+  
+  // Tax Information (optional)
+  taxId: taxIdSchema.optional(),
+  
+  // Promotional Code
+  couponCode: z
+    .string()
+    .max(50, 'Coupon code is too long')
+    .regex(/^[a-zA-Z0-9\-_]+$/, 'Coupon code contains invalid characters')
+    .optional(),
+  
+  // Legal Agreements
+  terms: z
+    .boolean()
+    .refine((val) => val === true, 'You must agree to the Terms of Service'),
+  privacy: z
+    .boolean()
+    .refine((val) => val === true, 'You must agree to the Privacy Policy'),
+  
+  // Marketing Consent
+  marketing: z.boolean().default(false),
+  
+  // Honeypot
+  _website: honeypotSchema.optional()
+});
+
+export type SubscriptionSignupData = z.infer<typeof subscriptionSignupSchema>;
+
+/**
+ * Payment Method Form Schema
+ * For adding/updating payment methods
+ */
+export const paymentMethodSchema = z.object({
+  // Payment Method Type
+  type: z.enum(['card'], {
+    errorMap: () => ({ message: 'Only card payments are supported currently' })
+  }).default('card'),
+  
+  // Billing Details
+  billingDetails: z.object({
+    name: z
+      .string()
+      .min(1, 'Cardholder name is required')
+      .max(100, 'Name is too long')
+      .regex(/^[a-zA-Z\s\-'.]+$/, 'Name contains invalid characters'),
+    email: emailSchema,
+    address: billingAddressSchema
+  }),
+  
+  // Set as Default
+  setAsDefault: z.boolean().default(false),
+  
+  // Stripe Elements Integration (card details handled by Stripe)
+  stripeElementsReady: z.boolean().default(false)
+});
+
+export type PaymentMethodData = z.infer<typeof paymentMethodSchema>;
+
+/**
+ * Billing Details Update Schema
+ * For updating customer billing information
+ */
+export const billingDetailsUpdateSchema = z.object({
+  // Contact Information
+  name: z
+    .string()
+    .min(1, 'Name is required')
+    .max(100, 'Name is too long')
+    .regex(/^[a-zA-Z\s\-'.]+$/, 'Name contains invalid characters'),
+  email: emailSchema,
+  
+  // Billing Address
+  address: billingAddressSchema,
+  
+  // Tax IDs (multiple allowed for international businesses)
+  taxIds: z
+    .array(taxIdSchema)
+    .max(5, 'Maximum 5 tax IDs allowed')
+    .optional()
+    .default([])
+});
+
+export type BillingDetailsUpdateData = z.infer<typeof billingDetailsUpdateSchema>;
+
+/**
+ * Subscription Update Schema
+ * For plan changes and subscription modifications
+ */
+export const subscriptionUpdateSchema = z.object({
+  // Plan Change
+  newPlanId: z.enum(['free', 'professional', 'enterprise']).optional(),
+  newBillingCycle: z.enum(['monthly', 'yearly']).optional(),
+  
+  // Payment Method Change
+  paymentMethodId: z.string().optional(),
+  
+  // Proration Settings
+  prorationBehavior: z.enum([
+    'create_prorations',
+    'none',
+    'always_invoice'
+  ]).default('create_prorations'),
+  
+  // Effective Date
+  effectiveDate: z.enum(['immediately', 'next_period']).default('immediately'),
+  
+  // Change Reason (for analytics)
+  changeReason: z
+    .string()
+    .max(500, 'Reason is too long')
+    .optional()
+});
+
+export type SubscriptionUpdateData = z.infer<typeof subscriptionUpdateSchema>;
+
+/**
+ * Subscription Cancellation Schema
+ * For handling subscription cancellations
+ */
+export const subscriptionCancellationSchema = z.object({
+  // Cancellation Timing
+  cancelAtPeriodEnd: z.boolean().default(true),
+  
+  // Cancellation Reason (for feedback)
+  reason: z.enum([
+    'too_expensive',
+    'missing_features', 
+    'poor_support',
+    'technical_issues',
+    'switching_provider',
+    'no_longer_needed',
+    'other'
+  ]).optional(),
+  
+  // Detailed Feedback
+  feedback: z
+    .string()
+    .max(1000, 'Feedback is too long')
+    .optional(),
+  
+  // Exit Survey
+  wouldRecommend: z.boolean().optional(),
+  overallSatisfaction: z
+    .number()
+    .min(1)
+    .max(5)
+    .optional(),
+  
+  // Re-engagement Offers
+  acceptOffers: z.boolean().default(false)
+});
+
+export type SubscriptionCancellationData = z.infer<typeof subscriptionCancellationSchema>;
+
+/**
+ * Invoice Download Request Schema
+ * For requesting invoice downloads
+ */
+export const invoiceRequestSchema = z.object({
+  invoiceId: z
+    .string()
+    .min(1, 'Invoice ID is required'),
+  format: z.enum(['pdf', 'json']).default('pdf')
+});
+
+export type InvoiceRequestData = z.infer<typeof invoiceRequestSchema>;
+
+/**
+ * Usage Alert Preferences Schema
+ * For configuring usage limit notifications
+ */
+export const usageAlertPreferencesSchema = z.object({
+  // Alert Thresholds
+  projectsThreshold: z
+    .number()
+    .min(50)
+    .max(100)
+    .default(80),
+  teamMembersThreshold: z
+    .number()
+    .min(50)
+    .max(100)
+    .default(80),
+  installationsThreshold: z
+    .number()
+    .min(50)
+    .max(100)
+    .default(80),
+  storageThreshold: z
+    .number()
+    .min(50)
+    .max(100)
+    .default(80),
+  
+  // Notification Methods
+  emailNotifications: z.boolean().default(true),
+  inAppNotifications: z.boolean().default(true),
+  
+  // Notification Recipients (additional emails)
+  additionalRecipients: z
+    .array(emailSchema)
+    .max(10, 'Maximum 10 additional recipients')
+    .optional()
+    .default([])
+});
+
+export type UsageAlertPreferencesData = z.infer<typeof usageAlertPreferencesSchema>;
+
+/**
+ * Billing Portal Access Schema
+ * For generating billing portal sessions
+ */
+export const billingPortalSchema = z.object({
+  returnUrl: z
+    .string()
+    .url('Invalid return URL')
+    .optional()
+});
+
+export type BillingPortalData = z.infer<typeof billingPortalSchema>;
+
+/**
+ * Coupon Application Schema
+ * For applying promotional codes
+ */
+export const couponApplicationSchema = z.object({
+  code: z
+    .string()
+    .min(1, 'Coupon code is required')
+    .max(50, 'Coupon code is too long')
+    .regex(/^[a-zA-Z0-9\-_]+$/, 'Coupon code contains invalid characters')
+    .transform(val => val.toUpperCase())
+});
+
+export type CouponApplicationData = z.infer<typeof couponApplicationSchema>;
+
+// Billing form validation options and constants
+export const BILLING_COUNTRIES = [
+  { value: 'US', label: 'United States' },
+  { value: 'CA', label: 'Canada' },
+  { value: 'GB', label: 'United Kingdom' },
+  { value: 'AU', label: 'Australia' },
+  { value: 'DE', label: 'Germany' },
+  { value: 'FR', label: 'France' },
+  { value: 'NL', label: 'Netherlands' },
+  { value: 'SE', label: 'Sweden' },
+  { value: 'DK', label: 'Denmark' },
+  { value: 'NO', label: 'Norway' }
+] as const;
+
+export const TAX_ID_TYPES = [
+  { value: 'us_ein', label: 'US EIN (Employer Identification Number)' },
+  { value: 'ca_bn', label: 'Canada Business Number' },
+  { value: 'gb_vat', label: 'UK VAT Number' },
+  { value: 'au_abn', label: 'Australia ABN' },
+  { value: 'eu_vat', label: 'EU VAT Number' },
+  { value: 'generic', label: 'Other Tax ID' }
+] as const;
+
+export const CANCELLATION_REASONS = [
+  { value: 'too_expensive', label: 'Too expensive' },
+  { value: 'missing_features', label: 'Missing required features' },
+  { value: 'poor_support', label: 'Unsatisfactory customer support' },
+  { value: 'technical_issues', label: 'Technical problems or bugs' },
+  { value: 'switching_provider', label: 'Switching to another provider' },
+  { value: 'no_longer_needed', label: 'No longer need the service' },
+  { value: 'other', label: 'Other reason' }
+] as const;
+
+export const PRORATION_BEHAVIORS = [
+  { 
+    value: 'create_prorations', 
+    label: 'Prorate charges immediately',
+    description: 'You will be charged/credited for the time used on each plan'
+  },
+  { 
+    value: 'none', 
+    label: 'No prorations',
+    description: 'Changes will take effect at the next billing cycle'
+  },
+  { 
+    value: 'always_invoice', 
+    label: 'Always create invoice',
+    description: 'Generate an invoice for any charges immediately'
+  }
+] as const;

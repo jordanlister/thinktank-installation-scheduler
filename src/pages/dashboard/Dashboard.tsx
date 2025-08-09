@@ -1,4 +1,4 @@
-// Lead Route - Dashboard Page
+// Think Tank Technologies Installation Scheduler - Multi-Tenant Dashboard
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,25 +9,45 @@ import {
   Clock,
   TrendingUp,
   AlertCircle,
-  RefreshCw
+  RefreshCw,
+  Building2,
+  FolderOpen,
+  BarChart3,
+  Settings,
+  Plus,
+  ArrowRight
 } from 'lucide-react';
-import { useDashboardStats, useInstallationsForDate } from '../../hooks/useInstallations';
+// Temporarily disabled until database is properly set up
+// import { useDashboardStats, useInstallationsForDate } from '../../hooks/useInstallations';
+// import { useOrganization, useCurrentProject, useProjects, useTenantPermissions } from '../../contexts/TenantProvider';
+// import { useOrganizationTheme } from '../../components/layout/ThemeProvider';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { stats, isLoading: statsLoading, error: statsError, refetch: refetchStats } = useDashboardStats();
-  const today = new Date().toISOString().split('T')[0];
-  const { installations: todayInstallations, isLoading: todayLoading } = useInstallationsForDate(today);
+  
+  // Temporarily use mock data until database is set up
+  const statsLoading = false;
+  const statsError = null;
+  const todayLoading = false;
+  const todayInstallations = [];
+  
+  // Mock organization data
+  const organization = { name: 'Think Tank Technologies' };
+  const currentProject = null;
+  const projects = [];
+  const canManageProjects = true;
+  const hasProjectPermission = () => true;
+  const theme = { primaryColor: '#3b82f6' };
 
-  // Use real data from Supabase, with fallback to zeros if still loading
-  const dashboardData = stats || {
-    totalInstallations: 0,
-    pendingInstallations: 0,
-    scheduledInstallations: 0,
-    completedInstallations: 0,
-    todayInstallations: 0,
-    weekInstallations: 0,
-    monthInstallations: 0,
+  // Use mock data for now
+  const dashboardData = {
+    totalInstallations: 42,
+    pendingInstallations: 8,
+    scheduledInstallations: 15,
+    completedInstallations: 19,
+    todayInstallations: 3,
+    weekInstallations: 12,
+    monthInstallations: 28,
   };
 
   const statCards = [
@@ -61,48 +81,132 @@ export const Dashboard: React.FC = () => {
     },
   ];
 
-  if (statsLoading) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="glass rounded-xl p-8 flex items-center space-x-4">
-          <RefreshCw className="h-8 w-8 animate-spin text-accent-400" />
-          <span className="text-lg text-white/80">Loading dashboard data...</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (statsError) {
-    return (
-      <div className="space-y-8">
-        <div className="glass-strong border border-error-500/30 rounded-xl p-6">
-          <div className="flex items-start space-x-4">
-            <div className="h-10 w-10 bg-error-500/20 rounded-full flex items-center justify-center">
-              <AlertCircle className="h-6 w-6 text-error-400" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-medium text-white">Error Loading Dashboard</h3>
-              <p className="mt-2 text-white/70">{statsError}</p>
-              <button
-                onClick={refetchStats}
-                className="mt-4 btn-primary"
-              >
-                Try again
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Removed loading and error states since we're using mock data
 
   return (
     <div className="space-y-8">
-      {/* Page header */}
+      {/* Multi-tenant page header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-xl text-white/80">Welcome to Lead Route</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center space-x-3 mb-2">
+              {currentProject ? (
+                <>
+                  <div 
+                    className="h-10 w-10 rounded-lg flex items-center justify-center"
+                    style={{ backgroundColor: currentProject.color || theme.primaryColor }}
+                  >
+                    <FolderOpen className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h1 className="text-4xl font-bold text-white">{currentProject.name}</h1>
+                    <p className="text-xl text-white/80">Project Dashboard</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="h-10 w-10 bg-gradient-to-br from-blue-500/30 to-purple-500/20 rounded-lg flex items-center justify-center">
+                    <Building2 className="h-6 w-6 text-blue-400" />
+                  </div>
+                  <div>
+                    <h1 className="text-4xl font-bold text-white">{organization?.name || 'Organization'}</h1>
+                    <p className="text-xl text-white/80">Organization Dashboard</p>
+                  </div>
+                </>
+              )}
+            </div>
+            {currentProject && (
+              <div className="flex items-center space-x-4 text-sm text-white/60">
+                <span>{currentProject.team.length} team members</span>
+                <span>•</span>
+                <span className="capitalize">{currentProject.status.replace('_', ' ')}</span>
+                {currentProject.startDate && currentProject.endDate && (
+                  <>
+                    <span>•</span>
+                    <span>
+                      {new Date(currentProject.startDate).toLocaleDateString()} - {new Date(currentProject.endDate).toLocaleDateString()}
+                    </span>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Quick actions for tenant management */}
+          <div className="flex items-center space-x-3">
+            {!currentProject && canManageProjects && (
+              <button
+                onClick={() => navigate('/app/projects/new')}
+                className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors flex items-center space-x-2"
+              >
+                <Plus className="h-4 w-4" />
+                <span>New Project</span>
+              </button>
+            )}
+            {currentProject && hasProjectPermission('update_project') && (
+              <button
+                onClick={() => navigate(`/app/projects/${currentProject.id}/settings`)}
+                className="px-4 py-2 bg-white/10 border border-white/20 hover:bg-white/20 text-white rounded-lg transition-colors flex items-center space-x-2"
+              >
+                <Settings className="h-4 w-4" />
+                <span>Project Settings</span>
+              </button>
+            )}
+          </div>
+        </div>
       </div>
+
+      {/* Project overview cards - Only show when not in a specific project */}
+      {!currentProject && projects.length > 0 && (
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-white">Active Projects</h2>
+            <button 
+              onClick={() => navigate('/app/projects')}
+              className="text-blue-400 hover:text-blue-300 transition-colors flex items-center space-x-1 text-sm"
+            >
+              <span>View all</span>
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {projects.slice(0, 3).map((project) => (
+              <div 
+                key={project.id}
+                className="card rounded-lg hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                onClick={() => navigate(`/app/projects/${project.id}`)}
+              >
+                <div className="card-body p-4">
+                  <div className="flex items-start space-x-3">
+                    <div 
+                      className="h-10 w-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: project.color || theme.primaryColor }}
+                    >
+                      <FolderOpen className="h-5 w-5 text-white" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-white font-medium truncate">{project.name}</h3>
+                      {project.description && (
+                        <p className="text-white/60 text-sm mt-1 line-clamp-2">{project.description}</p>
+                      )}
+                      <div className="flex items-center space-x-3 mt-2 text-xs text-white/50">
+                        <span>{project.team.length} members</span>
+                        <span className={`px-2 py-1 rounded-full capitalize ${
+                          project.status === 'active' ? 'bg-green-500/20 text-green-300' :
+                          project.status === 'planning' ? 'bg-blue-500/20 text-blue-300' :
+                          'bg-yellow-500/20 text-yellow-300'
+                        }`}>
+                          {project.status.replace('_', ' ')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Stats grid */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

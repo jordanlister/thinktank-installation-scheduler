@@ -1,12 +1,500 @@
 // Think Tank Technologies Installation Scheduler - Type Definitions
 
+// =====================================================
+// MULTI-TENANT AUTHENTICATION & ORGANIZATION TYPES
+// =====================================================
+
+// Organization roles (primary tenant level)
+export const OrganizationRole = {
+  OWNER: 'owner',
+  ADMIN: 'admin', 
+  MANAGER: 'manager',
+  MEMBER: 'member'
+} as const;
+
+export type OrganizationRole = typeof OrganizationRole[keyof typeof OrganizationRole];
+
+// Project roles (secondary level within organizations)
+export const ProjectRole = {
+  ADMIN: 'admin',
+  MANAGER: 'manager',
+  SCHEDULER: 'scheduler',
+  LEAD: 'lead',
+  ASSISTANT: 'assistant',
+  VIEWER: 'viewer'
+} as const;
+
+export type ProjectRole = typeof ProjectRole[keyof typeof ProjectRole];
+
+// Organization entity (primary tenant)
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  domain?: string;
+  subscriptionPlan: SubscriptionPlanEnum;
+  settings: OrganizationSettings;
+  branding: OrganizationBranding;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface OrganizationSettings {
+  timezone: string;
+  currency: string;
+  dateFormat: string;
+  timeFormat: '12h' | '24h';
+  workingHours: {
+    start: string;
+    end: string;
+  };
+  defaultJobDuration: number;
+  maxJobsPerDay: number;
+  enableAutoAssignments: boolean;
+  requireApprovalForChanges: boolean;
+  [key: string]: any;
+}
+
+export interface OrganizationBranding {
+  primaryColor: string;
+  secondaryColor: string;
+  logo?: string;
+  favicon?: string;
+  customCss?: string;
+}
+
+export const SubscriptionPlan = {
+  FREE: 'free',
+  PROFESSIONAL: 'professional',
+  ENTERPRISE: 'enterprise'
+} as const;
+
+export type SubscriptionPlanEnum = typeof SubscriptionPlan[keyof typeof SubscriptionPlan];
+
+// Project entity (secondary isolation within organizations)
+export interface Project {
+  id: string;
+  organizationId: string;
+  name: string;
+  description?: string;
+  settings: ProjectSettings;
+  isActive: boolean;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ProjectSettings {
+  defaultDuration: number;
+  workingHours: {
+    start: string;
+    end: string;
+  };
+  bufferTime: number;
+  maxTravelDistance: number;
+  [key: string]: any;
+}
+
+// Project user assignments (many-to-many with roles)
+export interface ProjectUser {
+  id: string;
+  projectId: string;
+  userId: string;
+  role: ProjectRole;
+  assignedBy: string;
+  assignedAt: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// User invitation system
+export interface UserInvitation {
+  id: string;
+  organizationId: string;
+  projectId?: string; // Optional project assignment
+  email: string;
+  organizationRole: OrganizationRole;
+  projectRole?: ProjectRole;
+  invitedBy: string;
+  token: string;
+  expiresAt: string;
+  acceptedAt?: string;
+  acceptedBy?: string;
+  metadata: InvitationMetadata;
+  createdAt: string;
+}
+
+export interface InvitationMetadata {
+  firstName?: string;
+  lastName?: string;
+  message?: string;
+  redirectUrl?: string;
+  source: 'admin' | 'bulk_import' | 'api';
+}
+
+// Subscription and billing
+export interface Subscription {
+  id: string;
+  organizationId: string;
+  planId: string;
+  status: SubscriptionStatus;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  trialEnd?: string;
+  billingCycle: BillingCycle;
+  amountCents: number;
+  currency: string;
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  paymentMethodId?: string;
+  lastPaymentAt?: string;
+  nextBillingDate?: string;
+  metadata: Record<string, any>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const SubscriptionStatus = {
+  TRIAL: 'trial',
+  ACTIVE: 'active',
+  PAST_DUE: 'past_due',
+  CANCELED: 'canceled',
+  PAUSED: 'paused'
+} as const;
+
+export type SubscriptionStatus = typeof SubscriptionStatus[keyof typeof SubscriptionStatus];
+
+export const BillingCycle = {
+  MONTHLY: 'monthly',
+  YEARLY: 'yearly'
+} as const;
+
+export type BillingCycle = typeof BillingCycle[keyof typeof BillingCycle];
+
+// Organization activity/audit log
+export interface OrganizationActivity {
+  id: string;
+  organizationId: string;
+  projectId?: string;
+  userId?: string;
+  activityType: string;
+  entityType?: string;
+  entityId?: string;
+  description: string;
+  metadata: Record<string, any>;
+  ipAddress?: string;
+  userAgent?: string;
+  createdAt: string;
+}
+
+// Permission and RBAC types
+export interface Permission {
+  id: string;
+  resource: string;
+  action: string; // create, read, update, delete, manage
+  conditions?: Record<string, any>;
+}
+
+export interface RolePermissions {
+  organizationRole: OrganizationRole;
+  projectRole?: ProjectRole;
+  permissions: Permission[];
+  inherited: boolean;
+}
+
+// Enhanced authentication context
+export interface AuthUser {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  organizationId: string;
+  organizationRole: OrganizationRole;
+  organization: Organization;
+  currentProject?: Project;
+  projects: ProjectAssignment[];
+  permissions: Permission[];
+  settings: Record<string, any>;
+  lastLoginAt: string;
+}
+
+export interface ProjectAssignment {
+  projectId: string;
+  projectName: string;
+  role: ProjectRole;
+  isActive: boolean;
+}
+
+// JWT claims structure for multi-tenant context
+export interface JWTClaims {
+  sub: string; // user id
+  email: string;
+  organizationId: string;
+  organizationRole: OrganizationRole;
+  currentProject?: string;
+  projects: ProjectAssignment[];
+  permissions: string[];
+  exp: number;
+  iat: number;
+}
+
+// API key management for organizations
+export interface OrganizationAPIKey {
+  id: string;
+  organizationId: string;
+  name: string;
+  keyPrefix: string;
+  scopes: string[];
+  lastUsedAt?: string;
+  expiresAt?: string;
+  createdBy: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+// Email template types for invitations
+export interface InvitationEmailTemplate {
+  id: string;
+  name: string;
+  subject: string;
+  htmlContent: string;
+  textContent: string;
+  variables: EmailTemplateVariable[];
+  isActive: boolean;
+}
+
+export interface EmailTemplateVariable {
+  name: string;
+  description: string;
+  required: boolean;
+  defaultValue?: string;
+}
+
+// Multi-Tenant Types
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  logoUrl?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+  customTheme?: OrganizationTheme;
+  settings: OrganizationSettings;
+  subscription: OrganizationSubscription;
+  contact: OrganizationContact;
+  createdAt: string;
+  updatedAt: string;
+  isActive: boolean;
+  memberCount: number;
+  projectCount: number;
+}
+
+export interface OrganizationTheme {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  backgroundColor: string;
+  textColor: string;
+  fontFamily?: string;
+  logoUrl?: string;
+  faviconUrl?: string;
+  customCss?: string;
+}
+
+export interface OrganizationSettings {
+  timezone: string;
+  dateFormat: 'MM/DD/YYYY' | 'DD/MM/YYYY' | 'YYYY-MM-DD';
+  timeFormat: '12h' | '24h';
+  currency: string;
+  language: string;
+  allowPublicProjects: boolean;
+  requireProjectApproval: boolean;
+  maxProjectsPerUser: number;
+  defaultUserRole: UserRole;
+}
+
+export interface OrganizationContact {
+  email: string;
+  phone?: string;
+  address?: Address;
+  billingEmail?: string;
+  supportEmail?: string;
+}
+
+export interface OrganizationSubscription {
+  plan: SubscriptionPlanEnum;
+  status: SubscriptionStatus;
+  startDate: string;
+  endDate?: string;
+  maxUsers: number;
+  maxProjects: number;
+  features: string[];
+  billingCycle: 'monthly' | 'yearly';
+}
+
+
+export interface Project {
+  id: string;
+  organizationId: string;
+  name: string;
+  slug: string;
+  description?: string;
+  status: ProjectStatus;
+  visibility: ProjectVisibility;
+  settings: ProjectSettings;
+  team: ProjectMember[];
+  tags: string[];
+  color?: string;
+  logoUrl?: string;
+  startDate?: string;
+  endDate?: string;
+  budget?: ProjectBudget;
+  createdAt: string;
+  updatedAt: string;
+  createdBy: string;
+  lastActivityAt: string;
+}
+
+export const ProjectStatus = {
+  PLANNING: 'planning',
+  ACTIVE: 'active',
+  ON_HOLD: 'on_hold',
+  COMPLETED: 'completed',
+  ARCHIVED: 'archived'
+} as const;
+
+export type ProjectStatus = typeof ProjectStatus[keyof typeof ProjectStatus];
+
+export const ProjectVisibility = {
+  PRIVATE: 'private',
+  ORGANIZATION: 'organization',
+  PUBLIC: 'public'
+} as const;
+
+export type ProjectVisibility = typeof ProjectVisibility[keyof typeof ProjectVisibility];
+
+export interface ProjectSettings {
+  allowExternalSharing: boolean;
+  requireApprovalForChanges: boolean;
+  enableTimeTracking: boolean;
+  defaultTaskPriority: Priority;
+  autoAssignTasks: boolean;
+  notificationsEnabled: boolean;
+  customFields: ProjectCustomField[];
+}
+
+export interface ProjectCustomField {
+  id: string;
+  name: string;
+  type: 'text' | 'number' | 'date' | 'select' | 'multiselect' | 'boolean';
+  required: boolean;
+  options?: string[];
+  defaultValue?: any;
+}
+
+export interface ProjectBudget {
+  total: number;
+  spent: number;
+  currency: string;
+  trackingEnabled: boolean;
+  approvalRequired: boolean;
+}
+
+export interface ProjectMember {
+  id: string;
+  userId: string;
+  projectId: string;
+  role: ProjectRole;
+  permissions: ProjectPermission[];
+  joinedAt: string;
+  invitedBy: string;
+  isActive: boolean;
+}
+
+export const ProjectPermission = {
+  READ_PROJECT: 'read_project',
+  UPDATE_PROJECT: 'update_project',
+  DELETE_PROJECT: 'delete_project',
+  MANAGE_MEMBERS: 'manage_members',
+  MANAGE_INSTALLATIONS: 'manage_installations',
+  MANAGE_ASSIGNMENTS: 'manage_assignments',
+  MANAGE_SCHEDULES: 'manage_schedules',
+  MANAGE_REPORTS: 'manage_reports',
+  VIEW_ANALYTICS: 'view_analytics',
+  EXPORT_DATA: 'export_data'
+} as const;
+
+export type ProjectPermission = typeof ProjectPermission[keyof typeof ProjectPermission];
+
+export interface OrganizationMember {
+  id: string;
+  userId: string;
+  organizationId: string;
+  role: OrganizationRole;
+  permissions: OrganizationPermission[];
+  joinedAt: string;
+  invitedBy: string;
+  isActive: boolean;
+  lastActiveAt: string;
+}
+
+export const OrganizationPermission = {
+  MANAGE_ORGANIZATION: 'manage_organization',
+  MANAGE_BILLING: 'manage_billing',
+  MANAGE_MEMBERS: 'manage_members',
+  MANAGE_PROJECTS: 'manage_projects',
+  MANAGE_SETTINGS: 'manage_settings',
+  VIEW_ANALYTICS: 'view_analytics',
+  EXPORT_DATA: 'export_data'
+} as const;
+
+export type OrganizationPermission = typeof OrganizationPermission[keyof typeof OrganizationPermission];
+
+// Multi-tenant context types
+export interface TenantContext {
+  organization: Organization | null;
+  project: Project | null;
+  userRole: OrganizationRole | null;
+  projectRole: ProjectRole | null;
+  permissions: {
+    organization: OrganizationPermission[];
+    project: ProjectPermission[];
+  };
+  projects: Project[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+export interface TenantActions {
+  switchOrganization: (organizationId: string) => Promise<void>;
+  switchProject: (projectId: string | null) => Promise<void>;
+  refreshTenantData: () => Promise<void>;
+  createProject: (projectData: Partial<Project>) => Promise<Project>;
+  updateProject: (projectId: string, updates: Partial<Project>) => Promise<void>;
+  deleteProject: (projectId: string) => Promise<void>;
+  inviteToProject: (projectId: string, email: string, role: ProjectRole) => Promise<void>;
+  updateMemberRole: (projectId: string, memberId: string, role: ProjectRole) => Promise<void>;
+  removeMember: (projectId: string, memberId: string) => Promise<void>;
+}
+
 export interface User {
   id: string;
   email: string;
   firstName: string;
   lastName: string;
-  role: UserRole;
+  organizationId?: string; // Optional for backward compatibility
+  role: UserRole; // Legacy role - kept for backward compatibility
+  organizationRole?: OrganizationRole; // New organization-level role
   isActive: boolean;
+  invitedBy?: string;
+  invitedAt?: string;
+  joinedAt?: string;
+  lastLoginAt?: string;
+  settings?: Record<string, any>;
   createdAt: string;
   updatedAt: string;
 }
@@ -2723,5 +3211,1141 @@ export type NotificationPriority = 'low' | 'medium' | 'high' | 'urgent';
 export type NotificationStatus = 'unread' | 'read' | 'dismissed' | 'archived';
 export type NotificationChannel = 'in_app' | 'email' | 'sms' | 'push';
 export type NotificationFrequency = 'immediate' | 'daily' | 'weekly' | 'monthly' | 'never';
+
+// =====================================================
+// BILLING AND SUBSCRIPTION TYPES
+// =====================================================
+
+// Organization-based subscription management
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  domain?: string;
+  subscriptionPlan: SubscriptionPlanEnum;
+  settings: OrganizationSettings;
+  branding: OrganizationBranding;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface OrganizationSettings {
+  timezone: string;
+  currency: string;
+  dateFormat: string;
+  workingHours: {
+    start: string;
+    end: string;
+  };
+  features: Record<string, boolean>;
+}
+
+export interface OrganizationBranding {
+  logoUrl?: string;
+  primaryColor?: string;
+  secondaryColor?: string;
+  customCss?: string;
+}
+
+// Subscription Plans and Billing (using existing declaration from line 67)
+
+export interface SubscriptionPlanConfig {
+  id: SubscriptionPlanEnum;
+  name: string;
+  description: string;
+  price: {
+    monthly: number;
+    yearly: number;
+  };
+  stripePriceId: {
+    monthly: string;
+    yearly: string;
+  };
+  limits: SubscriptionLimits;
+  features: SubscriptionFeatures;
+  isPopular: boolean;
+  isCustom: boolean;
+}
+
+export interface SubscriptionLimits {
+  projects: number;
+  teamMembers: number;
+  installations: number;
+  storageGB: number;
+  apiRequests: number;
+  webhookEndpoints: number;
+  customIntegrations: number;
+}
+
+export interface SubscriptionFeatures {
+  analytics: boolean;
+  advancedReporting: boolean;
+  customBranding: boolean;
+  apiAccess: boolean;
+  webhookSupport: boolean;
+  prioritySupport: boolean;
+  customIntegrations: boolean;
+  auditLogs: boolean;
+  ssoIntegration: boolean;
+  advancedSecurity: boolean;
+  customFields: boolean;
+  bulkOperations: boolean;
+  exportData: boolean;
+  whiteLabeling: boolean;
+  dedicatedSupport: boolean;
+}
+
+// Database subscription record
+export interface Subscription {
+  id: string;
+  organizationId: string;
+  planId: SubscriptionPlanEnum;
+  status: SubscriptionStatus;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  trialEnd?: string;
+  billingCycle: BillingCycle;
+  amountCents: number;
+  currency: string;
+  stripeCustomerId: string;
+  stripeSubscriptionId: string;
+  paymentMethodId?: string;
+  lastPaymentAt?: string;
+  nextBillingDate: string;
+  metadata: SubscriptionMetadata;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// BillingCycle already declared at line 169
+
+export interface SubscriptionMetadata {
+  upgradedFrom?: SubscriptionPlanEnum;
+  downgradedFrom?: SubscriptionPlanEnum;
+  changeReason?: string;
+  customPricing?: boolean;
+  discount?: number;
+  referralCode?: string;
+}
+
+// Usage Tracking and Enforcement
+export interface UsageMetrics {
+  organizationId: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  projects: {
+    current: number;
+    limit: number;
+    percentage: number;
+  };
+  teamMembers: {
+    current: number;
+    limit: number;
+    percentage: number;
+  };
+  installations: {
+    current: number;
+    limit: number;
+    percentage: number;
+  };
+  storage: {
+    currentGB: number;
+    limitGB: number;
+    percentage: number;
+  };
+  apiRequests: {
+    current: number;
+    limit: number;
+    percentage: number;
+    resetDate: string;
+  };
+  features: Record<string, FeatureUsage>;
+  warnings: UsageWarning[];
+  lastCalculated: string;
+}
+
+export interface FeatureUsage {
+  enabled: boolean;
+  used: boolean;
+  usageCount: number;
+  lastUsed?: string;
+}
+
+export interface UsageWarning {
+  type: UsageWarningType;
+  resource: string;
+  currentUsage: number;
+  limit: number;
+  percentage: number;
+  severity: 'info' | 'warning' | 'critical';
+  message: string;
+  actionRequired: boolean;
+  suggestedAction?: string;
+}
+
+export const UsageWarningType = {
+  APPROACHING_LIMIT: 'approaching_limit',
+  LIMIT_EXCEEDED: 'limit_exceeded',
+  FEATURE_DISABLED: 'feature_disabled',
+  UPGRADE_REQUIRED: 'upgrade_required'
+} as const;
+
+export type UsageWarningType = typeof UsageWarningType[keyof typeof UsageWarningType];
+
+// Stripe Integration Types
+export interface StripeCustomer {
+  id: string;
+  organizationId: string;
+  stripeCustomerId: string;
+  email: string;
+  name: string;
+  address?: BillingAddress;
+  paymentMethods: PaymentMethod[];
+  defaultPaymentMethodId?: string;
+  taxIds: TaxId[];
+  metadata: Record<string, string>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BillingAddress {
+  line1: string;
+  line2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+}
+
+export interface PaymentMethod {
+  id: string;
+  type: PaymentMethodType;
+  card?: {
+    brand: string;
+    last4: string;
+    expMonth: number;
+    expYear: number;
+    fingerprint: string;
+  };
+  billingDetails: {
+    name?: string;
+    email?: string;
+    address?: BillingAddress;
+  };
+  isDefault: boolean;
+  createdAt: string;
+}
+
+export const PaymentMethodType = {
+  CARD: 'card',
+  BANK_ACCOUNT: 'us_bank_account',
+  SEPA: 'sepa_debit'
+} as const;
+
+export type PaymentMethodType = typeof PaymentMethodType[keyof typeof PaymentMethodType];
+
+export interface TaxId {
+  id: string;
+  type: string;
+  value: string;
+  country: string;
+  verification: {
+    status: 'pending' | 'verified' | 'unverified';
+    verifiedAt?: string;
+  };
+}
+
+// Billing and Invoice Management
+export interface Invoice {
+  id: string;
+  organizationId: string;
+  stripeInvoiceId: string;
+  subscriptionId: string;
+  status: InvoiceStatus;
+  amountPaid: number;
+  amountDue: number;
+  amountRemaining: number;
+  currency: string;
+  description?: string;
+  hostedInvoiceUrl?: string;
+  invoicePdf?: string;
+  periodStart: string;
+  periodEnd: string;
+  dueDate: string;
+  paidAt?: string;
+  lineItems: InvoiceLineItem[];
+  metadata: Record<string, string>;
+  createdAt: string;
+}
+
+export const InvoiceStatus = {
+  DRAFT: 'draft',
+  OPEN: 'open',
+  PAID: 'paid',
+  UNCOLLECTIBLE: 'uncollectible',
+  VOID: 'void'
+} as const;
+
+export type InvoiceStatus = typeof InvoiceStatus[keyof typeof InvoiceStatus];
+
+export interface InvoiceLineItem {
+  id: string;
+  description: string;
+  amount: number;
+  currency: string;
+  quantity: number;
+  unitAmount: number;
+  period: {
+    start: string;
+    end: string;
+  };
+  proration: boolean;
+  metadata: Record<string, string>;
+}
+
+// Payment Processing
+export interface PaymentIntent {
+  id: string;
+  organizationId: string;
+  stripePaymentIntentId: string;
+  amount: number;
+  currency: string;
+  status: PaymentIntentStatus;
+  paymentMethodId?: string;
+  clientSecret: string;
+  description?: string;
+  metadata: Record<string, string>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const PaymentIntentStatus = {
+  REQUIRES_PAYMENT_METHOD: 'requires_payment_method',
+  REQUIRES_CONFIRMATION: 'requires_confirmation',
+  REQUIRES_ACTION: 'requires_action',
+  PROCESSING: 'processing',
+  REQUIRES_CAPTURE: 'requires_capture',
+  CANCELED: 'canceled',
+  SUCCEEDED: 'succeeded'
+} as const;
+
+export type PaymentIntentStatus = typeof PaymentIntentStatus[keyof typeof PaymentIntentStatus];
+
+// Subscription Management UI Types
+export interface SubscriptionManagementState {
+  currentSubscription?: Subscription;
+  availablePlans: SubscriptionPlanConfig[];
+  paymentMethods: PaymentMethod[];
+  invoices: Invoice[];
+  usageMetrics: UsageMetrics;
+  isLoading: boolean;
+  error?: string;
+}
+
+export interface BillingPortalSession {
+  url: string;
+  returnUrl: string;
+}
+
+// Form Types for Billing
+export interface SubscriptionSignupForm {
+  planId: SubscriptionPlanEnum;
+  billingCycle: BillingCycle;
+  paymentMethodId?: string;
+  billingDetails: {
+    name: string;
+    email: string;
+    address: BillingAddress;
+  };
+  taxId?: string;
+  couponCode?: string;
+}
+
+export interface PaymentMethodForm {
+  type: PaymentMethodType;
+  billingDetails: {
+    name: string;
+    email: string;
+    address: BillingAddress;
+  };
+  setAsDefault: boolean;
+}
+
+export interface BillingDetailsForm {
+  name: string;
+  email: string;
+  address: BillingAddress;
+  taxIds: Array<{
+    type: string;
+    value: string;
+  }>;
+}
+
+// Webhook Types
+export interface WebhookEvent {
+  id: string;
+  object: string;
+  apiVersion: string;
+  created: number;
+  type: WebhookEventType;
+  data: {
+    object: any;
+    previousAttributes?: any;
+  };
+  livemode: boolean;
+  pendingWebhooks: number;
+  request: {
+    id?: string;
+    idempotencyKey?: string;
+  };
+}
+
+export const WebhookEventType = {
+  // Customer events
+  CUSTOMER_CREATED: 'customer.created',
+  CUSTOMER_UPDATED: 'customer.updated',
+  CUSTOMER_DELETED: 'customer.deleted',
+  
+  // Subscription events
+  SUBSCRIPTION_CREATED: 'customer.subscription.created',
+  SUBSCRIPTION_UPDATED: 'customer.subscription.updated',
+  SUBSCRIPTION_DELETED: 'customer.subscription.deleted',
+  SUBSCRIPTION_TRIAL_WILL_END: 'customer.subscription.trial_will_end',
+  
+  // Payment events
+  PAYMENT_METHOD_ATTACHED: 'payment_method.attached',
+  PAYMENT_METHOD_DETACHED: 'payment_method.detached',
+  PAYMENT_INTENT_SUCCEEDED: 'payment_intent.succeeded',
+  PAYMENT_INTENT_PAYMENT_FAILED: 'payment_intent.payment_failed',
+  
+  // Invoice events
+  INVOICE_CREATED: 'invoice.created',
+  INVOICE_FINALIZED: 'invoice.finalized',
+  INVOICE_PAID: 'invoice.paid',
+  INVOICE_PAYMENT_FAILED: 'invoice.payment_failed',
+  INVOICE_UPCOMING: 'invoice.upcoming',
+  
+  // Setup Intent events
+  SETUP_INTENT_SUCCEEDED: 'setup_intent.succeeded',
+  SETUP_INTENT_SETUP_FAILED: 'setup_intent.setup_failed'
+} as const;
+
+export type WebhookEventType = typeof WebhookEventType[keyof typeof WebhookEventType];
+
+export interface WebhookEventLog {
+  id: string;
+  eventId: string;
+  type: WebhookEventType;
+  organizationId?: string;
+  processed: boolean;
+  processedAt?: string;
+  error?: string;
+  retryCount: number;
+  maxRetries: number;
+  nextRetryAt?: string;
+  data: any;
+  createdAt: string;
+}
+
+// Billing Analytics and Reporting
+export interface BillingAnalytics {
+  period: {
+    start: string;
+    end: string;
+  };
+  revenue: RevenueMetrics;
+  subscriptions: SubscriptionMetrics;
+  customers: CustomerMetrics;
+  usage: UsageAnalytics;
+  churn: ChurnMetrics;
+  trends: BillingTrend[];
+}
+
+export interface RevenueMetrics {
+  totalRevenue: number;
+  recurringRevenue: number;
+  oneTimeRevenue: number;
+  refunds: number;
+  netRevenue: number;
+  averageRevenuePerUser: number;
+  monthlyRecurringRevenue: number;
+  annualRecurringRevenue: number;
+  revenueGrowthRate: number;
+}
+
+export interface SubscriptionMetrics {
+  totalSubscriptions: number;
+  activeSubscriptions: number;
+  trialSubscriptions: number;
+  canceledSubscriptions: number;
+  pastDueSubscriptions: number;
+  upgrades: number;
+  downgrades: number;
+  newSubscriptions: number;
+  subscriptionsByPlan: Record<SubscriptionPlanEnum, number>;
+}
+
+export interface CustomerMetrics {
+  totalCustomers: number;
+  newCustomers: number;
+  activeCustomers: number;
+  churned: number;
+  lifetimeValue: number;
+  acquisitionCost: number;
+  paybackPeriod: number;
+}
+
+export interface UsageAnalytics {
+  averageUsageByPlan: Record<SubscriptionPlanEnum, UsageMetrics>;
+  featureAdoption: Record<string, number>;
+  limitUtilization: Record<string, number>;
+  upgradeDrivers: string[];
+}
+
+export interface ChurnMetrics {
+  churnRate: number;
+  revenueChurnRate: number;
+  churnReasons: Record<string, number>;
+  churnPredictionScore: number;
+  retentionRate: number;
+  expandedCustomers: number;
+}
+
+export interface BillingTrend {
+  date: string;
+  metric: BillingTrendMetric;
+  value: number;
+  previousPeriodValue?: number;
+  change?: number;
+  changePercentage?: number;
+}
+
+export const BillingTrendMetric = {
+  REVENUE: 'revenue',
+  SUBSCRIPTIONS: 'subscriptions',
+  CUSTOMERS: 'customers',
+  CHURN: 'churn',
+  USAGE: 'usage'
+} as const;
+
+export type BillingTrendMetric = typeof BillingTrendMetric[keyof typeof BillingTrendMetric];
+
+// Error Types
+export interface BillingError {
+  type: BillingErrorType;
+  message: string;
+  details?: any;
+  retryable: boolean;
+  userMessage: string;
+}
+
+export const BillingErrorType = {
+  STRIPE_API_ERROR: 'stripe_api_error',
+  SUBSCRIPTION_NOT_FOUND: 'subscription_not_found',
+  PAYMENT_FAILED: 'payment_failed',
+  LIMIT_EXCEEDED: 'limit_exceeded',
+  INVALID_PLAN: 'invalid_plan',
+  WEBHOOK_ERROR: 'webhook_error',
+  USAGE_CALCULATION_ERROR: 'usage_calculation_error'
+} as const;
+
+export type BillingErrorType = typeof BillingErrorType[keyof typeof BillingErrorType];
+
+// =====================================================
+// MULTI-TENANT ORGANIZATION & PROJECT MANAGEMENT TYPES
+// =====================================================
+
+// Organization Types
+export interface Organization {
+  id: string;
+  name: string;
+  slug: string;
+  domain?: string;
+  subscriptionPlan: SubscriptionPlanEnum;
+  settings: OrganizationSettings;
+  branding: OrganizationBranding;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  
+  // Computed properties
+  memberCount?: number;
+  projectCount?: number;
+  currentUsage?: OrganizationUsage;
+}
+
+export interface OrganizationSettings {
+  timezone: string;
+  currency: string;
+  dateFormat: string;
+  timeFormat: string;
+  language: string;
+  workingHours: {
+    start: string;
+    end: string;
+    days: number[];
+  };
+  defaultJobDuration: number;
+  travelTimeBuffer: number;
+  maxJobsPerTeamMember: number;
+  autoAssignments: boolean;
+  enableOptimization: boolean;
+  optimizationGoal: 'travel_distance' | 'workload_balance' | 'deadline_priority';
+  requireApprovalForChanges: boolean;
+  allowOvertimeAssignment: boolean;
+  weatherIntegration: boolean;
+  trafficIntegration: boolean;
+  customerPreferenceWeighting: number;
+  retentionDays: number;
+  auditLogging: boolean;
+  encryptSensitiveData: boolean;
+}
+
+export interface OrganizationBranding {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  logo?: string;
+  logoUrl?: string;
+  favicon?: string;
+  companyName?: string;
+  customCss?: string;
+  emailSignature?: string;
+  footerText?: string;
+}
+
+export interface OrganizationUsage {
+  projects: {
+    current: number;
+    limit: number;
+  };
+  teamMembers: {
+    current: number;
+    limit: number;
+  };
+  installations: {
+    current: number;
+    limit: number;
+  };
+  storage: {
+    current: number; // in GB
+    limit: number;
+  };
+}
+
+// Project Types
+export interface Project {
+  id: string;
+  organizationId: string;
+  name: string;
+  description?: string;
+  settings: ProjectSettings;
+  isActive: boolean;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  
+  // Computed properties
+  memberCount?: number;
+  installationCount?: number;
+  completedInstallations?: number;
+  activeAssignments?: number;
+}
+
+export interface ProjectSettings {
+  workingHours?: {
+    start: string;
+    end: string;
+    days: number[];
+  };
+  defaultJobDuration?: number;
+  travelTimeBuffer?: number;
+  maxJobsPerTeamMember?: number;
+  autoAssignments?: boolean;
+  requireApproval?: boolean;
+  allowOvertimeAssignment?: boolean;
+  geographicBounds?: {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+  };
+  customFields?: ProjectCustomField[];
+  templates?: ProjectTemplate[];
+}
+
+export interface ProjectCustomField {
+  id: string;
+  name: string;
+  type: 'text' | 'number' | 'date' | 'boolean' | 'select';
+  options?: string[];
+  required: boolean;
+  defaultValue?: any;
+}
+
+export interface ProjectTemplate {
+  id: string;
+  name: string;
+  description?: string;
+  installationType: string;
+  defaultDuration: number;
+  requiredSkills: string[];
+  checklist: ProjectTemplateTask[];
+}
+
+export interface ProjectTemplateTask {
+  id: string;
+  title: string;
+  description?: string;
+  estimatedMinutes: number;
+  required: boolean;
+  order: number;
+}
+
+// User Management Types
+export interface OrganizationMember {
+  id: string;
+  userId: string;
+  organizationId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: OrganizationRole;
+  isActive: boolean;
+  invitedBy?: string;
+  invitedAt?: string;
+  joinedAt?: string;
+  lastLoginAt?: string;
+  settings: UserSettings;
+  projects: ProjectMembership[];
+}
+
+export interface ProjectMembership {
+  projectId: string;
+  projectName: string;
+  role: ProjectRole;
+  assignedBy: string;
+  assignedAt: string;
+  isActive: boolean;
+}
+
+export interface UserSettings {
+  theme: 'light' | 'dark' | 'auto';
+  timezone: string;
+  dateFormat: string;
+  timeFormat: string;
+  language: string;
+  notifications: NotificationSettings;
+  preferences: {
+    defaultView: 'calendar' | 'list' | 'map';
+    itemsPerPage: number;
+    showAvatars: boolean;
+    enableSounds: boolean;
+    autoRefresh: boolean;
+    refreshInterval: number;
+  };
+}
+
+// Invitation System Types
+export interface UserInvitation {
+  id: string;
+  organizationId: string;
+  projectId?: string;
+  email: string;
+  organizationRole: OrganizationRole;
+  projectRole?: ProjectRole;
+  invitedBy: string;
+  token: string;
+  expiresAt: string;
+  acceptedAt?: string;
+  acceptedBy?: string;
+  metadata: InvitationMetadata;
+  createdAt: string;
+}
+
+export interface InvitationMetadata {
+  message?: string;
+  permissions?: string[];
+  customData?: Record<string, any>;
+}
+
+// Subscription and Billing Types (BillingCycle already declared at line 169)
+
+export interface SubscriptionPlanInterface {
+  id: string;
+  name: string;
+  description: string;
+  pricing: {
+    monthly: number;
+    yearly: number;
+  };
+  limits: {
+    projects: number; // -1 for unlimited
+    teamMembers: number;
+    installations: number;
+    storage: number; // in GB
+    apiCalls: number;
+  };
+  features: string[];
+  isPopular?: boolean;
+  isCustom?: boolean;
+}
+
+export interface Subscription {
+  id: string;
+  organizationId: string;
+  planId: string;
+  status: SubscriptionStatus;
+  currentPeriodStart: string;
+  currentPeriodEnd: string;
+  trialEnd?: string;
+  billingCycle: BillingCycle;
+  amountCents: number;
+  currency: string;
+  stripeCustomerId?: string;
+  stripeSubscriptionId?: string;
+  paymentMethodId?: string;
+  lastPaymentAt?: string;
+  nextBillingDate?: string;
+  metadata: Record<string, any>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Organization Setup and Onboarding Types
+export interface OrganizationSetupData {
+  organization: {
+    name: string;
+    slug: string;
+    domain?: string;
+  };
+  firstProject: {
+    name: string;
+    description?: string;
+  };
+  teamInvites: {
+    email: string;
+    role: OrganizationRole;
+    projectRole?: ProjectRole;
+  }[];
+  subscription: {
+    planId: string;
+    billingCycle: BillingCycle;
+  };
+}
+
+export const OrganizationSetupStep = {
+  ORGANIZATION_DETAILS: 'organization_details',
+  FIRST_PROJECT: 'first_project',
+  TEAM_INVITES: 'team_invites',
+  SUBSCRIPTION: 'subscription',
+  COMPLETE: 'complete'
+} as const;
+
+export type OrganizationSetupStep = typeof OrganizationSetupStep[keyof typeof OrganizationSetupStep];
+
+export interface OrganizationSetupState {
+  currentStep: OrganizationSetupStep;
+  completedSteps: OrganizationSetupStep[];
+  data: Partial<OrganizationSetupData>;
+  isLoading: boolean;
+  errors: Record<string, string>;
+}
+
+// Organization Analytics Types
+export interface OrganizationAnalytics {
+  period: {
+    start: string;
+    end: string;
+  };
+  overview: {
+    totalProjects: number;
+    activeProjects: number;
+    totalMembers: number;
+    activeMembers: number;
+    totalInstallations: number;
+    completedInstallations: number;
+    averageProjectCompletion: number;
+    customerSatisfactionScore: number;
+  };
+  projectMetrics: ProjectMetrics[];
+  memberActivity: MemberActivity[];
+  usageMetrics: UsageMetrics;
+  trends: AnalyticsTrend[];
+}
+
+export interface ProjectMetrics {
+  projectId: string;
+  projectName: string;
+  totalInstallations: number;
+  completedInstallations: number;
+  averageCompletionTime: number;
+  teamUtilization: number;
+  customerSatisfaction: number;
+  revenue: number;
+}
+
+export interface MemberActivity {
+  userId: string;
+  name: string;
+  role: OrganizationRole;
+  projectsAssigned: number;
+  installationsCompleted: number;
+  averageRating: number;
+  lastActive: string;
+  utilizationRate: number;
+}
+
+export interface UsageMetrics {
+  storageUsed: number;
+  apiCallsUsed: number;
+  activeIntegrations: number;
+  dataExports: number;
+  reportGenerations: number;
+}
+
+export interface AnalyticsTrend {
+  date: string;
+  metric: string;
+  value: number;
+  change: number;
+  changePercent: number;
+}
+
+// Activity Logging Types
+export interface OrganizationActivity {
+  id: string;
+  organizationId: string;
+  projectId?: string;
+  userId?: string;
+  activityType: ActivityType;
+  entityType?: string;
+  entityId?: string;
+  description: string;
+  metadata: Record<string, any>;
+  ipAddress?: string;
+  userAgent?: string;
+  createdAt: string;
+}
+
+export const ActivityType = {
+  // Organization activities
+  ORGANIZATION_CREATED: 'organization_created',
+  ORGANIZATION_UPDATED: 'organization_updated',
+  ORGANIZATION_SETTINGS_CHANGED: 'organization_settings_changed',
+  
+  // Project activities
+  PROJECT_CREATED: 'project_created',
+  PROJECT_UPDATED: 'project_updated',
+  PROJECT_ARCHIVED: 'project_archived',
+  
+  // User activities
+  USER_INVITED: 'user_invited',
+  USER_JOINED: 'user_joined',
+  USER_ROLE_CHANGED: 'user_role_changed',
+  USER_REMOVED: 'user_removed',
+  
+  // Installation activities
+  INSTALLATION_CREATED: 'installation_created',
+  INSTALLATION_ASSIGNED: 'installation_assigned',
+  INSTALLATION_COMPLETED: 'installation_completed',
+  
+  // System activities
+  SUBSCRIPTION_CHANGED: 'subscription_changed',
+  INTEGRATION_ADDED: 'integration_added',
+  DATA_EXPORT: 'data_export',
+  SETTINGS_IMPORT: 'settings_import'
+} as const;
+
+export type ActivityType = typeof ActivityType[keyof typeof ActivityType];
+
+// API Key Management Types
+export interface OrganizationApiKey {
+  id: string;
+  organizationId: string;
+  name: string;
+  keyPrefix: string; // Only first 8 characters for display
+  scopes: ApiKeyScope[];
+  lastUsedAt?: string;
+  expiresAt?: string;
+  createdBy: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export const ApiKeyScope = {
+  READ_INSTALLATIONS: 'read:installations',
+  WRITE_INSTALLATIONS: 'write:installations',
+  READ_TEAM: 'read:team',
+  WRITE_TEAM: 'write:team',
+  READ_ASSIGNMENTS: 'read:assignments',
+  WRITE_ASSIGNMENTS: 'write:assignments',
+  READ_ANALYTICS: 'read:analytics',
+  ADMIN_ACCESS: 'admin:access'
+} as const;
+
+export type ApiKeyScope = typeof ApiKeyScope[keyof typeof ApiKeyScope];
+
+// Integration Types
+export interface OrganizationIntegration {
+  id: string;
+  organizationId: string;
+  integrationType: IntegrationType;
+  name: string;
+  configuration: Record<string, any>;
+  isActive: boolean;
+  lastSyncAt?: string;
+  syncStatus: 'pending' | 'syncing' | 'success' | 'error';
+  syncError?: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const IntegrationType = {
+  CALENDAR: 'calendar', // Google Calendar, Outlook
+  CRM: 'crm', // Salesforce, HubSpot
+  MAPPING: 'mapping', // Google Maps, HERE
+  COMMUNICATION: 'communication', // Slack, Teams
+  EMAIL: 'email', // SendGrid, Mailchimp
+  STORAGE: 'storage', // Google Drive, Dropbox
+  PAYMENT: 'payment', // Stripe, PayPal
+  WEBHOOK: 'webhook' // Generic webhooks
+} as const;
+
+export type IntegrationType = typeof IntegrationType[keyof typeof IntegrationType];
+
+// Context and State Management Types
+export interface OrganizationContextType {
+  // Current state
+  organization: Organization | null;
+  currentProject: Project | null;
+  projects: Project[];
+  userRole: OrganizationRole | null;
+  permissions: Permission[];
+  
+  // Loading states
+  isLoading: boolean;
+  isProjectsLoading: boolean;
+  
+  // Actions
+  switchProject: (projectId: string) => Promise<void>;
+  refreshOrganization: () => Promise<void>;
+  refreshProjects: () => Promise<void>;
+  
+  // Organization management
+  updateOrganization: (updates: Partial<Organization>) => Promise<void>;
+  updateOrganizationSettings: (settings: Partial<OrganizationSettings>) => Promise<void>;
+  updateOrganizationBranding: (branding: Partial<OrganizationBranding>) => Promise<void>;
+  
+  // Member management
+  inviteUser: (invitation: Omit<UserInvitation, 'id' | 'token' | 'createdAt'>) => Promise<void>;
+  updateMemberRole: (userId: string, role: OrganizationRole) => Promise<void>;
+  removeMember: (userId: string) => Promise<void>;
+  
+  // Project management
+  createProject: (project: Omit<Project, 'id' | 'organizationId' | 'createdAt' | 'updatedAt'>) => Promise<Project>;
+  updateProject: (projectId: string, updates: Partial<Project>) => Promise<void>;
+  deleteProject: (projectId: string) => Promise<void>;
+  assignUserToProject: (userId: string, projectId: string, role: ProjectRole) => Promise<void>;
+  removeUserFromProject: (userId: string, projectId: string) => Promise<void>;
+}
+
+export interface ProjectContextType {
+  // Current state
+  project: Project | null;
+  projectMembers: OrganizationMember[];
+  projectSettings: ProjectSettings;
+  
+  // Loading states
+  isLoading: boolean;
+  isMembersLoading: boolean;
+  
+  // Actions
+  refreshProject: () => Promise<void>;
+  refreshMembers: () => Promise<void>;
+  
+  // Project management
+  updateProject: (updates: Partial<Project>) => Promise<void>;
+  updateProjectSettings: (settings: Partial<ProjectSettings>) => Promise<void>;
+  
+  // Member management
+  assignMember: (userId: string, role: ProjectRole) => Promise<void>;
+  updateMemberRole: (userId: string, role: ProjectRole) => Promise<void>;
+  removeMember: (userId: string) => Promise<void>;
+  
+  // Project-specific data
+  getProjectInstallations: () => Promise<Installation[]>;
+  getProjectTeamMembers: () => Promise<TeamMember[]>;
+  getProjectAssignments: () => Promise<Assignment[]>;
+}
+
+export interface Permission {
+  resource: string;
+  action: string;
+  conditions?: Record<string, any>;
+}
+
+// Utility Types for Multi-tenant Operations
+export interface MultiTenantQuery {
+  organizationId: string;
+  projectId?: string;
+  userId?: string;
+}
+
+export interface MultiTenantResponse<T> {
+  data: T;
+  pagination?: {
+    total: number;
+    page: number;
+    pageSize: number;
+    hasMore: boolean;
+  };
+  organizationContext: {
+    organizationId: string;
+    projectId?: string;
+  };
+}
+
+// Form and Validation Types
+export interface OrganizationFormData {
+  name: string;
+  slug: string;
+  domain?: string;
+  settings: Partial<OrganizationSettings>;
+  branding: Partial<OrganizationBranding>;
+}
+
+export interface ProjectFormData {
+  name: string;
+  description?: string;
+  settings: Partial<ProjectSettings>;
+}
+
+export interface InvitationFormData {
+  email: string;
+  organizationRole: OrganizationRole;
+  projectId?: string;
+  projectRole?: ProjectRole;
+  message?: string;
+}
+
+// Error and Validation Types
+export interface MultiTenantError {
+  code: string;
+  message: string;
+  details?: Record<string, any>;
+  organizationId?: string;
+  projectId?: string;
+}
+
+export interface ValidationResult {
+  isValid: boolean;
+  errors: Record<string, string[]>;
+  warnings: Record<string, string[]>;
+}
 
 

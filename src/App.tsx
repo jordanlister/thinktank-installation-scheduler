@@ -20,6 +20,8 @@ import AuthForm from './components/forms/AuthForm';
 import { useAppStore, useIsAuthenticated, useIsLoading } from './stores/useAppStore';
 import { auth } from './services/supabase';
 import { RealtimeProvider } from './contexts/RealtimeProvider';
+import { TenantProvider } from './contexts/TenantProvider';
+import { ThemeProvider } from './components/layout/ThemeProvider';
 
 // Marketing Components
 import MarketingLayout from './components/marketing/layout/MarketingLayout';
@@ -95,22 +97,26 @@ const AppRouter = () => {
 
   // Authenticated app routes
   return (
-    <RealtimeProvider>
-      <Routes>
-        <Route path="/app" element={<Layout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="schedules" element={<SchedulingDashboard />} />
-          <Route path="installations" element={<InstallationsPage />} />
-          <Route path="assignments" element={<AssignmentsPage />} />
-          <Route path="team" element={<TeamManagement />} />
-          <Route path="data-processing" element={<DataProcessing />} />
-          <Route path="reports" element={<ReportsPage />} />
-          <Route path="notifications" element={<NotificationsPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/app" replace />} />
-      </Routes>
-    </RealtimeProvider>
+    <TenantProvider>
+      <ThemeProvider>
+        <RealtimeProvider>
+          <Routes>
+            <Route path="/app" element={<Layout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="schedules" element={<SchedulingDashboard />} />
+              <Route path="installations" element={<InstallationsPage />} />
+              <Route path="assignments" element={<AssignmentsPage />} />
+              <Route path="team" element={<TeamManagement />} />
+              <Route path="data-processing" element={<DataProcessing />} />
+              <Route path="reports" element={<ReportsPage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
+              <Route path="settings" element={<SettingsPage />} />
+            </Route>
+            <Route path="*" element={<Navigate to="/app" replace />} />
+          </Routes>
+        </RealtimeProvider>
+      </ThemeProvider>
+    </TenantProvider>
   );
 };
 
@@ -120,13 +126,30 @@ function App() {
   useEffect(() => {
     // Check for existing session on app load
     const checkSession = async () => {
+      console.log('🔄 Starting authentication check...');
       setLoading(true);
       
+      // Add a timeout to prevent infinite loading
+      const timeout = setTimeout(() => {
+        console.log('⏰ Auth check timeout, setting loading to false');
+        setLoading(false);
+        setAuthenticated(false);
+        setUser(null);
+      }, 5000); // 5 second timeout
+      
       try {
+        console.log('🔍 Calling auth.getCurrentUser()...');
         const { user, error } = await auth.getCurrentUser();
+        
+        clearTimeout(timeout); // Clear the timeout since we got a response
+        console.log('📝 Auth response:', { user: !!user, error });
+        
         if (error) {
-          console.warn('Auth service not available:', error.message);
+          console.warn('⚠️ Auth service error:', error.message);
+          setAuthenticated(false);
+          setUser(null);
         } else if (user) {
+          console.log('✅ User authenticated:', user.id, user.email);
           setAuthenticated(true);
           // Extract user data from Supabase user object
           setUser({
@@ -139,11 +162,18 @@ function App() {
             createdAt: user.created_at || new Date().toISOString(),
             updatedAt: user.updated_at || new Date().toISOString(),
           });
+        } else {
+          console.log('❌ No user found, user is not authenticated');
+          setAuthenticated(false);
+          setUser(null);
         }
       } catch (error) {
-        console.error('Session check failed:', error);
-        // Don't crash the app, just log the error
+        clearTimeout(timeout); // Clear the timeout since we got a response (even if error)
+        console.error('💥 Session check failed:', error);
+        setAuthenticated(false);
+        setUser(null);
       } finally {
+        console.log('🏁 Authentication check complete, setting loading to false');
         setLoading(false);
       }
     };

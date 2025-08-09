@@ -1,0 +1,62 @@
+{
+  "timestamp": "2025-08-09T07:11:49.700Z",
+  "database_url": "https://wgcmoorllvctbnabwqux.supabase.co",
+  "summary": {
+    "total_tests": 8,
+    "passed": 4,
+    "failed": 4,
+    "partial": 0,
+    "success_rate": 50
+  },
+  "tests": [
+    {
+      "name": "Organizations Table",
+      "description": "Verify organizations table exists and is accessible",
+      "status": "FAIL",
+      "error": "Organizations table error: relation \"public.organizations\" does not exist"
+    },
+    {
+      "name": "Projects Table",
+      "description": "Verify projects table exists and is accessible",
+      "status": "FAIL",
+      "error": "Projects table error: relation \"public.projects\" does not exist"
+    },
+    {
+      "name": "Default Organization",
+      "description": "Verify Think Tank Technologies organization was created",
+      "status": "FAIL",
+      "error": "Error checking default org: relation \"public.organizations\" does not exist"
+    },
+    {
+      "name": "Default Project",
+      "description": "Verify default project was created",
+      "status": "FAIL",
+      "error": "Error checking default project: relation \"public.projects\" does not exist"
+    },
+    {
+      "name": "Multi-Tenant Columns",
+      "description": "Verify existing tables have organization_id columns",
+      "status": "PASS",
+      "result": "✅ users: has organization_id, ✅ team_members: has organization_id, ✅ installations: has organization_id, ✅ assignments: has organization_id, ✅ notifications: has organization_id"
+    },
+    {
+      "name": "RLS Policies",
+      "description": "Check if Row Level Security policies are enabled",
+      "status": "PASS",
+      "result": "RLS policies appear to be active (access controlled)"
+    },
+    {
+      "name": "Subscription Table",
+      "description": "Verify subscription table and default subscription",
+      "status": "PASS",
+      "result": "Subscriptions table exists (RLS protected)"
+    },
+    {
+      "name": "Database Functions",
+      "description": "Test if migration functions were created",
+      "status": "PASS",
+      "result": "Migration functions created successfully"
+    }
+  ],
+  "overall_status": "FAILURE"
+}
