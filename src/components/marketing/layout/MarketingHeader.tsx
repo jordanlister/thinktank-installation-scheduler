@@ -42,7 +42,8 @@ const MarketingHeader: React.FC = () => {
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-center space-x-3 font-bold text-xl text-white hover:text-brand-primary transition-colors"
+            className="flex items-center space-x-3 font-bold text-xl text-white hover:text-brand-primary transition-colors border-0 outline-none focus:outline-none shadow-none"
+            style={{ boxShadow: 'none', border: 'none', outline: 'none' }}
           >
             <img 
               src="/thinktanklogo.png" 
@@ -58,15 +59,16 @@ const MarketingHeader: React.FC = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-lg ${
+                className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 border-0 outline-none focus:outline-none shadow-none ${
                   isActiveRoute(item.path)
-                    ? 'text-brand-primary bg-brand-primary/10'
-                    : 'text-text-secondary hover:text-white hover:bg-white/5'
+                    ? 'text-brand-primary'
+                    : 'text-text-secondary hover:text-white'
                 }`}
+                style={{ boxShadow: 'none', border: 'none', outline: 'none' }}
               >
                 {item.name}
                 {isActiveRoute(item.path) && (
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-brand-primary rounded-full" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-primary rounded-full" />
                 )}
               </Link>
             ))}
