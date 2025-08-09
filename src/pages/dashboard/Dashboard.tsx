@@ -108,6 +108,8 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {statCards.map((stat, index) => {
           const Icon = stat.icon;
+          const maxValue = Math.max(...statCards.map(s => s.value));
+          const widthPercentage = Math.min((stat.value / maxValue) * 100, 100);
           const gradients = [
             'from-accent-500/20 to-accent-600/10',
             'from-warning-500/20 to-warning-600/10',
@@ -141,8 +143,10 @@ export const Dashboard: React.FC = () => {
                 {/* Progress indicator */}
                 <div className="mt-4">
                   <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                    <div className={`h-full bg-gradient-to-r ${gradients[index]} rounded-full transition-all duration-300`}
-                         style={{ width: `${Math.min((stat.value / Math.max(...statCards.map(s => s.value))) * 100, 100)}%` }}>
+                    <div 
+                      className={`h-full bg-gradient-to-r ${gradients[index]} rounded-full transition-all duration-300`}
+                      style={{ width: `${widthPercentage}%` }}
+                    >
                     </div>
                   </div>
                 </div>
