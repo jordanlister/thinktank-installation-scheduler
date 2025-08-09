@@ -312,12 +312,24 @@
   
   /* Hide Scrollbar */
   .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
   
   .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+    display: none !important;
+  }
+  
+  /* Hide Scrollbar when applied to html/body */
+  html.hide-scrollbar,
+  body.hide-scrollbar {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+  }
+  
+  html.hide-scrollbar::-webkit-scrollbar,
+  body.hide-scrollbar::-webkit-scrollbar {
+    display: none !important;
   }
   
   /* Custom Container Sizes */

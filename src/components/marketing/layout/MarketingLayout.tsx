@@ -8,10 +8,12 @@ interface MarketingLayoutProps {
 }
 
 const MarketingLayout: React.FC<MarketingLayoutProps> = ({ children }) => {
-  // Add hide-scrollbar class to body for marketing pages
+  // Add hide-scrollbar class to html and body for marketing pages
   React.useEffect(() => {
+    document.documentElement.classList.add('hide-scrollbar');
     document.body.classList.add('hide-scrollbar');
     return () => {
+      document.documentElement.classList.remove('hide-scrollbar');
       document.body.classList.remove('hide-scrollbar');
     };
   }, []);

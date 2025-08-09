@@ -11,7 +11,17 @@ import {
 } from 'lucide-react';
 import { PricingSEO } from '../../components/SEO';
 import { getPricingPageSchemas, buildBreadcrumbListSchema, buildFAQPageSchema } from '../../lib/seo/jsonld';
-import { ScrollProgressIndicator } from '../../components/marketing/animations';
+import {
+  ScrollProgressIndicator,
+  HeroReveal,
+  ScrollReveal,
+  StaggerGroup,
+  StaggerItem,
+  CTAReveal,
+  AnimatedCard,
+  InteractiveIcon,
+  CTAButton
+} from '../../components/marketing/animations';
 
 const PricingPage: React.FC = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
@@ -201,7 +211,7 @@ const PricingPage: React.FC = () => {
       {/* Pricing Hero */}
       <section className="marketing-hero">
         <div className="marketing-container">
-          <div className="marketing-text-container text-center mb-12">
+          <HeroReveal className="marketing-text-container text-center mb-12">
             <h1 className="ttt-hero-heading font-bold text-white mb-4">
               Simple, transparent pricing
             </h1>
@@ -234,27 +244,29 @@ const PricingPage: React.FC = () => {
                 </span>
               </span>
             </div>
-          </div>
+          </HeroReveal>
         </div>
       </section>
 
       {/* Pricing Cards */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <StaggerGroup className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {pricingPlans.map((plan, index) => (
-              <div
-                key={index}
-                className={`relative marketing-feature-card h-full flex flex-col ${
+              <StaggerItem key={index}>
+                <AnimatedCard
+                  className={`relative marketing-feature-card h-full flex flex-col ${
                   plan.popular 
                     ? `border-brand-primary shadow-xl shadow-brand-primary/20` 
                     : `hover:border-brand-primary/30`
                 } transition-all duration-300`}
-              >
+                >
                 {plan.popular && (
                   <div className="absolute top-4 right-4">
                     <div className="bg-brand-primary text-white p-2 rounded-full">
-                      <Star className="w-4 h-4 fill-current" />
+                      <InteractiveIcon>
+                        <Star className="w-4 h-4 fill-current" />
+                      </InteractiveIcon>
                     </div>
                   </div>
                 )}
@@ -288,19 +300,21 @@ const PricingPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <Button
+                  <CTAButton
                     variant={plan.popular ? 'primary' : 'secondary'}
                     className="w-full"
                   >
                     {plan.cta}
-                  </Button>
+                  </CTAButton>
                 </div>
 
                 {/* Features Section - Fixed height to align buttons */}
                 <div className="flex-1 space-y-1.5 min-h-[320px]">
                   {plan.features.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-start">
-                      <CheckCircle className="w-3.5 h-3.5 text-success mr-2.5 flex-shrink-0 mt-0.5" />
+                      <InteractiveIcon>
+                        <CheckCircle className="w-3.5 h-3.5 text-success mr-2.5 flex-shrink-0 mt-0.5" />
+                      </InteractiveIcon>
                       <span className="text-xs text-text-secondary leading-relaxed">
                         {feature}
                       </span>
@@ -308,32 +322,35 @@ const PricingPage: React.FC = () => {
                   ))}
                   {plan.notIncluded.map((feature, featureIndex) => (
                     <div key={featureIndex} className="flex items-start opacity-40">
-                      <X className="w-3.5 h-3.5 text-text-muted mr-2.5 flex-shrink-0 mt-0.5" />
+                      <InteractiveIcon>
+                        <X className="w-3.5 h-3.5 text-text-muted mr-2.5 flex-shrink-0 mt-0.5" />
+                      </InteractiveIcon>
                       <span className="text-xs text-text-muted leading-relaxed">
                         {feature}
                       </span>
                     </div>
                   ))}
                 </div>
-              </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* Feature Comparison Table */}
       <section className="marketing-section bg-surface/30">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Compare all features
             </h2>
             <p className="ttt-text-lead text-text-secondary">
               See exactly what's included in each plan
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden">
+          <AnimatedCard className="bg-surface-glass backdrop-blur-xl border border-border rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-surface-elevated">
@@ -360,9 +377,13 @@ const PricingPage: React.FC = () => {
                           <td className="p-4 text-center">
                             {typeof feature.starter === 'boolean' ? (
                               feature.starter ? (
-                                <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                <InteractiveIcon>
+                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                </InteractiveIcon>
                               ) : (
-                                <X className="w-5 h-5 text-text-muted mx-auto" />
+                                <InteractiveIcon>
+                                  <X className="w-5 h-5 text-text-muted mx-auto" />
+                                </InteractiveIcon>
                               )
                             ) : (
                               <span className="text-text-secondary">{feature.starter}</span>
@@ -371,9 +392,13 @@ const PricingPage: React.FC = () => {
                           <td className="p-4 text-center">
                             {typeof feature.professional === 'boolean' ? (
                               feature.professional ? (
-                                <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                <InteractiveIcon>
+                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                </InteractiveIcon>
                               ) : (
-                                <X className="w-5 h-5 text-text-muted mx-auto" />
+                                <InteractiveIcon>
+                                  <X className="w-5 h-5 text-text-muted mx-auto" />
+                                </InteractiveIcon>
                               )
                             ) : (
                               <span className="text-text-secondary">{feature.professional}</span>
@@ -382,9 +407,13 @@ const PricingPage: React.FC = () => {
                           <td className="p-4 text-center">
                             {typeof feature.enterprise === 'boolean' ? (
                               feature.enterprise ? (
-                                <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                <InteractiveIcon>
+                                  <CheckCircle className="w-5 h-5 text-success mx-auto" />
+                                </InteractiveIcon>
                               ) : (
-                                <X className="w-5 h-5 text-text-muted mx-auto" />
+                                <InteractiveIcon>
+                                  <X className="w-5 h-5 text-text-muted mx-auto" />
+                                </InteractiveIcon>
                               )
                             ) : (
                               <span className="text-text-secondary">{feature.enterprise}</span>
@@ -397,14 +426,14 @@ const PricingPage: React.FC = () => {
                 </tbody>
               </table>
             </div>
-          </div>
+          </AnimatedCard>
         </div>
       </section>
 
       {/* ROI Calculator */}
       <section className="marketing-section">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Calculate your ROI
             </h2>
@@ -412,11 +441,13 @@ const PricingPage: React.FC = () => {
               See how much you could save with our intelligent scheduling 
               and optimization platform.
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="marketing-feature-card max-w-4xl mx-auto">
+          <AnimatedCard className="marketing-feature-card max-w-4xl mx-auto">
             <div className="flex items-center justify-center mb-8">
-              <Calculator className="w-8 h-8 text-brand-primary mr-3" />
+              <InteractiveIcon>
+                <Calculator className="w-8 h-8 text-brand-primary mr-3" />
+              </InteractiveIcon>
               <h3 className="ttt-feature-title text-white">
                 ROI Calculator
               </h3>
@@ -432,67 +463,74 @@ const PricingPage: React.FC = () => {
                   Based on 500+ customer implementations
                 </p>
                 
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-success mb-2">40%</div>
-                    <div className="ttt-text-small text-text-secondary">Travel Time Reduction</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-success mb-2">35%</div>
-                    <div className="ttt-text-small text-text-secondary">Fuel Cost Savings</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-success mb-2">25%</div>
-                    <div className="ttt-text-small text-text-secondary">Capacity Increase</div>
-                  </div>
-                </div>
+                <StaggerGroup className="grid md:grid-cols-3 gap-6 mb-8">
+                  <StaggerItem>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-success mb-2">40%</div>
+                      <div className="ttt-text-small text-text-secondary">Travel Time Reduction</div>
+                    </div>
+                  </StaggerItem>
+                  <StaggerItem>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-success mb-2">35%</div>
+                      <div className="ttt-text-small text-text-secondary">Fuel Cost Savings</div>
+                    </div>
+                  </StaggerItem>
+                  <StaggerItem>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-success mb-2">25%</div>
+                      <div className="ttt-text-small text-text-secondary">Capacity Increase</div>
+                    </div>
+                  </StaggerItem>
+                </StaggerGroup>
 
-                <Button size="lg" variant="primary">
+                <CTAButton size="lg" variant="primary">
                   Get Custom ROI Analysis
-                </Button>
+                </CTAButton>
               </div>
             </div>
-          </div>
+          </AnimatedCard>
         </div>
       </section>
 
       {/* FAQ Section */}
       <section className="marketing-section bg-surface/30">
         <div className="marketing-container">
-          <div className="text-center mb-12">
+          <ScrollReveal className="text-center mb-12">
             <h2 className="ttt-section-header text-white mb-4">
               Frequently asked questions
             </h2>
             <p className="ttt-text-lead text-text-secondary">
               Get answers to common questions about our pricing and plans
             </p>
-          </div>
+          </ScrollReveal>
           
-          <div className="max-w-4xl mx-auto space-y-4">
+          <StaggerGroup className="max-w-4xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="marketing-feature-card overflow-hidden"
-              >
+              <StaggerItem key={index}>
+                <AnimatedCard className="marketing-feature-card overflow-hidden">
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="w-full p-6 text-left flex items-center justify-between hover:bg-surface-elevated/50 transition-colors"
                 >
                   <span className="ttt-feature-title text-white">{faq.question}</span>
-                  {openFaq === index ? (
-                    <ChevronUp className="w-5 h-5 text-text-secondary" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-text-secondary" />
-                  )}
+                  <InteractiveIcon>
+                    {openFaq === index ? (
+                      <ChevronUp className="w-5 h-5 text-text-secondary" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-text-secondary" />
+                    )}
+                  </InteractiveIcon>
                 </button>
                 {openFaq === index && (
                   <div className="px-6 pb-6">
                     <p className="ttt-feature-description">{faq.answer}</p>
                   </div>
                 )}
-              </div>
+                </AnimatedCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -503,7 +541,7 @@ const PricingPage: React.FC = () => {
         </div>
         
         <div className="marketing-container text-center relative z-10">
-          <div className="marketing-cta-section">
+          <CTAReveal className="marketing-cta-section">
             <h2 className="ttt-section-header text-white mb-6">
               Ready to get started?
             </h2>
@@ -512,14 +550,14 @@ const PricingPage: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg">
+              <CTAButton size="lg">
                 Start Free Trial
-              </Button>
-              <Button size="lg" variant="secondary">
+              </CTAButton>
+              <CTAButton size="lg" variant="secondary">
                 Contact Sales
-              </Button>
+              </CTAButton>
             </div>
-          </div>
+          </CTAReveal>
         </div>
       </section>
     </div>
