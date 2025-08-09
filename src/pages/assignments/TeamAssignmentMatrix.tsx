@@ -186,83 +186,31 @@ const TeamAssignmentMatrix: React.FC<TeamAssignmentMatrixProps> = ({
   }, [dateRange, generateAssignmentMatrix]);
 
   // Render grid view
-  const renderGridView = () => (
-    <div className="space-y-4">
-      {/* Filters */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div>
-            <input
-              type="text"
-              placeholder="Filter team members..."
-              value={filterTeam}
-              onChange={(e) => setFilterTeam(e.target.value)}
-              className="form-input text-sm"
-            />
-          </div>
-          <div>
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="form-select text-sm"
-            >
-              <option value="">All Status</option>
-              <option value="available">Available</option>
-              <option value="assigned">Assigned</option>
-              <option value="overbooked">Overbooked</option>
-              <option value="conflict">Conflicts</option>
-            </select>
-          </div>
-        </div>
-        
-        <div className="flex items-center space-x-4">
-          <div className="glass-subtle rounded-xl p-1 flex space-x-1">
-            <button
-              onClick={() => onViewModeChange('grid')}
-              className={`p-2 rounded-lg transition-all ${
-                viewMode === 'grid'
-                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
-                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
-              }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => onViewModeChange('list')}
-              className={`p-2 rounded-lg transition-all ${
-                viewMode === 'list'
-                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
-                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
-              }`}
-            >
-              List
-            </button>
-          </div>
-          
-          <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 backdrop-filter backdrop-blur-md">
-            <div className="flex items-center space-x-6 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-green-400 rounded-full shadow-sm"></div>
-                <span className="text-white/90 font-medium">Available</span>
+  const renderGridView = () => {
+    if (filteredTeams.length === 0) {
+      return (
+        <div className="card">
+          <div className="card-body">
+            <div className="text-center py-12">
+              <div className="h-20 w-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="h-10 w-10 text-white/40" />
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-blue-400 rounded-full shadow-sm"></div>
-                <span className="text-white/90 font-medium">Assigned</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-red-400 rounded-full shadow-sm"></div>
-                <span className="text-white/90 font-medium">Overbooked</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-yellow-400 rounded-full shadow-sm"></div>
-                <span className="text-white/90 font-medium">Conflicts</span>
-              </div>
+              <p className="text-white/80 text-lg mb-2">
+                No team members found
+              </p>
+              <p className="text-white/50">
+                {filterTeam || filterStatus 
+                  ? 'Try adjusting your filters to see more results' 
+                  : 'No active team members available for assignment'
+                }
+              </p>
             </div>
           </div>
         </div>
-      </div>
+      );
+    }
 
-      {/* Assignment Matrix Grid */}
+    return (
       <div className="card">
         <div className="card-body p-0">
           <div className="overflow-x-auto">
@@ -361,79 +309,104 @@ const TeamAssignmentMatrix: React.FC<TeamAssignmentMatrixProps> = ({
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   // Render list view
-  const renderListView = () => (
-    <div className="space-y-4">
-      {filteredTeams.map(team => (
-        <div key={team.id} className="card">
-          <div className="card-header">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
-                  <User className="h-5 w-5 text-primary-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-glass-primary">
-                    {team.firstName} {team.lastName}
-                  </h3>
-                  <p className="text-sm text-glass-secondary">
-                    {team.region} • Capacity: {team.capacity} jobs/day
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-glass-secondary">
-                  {assignments.filter(a => a.leadId === team.id || a.assistantId === team.id).length} assignments
-                </span>
-              </div>
-            </div>
-          </div>
+  const renderListView = () => {
+    if (filteredTeams.length === 0) {
+      return (
+        <div className="card">
           <div className="card-body">
-            <div className="grid grid-cols-7 gap-4">
-              {dateArray.map(date => {
-                const cellAssignments = getCellAssignments(date, team.id);
-                const cellStatus = getCellStatus(date, team.id);
-                const utilization = getCellUtilization(date, team.id);
-                
-                return (
-                  <div
-                    key={date}
-                    className={`p-3 rounded-lg border ${getCellStatusClass(cellStatus)}`}
-                    onDrop={(e) => handleDrop(date, team.id, e)}
-                    onDragOver={handleDragOver}
-                  >
-                    <div className="text-xs font-medium text-center mb-2">
-                      {new Date(date).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}
-                    </div>
-                    <div className="text-center">
-                      <div className="text-sm font-medium">
-                        {cellAssignments.length} / {team.capacity}
-                      </div>
-                      <div className="w-full bg-white/20 rounded-full h-1.5 mt-1">
-                        <div 
-                          className={`h-1.5 rounded-full ${
-                            utilization > 100 ? 'bg-red-500' : 
-                            utilization > 80 ? 'bg-yellow-500' : 'bg-blue-500'
-                          }`}
-                          style={{ width: `${Math.min(utilization, 100)}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="text-center py-12">
+              <div className="h-20 w-20 bg-gradient-to-br from-white/10 to-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="h-10 w-10 text-white/40" />
+              </div>
+              <p className="text-white/80 text-lg mb-2">
+                No team members found
+              </p>
+              <p className="text-white/50">
+                {filterTeam || filterStatus 
+                  ? 'Try adjusting your filters to see more results' 
+                  : 'No active team members available for assignment'
+                }
+              </p>
             </div>
           </div>
         </div>
-      ))}
-    </div>
-  );
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {filteredTeams.map(team => (
+          <div key={team.id} className="card">
+            <div className="card-header">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
+                    <User className="h-5 w-5 text-primary-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium text-glass-primary">
+                      {team.firstName} {team.lastName}
+                    </h3>
+                    <p className="text-sm text-glass-secondary">
+                      {team.region} • Capacity: {team.capacity} jobs/day
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-glass-secondary">
+                    {assignments.filter(a => a.leadId === team.id || a.assistantId === team.id).length} assignments
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <div className="grid grid-cols-7 gap-4">
+                {dateArray.map(date => {
+                  const cellAssignments = getCellAssignments(date, team.id);
+                  const cellStatus = getCellStatus(date, team.id);
+                  const utilization = getCellUtilization(date, team.id);
+                  
+                  return (
+                    <div
+                      key={date}
+                      className={`p-3 rounded-lg border ${getCellStatusClass(cellStatus)}`}
+                      onDrop={(e) => handleDrop(date, team.id, e)}
+                      onDragOver={handleDragOver}
+                    >
+                      <div className="text-xs font-medium text-center mb-2">
+                        {new Date(date).toLocaleDateString('en-US', { 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                      </div>
+                      <div className="text-center">
+                        <div className="text-sm font-medium">
+                          {cellAssignments.length} / {team.capacity}
+                        </div>
+                        <div className="w-full bg-white/20 rounded-full h-1.5 mt-1">
+                          <div 
+                            className={`h-1.5 rounded-full ${
+                              utilization > 100 ? 'bg-red-500' : 
+                              utilization > 80 ? 'bg-yellow-500' : 'bg-blue-500'
+                            }`}
+                            style={{ width: `${Math.min(utilization, 100)}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -497,6 +470,80 @@ const TeamAssignmentMatrix: React.FC<TeamAssignmentMatrixProps> = ({
                     }, 0) / Math.max(filteredTeams.length, 1)
                   )}%
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filters and Controls */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <div>
+            <input
+              type="text"
+              placeholder="Filter team members..."
+              value={filterTeam}
+              onChange={(e) => setFilterTeam(e.target.value)}
+              className="form-input text-sm"
+            />
+          </div>
+          <div>
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="form-select text-sm"
+            >
+              <option value="">All Status</option>
+              <option value="available">Available</option>
+              <option value="assigned">Assigned</option>
+              <option value="overbooked">Overbooked</option>
+              <option value="conflict">Conflicts</option>
+            </select>
+          </div>
+        </div>
+        
+        <div className="flex items-center space-x-4">
+          <div className="glass-subtle rounded-xl p-1 flex space-x-1">
+            <button
+              onClick={() => onViewModeChange('grid')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'grid'
+                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
+                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              onClick={() => onViewModeChange('list')}
+              className={`p-2 rounded-lg transition-all ${
+                viewMode === 'list'
+                  ? 'bg-accent-500/20 text-accent-300 shadow-lg border border-accent-500/30'
+                  : 'text-glass-secondary hover:text-glass-primary hover:bg-white/10 border border-transparent'
+              }`}
+            >
+              List
+            </button>
+          </div>
+          
+          <div className="bg-white/10 border border-white/20 rounded-lg px-4 py-3 backdrop-filter backdrop-blur-md">
+            <div className="flex items-center space-x-6 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-green-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Available</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-blue-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Assigned</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-red-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Overbooked</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-yellow-400 rounded-full shadow-sm"></div>
+                <span className="text-white/90 font-medium">Conflicts</span>
               </div>
             </div>
           </div>
