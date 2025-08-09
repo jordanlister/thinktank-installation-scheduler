@@ -74,7 +74,31 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!api/|assets/|_next/|favicon.ico|robots.txt|sitemap.xml|manifest.json|sw.js|offline.html).*)",
+      "source": "/features",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/solutions",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/company",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/resources",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/dashboard/(.*)",
       "destination": "/index.html"
     }
   ],
