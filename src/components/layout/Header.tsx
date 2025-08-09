@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
   }
 
   return (
-    <header className="bg-white/5 backdrop-filter backdrop-blur-md border-b border-white/10 h-16 relative z-50">
+    <header className="bg-white/5 backdrop-filter backdrop-blur-md border-b border-white/10 h-16 fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center justify-between h-full px-6 max-w-none">
         {/* Left section - Logo, org info, and mobile menu toggle */}
         <div className="flex items-center space-x-4">
@@ -135,15 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
               
               {/* Organization Details - Desktop only */}
               <div className="hidden sm:block text-left">
-                <div className="flex items-center space-x-2">
-                  <h2 className="text-sm font-semibold text-white">{organization.name}</h2>
-                  <span className="px-2 py-0.5 bg-green-500/20 text-green-300 text-xs rounded-full border border-green-500/20 capitalize">
-                    {organization.subscription.plan}
-                  </span>
-                </div>
-                <p className="text-xs text-white/60">
-                  {organization.memberCount} members
-                </p>
+                <h2 className="text-sm font-semibold text-white">{organization.name}</h2>
               </div>
 
               <ChevronDown className={`h-4 w-4 text-white/70 transition-transform ${showOrgMenu ? 'rotate-180' : ''} ${isLoading ? 'animate-spin' : ''}`} />
@@ -151,7 +143,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
 
             {/* Organization Dropdown Menu */}
             {showOrgMenu && (
-              <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-50">
+              <div className="absolute top-full left-0 mt-2 w-80 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60]">
                 {/* Current Organization Section */}
                 <div className="p-4 border-b border-white/10">
                   <div className="flex items-center space-x-3">
@@ -297,7 +289,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle, sidebarOpen }) => 
 
             {/* User Dropdown Menu */}
             {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-50">
+              <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60]">
                 <div className="py-2">
                   <button
                     onClick={() => {

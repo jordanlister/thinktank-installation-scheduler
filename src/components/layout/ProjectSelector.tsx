@@ -148,9 +148,14 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({ className = ''
       <div ref={dropdownRef}>
         <button
           onClick={() => setShowProjectMenu(!showProjectMenu)}
-          className={`flex items-center ${compact ? 'space-x-2 px-3 py-2' : 'space-x-3 p-3'} bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-200 ${compact ? 'text-left' : 'w-full text-left'} group`}
+          className={`relative flex items-center ${compact ? 'space-x-2 px-3 py-2' : 'space-x-3 p-4'} bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all duration-200 ${compact ? 'text-left' : 'w-full text-left'} group`}
           disabled={isLoading}
         >
+          {/* Active Status Indicator */}
+          {currentProject?.status === 'active' && (
+            <div className="absolute top-2 left-2 h-2 w-2 bg-green-400 rounded-full border border-green-500/30"></div>
+          )}
+          
           {/* Project Icon/Logo */}
           <div className="flex-shrink-0">
             {currentProject ? (
@@ -168,31 +173,13 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({ className = ''
           <div className={`${compact ? 'hidden sm:block' : 'flex-1'} min-w-0`}>
             {currentProject ? (
               <>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center">
                   <h3 className={`${compact ? 'text-sm' : 'text-sm'} font-semibold text-white truncate`}>{currentProject.name}</h3>
-                  {!compact && <ProjectStatusBadge status={currentProject.status} />}
                 </div>
                 {!compact && (
-                  <div className="flex items-center space-x-4 mt-1">
-                    <p className="text-xs text-white/60 truncate">
-                      {currentProject.team.length} members
-                    </p>
-                    {formatProjectDates(currentProject) && (
-                      <p className="text-xs text-white/60">
-                        {formatProjectDates(currentProject)}
-                      </p>
-                    )}
-                  </div>
-                )}
-                {compact && (
-                  <div className="flex items-center space-x-2 mt-0.5">
-                    <ProjectStatusBadge status={currentProject.status} />
-                    {formatProjectDates(currentProject) && (
-                      <p className="text-xs text-white/60 hidden md:block">
-                        {formatProjectDates(currentProject)}
-                      </p>
-                    )}
-                  </div>
+                  <p className="text-xs text-white/60 truncate mt-0.5">
+                    {currentProject.team.length} members
+                  </p>
                 )}
               </>
             ) : (
@@ -208,7 +195,7 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({ className = ''
 
         {/* Project Dropdown Menu */}
         {showProjectMenu && (
-          <div className={`absolute top-full ${compact ? 'left-0 w-80' : 'left-0 right-0'} mt-2 bg-black/90 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-50 max-h-96 overflow-hidden`}>
+          <div className={`absolute top-full ${compact ? 'left-0 w-80' : 'left-0 right-0'} mt-2 bg-black/90 backdrop-filter backdrop-blur-md border border-white/20 rounded-lg shadow-xl z-[60] max-h-96 overflow-hidden`}>
             {/* Search Bar */}
             <div className="p-3 border-b border-white/10">
               <div className="relative">
@@ -295,16 +282,9 @@ export const ProjectSelector: React.FC<ProjectSelectorProps> = ({ className = ''
                               </span>
                             ))}
                           </div>
-                          <div className="flex items-center space-x-4 mt-1">
-                            <p className="text-xs text-white/60">
-                              {project.team.length} members
-                            </p>
-                            {formatProjectDates(project) && (
-                              <p className="text-xs text-white/60">
-                                {formatProjectDates(project)}
-                              </p>
-                            )}
-                          </div>
+                          <p className="text-xs text-white/60 mt-0.5">
+                            {project.team.length} members
+                          </p>
                         </div>
 
                         {/* Actions */}
