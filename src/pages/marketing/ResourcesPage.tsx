@@ -25,10 +25,56 @@ import {
   AnimatedCard,
   InteractiveIcon,
   CTAButton,
-  ScrollProgressIndicator
+  ScrollProgressIndicator,
+  AnimatedCounter
 } from '../../components/marketing/animations';
 
 const ResourcesPage: React.FC = () => {
+  // Helper function to render title with animated counter for statistics
+  const renderAnimatedTitle = (title: string, delay = 0) => {
+    // Pattern to match numbers followed by % in the title
+    const numberPattern = /(\d+)(%)/g;
+    const matches = [...title.matchAll(numberPattern)];
+    
+    if (matches.length === 0) {
+      return title;
+    }
+
+    // Split the title and replace numeric values with AnimatedCounter components
+    let result = title;
+    let offset = 0;
+
+    return (
+      <>
+        {title.split(numberPattern).map((part, index) => {
+          // Check if this part is a number that was matched
+          const matchIndex = Math.floor(index / 3);
+          const partIndex = index % 3;
+          
+          if (partIndex === 1 && matches[matchIndex]) {
+            // This is the number part
+            const number = parseInt(part);
+            return (
+              <AnimatedCounter
+                key={index}
+                value={number}
+                duration={2}
+                delay={delay}
+                className="inline tabular-nums"
+              />
+            );
+          } else if (partIndex === 2 && matches[matchIndex]) {
+            // This is the % part
+            return <span key={index}>{part}</span>;
+          }
+          
+          // Regular text part
+          return part;
+        })}
+      </>
+    );
+  };
+
   const featuredResources = [
     {
       type: 'Case Study',
@@ -317,7 +363,7 @@ const ResourcesPage: React.FC = () => {
                   </div>
                   
                   <h3 className="ttt-feature-title group-hover:text-brand-primary transition-colors">
-                    {resource.title}
+                    {renderAnimatedTitle(resource.title, index * 0.2)}
                   </h3>
                   
                   <p className="ttt-feature-description mb-4">
@@ -385,7 +431,7 @@ const ResourcesPage: React.FC = () => {
                             </div>
                             
                             <h4 className="ttt-feature-title mb-2">
-                              {resource.title}
+                              {renderAnimatedTitle(resource.title, (categoryIndex * 4 + resourceIndex) * 0.1)}
                             </h4>
                             
                             <p className="ttt-feature-description mb-4">

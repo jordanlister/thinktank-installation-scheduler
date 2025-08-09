@@ -13,7 +13,8 @@ import {
   ScrollProgressIndicator,
   CTAButton,
   FeatureCard,
-  InteractiveIcon
+  InteractiveIcon,
+  AnimatedCounter
 } from '../../components/marketing/animations';
 
 const HomePage: React.FC = () => {
@@ -174,7 +175,13 @@ const HomePage: React.FC = () => {
               description="Live dashboards and automated reports for data-driven decisions"
             >
               <div className="ttt-text-small text-warning font-medium">
-                90% faster reporting
+                <AnimatedCounter
+                  value={90}
+                  suffix="% faster reporting"
+                  duration={2.5}
+                  delay={0.5}
+                  className="tabular-nums"
+                />
               </div>
             </FeatureCard>
 
@@ -226,22 +233,56 @@ const HomePage: React.FC = () => {
           
           <AnimatedStats className="marketing-stats-grid">
             <div className="marketing-stats-card">
-              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">500+</div>
+              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 tabular-nums">
+                <AnimatedCounter
+                  value={500}
+                  suffix="+"
+                  duration={2.0}
+                  delay={0.2}
+                />
+              </div>
               <div className="ttt-text-small font-medium text-white mb-0.5">Companies</div>
               <div className="ttt-text-small text-text-muted">Trust our platform daily</div>
             </div>
             <div className="marketing-stats-card">
-              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">2M+</div>
+              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 tabular-nums">
+                <AnimatedCounter
+                  value={2000000}
+                  duration={2.5}
+                  delay={0.4}
+                  formatNumber={(value) => {
+                    if (value >= 1000000) {
+                      return `${(value / 1000000).toFixed(0)}M+`;
+                    }
+                    return value.toLocaleString();
+                  }}
+                />
+              </div>
               <div className="ttt-text-small font-medium text-white mb-0.5">Installations</div>
               <div className="ttt-text-small text-text-muted">Scheduled and optimized</div>
             </div>
             <div className="marketing-stats-card">
-              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">25%</div>
+              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 tabular-nums">
+                <AnimatedCounter
+                  value={25}
+                  suffix="%"
+                  duration={2.0}
+                  delay={0.6}
+                />
+              </div>
               <div className="ttt-text-small font-medium text-white mb-0.5">Cost Reduction</div>
               <div className="ttt-text-small text-text-muted">Average savings achieved</div>
             </div>
             <div className="marketing-stats-card">
-              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">99.9%</div>
+              <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 tabular-nums">
+                <AnimatedCounter
+                  value={99.9}
+                  suffix="%"
+                  duration={2.5}
+                  delay={0.8}
+                  decimals={1}
+                />
+              </div>
               <div className="ttt-text-small font-medium text-white mb-0.5">Uptime</div>
               <div className="ttt-text-small text-text-muted">Enterprise-grade reliability</div>
             </div>

@@ -12,10 +12,19 @@ export {
   HeroGradient,
   ProductMockup,
   Particles,
-  AnimatedCounter,
   HeroAnimations,
   default as HeroAnimationsComponents,
 } from './HeroAnimations';
+
+// Animated Counter Components
+export {
+  AnimatedCounter,
+  PercentageCounter,
+  CurrencyCounter,
+  LargeNumberCounter,
+  StatCard,
+  default as AnimatedCounterComponent,
+} from './AnimatedCounter';
 
 // Interactive Elements
 export {

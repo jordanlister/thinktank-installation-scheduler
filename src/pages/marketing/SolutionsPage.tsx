@@ -25,7 +25,9 @@ import {
   InteractiveIcon,
   CTAButton,
   AnimatedStats,
-  ScrollProgressIndicator
+  ScrollProgressIndicator,
+  AnimatedCounter,
+  PercentageCounter
 } from '../../components/marketing/animations';
 
 const SolutionsPage: React.FC = () => {
@@ -311,12 +313,32 @@ const SolutionsPage: React.FC = () => {
                           Proven Results
                         </h4>
                         <div className="grid grid-cols-2 gap-4">
-                          {Object.entries(solution.results).map(([metric, value]) => (
-                            <div key={metric} className="text-center p-5 bg-surface/40 rounded-xl border border-border/60 hover:border-brand-primary/30 transition-colors">
-                              <div className="text-3xl font-bold text-brand-primary mb-3">{value}</div>
-                              <div className="text-sm font-medium text-white leading-tight">{metric}</div>
-                            </div>
-                          ))}
+                          {Object.entries(solution.results).map(([metric, value], idx) => {
+                            // Parse numeric value and suffix from the result string
+                            const numericMatch = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+                            const numericValue = numericMatch ? parseFloat(numericMatch[1]) : 0;
+                            const suffix = numericMatch ? numericMatch[2] : value;
+                            const hasNumericValue = numericMatch && numericValue > 0;
+
+                            return (
+                              <div key={metric} className="text-center p-5 bg-surface/40 rounded-xl border border-border/60 hover:border-brand-primary/30 transition-colors">
+                                <div className="text-3xl font-bold text-brand-primary mb-3">
+                                  {hasNumericValue ? (
+                                    <AnimatedCounter
+                                      value={numericValue}
+                                      suffix={suffix}
+                                      duration={2.2}
+                                      delay={idx * 0.2}
+                                      className="tabular-nums"
+                                    />
+                                  ) : (
+                                    value
+                                  )}
+                                </div>
+                                <div className="text-sm font-medium text-white leading-tight">{metric}</div>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
 

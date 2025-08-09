@@ -24,7 +24,8 @@ import {
   CTAReveal,
   AnimatedCard,
   InteractiveIcon,
-  CTAButton
+  CTAButton,
+  AnimatedCounter
 } from '../../components/marketing/animations';
 
 const CompanyPage: React.FC = () => {
@@ -231,15 +232,50 @@ const CompanyPage: React.FC = () => {
       <section className="marketing-section-tight">
         <div className="marketing-container">
           <StaggerGroup className="marketing-stats-grid">
-            {companyStats.map((stat, index) => (
-              <StaggerItem key={index}>
-                <div className="marketing-stats-card">
-                  <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1">{stat.metric}</div>
-                  <div className="ttt-text-small font-medium text-white mb-0.5">{stat.label}</div>
-                  <div className="ttt-text-small text-text-muted">{stat.description}</div>
-                </div>
-              </StaggerItem>
-            ))}
+            {companyStats.map((stat, index) => {
+              // Extract numeric value and suffix from metric string
+              const getCounterProps = (metric: string) => {
+                if (metric === '500+') {
+                  return { value: 500, suffix: '+' };
+                } else if (metric === '2M+') {
+                  return { 
+                    value: 2000000, 
+                    formatNumber: (value: number) => {
+                      if (value >= 1000000) {
+                        return `${(value / 1000000).toFixed(0)}M+`;
+                      }
+                      return value.toLocaleString();
+                    }
+                  };
+                } else if (metric === '99.9%') {
+                  return { value: 99.9, suffix: '%', decimals: 1 };
+                } else if (metric === '150+') {
+                  return { value: 150, suffix: '+' };
+                }
+                // Fallback for other metrics
+                const numericValue = parseFloat(metric.replace(/[^0-9.]/g, ''));
+                const suffix = metric.replace(/[0-9.]/g, '');
+                return { value: numericValue, suffix };
+              };
+              
+              const counterProps = getCounterProps(stat.metric);
+              
+              return (
+                <StaggerItem key={index}>
+                  <div className="marketing-stats-card">
+                    <div className="text-2xl md:text-3xl font-bold text-brand-primary mb-1 tabular-nums">
+                      <AnimatedCounter
+                        {...counterProps}
+                        duration={2.0 + (index * 0.2)}
+                        delay={0.2 + (index * 0.2)}
+                      />
+                    </div>
+                    <div className="ttt-text-small font-medium text-white mb-0.5">{stat.label}</div>
+                    <div className="ttt-text-small text-text-muted">{stat.description}</div>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </StaggerGroup>
         </div>
       </section>
